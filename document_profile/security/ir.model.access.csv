@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_document_profile_set_user,access.document.profile.set.user,model_document_profile_set,group_document_profile_user,1,0,0,0
+access_document_profile_set_manager,access.document.profile.set.manager,model_document_profile_set,group_document_profile_manager,1,1,1,1
+access_document_profile_set_system,access.document.profile.set.system,model_document_profile_set,base.group_system,1,1,1,1
+access_document_profile_dossier_user,access.document.profile.dossier.user,model_document_profile_dossier,group_document_profile_user,1,0,0,0
+access_document_profile_dossier_manager,access.document.profile.dossier.manager,model_document_profile_dossier,group_document_profile_manager,1,1,1,1
+access_document_profile_dossier_system,access.document.profile.dossier.system,model_document_profile_dossier,base.group_system,1,1,1,1
+access_document_profile_item_user,access.document.profile.item.user,model_document_profile_item,group_document_profile_user,1,1,1,0
+access_document_profile_item_manager,access.document.profile.item.manager,model_document_profile_item,group_document_profile_manager,1,1,1,1
+access_document_profile_item_system,access.document.profile.item.system,model_document_profile_item,base.group_system,1,1,1,1

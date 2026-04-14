@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_document_profile_dossier_tree" model="ir.ui.view">
+        <field name="name">document.profile.dossier.list</field>
+        <field name="model">document.profile.dossier</field>
+        <field name="arch" type="xml">
+            <list string="Dossiers" decoration-muted="not active">
+                <field name="name" string="Name"/>
+                <field name="profile_set_id"/>
+                <field name="code"/>
+                <field name="company_id" optional="show" groups="base.group_multi_company"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_document_profile_dossier_search" model="ir.ui.view">
+        <field name="name">document.profile.dossier.search</field>
+        <field name="model">document.profile.dossier</field>
+        <field name="arch" type="xml">
+            <search string="Dossiers">
+                <field name="name" string="Name"/>
+                <field name="code"/>
+                <field name="profile_set_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <separator/>
+                <filter string="In use" name="filter_active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter
+                    string="Has file lines"
+                    name="has_items"
+                    domain="[('item_ids', '!=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_document_profile_dossier_form" model="ir.ui.view">
+        <field name="name">document.profile.dossier.form</field>
+        <field name="model">document.profile.dossier</field>
+        <field name="arch" type="xml">
+            <form string="Dossier">
+                <header>
+                    <button
+                        name="action_archive"
+                        type="object"
+                        string="Archive"
+                        class="btn-secondary"
+                        data-hotkey="shift+x"
+                        invisible="not id or not active"
+                        groups="document_profile.group_document_profile_manager"
+                    />
+                    <button
+                        name="action_unarchive"
+                        type="object"
+                        string="Restore"
+                        class="btn-secondary"
+                        data-hotkey="shift+x"
+                        invisible="not id or active"
+                        groups="document_profile.group_document_profile_manager"
+                    />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field
+                                name="name"
+                                default_focus="1"
+                                placeholder="e.g. Project dossier · 2025"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="profile_set_id"/>
+                        <field name="sequence_number" readonly="1"/>
+                        <field name="code" readonly="1"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <field
+                        name="item_ids"
+                        context="{'default_dossier_id': id, 'default_profile_set_id': profile_set_id}"
+                    >
+                        <list string="Files by code" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name" string="Name"/>
+                            <field name="reference_key" optional="hide"/>
+                            <field name="code" readonly="1"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_document_profile_dossier" model="ir.actions.act_window">
+        <field name="name">Document Dossiers</field>
+        <field name="res_model">document.profile.dossier</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_document_profile_dossier_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a dossier or open one from Document Profile Sets.</p>
+        </field>
+    </record>
+</odoo>

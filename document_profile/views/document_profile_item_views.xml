@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_document_profile_item_tree" model="ir.ui.view">
+        <field name="name">document.profile.item.list</field>
+        <field name="model">document.profile.item</field>
+        <field name="arch" type="xml">
+            <list string="Files by code" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="profile_set_id" column_invisible="1"/>
+                <field name="dossier_id" options="{'no_create': True}"/>
+                <field name="name" string="Name"/>
+                <field name="reference_key"/>
+                <field name="code" readonly="1"/>
+                <field name="attachment_ids" widget="many2many_binary"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_document_profile_item_search" model="ir.ui.view">
+        <field name="name">document.profile.item.search</field>
+        <field name="model">document.profile.item</field>
+        <field name="arch" type="xml">
+            <search string="Files by code">
+                <field name="code"/>
+                <field name="reference_key"/>
+                <field name="name" string="Name"/>
+                <field name="dossier_id"/>
+                <field name="profile_set_id"/>
+            </search>
+        </field>
+    </record>
+    <record id="view_document_profile_item_form" model="ir.ui.view">
+        <field name="name">document.profile.item.form</field>
+        <field name="model">document.profile.item</field>
+        <field name="arch" type="xml">
+            <form string="File by code">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field
+                                name="name"
+                                default_focus="1"
+                                placeholder="e.g. Annex — signed PDF"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="profile_set_id"/>
+                        <field
+                            name="dossier_id"
+                            domain="[('profile_set_id', '=', profile_set_id)]"
+                            options="{'no_create': True}"
+                        />
+                        <field name="sequence"/>
+                        <field name="reference_key"/>
+                        <field name="code" readonly="1"/>
+                    </group>
+                    <group string="Attachments">
+                        <field
+                            name="attachment_ids"
+                            widget="many2many_binary"
+                            colspan="2"
+                            nolabel="1"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

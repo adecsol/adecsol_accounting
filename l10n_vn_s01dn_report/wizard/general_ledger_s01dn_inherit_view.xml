@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- General Ledger wizard: footer chỉ còn S01-DN + Cancel -->
+    <record id="general_ledger_wizard_s01dn_inherit" model="ir.ui.view">
+        <field name="name">general.ledger.wizard.s01dn.inherit</field>
+        <field name="model">general.ledger.report.wizard</field>
+        <field name="inherit_id" ref="account_financial_report.general_ledger_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer/div[@invisible='not only_one_unaffected_earnings_account']" position="replace">
+                <div invisible="not only_one_unaffected_earnings_account">
+                    <button
+                        name="button_view_s01dn_html"
+                        string="Xem Nhật ký - Sổ Cái (S01-DN)"
+                        type="object"
+                        class="oe_highlight"
+                        default_focus="1"
+                        title="Một lần: xem báo cáo (QWeb). Hai lần liên tiếp: xuất Excel ngay."
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='receivable_accounts_only']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payable_accounts_only']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='account_code_from']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='account_code_from']/following-sibling::div[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='show_cost_center']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='hide_account_at_0']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='foreign_currency']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='centralize']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='grouped_by']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='format']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[field[@name='cost_center_ids']]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[field[@name='domain']]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[field[@name='partner_ids']]" position="after">
+                <page name="filter_journals" string="Filter journals">
+                    <field name="account_journal_ids" nolabel="1" widget="many2many_tags" options="{'no_create': True}"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>B03-DN — Cấu hình template (Developer)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --surface: rgba(255, 255, 255, 0.96);
+            --surface2: #e8eef5;
+            --text: #152238;
+            --muted: #546e7a;
+            --primary: #0d47a1;
+            --primary-mid: #1565c0;
+            --accent: #00838f;
+            --accent2: #0d9488;
+            --green: #2e7d32;
+            --orange: #e65100;
+            --border: rgba(13, 71, 161, 0.16);
+            --radius: 14px;
+            --shadow: 0 8px 28px rgba(13, 71, 161, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --table-head: #e3f2fd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: rgba(22, 34, 54, 0.96);
+                --surface2: rgba(30, 48, 78, 0.88);
+                --text: #e8eef5;
+                --muted: #90a4ae;
+                --border: rgba(100, 181, 246, 0.22);
+                --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+                --table-head: rgba(13, 71, 161, 0.35);
+                --green: #66bb6a;
+                --orange: #ff9800;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, sans-serif;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -5%, rgba(13, 71, 161, 0.07), transparent 50%),
+                linear-gradient(180deg, #eef3f9 0%, #f8fafc 45%, #f0f7fa 100%);
+            min-height: 100vh;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background:
+                    radial-gradient(ellipse 70% 45% at 15% 0%, rgba(21, 101, 192, 0.18), transparent 55%),
+                    linear-gradient(180deg, #0d1520 0%, #121c2a 55%, #0f1722 100%);
+            }
+        }
+        .topbar {
+            background: linear-gradient(125deg, #0d47a1 0%, #1565c0 42%, #00838f 100%);
+            color: #fff;
+            padding: 1.65rem 1.5rem;
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .topbar h1 {
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .topbar p { margin: 0.35rem 0 0; opacity: 0.95; font-size: 0.88rem; }
+        .topbar nav { margin-top: 0.75rem; }
+        .topbar a { color: #fff; font-weight: 600; margin-right: 1rem; }
+        .topbar a:hover { color: #b2ebf2; }
+        .layout { max-width: 52rem; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
+        section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.35rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+        h2 {
+            margin: 0 0 0.65rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.4rem;
+            color: var(--primary);
+        }
+        h3 { margin: 0.9rem 0 0.4rem; font-size: 0.95rem; font-weight: 600; color: var(--accent); }
+        p { margin: 0.5rem 0; }
+        .muted { color: var(--muted); font-size: 0.88rem; }
+        ul, ol { margin: 0.45rem 0; padding-left: 1.35rem; }
+        li { margin: 0.3rem 0; }
+        li::marker { color: var(--accent2); }
+        code, pre { font-family: "IBM Plex Mono", monospace; }
+        code {
+            font-size: 0.84em;
+            background: var(--surface2);
+            padding: 0.12em 0.35em;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        pre {
+            font-size: 0.76rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.85rem 1rem;
+            overflow-x: auto;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.65rem 0; }
+        th, td { border: 1px solid var(--border); padding: 0.45rem 0.5rem; text-align: left; vertical-align: top; }
+        th {
+            background: var(--table-head);
+            color: var(--primary);
+            font-family: "Outfit", sans-serif;
+            font-weight: 600;
+        }
+        .note { border-left: 3px solid var(--orange); padding: 0.55rem 0.85rem; margin: 0.65rem 0; background: rgba(230, 81, 0, 0.08); border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.88rem; }
+        .ok { border-left-color: var(--green); background: rgba(46, 125, 50, 0.1); }
+        a { color: var(--primary-mid); font-weight: 600; }
+        a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <h1>B03-DN · Cấu hình template — Developer</h1>
+    <p>Models <code>l10n.vn.b03dn.template</code> / <code>l10n.vn.b03dn.line</code> · Engine <code>l10n.vn.b03dn.engine</code> · Theme tài liệu: <a href="https://adecsol.vn/" style="color:#b3e5fc">adecsol.vn</a></p>
+    <nav>
+        <a href="b03dn_template_config_user.html">Bản cho kế toán</a>
+        <a href="lctt_tt200_calculation_technical.html">Engine · TT200</a>
+        <a href="developer_guide.html">Developer guide</a>
+        <a href="../README.md">README</a>
+    </nav>
+</header>
+
+<div class="layout">
+
+<section id="onboarding">
+    <h2>0. Bàn giao nhanh cho dev mới</h2>
+    <h3>Việc nên làm trong ngày đầu</h3>
+    <ol>
+        <li>Clone/addon path: đảm bảo thư mục module <code>l10n_vn_b03dn_direct_report</code> nằm trong <code>--addons-path</code>, chạy cập nhật apps list và module đã ở trạng thái <strong>Installed</strong> trên DB dev.</li>
+        <li>Đọc <code>__manifest__.py</code>: tên module người dùng thấy, <code>depends</code> (đặc biệt <code>accounting_adecsol</code>, <code>account_financial_report</code>), và danh sách <code>data/</code> + <code>views/</code> được load.</li>
+        <li>Mở UI: <strong>Accounting → Configuration → B03-DN templates</strong> (menu <code>menu_l10n_vn_b03dn_template</code>, parent <code>account.menu_finance_configuration</code>). Xác nhận form khớp với field trong <code>models/b03dn_template.py</code>.</li>
+        <li>Chạy test (từ root addons chứa module):<pre>odoo-bin -c odoo.conf -d YOUR_DATABASE \
+  --test-enable --stop-after-init -i l10n_vn_b03dn_direct_report</pre>
+            hoặc chỉ chạy file: tùy setup CI — file gốc: <code>tests/test_b03dn_direct.py</code>.</li>
+    </ol>
+    <h3>Cây thư mục chính (orientation)</h3>
+    <pre>l10n_vn_b03dn_direct_report/
+├── __manifest__.py
+├── models/          # b03dn_template.py, b03dn_engine.py, b03dn_wizard.py, …
+├── views/           # b03dn_template_views.xml, wizard, report actions
+├── data/            # b03dn_template_tt200_direct.xml, account_tags_cash_flow.xml
+├── report/          # QWeb + XLSX
+├── security/
+├── tests/
+└── doc/             # HTML hướng dẫn (file bạn đang đọc)</pre>
+    <h3>Nhân bản template</h3>
+    <ul>
+        <li><strong>UI:</strong> mở template TT200 mặc định → Action → Duplicate → đổi <code>name</code>, gán <code>company_id</code> nếu cần → chỉnh <code>line_ids</code>.</li>
+        <li><strong>XML / cổng:</strong> sao chép record template + dòng trong file mới hoặc module tùy biến; giữ <code>xml_id</code> mới để tránh trùng; cân nhắc <code>noupdate</code> cho dữ liệu khách hàng.</li>
+    </ul>
+    <div class="note ok">Khi sửa model hoặc xóa/đổi field: thêm bước migration theo version trong <code>migrations/</code> (module đã có <code>18.0.1.0.x/pre-migrate.py</code>), cập nhật <code>tests/test_b03dn_direct.py</code> và <code>security/ir.model.access.csv</code> nếu có model/field mới.</div>
+</section>
+
+<section id="scope">
+    <h2>1. Phạm vi</h2>
+    <p>Báo cáo lưu chuyển tiền tệ <strong>B03-DN phương pháp trực tiếp</strong> lấy quy tắc từ <strong>template</strong> (không hard-code chỉ tiêu trong Python). Tài liệu này mô tả <strong>field</strong>, <strong>ràng buộc</strong>, <strong>XML mẫu</strong> và chỗ <strong>mở rộng</strong> trong code.</p>
+</section>
+
+<section id="models">
+    <h2>2. Models</h2>
+    <table>
+        <tr><th>Model</th><th>Mục đích</th></tr>
+        <tr><td><code>l10n.vn.b03dn.template</code></td><td>Một “bộ” chỉ tiêu: tên, công ty (tùy chọn), TK tiền ghi đè, danh sách dòng <code>line_ids</code>.</td></tr>
+        <tr><td><code>l10n.vn.b03dn.line</code></td><td>Một dòng trên báo cáo: <code>line_kind</code>, <code>code</code>, pattern TK, thẻ, biểu thức tổng…</td></tr>
+        <tr><td><code>l10n.vn.b03dn.engine</code> <span class="muted">(AbstractModel)</span></td><td><code>compute_period(template, company, date_from, date_to)</code> → <code>lines_by_code</code>, <code>account_ids</code>.</td></tr>
+    </table>
+</section>
+
+<section id="template-fields">
+    <h2>3. Trường template</h2>
+    <table>
+        <tr><th>Field</th><th>Kiểu</th><th>Ghi chú kỹ thuật</th></tr>
+        <tr><td><code>name</code></td><td>Char</td><td>Bắt buộc, có thể dịch.</td></tr>
+        <tr><td><code>active</code></td><td>Boolean</td><td>Mặc định True.</td></tr>
+        <tr><td><code>company_id</code></td><td>Many2one <code>res.company</code></td><td><strong>Để trống</strong> = áp dụng mọi công ty (khi wizard không lọc khác).</td></tr>
+        <tr><td><code>cash_account_ids</code></td><td>Many2many <code>account.account</code></td><td>Nếu có: <strong>chỉ</strong> các TK này là “tiền” cho báo cáo. Rỗng: logic mặc định trên công ty (<code>111%</code>, <code>112%</code>, <code>113%</code> + tương đương tiền).</td></tr>
+        <tr><td><code>line_ids</code></td><td>One2many → line</td><td>Thứ tự hiển thị/tính ưu tiên leaf: <code>sequence</code>, <code>id</code>.</td></tr>
+    </table>
+</section>
+
+<section id="line-fields">
+    <h2>4. Trường dòng (<code>l10n.vn.b03dn.line</code>)</h2>
+    <table>
+        <tr><th>Field</th><th>Ý nghĩa ngắn</th></tr>
+        <tr><td><code>sequence</code></td><td>Số nhỏ đứng trước. Với <strong>leaf</strong>, quyết định rule nào được thử <strong>trước</strong> (first match).</td></tr>
+        <tr><td><code>line_kind</code></td><td><code>none</code> | <code>leaf</code> | <code>aggregate</code> | <code>opening_cash</code> | <code>fx_adjustment</code></td></tr>
+        <tr><td><code>code</code></td><td>Mã chỉ tiêu (vd <code>01</code>, <code>20</code>). Bắt buộc nếu <code>line_kind ≠ none</code>. <strong>Duy nhất</strong> trên cùng template.</td></tr>
+        <tr><td><code>name</code></td><td>Html, bắt buộc — tên hiển thị.</td></tr>
+        <tr><td><code>explanation_ref</code></td><td>Tham chiếu thuyết minh (tùy chọn).</td></tr>
+        <tr><td><code>credit_account_patterns</code></td><td>Chuỗi mẫu TK, phẩy. Dùng khi fragment <strong>tiền vào</strong> — so với mã TK đối ứng phía <strong>Có</strong>.</td></tr>
+        <tr><td><code>debit_account_patterns</code></td><td>Tương tự — khi fragment <strong>tiền ra</strong>, so với đối ứng phía <strong>Nợ</strong>.</td></tr>
+        <tr><td><code>amount_multiplier</code></td><td>Float, mặc định 1. Nhân sau khi gán dấu (+/−).</td></tr>
+        <tr><td><code>tag_ids</code></td><td>Thẻ yêu cầu (<code>account.account.tag</code>).</td></tr>
+        <tr><td><code>exclude_tag_ids</code></td><td>Thẻ loại trừ — nếu xuất hiện trong pool (theo <code>tag_source</code>) thì leaf không khớp.</td></tr>
+        <tr><td><code>tag_match_mode</code></td><td><code>all</code> | <code>any</code></td></tr>
+        <tr><td><code>tag_source</code></td><td><code>counterpart_account</code> | <code>cash_line</code> | <code>either</code></td></tr>
+        <tr><td><code>sum_expression</code></td><td>Chuỗi dạng <code>01+02+07</code>; chỉ cho <code>aggregate</code>.</td></tr>
+        <tr><td><code>fx_account_patterns</code></td><td>Mẫu TK tỷ giá (vd <code>413%</code>); chỉ <code>fx_adjustment</code>.</td></tr>
+        <tr><td><code>extra_domain</code></td><td>Domain Odoo (JSON string) áp trên <strong>dòng tiền</strong>, <code>safe_eval</code>.</td></tr>
+    </table>
+    <div class="note ok">Leaf không có pattern parse được <strong>và</strong> không có <code>tag_ids</code> → <strong>bỏ qua</strong> (skip rule rỗng).</div>
+</section>
+
+<section id="line-kind">
+    <h2>5. <code>line_kind</code> — hành vi engine</h2>
+    <table>
+        <tr><th>Giá trị</th><th>Nguồn số</th></tr>
+        <tr><td><code>none</code></td><td>Luôn 0; có thể không có <code>code</code> (tiêu đề phần).</td></tr>
+        <tr><td><code>leaf</code></td><td>Cộng các fragment khớp; <code>aml_ids</code> = id các <strong>dòng tiền</strong>.</td></tr>
+        <tr><td><code>aggregate</code></td><td>Cộng các mã trong <code>sum_expression</code>; gộp <code>aml_ids</code>.</td></tr>
+        <tr><td><code>opening_cash</code></td><td><code>SUM(debit - credit)</code> TK tiền, <code>date &lt; date_from</code>, posted.</td></tr>
+        <tr><td><code>fx_adjustment</code></td><td>Tổng <code>balance</code> AML trong kỳ, TK khớp <code>fx_account_patterns</code>.</td></tr>
+    </table>
+    <p class="muted">Vòng <code>aggregate</code> có thể lặp cho đến khi biểu thức ổn định (phụ thuộc các mã con đã có số).</p>
+</section>
+
+<section id="patterns">
+    <h2>6. Pattern tài khoản</h2>
+    <ul>
+        <li>Phân tách bằng <strong>dấu phẩy</strong>, khoảng trắng sau phẩy được trim khi parse.</li>
+        <li>Suffix <code>%</code> → tiền tố: mã TK đối ứng phải <strong>bắt đầu bằng</strong> phần trước <code>%</code>.</li>
+        <li>Không có <code>%</code> → khớp đúng mã.</li>
+        <li>Tiền <strong>vào</strong>: engine chỉ dùng <code>credit_account_patterns</code> cho fragment có <code>is_inflow=True</code>.</li>
+        <li>Tiền <strong>ra</strong>: chỉ dùng <code>debit_account_patterns</code> khi <code>is_inflow=False</code>.</li>
+    </ul>
+    <p>XML mẫu TT200 đôi khi ghi cả hai nhánh pattern trên cùng leaf để đối chiếu tài liệu; nhánh không dùng cho chiều hiện tại không ảnh hưởng kết quả.</p>
+</section>
+
+<section id="constraints">
+    <h2>7. Ràng buộc &amp; lỗi thường gặp</h2>
+    <ul>
+        <li><code>_b03dn_line_code_required_by_kind</code>: mọi dòng trừ <code>none</code> phải có <code>code</code> non-empty sau strip.</li>
+        <li><code>_b03dn_line_code_unique_per_template</code>: không trùng <code>code</code> trong cùng <code>template_id</code>.</li>
+        <li>Biểu thức <code>sum_expression</code>: mọi token mã tham chiếu phải tồn tại ở dòng khác cùng template (nếu không engine bỏ qua phần chưa resolve).</li>
+    </ul>
+</section>
+
+<section id="data-xml">
+    <h2>8. Dữ liệu XML mặc định</h2>
+    <ul>
+        <li><code>data/b03dn_template_tt200_direct.xml</code> — template «B03-DN — Phương pháp trực tiếp (TT200)» và toàn bộ dòng mã <code>01</code>…<code>70</code>.</li>
+        <li><code>data/account_tags_cash_flow.xml</code> — thẻ phục vụ exclude/include (vd loại một số TK khỏi leaf cụ thể).</li>
+    </ul>
+    <p>Khi nâng cấp module: dùng <code>migrations/18.0.x.x/pre-migrate.py</code> (theo version đang nâng) để đổi tên field / dữ liệu; đối chiếu số phiên bản trong <code>__manifest__.py</code>.</p>
+</section>
+
+<section id="engine">
+    <h2>9. Engine — tham chiếu code</h2>
+    <p>File <code>models/b03dn_engine.py</code>: <code>compute_period</code>, <code>_fragment_from_cash_line</code>, phân bổ multi-counterpart, <code>_code_matches_patterns</code>, match leaf, merge aggregate.</p>
+    <p>Chi tiết luồng fragment / ví dụ số: <a href="lctt_tt200_calculation_technical.html">lctt_tt200_calculation_technical.html</a>.</p>
+</section>
+
+<section id="extend">
+    <h2>10. Mở rộng</h2>
+    <ul>
+        <li>Kế thừa <code>l10n.vn.b03dn.engine</code> và gọi <code>super()</code> nếu cần hook (giữ tương thích).</li>
+        <li>Module tùy chỉnh có thể <code>inherit</code> view form template/line để thêm field (cần mở rộng model tương ứng nếu lưu DB).</li>
+        <li>Tests: <code>tests/test_b03dn_direct.py</code>.</li>
+    </ul>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="accounting_adecsol.menu_vn_b03_dn" model="ir.ui.menu">
+        <field name="parent_id" ref="accounting_adecsol.menu_vn_bctc_year"/>
+        <field name="name">Lưu chuyển tiền tệ (B03 - DN) (trực tiếp)</field>
+        <field name="action" ref="action_open_b03dn_html_direct"/>
+    </record>
+</odoo>

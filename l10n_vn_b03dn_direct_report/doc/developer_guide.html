@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>B03-DN — Developer guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --surface: rgba(255, 255, 255, 0.96);
+            --surface2: #e8eef5;
+            --text: #152238;
+            --muted: #546e7a;
+            --primary: #0d47a1;
+            --primary-mid: #1565c0;
+            --accent: #00838f;
+            --accent2: #0d9488;
+            --green: #2e7d32;
+            --orange: #e65100;
+            --border: rgba(13, 71, 161, 0.16);
+            --radius: 14px;
+            --shadow: 0 8px 28px rgba(13, 71, 161, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --table-head: #e3f2fd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: rgba(22, 34, 54, 0.96);
+                --surface2: rgba(30, 48, 78, 0.88);
+                --text: #e8eef5;
+                --muted: #90a4ae;
+                --border: rgba(100, 181, 246, 0.22);
+                --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+                --table-head: rgba(13, 71, 161, 0.35);
+                --green: #66bb6a;
+                --orange: #ff9800;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, sans-serif;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -5%, rgba(13, 71, 161, 0.07), transparent 50%),
+                linear-gradient(180deg, #eef3f9 0%, #f8fafc 45%, #f0f7fa 100%);
+            min-height: 100vh;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background:
+                    radial-gradient(ellipse 70% 45% at 15% 0%, rgba(21, 101, 192, 0.18), transparent 55%),
+                    linear-gradient(180deg, #0d1520 0%, #121c2a 50%, #0f1722 100%);
+            }
+        }
+        .topbar {
+            background: linear-gradient(125deg, #0d47a1 0%, #1565c0 42%, #00838f 100%);
+            color: #fff;
+            padding: 1.85rem 1.5rem 1.75rem;
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .topbar h1 {
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.38rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .topbar p { margin: 0.35rem 0 0; opacity: 0.97; font-size: 0.92rem; }
+        .topbar nav { margin-top: 0.85rem; }
+        .topbar a { color: #fff; font-weight: 600; margin-right: 1rem; }
+        .topbar a:hover { color: #b2ebf2; }
+        .layout { max-width: 56rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; display: grid; gap: 1rem; grid-template-columns: 1fr; }
+        @media (min-width: 960px) {
+            .layout { grid-template-columns: 14rem 1fr; align-items: start; }
+            .side { position: sticky; top: 1rem; }
+        }
+        .side {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            font-size: 0.82rem;
+            box-shadow: var(--shadow);
+        }
+        .side h3 {
+            margin: 0 0 0.6rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+        }
+        .side ul { margin: 0; padding: 0; list-style: none; }
+        .side a { color: var(--primary-mid); text-decoration: none; display: block; padding: 0.28rem 0; font-weight: 600; }
+        .side a:hover { color: var(--accent); text-decoration: underline; }
+        main section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.35rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+        main h2 {
+            margin: 0 0 0.85rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        main h3 { margin: 1.1rem 0 0.5rem; font-size: 1rem; font-weight: 600; color: var(--accent); }
+        p { margin: 0.55rem 0; }
+        .muted { color: var(--muted); font-size: 0.9rem; }
+        ol, ul { margin: 0.5rem 0; padding-left: 1.35rem; }
+        li { margin: 0.35rem 0; }
+        li::marker { color: var(--accent2); }
+        code {
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 0.84em;
+            background: var(--surface2);
+            padding: 0.12em 0.38em;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        pre {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.78rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.9rem 1rem;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            margin: 0.75rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.5rem 0.55rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: var(--table-head);
+            color: var(--primary);
+            font-weight: 600;
+            font-family: "Outfit", sans-serif;
+        }
+        .pill {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            font-family: "Outfit", sans-serif;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(13, 71, 161, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--border);
+            margin-bottom: 0.5rem;
+        }
+        .note {
+            border-left: 3px solid var(--orange);
+            padding: 0.65rem 1rem;
+            margin: 0.85rem 0;
+            background: rgba(230, 81, 0, 0.08);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        .ok {
+            border-left-color: var(--green);
+            background: rgba(46, 125, 50, 0.1);
+        }
+        main a { color: var(--primary-mid); font-weight: 600; }
+        main a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <h1>l10n_vn_b03dn_direct_report</h1>
+    <p>Odoo 18 · AGPL-3 · B03-DN direct · Configuration-driven · <a href="https://adecsol.vn/" style="color:#b3e5fc;font-weight:600">adecsol.vn</a></p>
+    <nav>
+        <a href="b03dn_template_config_user.html">Cấu hình template · Kế toán</a>
+        <a href="b03dn_template_config_dev.html">Cấu hình template · Dev</a>
+        <a href="lctt_tt200_calculation_technical.html">TT200 · Kỹ thuật</a>
+        <a href="lctt_tt200_calculation_management.html">TT200 · Quản lý</a>
+        <a href="../README.md">README.md</a>
+    </nav>
+</header>
+
+<div class="layout">
+    <aside class="side">
+        <h3>Mục lục</h3>
+        <ul>
+            <li><a href="#readme">Nội dung README</a></li>
+            <li><a href="#tt200">Bảng TT200 (XML)</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#compute">compute_period</a></li>
+            <li><a href="#fragment">Fragment &amp; match</a></li>
+            <li><a href="#deps">Dependencies &amp; UI</a></li>
+            <li><a href="#data">Data files</a></li>
+            <li><a href="#extend">Mở rộng &amp; test</a></li>
+            <li><a href="#files">File map</a></li>
+            <li><a href="b03dn_template_config_dev.html">→ Hướng dẫn template (dev)</a></li>
+            <li><a href="b03dn_template_config_user.html">→ Hướng dẫn template (KT)</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section id="readme">
+            <span class="pill">Trùng nội dung README.md</span>
+            <h2>Nội dung README (tổng quan module)</h2>
+            <p>Module Odoo 18: <strong>Báo cáo lưu chuyển tiền tệ — mẫu B03-DN, phương pháp trực tiếp</strong> (Thông tư 200/2014). Chỉ tiêu và quy tắc gán số liệu được <strong>cấu hình</strong> qua model <code>l10n.vn.b03dn.template</code> / <code>l10n.vn.b03dn.line</code>, không cố định trong code Python.</p>
+
+            <h3>Tổng quan luồng dữ liệu</h3>
+            <ol>
+                <li><strong>Chọn tập tài khoản tiền</strong> trong kỳ báo cáo (<code>date_from</code> … <code>date_to</code>), chỉ các bút toán <strong>đã post</strong>.</li>
+                <li>Lấy mọi dòng sổ (<code>account.move.line</code>) thuộc các TK đó → gọi là <strong>dòng tiền</strong>.</li>
+                <li>Với từng dòng tiền, trong cùng <code>account.move</code>, xác định <strong>TK đối ứng</strong>. Nếu một lần có <strong>nhiều đối ứng</strong> cùng phía, số tiền được <strong>phân bổ</strong> theo tỷ lệ Nợ/Có (tương tự logic S01-DN trong <code>l10n_vn_s01dn_report</code>).</li>
+                <li>Mỗi cặp <em>(dòng tiền, phần đối ứng đã phân bổ)</em> tạo một <strong>fragment</strong>: chiều vào/ra, mã TK đối ứng, <code>account</code> đối ứng, số tiền, id dòng tiền (để drill-down).</li>
+                <li>Fragment so khớp lần lượt với các dòng template kiểu <strong>leaf</strong> (theo <code>sequence</code>). <strong>Một fragment chỉ gán vào tối đa một chỉ tiêu leaf</strong> — chỉ tiêu <strong>đầu tiên</strong> thỏa điều kiện được cộng dồn.</li>
+                <li>Các chỉ tiêu <code>opening_cash</code>, <code>fx_adjustment</code> tính riêng bằng SQL/truy vấn.</li>
+                <li>Các chỉ tiêu <code>aggregate</code> cộng dồn số và gộp tập <code>aml_ids</code> theo biểu thức <code>sum_expression</code>.</li>
+                <li>Chỉ tiêu <code>none</code> chỉ hiển thị, luôn <strong>0</strong> và không tham gia so khớp fragment.</li>
+            </ol>
+
+            <h3>Nguồn “tiền và tương đương tiền”</h3>
+            <table>
+                <tr><th>Cấu hình</th><th>Cách xác định TK</th></tr>
+                <tr><td>Trên <strong>template</strong>: <code>cash_account_ids</code> có giá trị</td><td>Chỉ các tài khoản được chọn (lọc theo công ty).</td></tr>
+                <tr><td>Để trống</td><td>Tất cả TK mã <code>111%</code>, <code>112%</code>, <code>113%</code> của công ty <strong>+</strong> các TK trong <code>res.company.b03dn_cash_equiv_account_ids</code> (tương đương tiền ngắn hạn, ví dụ tiểu khoản 128).</td></tr>
+            </table>
+            <p class="muted">Chỉ các phát sinh <strong>trên các TK này</strong> trong kỳ mới sinh fragment; các TK khác không đi vào báo cáo trực tiếp qua luồng này.</p>
+
+            <h3>Chiều tiền và pattern đối ứng (leaf)</h3>
+            <ul>
+                <li><strong>Tiền vào</strong> (<code>is_inflow</code>): dòng tiền <strong>Nợ &gt; 0</strong>, Có ≈ 0. Engine so khớp <code>credit_account_patterns</code> với mã TK đối ứng phía <strong>Có</strong> (cột “TK Có” trên hướng dẫn TT200). Số vào bucket: <strong>+amount</strong> × <code>amount_multiplier</code>.</li>
+                <li><strong>Tiền ra</strong>: dòng tiền <strong>Có &gt; 0</strong>, Nợ ≈ 0. So khớp <code>debit_account_patterns</code> với mã đối ứng phía <strong>Nợ</strong> (“TK Nợ” TT200). Số vào bucket: <strong>−amount</strong> × <code>amount_multiplier</code> (mặc định multiplier = 1 → chi ra là âm trong dữ liệu tính toán).</li>
+            </ul>
+
+            <h3>Mẫu tài khoản (<code>debit_account_patterns</code>, <code>credit_account_patterns</code>)</h3>
+            <ul>
+                <li>Danh sách phân tách dấu <strong>phẩy</strong> (ví dụ <code>511%,131%</code>).</li>
+                <li>Hậu tố <code>%</code>: khớp <strong>tiền tố</strong> mã TK đối ứng.</li>
+                <li>Không có <code>%</code>: khớp <strong>đúng mã</strong>.</li>
+                <li><code>exclude_tag_ids</code>: nếu tập “nguồn thẻ” (theo <code>tag_source</code>) chứa bất kỳ thẻ loại trừ nào → leaf này <strong>không</strong> nhận fragment (không dùng pattern exclude riêng cho TK).</li>
+            </ul>
+            <p>Nếu đối ứng có nhiều mã ghép, hệ thống thử từng mã; <strong>một mã</strong> khớp pattern là đủ (sau khi qua thẻ).</p>
+
+            <h3>Thẻ (<code>tag_ids</code>, <code>exclude_tag_ids</code>, <code>tag_source</code>, <code>tag_match_mode</code>)</h3>
+            <ul>
+                <li><code>tag_ids</code> (thẻ yêu cầu): chỉ fragment thỏa điều kiện thẻ mới được gán.</li>
+                <li><code>exclude_tag_ids</code>: có thẻ loại trừ trong pool → bỏ qua leaf này.</li>
+                <li><code>tag_source</code>: <code>counterpart_account</code> (mặc định) = thẻ trên <code>account.account</code> đối ứng; <code>cash_line</code> = thẻ trên dòng tiền; <code>either</code> = ưu tiên dòng tiền rồi TK đối ứng.</li>
+                <li><code>tag_match_mode</code>: <code>all</code> / <code>any</code>.</li>
+            </ul>
+            <div class="note">Leaf <strong>bỏ qua</strong> nếu sau khi parse <strong>không</strong> còn mẫu TK nào <strong>và</strong> không có <code>tag_ids</code> (rule “trống”).</div>
+
+            <h3>Domain bổ sung (<code>extra_domain</code>)</h3>
+            <p>Chuỗi Python là <strong>domain Odoo</strong> (list), <code>safe_eval</code> trên <code>account.move.line</code> của <strong>dòng tiền</strong>. Áp dụng <strong>sau</strong> khi đã khớp pattern/thẻ.</p>
+
+            <h3>Ưu tiên rule (leaf)</h3>
+            <p><code>leaf_lines</code> sắp theo <code>sequence</code>, <code>id</code>. Với <strong>mỗi fragment</strong>, engine duyệt rule theo thứ tự đó; <strong>dừng ngay</strong> khi khớp rule đầu tiên.</p>
+            <ul>
+                <li>Rule <strong>cụ thể</strong> (tag, mẫu hẹp) nên đặt <strong>sequence nhỏ hơn</strong> rule tổng quát.</li>
+                <li>Hai rule có thể “khớp lý thuyết” cùng giao dịch nhưng chỉ một được nhận fragment — cần hiệu chỉnh thứ tự hoặc mẫu.</li>
+            </ul>
+
+            <h3>Các loại chỉ tiêu (<code>line_kind</code>)</h3>
+            <table>
+                <tr><th><code>line_kind</code></th><th>Cách lấy số</th><th>Drill-down (HTML)</th></tr>
+                <tr><td><strong>none</strong></td><td>Luôn 0.</td><td>Không.</td></tr>
+                <tr><td><strong>leaf</strong></td><td>Cộng dồn fragment khớp; <code>aml_ids</code> = các <strong>dòng tiền</strong> (<code>cash_aml_id</code>).</td><td>Có, theo id dòng tiền.</td></tr>
+                <tr><td><strong>aggregate</strong></td><td><code>sum_expression</code>: cộng số các mã; <code>aml_ids</code> = hợp các mã con.</td><td>Có (gộp nhiều dòng).</td></tr>
+                <tr><td><strong>opening_cash</strong></td><td><code>SUM(debit - credit)</code> các TK tiền, <code>date &lt; date_from</code>, posted.</td><td>Không (số tổng hợp).</td></tr>
+                <tr><td><strong>fx_adjustment</strong></td><td>Trong kỳ, AML mà <code>account_id.code</code> khớp <code>fx_account_patterns</code> (mặc định <code>413%</code>); số = <strong>tổng balance</strong>.</td><td>Có (theo id các dòng tỷ giá).</td></tr>
+            </table>
+            <div class="note"><strong>Lưu ý biểu thức tổng:</strong> Mọi mã trong <code>sum_expression</code> phải <strong>tồn tại</strong> là một dòng template cùng <code>code</code>. Nếu thiếu mã, engine sẽ <strong>bỏ qua</strong> bước cộng đó cho đến khi bạn thêm dòng (kể cả <code>line_kind = none</code> với số 0) hoặc chỉnh lại biểu thức.</div>
+
+            <p class="muted" style="margin-top:1.25rem;">Bảng tham chiếu đầy đủ dữ liệu mẫu <code>b03dn_template_tt200_direct.xml</code> nằm ở mục <a href="#tt200">Bảng TT200 (XML)</a> bên dưới.</p>
+
+            <h3>Báo cáo và drill-down</h3>
+            <ul>
+                <li><strong>QWeb / HTML</strong>: số trên chỉ tiêu có liên kết tới danh sách <code>account.move.line</code> khi có <code>aml_ids</code> (container OCA <code>account_financial_report</code>).</li>
+                <li><strong>XLSX</strong>: cùng cấu trúc số; không nhất thiết hyperlink trong Excel.</li>
+            </ul>
+
+            <h3>Phụ thuộc chính</h3>
+            <p><code>accounting_adecsol</code>, <code>account_financial_report</code>, <code>report_xlsx</code>, <code>mis_builder</code>, <code>mis_builder_cash_flow</code> (stack OCA); engine B03 <strong>không</strong> đọc KPI MIS — chỉ dùng <code>account.move.line</code> và cấu hình template.</p>
+
+            <h3>Cài đặt</h3>
+            <p>Thêm thư mục module vào <code>--addons-path</code>, cài <strong>B03-DN — Lưu chuyển tiền tệ (phương pháp trực tiếp, cấu hình)</strong>. Menu B03-DN trong localization Adecsol mở <strong>wizard</strong> chọn kỳ và template.</p>
+            <p>Cấu hình template: <strong>Kế toán → Cấu hình → B03-DN templates</strong> (hoặc tương đương theo menu đã định nghĩa).</p>
+        </section>
+
+        <section id="tt200">
+            <h2>Bảng tham chiếu — <code>b03dn_template_tt200_direct.xml</code></h2>
+            <p class="muted">Giá trị mặc định trong module; doanh nghiệp có thể chỉnh trên UI.</p>
+
+            <h3>Phần I — HĐ kinh doanh (leaf)</h3>
+            <table>
+                <tr><th>Mã</th><th>Chiều tiền</th><th>Đối ứng (mẫu mặc định)</th><th>Ghi chú</th></tr>
+                <tr><td>01</td><td>Vào (Nợ tiền)</td><td><code>511%</code>, <code>131%</code></td><td>Doanh thu / thu từ KH…</td></tr>
+                <tr><td>02</td><td>Ra (Có tiền)</td><td><code>331%</code> + thẻ <strong>B03-DN — Chi trả NCC</strong> trên <strong>TK đối ứng</strong></td><td>Tách khỏi chi 331 khác nếu gắn thẻ.</td></tr>
+                <tr><td>03</td><td>Ra</td><td><code>334%</code></td><td>Chi NLĐ.</td></tr>
+                <tr><td>04</td><td>Ra</td><td><code>635%</code>, <code>242%</code>, <code>335%</code></td><td>Lãi vay / chi phí tài chính.</td></tr>
+                <tr><td>05</td><td>Ra</td><td><code>3334%</code></td><td>TNDN hiện hành.</td></tr>
+                <tr><td>06</td><td>Vào</td><td><code>515%</code>, <code>811%</code>, <code>717%</code></td><td>Thu khác HĐKD.</td></tr>
+                <tr><td>07</td><td>Ra</td><td><code>632%</code>… trừ <code>635%</code> trong loại trừ</td><td>Chi khác HĐKD; exclude tránh trùng lãi vay.</td></tr>
+            </table>
+            <p><strong>20</strong> — <code>aggregate</code>: mặc định <code>01+02+03+04+05+06+07</code> (theo <code>sum_expression</code> trong XML).</p>
+
+            <h3>Phần II — HĐ đầu tư</h3>
+            <table>
+                <tr><th>Mã</th><th>Chiều</th><th>Mẫu đối ứng (mặc định)</th><th>Ghi chú</th></tr>
+                <tr><td>21</td><td>Ra</td><td><code>211%</code>… + thẻ <strong>mua TSCĐ</strong> trên TK đối ứng</td><td></td></tr>
+                <tr><td>22</td><td>Vào</td><td><code>711%</code>, <code>214%</code></td><td>Thanh lý TSCĐ…</td></tr>
+                <tr><td>23</td><td>Ra</td><td><code>128%</code>, <code>228%</code>, <code>229%</code></td><td>Cho vay / công cụ nợ…</td></tr>
+                <tr><td>24</td><td>Vào</td><td><code>128%</code>, <code>228%</code></td><td>Thu hồi…</td></tr>
+                <tr><td>25</td><td>Ra</td><td><code>221%</code>, <code>222%</code>, <code>228%</code></td><td>Góp vốn đầu tư ra ngoài.</td></tr>
+                <tr><td>26</td><td>Vào</td><td><code>221%</code>, <code>222%</code></td><td>Thu hồi góp vốn.</td></tr>
+                <tr><td>27</td><td>Vào</td><td><code>515%</code>, <code>635%</code></td><td>Lãi / cổ tức thu.</td></tr>
+            </table>
+            <p><strong>30</strong> — <code>aggregate</code>: mặc định <code>21+22+23+24+25+26+27</code>.</p>
+
+            <h3>Phần III — HĐ tài chính</h3>
+            <table>
+                <tr><th>Mã</th><th>Chiều</th><th>Mẫu đối ứng (mặc định)</th></tr>
+                <tr><td>31</td><td>Vào</td><td><code>411%</code></td></tr>
+                <tr><td>32</td><td>Ra</td><td><code>411%</code>, <code>412%</code></td></tr>
+                <tr><td>33</td><td>Vào</td><td><code>341%</code>, <code>343%</code>, <code>344%</code></td></tr>
+                <tr><td>34</td><td>Ra</td><td><code>341%</code>, <code>343%</code>, <code>344%</code></td></tr>
+                <tr><td>35</td><td>Ra</td><td><code>212%</code>, <code>214%</code>, <code>342%</code></td></tr>
+                <tr><td>36</td><td>Ra</td><td><code>421%</code>, <code>338%</code></td></tr>
+            </table>
+            <p><strong>40</strong> — <code>aggregate</code>: mặc định <code>31+32+33+34+35+36</code>.</p>
+
+            <h3>Phần IV — Tổng hợp</h3>
+            <table>
+                <tr><th>Mã</th><th>Loại</th><th>Logic mặc định</th></tr>
+                <tr><td>50</td><td>aggregate</td><td><code>20+30+40</code></td></tr>
+                <tr><td>60</td><td>opening_cash</td><td>Số dư đầu kỳ (trước <code>date_from</code>) của nhóm TK tiền.</td></tr>
+                <tr><td>61</td><td>fx_adjustment</td><td>Tổng <code>balance</code> AML trong kỳ, TK khớp <code>413%</code> (hoặc <code>fx_account_patterns</code>).</td></tr>
+                <tr><td>70</td><td>aggregate</td><td><code>50+60+61</code></td></tr>
+            </table>
+            <p>Các dòng <strong>H1–H4</strong> là <code>line_kind = none</code> (chỉ tiêu đề phần).</p>
+        </section>
+
+        <section id="models">
+            <h2>Models (chi tiết)</h2>
+            <table>
+                <tr><th>Model</th><th>Vai trò</th></tr>
+                <tr><td><code>l10n.vn.b03dn.template</code></td><td>Template; <code>cash_account_ids</code>; <code>company_id</code> optional.</td></tr>
+                <tr><td><code>l10n.vn.b03dn.line</code></td><td><code>code</code> unique/template; <code>line_kind</code>; leaf fields; <code>sum_expression</code>; <code>fx_account_patterns</code>.</td></tr>
+                <tr><td><code>l10n.vn.b03dn.engine</code></td><td><code>AbstractModel</code>; <code>compute_period(...)</code> → <code>lines_by_code</code>, <code>account_ids</code>.</td></tr>
+                <tr><td><code>l10n.vn.b03dn.report.wizard</code></td><td>Transient; hai kỳ; <code>_report_payload()</code>.</td></tr>
+                <tr><td><code>res.company</code></td><td><code>b03dn_cash_equiv_account_ids</code>.</td></tr>
+                <tr><td><code>account.move.line</code></td><td><code>b03dn_cash_flow_tag_ids</code>.</td></tr>
+            </table>
+        </section>
+
+        <section id="compute">
+            <h2><code>compute_period</code> — thứ tự thực thi</h2>
+            <ol>
+                <li><code>_cash_account_ids</code></li>
+                <li>Đọc cash AML trong kỳ; <code>_counterparts_for_moves</code></li>
+                <li><code>_fragment_from_cash_line</code> + <code>_allocate_split_amounts</code></li>
+                <li>Với mỗi fragment: vòng leaf <code>sorted(sequence,id)</code>, match → <code>break</code></li>
+                <li>Khởi tạo <code>result[code]</code> cho mọi line; merge buckets</li>
+                <li><code>opening_cash</code>, <code>fx_adjustment</code> per line</li>
+                <li>Vòng aggregate (cố định số vòng) cho đến stable</li>
+            </ol>
+        </section>
+
+        <section id="fragment">
+            <h2>Điều kiện match một fragment với leaf rule</h2>
+            <ul>
+                <li>Bỏ qua leaf “trống”: không pattern (sau parse) và không <code>tag_ids</code>.</li>
+                <li>Theo <code>is_inflow</code> chọn tập pattern: inflow → <code>credit_account_patterns</code>; outflow → <code>debit_account_patterns</code>.</li>
+                <li>So khớp mã đối ứng với pattern; xét <code>exclude_tag_ids</code> / <code>tag_ids</code> (theo <code>tag_source</code>, <code>tag_match_mode</code>).</li>
+                <li><code>extra_domain</code> trên dòng tiền (nếu có).</li>
+                <li>Cộng <code>signed * amount_multiplier</code>; <code>aml_ids</code> gom id <strong>dòng tiền</strong>.</li>
+            </ul>
+        </section>
+
+        <section id="deps">
+            <h2>Dependencies &amp; controllers</h2>
+            <p>Manifest: <code>account</code>, <code>accounting_adecsol</code>, <code>account_financial_report</code>, <code>report_xlsx</code>, <code>mis_builder</code>, <code>mis_builder_cash_flow</code>.</p>
+            <p><code>controllers/main.py</code>: kế thừa report_xlsx, đặt tên file download / <code>report_download</code>.</p>
+        </section>
+
+        <section id="data">
+            <h2>Data</h2>
+            <ul>
+                <li><code>data/account_tags_cash_flow.xml</code></li>
+                <li><code>data/b03dn_template_tt200_direct.xml</code></li>
+            </ul>
+        </section>
+
+        <section id="extend">
+            <h2>Mở rộng &amp; kiểm thử</h2>
+            <p>Subclass <code>l10n.vn.b03dn.engine</code> nếu cần hook (giữ super). Tests: <code>tests/test_b03dn_direct.py</code>, <code>AccountTestInvoicingCommon</code>, tag <code>post_install</code>.</p>
+            <div class="note ok">Kế thừa view: Odoo không cho xpath selector bằng <code>string=</code>; module dùng cấu trúc field <code>account_id</code> trên form dòng sổ.</div>
+        </section>
+
+        <section id="files">
+            <h2>File map</h2>
+            <pre>models/b03dn_engine.py      # compute_period, fragment, patterns, tags
+models/b03dn_template.py    # template + line
+models/b03dn_wizard.py      # wizard, payload
+models/res_company.py
+models/account_move_line.py
+report/b03dn_direct.py
+report/b03dn_direct_xlsx.py
+report/b03dn_direct_templates.xml
+controllers/main.py
+data/*.xml
+doc/b03dn_template_config_dev.html
+doc/b03dn_template_config_user.html
+doc/developer_guide.html</pre>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>

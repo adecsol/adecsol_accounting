@@ -1,0 +1,347 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- B03-DN phương pháp trực tiếp — chỉ tiêu / mẫu TK theo TT99 (bảng LCTT). -->
+    <record id="b03dn_template_tt99_direct" model="l10n.vn.b03dn.template">
+        <field name="name">B03-DN — Phương pháp trực tiếp (TT99)</field>
+        <field name="circular_type">tt99</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="b03dn_tt99_line_h1" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">5</field>
+        <field name="code">H1</field>
+        <field name="name" type="html">
+            <p>
+                <strong>I. Hoạt động kinh doanh</strong>
+            </p>
+        </field>
+        <field name="display_type">line_section</field>
+    </record>
+
+    <record id="b03dn_tt99_line_01" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">10</field>
+        <field name="code">01</field>
+        <field name="name">1. Tiền thu bán hàng, cung cấp DV và DT khác</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">511%,131%,121%,515%</field>
+        <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_22'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_27')])]"/>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_02" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">20</field>
+        <field name="code">02</field>
+        <field name="name">2. Tiền chi trả cho người cung cấp HH, DV</field>
+        <field name="debit_account_patterns">331%,15%,242%,133%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_21_asset')])]"/>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_03" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">30</field>
+        <field name="code">03</field>
+        <field name="name">3. Tiền chi trả cho người lao động</field>
+        <field name="debit_account_patterns">334%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_04" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">40</field>
+        <field name="code">04</field>
+        <field name="name">4. Tiền lãi vay đã trả</field>
+        <field name="debit_account_patterns">335%,635%,242%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_05" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">50</field>
+        <field name="code">05</field>
+        <field name="name">5. Thuế TNDN đã nộp</field>
+        <field name="debit_account_patterns">3334%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_06" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">60</field>
+        <field name="code">06</field>
+        <field name="name">6. Tiền thu khác từ HĐKD</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">711%,133%,141%,244%,338%</field>
+        <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_22')])]"/>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_07" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">70</field>
+        <field name="code">07</field>
+        <field name="name">7. Tiền chi khác cho HĐKD</field>
+        <field name="debit_account_patterns">811%,141%,244%,333%,338%,35%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="exclude_account_patterns">3388%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+
+    <record id="b03dn_tt99_line_20" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">200</field>
+        <field name="code">20</field>
+        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ HĐKD</em></strong></p>
+        </field>
+        <field name="sum_expression">01+02+03+04+05+06+07</field>
+    </record>
+    <record id="b03dn_tt99_line_20_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">201</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+    <record id="b03dn_tt99_line_h2" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">205</field>
+        <field name="code">H2</field>
+        <field name="name" type="html">
+            <p>
+                <strong>II. Hoạt động đầu tư</strong>
+            </p>
+        </field>
+        <field name="display_type">line_section</field>
+    </record>
+    <record id="b03dn_tt99_line_21" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">210</field>
+        <field name="code">21</field>
+        <field name="name">1. Tiền chi mua sắm, xây dựng TSCĐ, TSDH khác</field>
+        <field name="debit_account_patterns">211%,213%,217%,241%,331%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_25'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_34_loan_principal')])]"/>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_22" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">220</field>
+        <field name="code">22</field>
+        <field name="name">2. Tiền thu thanh lý, nhượng bán TSCĐ, TSDH khác</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">711%,511%,131%</field>
+        <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_26')])]"/>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_23" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">230</field>
+        <field name="code">23</field>
+        <field name="name">3. Tiền chi cho vay, mua công cụ nợ đơn vị khác</field>
+        <field name="debit_account_patterns">128%,171%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_24" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">240</field>
+        <field name="code">24</field>
+        <field name="name">4. Tiền thu hồi cho vay, bán lại CC nợ đơn vị khác</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">128%,171%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_25" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">250</field>
+        <field name="code">25</field>
+        <field name="name">5. Tiền chi đầu tư góp vốn vào đơn vị khác</field>
+        <field name="debit_account_patterns">221%,222%,228%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_26" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">260</field>
+        <field name="code">26</field>
+        <field name="name">6. Tiền thu hồi đầu tư vốn vào đơn vị khác</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">221%,222%,228%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_27" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">270</field>
+        <field name="code">27</field>
+        <field name="name">7. Thu lãi cho vay, cổ tức và lợi nhuận được chia</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">515%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+
+    <record id="b03dn_tt99_line_30" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">300</field>
+        <field name="code">30</field>
+        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ HĐĐT</em></strong></p>
+        </field>
+        <field name="sum_expression">21+22+23+24+25+26+27</field>
+    </record>
+    <record id="b03dn_tt99_line_30_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">301</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+
+    <record id="b03dn_tt99_line_h3" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">305</field>
+        <field name="code">H3</field>
+        <field name="name" type="html">
+            <p>
+                <strong>III. Hoạt động tài chính</strong>
+            </p>
+        </field>
+        <field name="display_type">line_section</field>
+    </record>
+    <record id="b03dn_tt99_line_31" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">310</field>
+        <field name="code">31</field>
+        <field name="name">1. Tiền thu từ phát hành CP, nhận vốn góp</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">411%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_32" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">320</field>
+        <field name="code">32</field>
+        <field name="name">2. Tiền chi trả vốn góp, mua lại CP đã phát hành</field>
+        <field name="debit_account_patterns">411%,419%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_33" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">330</field>
+        <field name="code">33</field>
+        <field name="name">3. Tiền thu từ đi vay</field>
+        <field name="debit_account_patterns">111%,112%,113%</field>
+        <field name="credit_account_patterns">341%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_34" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">340</field>
+        <field name="code">34</field>
+        <field name="name">4. Tiền trả nợ gốc vay</field>
+        <field name="debit_account_patterns">341%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="exclude_account_patterns">3412%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_35" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">350</field>
+        <field name="code">35</field>
+        <field name="name">5. Tiền trả nợ gốc thuê tài sản</field>
+        <field name="debit_account_patterns">3412%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+    <record id="b03dn_tt99_line_36" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">360</field>
+        <field name="code">36</field>
+        <field name="name">6. Cổ tức, lợi nhuận đã trả cho chủ sở hữu</field>
+        <field name="debit_account_patterns">421%,3388%</field>
+        <field name="credit_account_patterns">111%,112%,113%</field>
+        <field name="amount_multiplier">1</field>
+    </record>
+
+    <record id="b03dn_tt99_line_40" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">400</field>
+        <field name="code">40</field>
+        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ HĐTC</em></strong></p>
+        </field>
+        <field name="sum_expression">31+32+33+34+35+36</field>
+    </record>
+    <record id="b03dn_tt99_line_40_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">401</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+    <record id="b03dn_tt99_line_50" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">500</field>
+        <field name="code">50</field>
+        <field name="name" type="html">
+            <p>
+                <strong>Lưu chuyển tiền thuần trong kỳ (50 = 20+30+40)</strong>
+            </p>
+        </field>
+        <field name="sum_expression">20+30+40</field>
+    </record>
+    <record id="b03dn_tt99_line_50_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">501</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+    <record id="b03dn_tt99_line_60" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">600</field>
+        <field name="code">60</field>
+        <field name="name" type="html">
+            <p>
+                <strong>Tiền và tương đương tiền đầu kỳ</strong>
+            </p>
+        </field>
+        <field name="use_opening_cash_balance" eval="True"/>
+    </record>
+    <record id="b03dn_tt99_line_60_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">601</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+    <record id="b03dn_tt99_line_61" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">610</field>
+        <field name="code">61</field>
+        <field name="name">Ảnh hưởng thay đổi tỷ giá (TK 413)</field>
+        <field name="fx_account_patterns">413%</field>
+    </record>
+    <record id="b03dn_tt99_line_61_blank_after" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">611</field>
+        <field name="name" type="html">
+            <p><br/></p>
+        </field>
+        <field name="display_type">line_note</field>
+    </record>
+    <record id="b03dn_tt99_line_70" model="l10n.vn.b03dn.line">
+        <field name="template_id" ref="b03dn_template_tt99_direct"/>
+        <field name="sequence">700</field>
+        <field name="code">70</field>
+        <field name="name" type="html">
+            <p>
+                <strong>Tiền và tương đương tiền cuối kỳ (70 = 50+60+61)</strong>
+            </p>
+        </field>
+        <field name="sum_expression">50+60+61</field>
+    </record>
+</odoo> -->

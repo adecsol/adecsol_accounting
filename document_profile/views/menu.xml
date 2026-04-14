@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- OCA document_knowledge: views/document_knowledge.xml → menu_document_root -->
+    <menuitem
+        id="menu_document_profile"
+        name="Document Profiles"
+        parent="document_knowledge.menu_document_root"
+        sequence="15"
+        groups="document_profile.group_document_profile_user,document_profile.group_document_profile_manager,base.group_system"
+    >
+        <menuitem
+            id="menu_document_profile_set"
+            name="Profile Sets"
+            action="action_document_profile_set"
+            sequence="15"
+        />
+        <menuitem
+            id="menu_document_profile_dossier"
+            name="Document Dossiers"
+            action="action_document_profile_dossier"
+            sequence="16"
+        />
+    </menuitem>
+</odoo>

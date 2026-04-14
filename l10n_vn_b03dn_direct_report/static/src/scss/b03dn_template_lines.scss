@@ -1,0 +1,11 @@
+// Bảng chỉ tiêu template B03-DN (widget b03dn_template_line_one2many)
+
+.o_field_b03dn_template_lines .o_section_and_note_list_view tbody tr {
+    &.o_is_line_section > td {
+        background-color: #f0f2f5;
+    }
+
+    &.o_is_line_note > td {
+        color: #5f6368;
+    }
+}

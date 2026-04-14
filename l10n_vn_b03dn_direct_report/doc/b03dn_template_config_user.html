@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>B03-DN — Hướng dẫn cấu hình template (Kế toán)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --surface: rgba(255, 255, 255, 0.96);
+            --text: #152238;
+            --muted: #546e7a;
+            --primary: #0d47a1;
+            --primary-mid: #1565c0;
+            --accent: #00838f;
+            --accent2: #0d9488;
+            --border: rgba(13, 71, 161, 0.16);
+            --radius: 14px;
+            --shadow: 0 8px 28px rgba(13, 71, 161, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --table-head: #e3f2fd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: rgba(22, 34, 54, 0.96);
+                --text: #e8eef5;
+                --muted: #90a4ae;
+                --border: rgba(100, 181, 246, 0.22);
+                --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+                --table-head: rgba(13, 71, 161, 0.35);
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, sans-serif;
+            font-size: 1.02rem;
+            line-height: 1.72;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -5%, rgba(13, 71, 161, 0.07), transparent 50%),
+                linear-gradient(180deg, #eef3f9 0%, #f8fafc 45%, #f0f7fa 100%);
+            min-height: 100vh;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background:
+                    radial-gradient(ellipse 70% 45% at 15% 0%, rgba(21, 101, 192, 0.18), transparent 55%),
+                    linear-gradient(180deg, #0d1520 0%, #121c2a 50%, #0f1722 100%);
+            }
+        }
+        .hero {
+            background: linear-gradient(125deg, #0d47a1 0%, #1565c0 42%, #00838f 100%);
+            color: #fff;
+            padding: 2.6rem 1.5rem 2.9rem;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .hero h1 {
+            margin: 0 0 0.55rem;
+            font-family: "Outfit", sans-serif;
+            font-size: clamp(1.3rem, 4vw, 1.75rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .hero p { margin: 0 auto; max-width: 36rem; opacity: 0.97; font-size: 1.02rem; }
+        .hero .nav-inline { margin-top: 1rem; }
+        .hero .nav-inline a { color: #fff; font-weight: 700; margin: 0 0.65rem; text-decoration: none; border-bottom: 2px solid rgba(255,255,255,0.4); }
+        .hero .nav-inline a:hover { border-color: #80deea; color: #e0f7fa; }
+        .wrap { max-width: 44rem; margin: -1.6rem auto 0; padding: 0 1.25rem 3.5rem; }
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.6rem;
+            margin-bottom: 1.15rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            margin: 0 0 0.65rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.45rem;
+        }
+        .card h3 { margin: 1rem 0 0.45rem; font-size: 0.97rem; font-weight: 600; color: var(--accent); }
+        p { margin: 0.55rem 0; }
+        ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+        li { margin: 0.38rem 0; }
+        li::marker { color: var(--accent2); }
+        .muted { color: var(--muted); font-size: 0.94rem; }
+        .highlight {
+            background: linear-gradient(135deg, rgba(227, 242, 253, 0.9) 0%, rgba(224, 247, 250, 0.65) 100%);
+            border-radius: var(--radius);
+            padding: 0.95rem 1.1rem;
+            margin: 0.9rem 0;
+            border: 1px solid var(--border);
+        }
+        @media (prefers-color-scheme: dark) {
+            .highlight { background: linear-gradient(135deg, rgba(13, 71, 161, 0.28) 0%, rgba(0, 131, 143, 0.18) 100%); }
+        }
+        .footer-note { text-align: center; font-size: 0.88rem; color: var(--muted); margin-top: 2rem; }
+        .footer-note a { color: var(--primary-mid); font-weight: 600; text-decoration: none; }
+        .footer-note a:hover { color: var(--accent); text-decoration: underline; }
+        table.list { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.65rem 0; }
+        table.list th, table.list td { border: 1px solid var(--border); padding: 0.4rem 0.5rem; text-align: left; }
+        table.list th {
+            background: var(--table-head);
+            color: var(--primary);
+            font-family: "Outfit", sans-serif;
+            font-weight: 600;
+        }
+        kbd { font-family: inherit; background: rgba(13, 71, 161, 0.1); padding: 0.1em 0.4em; border-radius: 6px; font-size: 0.9em; border: 1px solid var(--border); }
+        a { color: var(--primary-mid); font-weight: 600; }
+        a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Cấu hình mẫu B03-DN<br/><span style="font-weight:600;font-size:0.9em">Dành cho kế toán / trưởng nhóm (không cần biết code)</span></h1>
+    <p>Tài liệu giúp chỉnh <strong>template</strong> sao cho số trên báo cáo lưu chuyển tiền tệ <strong>khớp cách hạch toán</strong> của doanh nghiệp và đúng tinh thần <strong>Thông tư 200</strong>. Giao diện tài liệu tham khảo phong cách <a href="https://adecsol.vn/" style="color:#b3e5fc;font-weight:700">adecsol.vn</a> (xanh lam / teal, nền sáng).</p>
+    <div class="nav-inline">
+        <a href="b03dn_template_config_dev.html">Bản cho IT / dev</a>
+        <a href="lctt_tt200_calculation_management.html">Cách đọc số B03-DN</a>
+    </div>
+</header>
+
+<div class="wrap">
+
+<div class="card">
+    <h2>Nếu bạn vừa được bàn giao</h2>
+    <h3>Ai nên đọc file này?</h3>
+    <p><strong>Kế toán trưởng / kế toán vận hành</strong> chỉnh mẫu báo cáo trên Odoo; <strong>không cần biết code</strong>. Nếu bạn là IT/dev, chuyển sang <a href="b03dn_template_config_dev.html">b03dn_template_config_dev.html</a>.</p>
+    <h3>Đọc theo thứ tự nào?</h3>
+    <ol>
+        <li>File này (thao tác UI + ý nghĩa từng ô).</li>
+        <li><a href="lctt_tt200_calculation_management.html">Cách đọc số B03-DN</a> — hiểu chỉ tiêu in ra báo cáo.</li>
+        <li>Khi lệch số hoặc cần domain/SQL: nhờ dev đọc <a href="b03dn_template_config_dev.html">bản dev</a> và <a href="lctt_tt200_calculation_technical.html">tài liệu engine</a>.</li>
+    </ol>
+</div>
+
+<div class="card">
+    <h2>Checklist người mới (gợi ý 3 ngày đầu)</h2>
+    <p><strong>Ngày 1 — Định vị &amp; quyền</strong></p>
+    <ul>
+        <li>Xác nhận bạn vào được menu mô tả ở mục 1 (nếu không: báo IT kiểm tra quyền nhóm <em>Accounting / Billing</em> và module đã cài).</li>
+        <li>Mở template mặc định TT200, <strong>không sửa trực tiếp</strong>; dùng <strong>nhân bản (duplicate)</strong> để có bản riêng cho DN.</li>
+        <li>Ghi lại <strong>tên template mới</strong> và công ty áp dụng (nếu có nhiều công ty).</li>
+    </ul>
+    <p><strong>Ngày 2 — Đối chiếu TK tiền &amp; 2–3 nghiệp vụ mẫu</strong></p>
+    <ul>
+        <li>Kiểm tra ô <strong>Tài khoản tiền &amp; TĐT</strong>: để trống (dùng mặc định 111/112/113 + tương đương tiền trên công ty) hoặc chỉ rõ nếu DN dùng cấu trúc đặc thù.</li>
+        <li>Chọn 2–3 chứng từ: <em>Thu bán hàng (tiền vào)</em>, <em>Trả NCC (tiền ra)</em>, <em>Chi lương / thuế</em> — đối chiếu mã TK đối ứng với cột pattern trên form.</li>
+    </ul>
+    <p><strong>Ngày 3 — In báo cáo thử &amp; ghi chú lệch</strong></p>
+    <ul>
+        <li>Chạy báo cáo B03-DN kỳ thử (cùng kỳ đã đóng sổ nội bộ).</li>
+        <li>Nếu lệch: dùng mục «Đối soát &amp; FAQ» bên dưới; ghi rỏ <strong>mã chỉ tiêu</strong>, <strong>số chứng từ</strong>, <strong>đoán nguyên nhân</strong> trước khi nhờ IT.</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>1. Vào đâu trên phần mềm?</h2>
+    <p><strong>Đường dẫn chuẩn trong code module</strong> (Odoo tiếng Việt thường tương ứng):</p>
+    <ul>
+        <li><strong>Kế toán → Cấu hình → B03-DN templates</strong> — tiêu đề cửa sổ hành động: «B03-DN — Template báo cáo»; danh sách chuỗi «B03-DN templates»; form «B03-DN template».</li>
+        <li>Gốc menu kỹ thuật: <code class="muted">account.menu_finance_configuration</code> (tức nhóm <em>Configuration</em> dưới ứng dụng Kế toán). Nếu giao diện Anh: <strong>Accounting → Configuration → B03-DN templates</strong>.</li>
+    </ul>
+    <p class="muted">Nếu không thấy mục này: module <strong>B03-DN — Lưu chuyển tiền tệ (phương pháp trực tiếp, cấu hình)</strong> chưa được cài hoặc tài khoản của bạn thiếu quyền — liên hệ người quản trị Odoo (IT) kèm tên menu trên.</p>
+    <p>Bạn làm việc với hai phần chính:</p>
+    <ul>
+        <li><strong>Template</strong> — “bộ quy tắc” cho một báo cáo (vd mẫu TT200 có sẵn).</li>
+        <li><strong>Chỉ tiêu</strong> (bảng con <code>line_ids</code>) — từng dòng trên B03 (mã 01, 02… hoặc dòng chỉ là tiêu đề).</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>2. Tên trên form Odoo ↔ ý nghĩa (bàn giao)</h2>
+    <p>Giao diện có thể hiện tiếng Anh hoặc Việt tùy ngôn ngữ user. Bảng sau map <strong>nhãn thường gặp</strong> với việc cần làm.</p>
+    <table class="list">
+        <tr><th>Khu vực form</th><th>Tên / field</th><th>Việc của kế toán</th></tr>
+        <tr><td>Đầu form</td><td>Name / Tên</td><td>Đặt tên dễ nhận biết (vd «B03 TT200 — Cty ABC»).</td></tr>
+        <tr><td>Đầu form</td><td>Active / Hoạt động</td><td>Bỏ chọn nếu muốn <strong>ẩn</strong> template khỏi lựa chọn (không xóa dữ liệu).</td></tr>
+        <tr><td>Đầu form</td><td>Company / Công ty</td><td>Để trống = có thể dùng cho mọi công ty (tùy wizard); gán công ty nếu DN muốn <strong>chỉ một CTY</strong> dùng mẫu này.</td></tr>
+        <tr><td>Đầu form</td><td>Tài khoản tiền &amp; TĐT (override)</td><td>Chỉ điền khi muốn <strong>thay</strong> bộ TK tiền mặc định (111/112/113…). Trống = theo quy tắc chuẩn module.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Thứ tự (kéo handle)</td><td><strong>Ưu tiên rule</strong>: số nhỏ được thử trước khi gán giao dịch vào chỉ tiêu.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Loại dòng / line_kind</td><td>Chỉ hiển thị / Luật lọc / Cộng biểu thức / Đầu kỳ / Tỷ giá — xem mục 5.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Tên chỉ tiêu (HTML)</td><td>Text hiển thị trên báo cáo; có thể có định dạng.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Mã / code</td><td>Mã 01, 02… theo TT200; bắt buộc trừ dòng «chỉ hiển thị».</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Debit account patterns</td><td>Mẫu TK đối ứng phía <strong>Nợ</strong> khi <strong>tiền ra</strong> (vd <kbd>331%</kbd>). Cột «TK Nợ» trên hướng dẫn TT200.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Credit account patterns</td><td>Mẫu TK đối ứng phía <strong>Có</strong> khi <strong>tiền vào</strong> (vd <kbd>511%</kbd>). Cột «TK Có».</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Thuyết minh</td><td>Tham chiếu thuyết minh (nếu DN dùng).</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Biểu thức cộng</td><td>Chỉ dòng tổng: vd <kbd>01+02+03</kbd>.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Nhân số / amount_multiplier</td><td>Ít chỉnh; thường để 1. Chỉ nhờ IT khi cần đảo dấu đặc biệt.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Thẻ yêu cầu / loại trừ, Chế độ thẻ, Nguồn thẻ</td><td>Lọc theo thẻ TK hoặc thẻ dòng — thống nhất với IT trước khi tự thêm thẻ.</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Mẫu TK tỷ giá</td><td>Cho dòng loại «Ảnh hưởng tỷ giá» (thường nhóm 413).</td></tr>
+        <tr><td>Bảng chỉ tiêu</td><td>Domain bổ sung</td><td><strong>Chỉ IT/dev</strong> — điều kiện kỹ thuật Odoo trên dòng tiền.</td></tr>
+    </table>
+</div>
+
+<div class="card">
+    <h2>3. Nên bắt đầu như thế nào?</h2>
+    <ul>
+        <li>Ưu tiên <strong>sao chép</strong> template có sẵn «Thông tư 200» rồi đổi tên cho công ty mình — tránh sửa trực tiếp bản gốc dùng chung.</li>
+        <li>Kiểm tra <strong>tài khoản tiền</strong>: nếu doanh nghiệp chỉ quy định rõ một nhóm TK quỹ/NH, có thể nhờ IT gán vào template; nếu để trống, hệ thống dùng quy tắc mặc định (nhóm 111, 112, 113 và tương đương tiền).</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>4. Cột «Thứ tự» (sequence) — rất quan trọng</h2>
+    <p>Với các dòng kiểu <strong>lọc giao dịch</strong> (hệ thống quét từng lần tiền vào/ra): khi <strong>một giao dịch có thể hiểu theo hai chỉ tiêu</strong>, chỉ tiêu nào có <strong>thứ tự nhỏ hơn</strong> sẽ được chọn trước.</p>
+    <div class="highlight">
+        <p style="margin:0"><strong>Gợi ý:</strong> Quy tắc <strong>hẹp</strong> (ví dụ chỉ thuế, chỉ một nhóm NCC đặc biệt) nên để <strong>thứ tự trước</strong> quy tắc rộng (ví dụ “mọi chi trả NCC”).</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2>5. Loại dòng là gì?</h2>
+    <table class="list">
+        <tr><th>Loại trên form</th><th>Ý nghĩa cho kế toán</th></tr>
+        <tr><td>Chỉ hiển thị</td><td>Dòng tiêu đề hoặc trống — <strong>không có số</strong>, không lọc giao dịch.</td></tr>
+        <tr><td>Luật lọc</td><td>Dòng có <strong>mã chỉ tiêu</strong> (01, 02…) — hệ thống <strong>cộng dồn</strong> các khoản tiền khớp quy tắc.</td></tr>
+        <tr><td>Cộng biểu thức</td><td>Dòng <strong>tổng</strong> = cộng các mã con (vd tổng phần I = 01+02+…+07). <strong>Không xóa</strong> hoặc làm sai công thức nếu chưa chắc.</td></tr>
+        <tr><td>Tiền đầu kỳ</td><td>Số dư tiền <strong>trước</strong> ngày bắt đầu kỳ báo cáo.</td></tr>
+        <tr><td>Ảnh hưởng tỷ giá</td><td>Khoản chênh lệch tỷ giá theo TK quy định (thường nhóm 413) — thường đã cấu hình sẵn.</td></tr>
+    </table>
+</div>
+
+<div class="card">
+    <h2>6. Hai ô mẫu tài khoản (quan trọng nhất)</h2>
+    <p>Không cần nhớ thuật ngữ kỹ thuật — chỉ cần nhớ:</p>
+    <ul>
+        <li><strong>Tiền vào ngân hàng / quỹ</strong> (bút toán ghi <strong>Nợ</strong> TK tiền): hệ thống nhìn các TK đối ứng bên <strong>Có</strong> trên <strong>cùng chứng từ</strong>. Ô tương ứng trên form là dạng «mẫu TK <strong>Có</strong>» (<code>credit_account_patterns</code>). Ví dụ doanh thu thường bắt đầu 511… thì có thể ghi <kbd>511%</kbd> (nghĩa: mọi TK mã bắt đầu bằng 511).</li>
+        <li><strong>Tiền ra</strong> (ghi <strong>Có</strong> TK tiền): hệ thống nhìn TK đối ứng bên <strong>Nợ</strong>. Ô «mẫu TK <strong>Nợ</strong>» (<code>debit_account_patterns</code>). Ví dụ trả nhà cung cấp thường Nợ 331… → <kbd>331%</kbd>.</li>
+    </ul>
+    <p class="muted">Dấu <kbd>%</kbd> nghĩa là “mọi mã <strong>bắt đầu bằng</strong> phần trước dấu %”. Nhiều nhóm: gõ <kbd>331%,152%</kbd> (cách nhau bằng dấu phẩy).</p>
+</div>
+
+<div class="card">
+    <h2>7. Thẻ (tag) — khi nào dùng?</h2>
+    <p>Thẻ gắn trên <strong>tài khoản</strong> hoặc trên <strong>dòng bút toán</strong> (tùy cấu hình) để:</p>
+    <ul>
+        <li><strong>Bắt buộc</strong> có thẻ nào đó mới tính vào chỉ tiêu, hoặc</li>
+        <li><strong>Loại trừ</strong>: có thẻ X thì <strong>không</strong> cho vào chỉ tiêu này dù mã TK vẫn khớp.</li>
+    </ul>
+    <p>Nếu chương trình triển khai có dùng thẻ cho DN bạn, <strong>thống nhất với IT</strong> tên thẻ và chỗ gán — tránh tự tạo thẻ trùng ý nghĩa.</p>
+</div>
+
+<div class="card">
+    <h2>8. Việc nên và không nên</h2>
+    <ul>
+        <li><strong>Nên:</strong> chỉnh mẫu TK cho khớp <strong>danh mục TK thực tế</strong> sau khi đối chiếu vài bút toán mẫu (thu khách, trả NCC, lương…).</li>
+        <li><strong>Nên:</strong> giữ mã chỉ tiêu <strong>01, 02…</strong> đúng như Thông tư nếu in báo cáo cho cơ quan.</li>
+        <li><strong>Không nên:</strong> xóa dòng <strong>tổng hợp</strong> (cộng nhiều mã) nếu chưa biết cách viết lại «biểu thức cộng».</li>
+        <li><strong>Không nên:</strong> tự điền «vùng bổ sung» kiểu domain kỹ thuật — nhờ IT (xem bản developer).</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>9. Đối soát sau khi chỉnh &amp; FAQ lệch số</h2>
+    <p><strong>Sau mỗi lần sửa template</strong>, nên kiểm tra nhanh:</p>
+    <ul>
+        <li>Tổng các dòng <strong>leaf</strong> cùng phần báo cáo có bị «nuốt» giao dịch do <strong>trùng rule</strong> không (chỉ rule <em>đứng trước</em> nhận fragment).</li>
+        <li>Dòng <strong>tổng (aggregate)</strong> vẫn khớp công thức (không xóa nhầm mã trong «Biểu thức cộng»).</li>
+        <li>In B03 một kỳ đã biết số — so với sổ tay hoặc báo cáo cũ nếu có.</li>
+    </ul>
+    <p><strong>FAQ</strong></p>
+    <ul>
+        <li><em>«Giao dịch đúng nhưng không vào chỉ tiêu mong muốn»</em> — thường do <strong>thứ tự</strong> rule khác đã khớp trước; thử đưa rule chi tiết lên trên.</li>
+        <li><em>«Cùng giao dịch vào hai chỉ tiêu»</em> — về lý thuyết engine chỉ gán <strong>một</strong> leaf; nếu vẫn lạ: báo dev kèm <strong>ID bút toán / số chứng từ</strong>.</li>
+        <li><em>«Pattern 511% không bắt TK con»</em> — kiểm tra <strong>mã TK thực tế</strong> trên sổ (có thể khác danh mục chuẩn).</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>10. Khi nào cần nhờ IT / dev?</h2>
+    <ul>
+        <li>Không vào được menu, không lưu được form, lỗi quyền hoặc import dữ liệu.</li>
+        <li>Cần <strong>Domain bổ sung</strong>, custom field, hoặc triển khai template qua XML/môi trường mới.</li>
+        <li>Lệch số sau khi đã thử chỉnh thứ tự + pattern; cần đọc log / trace engine — kế toán chuẩn bị <strong>mã chỉ tiêu, ví dụ chứng từ, kỳ báo cáo</strong>.</li>
+    </ul>
+    <p class="muted">Liên hệ triển khai: đội đã bàn giao Odoo / đối tác <a href="https://adecsol.vn/">ADEC Solutions</a> (theo hợp đồng DN).</p>
+</div>
+
+<p class="footer-note">Chi tiết kỹ thuật template: <a href="b03dn_template_config_dev.html">b03dn_template_config_dev.html</a> · Cách engine tính: <a href="lctt_tt200_calculation_technical.html">lctt_tt200_calculation_technical.html</a></p>
+
+</div>
+</body>
+</html>

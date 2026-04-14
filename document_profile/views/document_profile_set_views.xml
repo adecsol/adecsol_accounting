@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_document_profile_set_search" model="ir.ui.view">
+        <field name="name">document.profile.set.search</field>
+        <field name="model">document.profile.set</field>
+        <field name="arch" type="xml">
+            <search string="Profile Sets">
+                <field name="name" string="Name"/>
+                <field name="company_id"/>
+                <field name="dossier_code_format"/>
+                <separator/>
+                <filter string="In use" name="filter_active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+    <record id="view_document_profile_set_tree" model="ir.ui.view">
+        <field name="name">document.profile.set.list</field>
+        <field name="model">document.profile.set</field>
+        <field name="arch" type="xml">
+            <list string="Profile Sets" decoration-muted="not active">
+                <field name="name" string="Name"/>
+                <field name="company_id"/>
+                <field name="dossier_code_format"/>
+                <field name="file_code_format"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_document_profile_set_form" model="ir.ui.view">
+        <field name="name">document.profile.set.form</field>
+        <field name="model">document.profile.set</field>
+        <field name="arch" type="xml">
+            <form string="Profile Set">
+                <header>
+                    <button
+                        name="action_archive"
+                        type="object"
+                        string="Archive"
+                        class="btn-secondary"
+                        data-hotkey="shift+x"
+                        invisible="not id or not active"
+                        groups="document_profile.group_document_profile_manager"
+                    />
+                    <button
+                        name="action_unarchive"
+                        type="object"
+                        string="Restore"
+                        class="btn-secondary"
+                        data-hotkey="shift+x"
+                        invisible="not id or active"
+                        groups="document_profile.group_document_profile_manager"
+                    />
+                    <button
+                        name="action_download_all_files"
+                        type="object"
+                        string="Download all files"
+                        class="btn-secondary"
+                        icon="fa-download"
+                        invisible="not id"
+                    />
+                </header>
+                <sheet>
+                    <field name="dossier_code_format_locked" invisible="1"/>
+                    <field name="file_code_format_locked" invisible="1"/>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field
+                                name="name"
+                                default_focus="1"
+                                placeholder="e.g. Audit · Company X"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <label for="dossier_code_format"/>
+                            <div class="o_row">
+                                <field
+                                    name="dossier_code_format"
+                                    nolabel="1"
+                                    class="oe_inline"
+                                    placeholder="[Customer].[Project].[Person].%02d"
+                                    readonly="dossier_code_format_locked"
+                                />
+                                <button
+                                    name="action_toggle_dossier_code_format_lock"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    icon="fa-unlock"
+                                    title="Lock format (read-only)"
+                                    invisible="dossier_code_format_locked or not id"
+                                    groups="document_profile.group_document_profile_manager"
+                                />
+                                <button
+                                    name="action_toggle_dossier_code_format_lock"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    icon="fa-lock"
+                                    title="Unlock format"
+                                    invisible="not dossier_code_format_locked or not id"
+                                    groups="document_profile.group_document_profile_manager"
+                                />
+                            </div>
+                            <label for="file_code_format"/>
+                            <div class="o_row">
+                                <field
+                                    name="file_code_format"
+                                    nolabel="1"
+                                    class="oe_inline"
+                                    readonly="file_code_format_locked"
+                                />
+                                <button
+                                    name="action_toggle_file_code_format_lock"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    icon="fa-unlock"
+                                    title="Lock format (read-only)"
+                                    invisible="file_code_format_locked or not id"
+                                    groups="document_profile.group_document_profile_manager"
+                                />
+                                <button
+                                    name="action_toggle_file_code_format_lock"
+                                    type="object"
+                                    class="btn-link p-0"
+                                    icon="fa-lock"
+                                    title="Unlock format"
+                                    invisible="not file_code_format_locked or not id"
+                                    groups="document_profile.group_document_profile_manager"
+                                />
+                            </div>
+                        </group>
+                    </group>
+                    <field name="dossier_ids" context="{'default_profile_set_id': id, 'active_test': False}">
+                        <list string="Dossiers" editable="bottom" decoration-muted="not active">
+                            <field name="sequence_number" column_invisible="1" readonly="1"/>
+                            <field name="name" string="Name"/>
+                            <field name="code" readonly="1"/>
+                            <field name="active" optional="hide"/>
+                            <button
+                                name="action_open_item_window"
+                                type="object"
+                                string="Upload files"
+                                icon="fa-upload"
+                                class="btn-link"
+                                title="File codes and upload for this dossier"
+                                invisible="not id"
+                            />
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_document_profile_set" model="ir.actions.act_window">
+        <field name="name">Document Profile Sets</field>
+        <field name="res_model">document.profile.set</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_document_profile_set_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+</odoo>

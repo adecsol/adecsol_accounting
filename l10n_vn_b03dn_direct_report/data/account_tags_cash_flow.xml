@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Mẫu: [B03-DN][mã chỉ tiêu] Tên đầy đủ trên B03-DN (TT200) -->
+    <data noupdate="1">
+        <record id="tag_b03_cf_02_supplier" model="account.account.tag">
+            <field name="name">[B03-DN][02] Tiền chi trả cho người cung cấp hàng hoá, dịch vụ</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_generic_out" model="account.account.tag">
+            <field name="name">[B03-DN][07] Tiền chi khác cho hoạt động kinh doanh</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_21_asset" model="account.account.tag">
+            <field name="name">[B03-DN][21] Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_22" model="account.account.tag">
+            <field name="name">[B03-DN][22] Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_25" model="account.account.tag">
+            <field name="name">[B03-DN][25] Tiền chi đầu tư góp vốn vào đơn vị khác</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_26" model="account.account.tag">
+            <field name="name">[B03-DN][26] Tiền thu hồi đầu tư vốn vào đơn vị khác</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_27" model="account.account.tag">
+            <field name="name">[B03-DN][27] Thu lãi tiền cho vay, cổ tức và lợi nhuận được chia</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_34_loan_principal" model="account.account.tag">
+            <field name="name">[B03-DN][34] Tiền trả nợ gốc vay</field>
+            <field name="applicability">accounts</field>
+        </record>
+        <record id="tag_b03_cf_36" model="account.account.tag">
+            <field name="name">[B03-DN][36] Cổ tức, lợi nhuận đã trả cho chủ sở hữu</field>
+            <field name="applicability">accounts</field>
+        </record>
+    </data>
+</odoo>

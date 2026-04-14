@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="document_profile_set_comp_rule" model="ir.rule">
+        <field name="name">document.profile.set: multi-company</field>
+        <field name="model_id" ref="model_document_profile_set"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="False"/>
+    </record>
+    <record id="document_profile_dossier_comp_rule" model="ir.rule">
+        <field name="name">document.profile.dossier: multi-company</field>
+        <field name="model_id" ref="model_document_profile_dossier"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="False"/>
+    </record>
+    <record id="document_profile_item_comp_rule" model="ir.rule">
+        <field name="name">document.profile.item: multi-company</field>
+        <field name="model_id" ref="model_document_profile_item"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="False"/>
+    </record>
+</odoo>

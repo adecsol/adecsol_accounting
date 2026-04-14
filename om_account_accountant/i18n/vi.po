@@ -1,0 +1,2450 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dynamic_accounts_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 11:11+0000\n"
+"PO-Revision-Date: 2023-11-28 11:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+msgid "1-30"
+msgstr ""
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+msgid "31-60"
+msgstr ""
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+msgid "61-90"
+msgstr ""
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+msgid "91-120"
+msgstr ""
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder ms-1\">\n"
+"                                    Expenses\n"
+"                                </span>"
+msgstr "Pengeluaran"
+"<span class=\"fw-bolder ms-1\">\n"
+"                                    Chi phí\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder ms-2\">\n"
+"                                    Income\n"
+"                                </span>"
+msgstr ""
+"<span class=\"fw-bolder ms-2\">\n"
+"                                    Doanh thu\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder ms-2\">\n"
+"                                    Total Income\n"
+"                                </span>"
+msgstr ""
+"<span class=\"fw-bolder ms-2\">\n"
+"                                    Tổng doanh thu\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder ms-2\">Total Expenses\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"fw-bolder ms-2\">Tổng chi phí\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder ms-3\">\n"
+"                                    Gross Profit\n"
+"                                </span>"
+msgstr ""
+"<span class=\"fw-bolder ms-3\">\n"
+"                                    Lợi nhuận gộp\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"fw-bolder\">\n"
+"                                    Net Profit\n"
+"                                </span>"
+msgstr ""
+"<span class=\"fw-bolder\">\n"
+"                                    Lợi nhuận ròng\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"ms-3\">Cost of\n"
+"                                    Revenue\n"
+"                                </span>"
+msgstr ""
+"<span class=\"ms-3\">Chi phí\n"
+"                                    doanh thu\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"ms-3\">Depreciation\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"ms-3\">Khấu hao\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid "<span class=\"ms-3\">Expenses</span>"
+msgstr "<span class=\"ms-3\">Chi phí</span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid "<span class=\"ms-3\">Operating Income</span>"
+msgstr "<span class=\"ms-3\">Lợi nhuận hoạt động</span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid ""
+"<span class=\"ms-3\">Other Income\n"
+"                                </span>"
+msgstr ""
+"<span class=\"ms-3\">Thu nhập khác\n"
+"                                </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+msgid "<span style=\"font-weight: 700;\">Purchase</span>"
+msgstr "<span style=\"font-weight: 700;\">Mua hàng</span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+msgid "<span style=\"font-weight: 700;\">Sales</span>"
+msgstr "<span style=\"font-weight: 700;\">Bán hàng</span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        ASSETS\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        TÀI SẢN\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        EQUITY\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        VỐN CHỦ SỞ HỮU\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        LIABILITIES\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 2%;\">\n"
+"                                        NỢ PHẢI TRẢ\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Current Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tài sản ngắn hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Current Liabilities\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Nợ ngắn hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        LIABILITIES + EQUITY\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        NỢ + VỐN CHỦ SỞ HỮU\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng tài sản\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total Current Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng tài sản ngắn hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total Current Liabilities\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng nợ ngắn hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total EQUITY\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng vốn chủ sở hữu\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total LIABILITIES\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng nợ phải trả\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Total Unallocated Earnings\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Tổng lợi nhuận chưa phân phối\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Unallocated Earnings\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"font-weight: bolder; margin-left: 4%;\">\n"
+"                                        Lợi nhuận chưa phân phối\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Bank and Cash Accounts\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Tiền mặt và tiền gửi ngân hàng\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Current Allocated Earnings\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Lợi nhuận đã phân phối trong kỳ\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Current Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Tài sản hiện tại\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Current Earnings\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Thu nhập hiện tại\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Current Liabilities\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Khoản phải trả hiện tại\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Payables\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Các khoản phải trả\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Plus Fixed Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Cộng tài sản cố định\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Plus Non-current Assets\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Cộng tài sản dài hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Plus Non-current Liabilities\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Cộng nợ dài hạn\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Prepayments\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Chi trả trước\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Receivables\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Khoản phải thu\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+msgid ""
+"<span style=\"margin-left: 6%;\">Retained Earnings\n"
+"                                    </span>"
+msgstr ""
+"<span style=\"margin-left: 6%;\">Lợi nhuận giữ lại\n"
+"                                    </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+msgid ""
+"<span>Unknown\n"
+"                                                            Account\n"
+"                                                        </span>"
+msgstr ""
+"<span>Tài khoản\n"
+"                                                            Không xác định\n"
+"                                                        </span>"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+msgid ""
+"<span>Unknown\n"
+"                                                            Partner\n"
+"                                                        </span>"
+msgstr ""
+"<span>Đối tác\n"
+"                                                            Không xác định\n"
+"                                                        </span>"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "ASSETS"
+msgstr "TÀI SẢN"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_bank_book_report
+msgid "Account Bank Book Report"
+msgstr "Báo cáo Sổ Tài Khoản Ngân Hàng"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_cash_book_report
+msgid "Account Cash Book Report"
+msgstr "Báo cáo Sổ Quỹ Tiền Mặt"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__account_ids
+#, python-format
+msgid "Accounts"
+msgstr "Các Tài Khoản"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Accounts:"
+msgstr "Tài khoản:"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_aged_payable
+msgid "Age Payable"
+msgstr "Khoản Phải Trả Theo Kỳ"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_aged_receivable
+msgid "Age Receivable"
+msgstr "Khoản Phải Thu Theo Kỳ"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_aged_payable
+#: model:ir.ui.menu,name:dynamic_accounts_report.aged_payable_menu
+msgid "Aged Payable"
+msgstr "Khoản Phải Trả Quá Hạn"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_age_payable_report
+msgid "Aged Payable Report"
+msgstr "Báo Cáo Khoản Phải Trả Quá Hạn"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_aged_receivable
+#: model:ir.ui.menu,name:dynamic_accounts_report.aged_receivable_menu
+msgid "Aged Receivable"
+msgstr "Khoản Phải Thu Quá Hạn"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_age_receivable_report
+msgid "Aged Receivable Report"
+msgstr "Báo Cáo Khoản Phải Thu Quá Hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Amount Currency"
+msgstr "Số Tiền"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid "Analytic Account"
+msgstr "Tài Khoản Phân Tích"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__analytic_ids
+msgid "Analytic Accounts"
+msgstr "Các Tài Khoản Phân Tích"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Analytic Accounts:"
+msgstr "Các Tài Khoản Phân Tích:"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__analytic_ids
+msgid "Analytic accounts associated with the current record."
+msgstr "Các tài khoản phân tích liên quan đến bản ghi hiện tại."
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Apply"
+msgstr "Áp Dụng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#, python-format
+msgid "At Date"
+msgstr "Tại Ngày"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.balance_sheet
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+#, python-format
+msgid "Balance"
+msgstr "Số Dư"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_dynamic_balance_sheet
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_balance_sheet
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_balance_sheet_report
+msgid "Balance Sheet"
+msgstr "Bảng Cân Đối Kế Toán"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_bank_book
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_bank_book
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_bank_book
+msgid "Bank Book"
+msgstr "Sổ ngân hàng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Bank and\n"
+"                                                    Cash Accounts"
+msgstr "Ngân hàng và\n"
+"                                                    Tài khoản tiền mặt"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Bank and Cash Accounts"
+msgstr "Ngân hàng và Tài khoản tiền mặt"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_cash_book
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_cash_book
+msgid "Cash Book"
+msgstr "Sổ quỹ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Cash basis method"
+msgstr "Phương pháp cơ sở tiền mặt"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#, python-format
+msgid "Communication"
+msgstr "Liên lạc"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Comparison"
+msgstr "So sánh"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Cost\n"
+"                                                                of\n"
+"                                                                Revenue"
+msgstr "Chi phí\n"
+"                                                                Doanh thu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Cost of\n"
+"                                                        Revenue"
+msgstr "Chi phí\n"
+"                                                        Doanh thu"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__create_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__create_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__create_date
+msgid "Created on"
+msgstr "Ngày tạo"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Credit"
+msgstr "Tín dụng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#, python-format
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Current\n"
+"                                                    Allocated Earnings"
+msgstr "Lợi nhuận\n"
+"                                                    được phân bổ hiện tại"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Current\n"
+"                                                    Assets"
+msgstr "Tài sản\n"
+"                                                    ngắn hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Current\n"
+"                                                    Earnings"
+msgstr "Lợi nhuận\n"
+"                                                    hiện tại"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Current Allocated\n"
+"                                                            Earnings"
+msgstr "Lợi nhuận được phân bổ\n"
+"                                                            hiện tại"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Current Assets"
+msgstr "Tài sản ngắn hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Current Liabilities"
+msgstr "Nợ ngắn hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#, python-format
+msgid "Date"
+msgstr "Ngày"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#, python-format
+msgid ""
+"Date\n"
+"                                            :"
+msgstr "Ngày\n"
+"                                            :"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Date Range"
+msgstr "Khoảng thời gian"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Dates"
+msgstr "Ngày"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Depreciation"
+msgstr "Khấu hao"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__display_name
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields.selection,name:dynamic_accounts_report.selection__dynamic_balance_sheet_report__target_move__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Due Date"
+msgstr "Ngày đến hạn"
+
+#. module: dynamic_accounts_report
+#: model:ir.ui.menu,name:dynamic_accounts_report.dynamic_report_accounting
+msgid "Dynamic Financial Reports"
+msgstr "Báo cáo tài chính động"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "EQUITY"
+msgstr "VỐN CHỦ SỞ HỮU"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"End\n"
+"                                                Date\n"
+"                                                :"
+msgstr "Ngày\n"
+"                                                kết thúc\n"
+"                                                :"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "End Balance"
+msgstr "Số dư cuối kỳ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid ""
+"End Date\n"
+"                                            :"
+msgstr "Ngày\n"
+"                                            kết thúc\n"
+"                                            :"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__date_to
+msgid "End date"
+msgstr "Ngày kết thúc"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#, python-format
+msgid "End of Last Month"
+msgstr "Cuối tháng trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#, python-format
+msgid "End of Last Quarter"
+msgstr "Cuối quý trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#, python-format
+msgid "End of Last year"
+msgstr "Cuối năm trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#, python-format
+msgid "Entry label"
+msgstr "Nhãn bút toán"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#, python-format
+msgid "Expected Date"
+msgstr "Ngày dự kiến"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Expenses"
+msgstr "Chi phí"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Export (XLSX)"
+msgstr "Xuất (XLSX)"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"General\n"
+"                                                                                Ledger"
+msgstr "Sổ cái\n"
+"                                                                                chung"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"General\n"
+"                                                                    Ledger"
+msgstr "Sổ cái\n"
+"                                                                    chung"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model:ir.actions.client,name:dynamic_accounts_report.action_general_ledger
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_general_ledger
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_general_ledger
+#, python-format
+msgid "General Ledger"
+msgstr "Sổ cái chung"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_account_general_ledger
+msgid "General Ledger Report"
+msgstr "Báo cáo sổ cái chung"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Generic Tax Report"
+msgstr "Báo cáo thuế tổng hợp"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Gross Profit"
+msgstr "Lợi nhuận gộp"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Group by: Account > Tax"
+msgstr "Nhóm theo: Tài khoản > Thuế"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Group by: Tax > Account"
+msgstr "Nhóm theo: Thuế > Tài khoản"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__id
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__id
+msgid "ID"
+msgstr "ID"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Include Draft Entries"
+msgstr "Bao gồm bút toán nháp"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Income"
+msgstr "Doanh thu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Initial Balance"
+msgstr "Số dư đầu kỳ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#, python-format
+msgid "Invoice Date"
+msgstr "Ngày hóa đơn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "JRNL"
+msgstr "Sổ nhật ký"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Journal"
+msgstr "Sổ nhật ký"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Journal Items"
+msgstr "Dòng bút toán"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__journal_ids
+#, python-format
+msgid "Journals"
+msgstr "Sổ nhật ký"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Journals:"
+msgstr "Sổ nhật ký:"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "LIABILITIES"
+msgstr "NỢ PHẢI TRẢ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "LIABILITIES + EQUITY"
+msgstr "NỢ PHẢI TRẢ + VỐN CHỦ SỞ HỮU"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__write_uid
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_general_ledger__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_partner_ledger__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_account_trial_balance__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_payable_report__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_age_receivable_report__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_bank_book_report__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_cash_book_report__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__write_date
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_tax_report__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Last month"
+msgstr "Tháng trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Last quarter"
+msgstr "Quý trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Last year"
+msgstr "Năm trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Matching Number"
+msgstr "Số đối chiếu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#, python-format
+msgid "Move"
+msgstr "Bút toán"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#, python-format
+msgid "NET"
+msgstr "RÒNG"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Net Profit"
+msgstr "Lợi nhuận ròng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "No Comparison"
+msgstr "Không so sánh"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Number of Periods:"
+msgstr "Số kỳ:"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#, python-format
+msgid "Older"
+msgstr "Cũ hơn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#, python-format
+msgid "Open"
+msgstr "Mở"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Operating\n"
+"                                                                Income"
+msgstr ""
+"Thu nhập\n"
+"                                                                hoạt động"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Operating\n"
+"                                                        Income"
+msgstr ""
+"Thu nhập\n"
+"                                                                hoạt động"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+#, python-format
+msgid "Options"
+msgstr "Tùy chọn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Options : Posted Entries"
+msgstr "Tùy chọn: Bút toán đã ghi sổ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Options : Posted Entries ,"
+msgstr "Tùy chọn: Bút toán đã ghi sổ,"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#, python-format
+msgid "Options :Posted Entries"
+msgstr "Tùy chọn: Bút toán đã ghi sổ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#, python-format
+msgid "Options :Posted Entries ,"
+msgstr "Tùy chọn: Bút toán đã ghi sổ,"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Other\n"
+"                                                        Income"
+msgstr ""
+"Thu nhập\n"
+"                                                        khác"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Other Income"
+msgstr "Thu nhập khác"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Partner"
+msgstr "Đối tác"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_partner_ledger
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_partner_ledger
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_partner_ledger
+msgid "Partner Ledger"
+msgstr "Sổ cái đối tác"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_account_partner_ledger
+msgid "Partner Ledger Report"
+msgstr "Báo cáo sổ cái đối tác"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#, python-format
+msgid "Payable"
+msgstr "Khoản phải trả"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Payables"
+msgstr "Các khoản phải trả"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Plus\n"
+"                                                    Non-current Assets"
+msgstr ""
+"Cộng\n"
+"                                                    Tài sản dài hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Plus\n"
+"                                                    Non-current Liabilities"
+msgstr ""
+"Cộng\n"
+"                                                    Nợ phải trả dài hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Plus Fixed\n"
+"                                                    Assets"
+msgstr ""
+"Cộng Tài sản\n"
+"                                                    cố định"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Plus Fixed Assets"
+msgstr "Cộng Tài sản cố định"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Plus Non-current Assets"
+msgstr "Cộng Tài sản dài hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Plus Non-current Liabilities"
+msgstr "Cộng Nợ phải trả dài hạn"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields.selection,name:dynamic_accounts_report.selection__dynamic_balance_sheet_report__target_move__posted
+msgid "Posted"
+msgstr "Đã ghi sổ"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+msgid "Posted ,"
+msgstr "Đã ghi sổ ,"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Posted Entries"
+msgstr "Bút toán đã ghi sổ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Prepayments"
+msgstr "Trả trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Previous Period"
+msgstr "Kỳ trước"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Print (PDF)"
+msgstr "In (PDF)"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_profit_loss
+msgid "Profit And Loss"
+msgstr "Lãi và Lỗ"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_dynamic_balance_sheet_report
+msgid "Profit Loss Report"
+msgstr "Báo cáo Lãi/Lỗ"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_dynamic_profit_and_loss
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_profit_and_loss_report
+msgid "Profit and Loss"
+msgstr "Lãi và Lỗ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Purchase"
+msgstr "Mua hàng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#, python-format
+msgid "Receivable"
+msgstr "Khoản phải thu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Receivables"
+msgstr "Các khoản phải thu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Ref"
+msgstr "Tham chiếu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#, python-format
+msgid "Reference"
+msgstr "Tham chiếu"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+msgid "Report"
+msgstr "Báo cáo"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Reports :"
+msgstr "Báo cáo :"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid ""
+"Retained\n"
+"                                                    Earnings"
+msgstr ""
+"Lợi nhuận\n"
+"                                                    giữ lại"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Retained Earnings"
+msgstr "Lợi nhuận giữ lại"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#, python-format
+msgid "Sales"
+msgstr "Bán hàng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "Same Period Last Year"
+msgstr "Cùng kỳ năm trước"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__account_ids
+msgid "Select one or more accounts."
+msgstr "Chọn một hoặc nhiều tài khoản."
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__journal_ids
+msgid "Select one or more journals."
+msgstr "Chọn một hoặc nhiều sổ nhật ký."
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__company_id
+msgid "Select the company to which this record belongs."
+msgstr "Chọn công ty mà bản ghi này thuộc về."
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__target_move
+msgid "Select the target move status."
+msgstr "Chọn trạng thái bút toán."
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__date_to
+msgid "Specify the end date."
+msgstr "Xác định ngày kết thúc."
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,help:dynamic_accounts_report.field_dynamic_balance_sheet_report__date_from
+msgid "Specify the start date."
+msgstr "Xác định ngày bắt đầu."
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Start\n"
+"                                                Date :"
+msgstr ""
+"Ngày\n"
+"                                                bắt đầu :"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid ""
+"Start\n"
+"                                            Date :"
+msgstr ""
+"Ngày\n"
+"                                            bắt đầu :"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__date_from
+msgid "Start date"
+msgstr "Ngày bắt đầu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#, python-format
+msgid "TAX"
+msgstr "THUẾ"
+
+#. module: dynamic_accounts_report
+#: model:ir.model.fields,field_description:dynamic_accounts_report.field_dynamic_balance_sheet_report__target_move
+msgid "Target Move"
+msgstr "Trạng thái bút toán"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Target Move:"
+msgstr "Trạng thái bút toán:"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.profit_loss
+msgid "Target move"
+msgstr "Trạng thái bút toán"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_tax_report
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_tax_report
+#: model:ir.model,name:dynamic_accounts_report.model_tax_report
+#: model:ir.ui.menu,name:dynamic_accounts_report.tax_report_menu
+msgid "Tax Report"
+msgstr "Báo cáo thuế"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "This Month"
+msgstr "Tháng này"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "This Quarter"
+msgstr "Quý này"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/tax_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#, python-format
+msgid "This Year"
+msgstr "Năm nay"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#, python-format
+msgid "Today"
+msgstr "Hôm nay"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/trial_balance_view.xml:0
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_payable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.aged_receivable
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#, python-format
+msgid "Total"
+msgstr "Tổng cộng"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid ""
+"Total\n"
+"                                                    Expenses"
+msgstr ""
+"Tổng\n"
+"                                                    chi phí"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total ASSETS"
+msgstr "Tổng TÀI SẢN"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total Current Assets"
+msgstr "Tổng tài sản ngắn hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total Current Liabilities"
+msgstr "Tổng nợ ngắn hạn"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total EQUITY"
+msgstr "Tổng VỐN CHỦ SỞ HỮU"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Total Income"
+msgstr "Tổng doanh thu"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total LIABILITIES"
+msgstr "Tổng NỢ PHẢI TRẢ"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Total Unallocated Earnings"
+msgstr "Tổng lợi nhuận chưa phân phối"
+
+#. module: dynamic_accounts_report
+#: model:ir.actions.client,name:dynamic_accounts_report.action_trial_balance
+#: model:ir.actions.report,name:dynamic_accounts_report.action_print_trial_balance
+#: model:ir.ui.menu,name:dynamic_accounts_report.menu_trial_balance
+msgid "Trial Balance"
+msgstr "Bảng cân đối thử"
+
+#. module: dynamic_accounts_report
+#: model:ir.model,name:dynamic_accounts_report.model_account_trial_balance
+msgid "Trial Balance Report"
+msgstr "Báo cáo bảng cân đối thử"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#, python-format
+msgid "Unallocated Earnings"
+msgstr "Lợi nhuận chưa phân phối"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/balance_sheet_template.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/profit_and_loss_templates.xml:0
+#, python-format
+msgid "Unfold All"
+msgstr "Mở rộng tất cả"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#, python-format
+msgid ""
+"Unknown\n"
+"                                                                    Accounts"
+msgstr ""
+"Tài khoản\n"
+"                                                                    không xác định"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#, python-format
+msgid ""
+"Unknown\n"
+"                                                                    Partner"
+msgstr ""
+"Đối tác\n"
+"                                                                    không xác định"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_payable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/aged_receivable_report_views.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/bank_flow_templates.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/cash_flow_templates.xml:0
+#, python-format
+msgid ""
+"View\n"
+"                                                                        Journal\n"
+"                                                                        Entry"
+msgstr ""
+"Xem\n"
+"                                                                        bút toán\n"
+"                                                                        kế toán"
+
+#. module: dynamic_accounts_report
+#. odoo-javascript
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/cust1/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/general_ledger_view.xml:0
+#: code:addons/dynamic_accounts_report/static/src/xml/partner_ledger_view.xml:0
+#, python-format
+msgid ""
+"View\n"
+"                                                                    Journal\n"
+"                                                                    Entry"
+msgstr ""
+"Xem\n"
+"                                                                        bút toán\n"
+"                                                                        kế toán"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+msgid "posted,"
+msgstr "đã ghi sổ,"
+
+#. module: dynamic_accounts_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.bank_book
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.general_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.partner_ledger
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.tax_report
+#: model_terms:ir.ui.view,arch_db:dynamic_accounts_report.trial_balance
+msgid "to"
+msgstr "đến"

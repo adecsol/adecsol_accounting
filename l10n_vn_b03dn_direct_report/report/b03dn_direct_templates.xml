@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="b03dn_direct">
+        <t t-call="account_financial_report.html_container">
+            <div
+                class="article o_account_financial_reports_page b03dn-direct-report"
+                id="b03dn_report_root"
+                t-att-data-b03dn-currency-dp="currency.decimal_places if currency else 0"
+            >
+                <link
+                    href="/account_financial_report/static/src/css/report.css"
+                    rel="stylesheet"
+                />
+                <style>
+                    /* Arial toàn báo cáo; bảng số ép Arial kể cả CSS ngoài (giống hướng tối ưu in S01-DN) */
+                    .b03dn-direct-report {
+                        font-family: Arial, Helvetica, sans-serif !important;
+                        font-synthesis: none;
+                        color: #000 !important;
+                        font-size: 11pt;
+                        box-sizing: border-box;
+                        max-width: 100%;
+                    }
+                    .b03dn-direct-report *,
+                    .b03dn-direct-report *::before,
+                    .b03dn-direct-report *::after {
+                        box-sizing: border-box;
+                    }
+                    /* Chỉ tiêu cấu hình dạng Html: giữ markup, ép toàn bộ chữ về Arial */
+                    .b03dn-line-name-html,
+                    .b03dn-line-name-html *,
+                    .b03dn-line-name-html p,
+                    .b03dn-line-name-html span,
+                    .b03dn-line-name-html strong,
+                    .b03dn-line-name-html em,
+                    .b03dn-line-name-html u,
+                    .b03dn-line-name-html li,
+                    .b03dn-line-name-html div {
+                        font-family: Arial, Helvetica, sans-serif !important;
+                    }
+                    .b03dn-line-name-html { line-height: 1.35; }
+                    .b03dn-line-name-html p:last-child { margin-bottom: 0; }
+                    .b03dn-line-name-html img {
+                        max-width: 100%;
+                        height: auto;
+                        vertical-align: middle;
+                    }
+                    .b03dn-grid-wrap {
+                        width: 100%;
+                        max-width: 100%;
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                    }
+                    .b03dn-direct-report table,
+                    .b03dn-direct-report td,
+                    .b03dn-direct-report th,
+                    .b03dn-direct-report span,
+                    .b03dn-grid-table,
+                    .b03dn-grid-table thead,
+                    .b03dn-grid-table tbody,
+                    .b03dn-grid-table tr,
+                    .b03dn-grid-table th,
+                    .b03dn-grid-table td {
+                        font-family: Arial, Helvetica, sans-serif !important;
+                        color: #000 !important;
+                    }
+                    /*
+                     * Lề in: @page (không padding trên khối gốc — bảng tách trang).
+                     * Lề dưới 24mm: chừa margin box footer số trang (Chrome; cùng l10n_vn_s01dn_report).
+                     */
+                    @media print {
+                        @page {
+                            size: A4 portrait;
+                            margin: 20mm 20mm 24mm 30mm;
+                            @bottom-right {
+                                content: "Trang " counter(page, decimal-leading-zero) " / " counter(pages, decimal-leading-zero);
+                                font-size: 9pt;
+                                font-family: Arial, Helvetica, sans-serif;
+                                color: #000;
+                                vertical-align: top;
+                                text-align: right;
+                                white-space: nowrap;
+                                padding: 0 0 2mm 0;
+                            }
+                        }
+                        /* Reset layout Odoo/Bootstrap trong iframe in (theo l10n_vn_s01dn_report) */
+                        html, body, body.o_body_html {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            max-width: none !important;
+                            width: 100% !important;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                        }
+                        /* Một số theme đặt margin body 8px — gây lệch khi in */
+                        body {
+                            margin: 0 !important;
+                        }
+                        #wrapwrap,
+                        #wrapwrap > main,
+                        .o_action_manager,
+                        .o_action .o_content,
+                        .o_web_client .o_content {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            max-width: none !important;
+                            width: 100% !important;
+                            box-sizing: border-box !important;
+                        }
+                        body .container,
+                        body .container-fluid {
+                            margin: 0 !important;
+                            padding-left: 0 !important;
+                            padding-right: 0 !important;
+                            max-width: none !important;
+                            width: 100% !important;
+                        }
+                        .page {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            width: 100% !important;
+                            max-width: none !important;
+                            box-sizing: border-box !important;
+                        }
+                        .article.o_account_financial_reports_page + .footer {
+                            display: none !important;
+                        }
+                        #b03dn_report_root.b03dn-direct-report {
+                            box-sizing: border-box;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            width: 100% !important;
+                            max-width: none !important;
+                            min-height: 0;
+                        }
+                        /* Ẩn bộ lọc — bản đầy đủ selector ở cuối stylesheet để thắng display:block !important */
+                        #b03dnToolbar,
+                        #b03dnToolbar.b03dn-toolbar-screen-only {
+                            display: none !important;
+                            visibility: hidden !important;
+                        }
+                        .b03dn-direct-report,
+                        .b03dn-direct-report table,
+                        .b03dn-direct-report td,
+                        .b03dn-direct-report th,
+                        .b03dn-direct-report span,
+                        .b03dn-grid-table,
+                        .b03dn-grid-table th,
+                        .b03dn-grid-table td {
+                            font-family: Arial, Helvetica, sans-serif !important;
+                            color: #000 !important;
+                        }
+                        .b03dn-grid-table {
+                            table-layout: fixed !important;
+                            width: 100% !important;
+                            border-collapse: collapse !important;
+                        }
+                        .b03dn-grid-table thead {
+                            display: table-header-group !important;
+                        }
+                        .b03dn-grid-table th,
+                        .b03dn-grid-table td {
+                            line-height: 1.08 !important;
+                        }
+                        .b03dn-grid-table thead th {
+                            background: #FFFFCC !important;
+                            color: #000 !important;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                        }
+                        /* Cỡ chữ khi in (tham chiếu l10n_vn_s01dn_report: bảng gọn, Arial, tiêu đề rõ) */
+                        .b03dn-direct-report {
+                            font-size: 10pt !important;
+                        }
+                        .b03dn-header-table td {
+                            font-size: 10pt !important;
+                        }
+                        .b03dn-hdr-right .tt {
+                            font-size: 9pt !important;
+                        }
+                        .b03dn-title {
+                            font-size: 12pt !important;
+                            margin: 8px 0 3px !important;
+                        }
+                        .b03dn-subtitle,
+                        .b03dn-year-line,
+                        .b03dn-dvt-line {
+                            font-size: 10pt !important;
+                        }
+                        .b03dn-dvt-line {
+                            display: block !important;
+                            width: 100% !important;
+                            text-align: right !important;
+                        }
+                        .b03dn-grid-wrap {
+                            overflow: visible !important;
+                            max-width: none !important;
+                        }
+                        .b03dn-dvt-inline {
+                            flex-wrap: nowrap !important;
+                            white-space: nowrap !important;
+                            width: auto !important;
+                            max-width: 100% !important;
+                            margin-left: 0 !important;
+                            display: inline-flex !important;
+                            justify-content: flex-end !important;
+                        }
+                        .b03dn-grid-table {
+                            font-size: 9pt !important;
+                        }
+                        .b03dn-grid-table thead th {
+                            font-size: 9pt !important;
+                        }
+                        .b03dn-grid-table thead tr.b03dn-colnum th {
+                            font-size: 8.5pt !important;
+                        }
+                        .b03dn-grid-table th,
+                        .b03dn-grid-table td {
+                            padding: 2px 4px !important;
+                        }
+                        .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-ma,
+                        .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-tm,
+                        .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-money {
+                            font-weight: bold !important;
+                        }
+                        .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-ma,
+                        .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-tm,
+                        .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-money {
+                            font-style: italic !important;
+                        }
+                        .b03dn-grid-table tbody td.b03dn-chi-tieu.b03dn-chi-tieu-row-bold {
+                            font-weight: bold !important;
+                        }
+                        .b03dn-grid-table tbody td.b03dn-chi-tieu.b03dn-chi-tieu-row-italic {
+                            font-style: italic !important;
+                        }
+                        /* Thu gọn bảng khi in: cột và chiều cao hàng; Năm nay/Năm trước hẹp hơn để chừa chỗ cột Chỉ tiêu */
+                        .b03dn-grid-table .b03dn-chi-tieu { width: 48% !important; }
+                        .b03dn-grid-table .b03dn-ma { width: 7% !important; }
+                        .b03dn-grid-table .b03dn-tm { width: 9% !important; }
+                        .b03dn-grid-table .b03dn-money { width: 18% !important; }
+                        .b03dn-note {
+                            font-size: 8.5pt !important;
+                            margin: 10px 0 6px !important;
+                        }
+                        .b03dn-lap {
+                            font-size: 9pt !important;
+                            margin: 10px 0 !important;
+                        }
+                        .b03dn-sig td {
+                            font-size: 9pt !important;
+                        }
+                        .b03dn-sig-spacer .b03dn-sig-gap-cell {
+                            height: 25mm !important;
+                            min-height: 25mm !important;
+                            padding: 0 !important;
+                            border: none !important;
+                            line-height: 0 !important;
+                            vertical-align: top !important;
+                        }
+                        .b03dn-sig-gap {
+                            display: block !important;
+                            height: 30mm !important;
+                            min-height: 30mm !important;
+                            width: 100% !important;
+                            overflow: hidden !important;
+                        }
+                        .b03dn-sig {
+                            page-break-inside: avoid !important;
+                        }
+                        .b03dn-sig .sub,
+                        .b03dn-sig td.sub {
+                            font-size: 8.5pt !important;
+                        }
+                        .b03dn-foot-note {
+                            font-size: 8.5pt !important;
+                            margin-top: 12px !important;
+                        }
+                        .b03dn-money-unit-inline {
+                            border: none !important;
+                            background: transparent !important;
+                            appearance: none !important;
+                            -webkit-appearance: none !important;
+                            padding: 0 2px !important;
+                            margin: 0 !important;
+                            font-family: Arial, Helvetica, sans-serif !important;
+                            font-size: 10pt !important;
+                            font-weight: normal !important;
+                            color: #000 !important;
+                            box-sizing: border-box !important;
+                            width: auto !important;
+                            min-width: 0 !important;
+                            max-width: 9.5rem !important;
+                            flex: 0 1 auto !important;
+                        }
+                        .b03dn-line-name-html,
+                        .b03dn-line-name-html * {
+                            font-family: Arial, Helvetica, sans-serif !important;
+                            color: #000 !important;
+                        }
+                    }
+                    /* Màn hình hẹp / iframe báo cáo: cuộn ngang bảng, toolbar gọn */
+                    @media screen and (max-width: 1199.98px) {
+                        .b03dn-grid-wrap .b03dn-grid-table {
+                            min-width: 36rem;
+                        }
+                        .b03dn-f select.b03dn-sel-wide {
+                            max-width: min(22rem, 100%);
+                        }
+                    }
+                    /* Thanh công cụ: luôn hiện trên màn hình (iframe QWeb không gánh đủ Bootstrap .d-print-none). */
+                    #b03dnToolbar,
+                    #b03dnToolbar.b03dn-toolbar-screen-only {
+                        display: block !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        position: sticky;
+                        top: 0;
+                        z-index: 1000;
+                        background: #fff !important;
+                        border: 1px solid #dee2e6;
+                        border-radius: 8px;
+                        padding: 8px 10px;
+                        margin: 0 0 12px 0;
+                        box-shadow: 0 2px 8px rgba(0,0,0,.06);
+                        box-sizing: border-box;
+                        font-family: Arial, Helvetica, sans-serif;
+                    }
+                    #b03dnToolbar.b03dn-toolbar-collapsed {
+                        padding: 8px 10px;
+                    }
+                    .b03dn-toolbar-toggle-row {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        gap: 8px;
+                        margin-bottom: 8px;
+                    }
+                    #b03dnToolbar.b03dn-toolbar-collapsed .b03dn-toolbar-toggle-row {
+                        margin-bottom: 0;
+                    }
+                    .b03dn-filter-toggle {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        border: 1px solid #ced4da;
+                        background: #fff;
+                        border-radius: 6px;
+                        padding: 5px 10px;
+                        cursor: pointer;
+                        font-size: 11px;
+                        font-weight: 600;
+                        color: #495057;
+                        line-height: 1.2;
+                    }
+                    .b03dn-filter-toggle:hover {
+                        background: #f8f9fa;
+                        border-color: #adb5bd;
+                        color: #212529;
+                    }
+                    .b03dn-filter-toggle .b03dn-filter-toggle-ico {
+                        display: block;
+                        transition: transform 0.2s ease;
+                        flex-shrink: 0;
+                    }
+                    #b03dnToolbar.b03dn-toolbar-collapsed .b03dn-filter-toggle .b03dn-filter-toggle-ico {
+                        transform: rotate(-90deg);
+                    }
+                    .b03dn-toolbar-body--hidden {
+                        display: none !important;
+                    }
+                    .b03dn-filter-bar {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 4px 8px;
+                        font-size: 12px;
+                        padding: 4px 0;
+                    }
+                    .b03dn-filter-bar + .b03dn-filter-bar {
+                        border-top: 1px solid #e9ecef;
+                    }
+                    .b03dn-filter-bar--scope {
+                        display: grid;
+                        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                        gap: 8px 10px;
+                        align-items: center;
+                    }
+                    @media screen and (max-width: 599.98px) {
+                        .b03dn-filter-bar--scope {
+                            grid-template-columns: 1fr;
+                        }
+                    }
+                    .b03dn-filter-bar--dates {
+                        align-items: center;
+                        gap: 6px 10px;
+                        flex-wrap: wrap;
+                    }
+                    .b03dn-date-cluster {
+                        display: inline-flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 4px 8px;
+                    }
+                    .b03dn-inline-sec {
+                        font-size: 10px;
+                        font-weight: 700;
+                        color: #6c757d;
+                        text-transform: uppercase;
+                        letter-spacing: 0.03em;
+                        white-space: nowrap;
+                        padding-right: 2px;
+                    }
+                    .b03dn-filter-bar--dates .b03dn-bar-sep {
+                        width: 1px;
+                        height: 18px;
+                        background: #dee2e6;
+                        flex-shrink: 0;
+                        align-self: center;
+                    }
+                    .b03dn-filter-bar--money {
+                        justify-content: flex-end;
+                        padding-top: 2px;
+                    }
+                    .b03dn-f--money-unit {
+                        margin-left: auto;
+                    }
+                    .b03dn-money-unit-caption {
+                        font-size: 11pt;
+                        color: #000;
+                        text-align: right;
+                    }
+                    .b03dn-f { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+                    .b03dn-f label { margin: 0; font-weight: 600; color: #495057; font-size: 10px; }
+                    .b03dn-f input[type="date"], .b03dn-f select {
+                        height: 26px; padding: 0 5px; font-size: 11px;
+                        border: 1px solid #ced4da; border-radius: 4px; background: #fff;
+                    }
+                    .b03dn-f input[type="date"] { width: 128px; min-width: 0; }
+                    .b03dn-f select.b03dn-sel-wide { min-width: 0; max-width: 100%; width: 100%; }
+                    .b03dn-header-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+                    .b03dn-header-table td { vertical-align: top; padding: 4px 6px; }
+                    .b03dn-hdr-left { font-weight: bold; font-size: 11pt; line-height: 1.35; }
+                    .b03dn-hdr-right { text-align: right; font-size: 11pt; }
+                    .b03dn-hdr-right .mau { font-weight: bold; }
+                    .b03dn-hdr-right .tt { font-size: 10pt; font-style: italic; }
+                    .b03dn-title { text-align: center; font-size: 14pt; font-weight: bold; margin: 10px 0 4px; }
+                    .b03dn-subtitle { text-align: center; font-size: 11pt; font-weight: bold; font-style: italic; margin-bottom: 6px; }
+                    .b03dn-year-line { text-align: center; font-size: 11pt; margin-bottom: 4px; }
+                    .b03dn-dvt-line {
+                        text-align: right; font-size: 11pt; margin-bottom: 10px;
+                        display: flex; justify-content: flex-end; align-items: center;
+                        gap: 6px; flex-wrap: nowrap;
+                    }
+                    .b03dn-dvt-inline {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        flex-wrap: nowrap;
+                        white-space: nowrap;
+                        width: fit-content;
+                        max-width: 100%;
+                        margin-left: auto;
+                    }
+                    .b03dn-dvt-label { white-space: nowrap; flex-shrink: 0; }
+                    /* Chỉ rộng vừa nội dung (Đồng … Triệu đồng), không kéo quá mép bảng */
+                    .b03dn-money-unit-inline {
+                        font: inherit; font-size: 11pt; color: #000;
+                        box-sizing: border-box;
+                        width: auto;
+                        min-width: 0;
+                        max-width: 9.5rem;
+                        padding: 2px 6px;
+                        border: 1px solid #ced4da; border-radius: 4px; background: #fff;
+                        flex: 0 1 auto;
+                    }
+                    .b03dn-grid-table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+                    .b03dn-grid-table th, .b03dn-grid-table td {
+                        border: 1px solid #000; padding: 4px 6px; vertical-align: middle;
+                    }
+                    .b03dn-grid-table thead th {
+                        background: #FFFFCC;
+                        color: #000;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                    .b03dn-grid-table thead tr.b03dn-colnum th { background: #FFFFCC; color: #000; font-size: 10pt; }
+                    .b03dn-chi-tieu { width: 42%; text-align: left; }
+                    .b03dn-ma { width: 7%; text-align: center; }
+                    .b03dn-tm { width: 9%; text-align: center; }
+                    @media screen {
+                        .b03dn-tm-link {
+                            cursor: pointer;
+                            color: #0d6efd;
+                            text-decoration: underline;
+                            text-underline-offset: 2px;
+                        }
+                        .b03dn-tm-link:hover {
+                            color: #0a58ca;
+                        }
+                    }
+                    .b03dn-money { width: 21%; text-align: right; font-variant-numeric: tabular-nums; }
+                    /*
+                     * Đậm/nghiêng hàng: chỉ cột 2–5 — tránh bold trên td cột Chỉ tiêu khi name đã bọc thẻ strong
+                     * (strong kế thừa font-weight:bold từ td → trình duyệt dùng bolder → đậm xấu).
+                     * Cột Chỉ tiêu: class b03dn-chi-tieu-row-* chỉ khi bold/nghiêng từ báo cáo, HTML chưa phủ toàn dòng.
+                     */
+                    .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-ma,
+                    .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-tm,
+                    .b03dn-grid-table tbody tr.b03dn-row-bold td.b03dn-money {
+                        font-weight: bold !important;
+                    }
+                    .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-ma,
+                    .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-tm,
+                    .b03dn-grid-table tbody tr.b03dn-row-italic td.b03dn-money {
+                        font-style: italic !important;
+                    }
+                    .b03dn-grid-table tbody td.b03dn-chi-tieu.b03dn-chi-tieu-row-bold {
+                        font-weight: bold !important;
+                    }
+                    .b03dn-grid-table tbody td.b03dn-chi-tieu.b03dn-chi-tieu-row-italic {
+                        font-style: italic !important;
+                    }
+                    .b03dn-note { font-size: 10pt; font-style: italic; margin: 14px 0 8px; }
+                    .b03dn-lap { text-align: right; font-style: italic; margin: 12px 0; }
+                    .b03dn-lap-wrapper { text-align: right; font-style: italic; margin: 12px 0; position: relative; display: block; }
+                    .b03dn-sig-datepicker { position: absolute; right: 0; bottom: 0; opacity: 0; cursor: pointer; width: 140px; height: 100%; z-index: 10; font-size: 0; }
+                    .b03dn-sig-datepicker::-webkit-calendar-picker-indicator { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; margin: 0; padding: 0; cursor: pointer; opacity: 0; }
+                    #b03dnLapDateDisplay { position: relative; z-index: 5; cursor: pointer; text-decoration: underline dashed #aaa; text-underline-offset: 4px; }
+                    .b03dn-sig { width: 100%; margin-top: 8px; border-collapse: collapse; }
+                    .b03dn-sig td { text-align: center; font-weight: bold; font-size: 11pt; padding: 4px; }
+                    .b03dn-sig-spacer .b03dn-sig-gap-cell {
+                        height: 30mm;
+                        min-height: 30mm;
+                        padding: 0 !important;
+                        border: none !important;
+                        line-height: 0;
+                        vertical-align: top;
+                    }
+                    .b03dn-sig-gap {
+                        display: block;
+                        height: 30mm;
+                        min-height: 30mm;
+                        width: 100%;
+                        overflow: hidden;
+                    }
+                    .b03dn-sig .sub { font-weight: normal; font-size: 10pt; font-style: italic; }
+                    .b03dn-foot-note { font-size: 10pt; font-style: italic; text-align: left; margin-top: 16px; }
+                    @media screen and (max-width: 767.98px) {
+                        #b03dnToolbar {
+                            padding: 8px 10px !important;
+                        }
+                        .b03dn-filter-bar:not(.b03dn-filter-bar--scope) {
+                            flex-direction: column;
+                            align-items: stretch;
+                            gap: 8px;
+                        }
+                        .b03dn-date-cluster {
+                            width: 100%;
+                            justify-content: flex-start;
+                        }
+                        .b03dn-f {
+                            flex-wrap: wrap;
+                        }
+                        .b03dn-f input[type="date"] {
+                            width: 100%;
+                            max-width: 100%;
+                        }
+                        .b03dn-filter-bar--dates .b03dn-bar-sep {
+                            display: none;
+                        }
+                        .b03dn-filter-bar--money {
+                            justify-content: flex-end;
+                        }
+                        .b03dn-f--money-unit {
+                            width: 100%;
+                            max-width: 20rem;
+                            margin-left: auto;
+                        }
+                        .b03dn-title {
+                            font-size: 12pt;
+                            margin: 6px 0 3px;
+                        }
+                        .b03dn-subtitle,
+                        .b03dn-year-line {
+                            font-size: 10pt;
+                        }
+                        .b03dn-dvt-line {
+                            font-size: 10pt;
+                            margin-bottom: 8px;
+                        }
+                        .b03dn-filter-toggle {
+                            width: 100%;
+                            justify-content: center;
+                        }
+                    }
+                    /*
+                     * In QWeb: rule #b03dnToolbar.b03dn-toolbar-screen-only { display:block !important } nằm NGOÀI @media
+                     * nên vẫn áp dụng khi in và thắng #b03dnToolbar { display:none } cũ (độ cụ thể thấp hơn).
+                     * Khối này đặt cuối stylesheet để luôn ẩn toolbar khi in.
+                     */
+                    @media print {
+                        #b03dnToolbar,
+                        #b03dnToolbar.b03dn-toolbar-screen-only {
+                            display: none !important;
+                            visibility: hidden !important;
+                            height: 0 !important;
+                            min-height: 0 !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            overflow: hidden !important;
+                            border: none !important;
+                            box-shadow: none !important;
+                            position: absolute !important;
+                            width: 0 !important;
+                            left: -9999px !important;
+                            clip: rect(0, 0, 0, 0) !important;
+                        }
+                        .b03dn-sig-datepicker { display: none !important; }
+                        #b03dnLapDateDisplay { text-decoration: none !important; }
+                    }
+                </style>
+
+                <script type="application/json" id="b03dnReportReload" t-out="b03dn_report_reload_json"/>
+
+                <!-- Thanh công cụ QWeb: hiện trên màn hình (CSS #b03dnToolbar display:block); ẩn khi in (@media print). -->
+                <div id="b03dnToolbar" class="b03dn-toolbar-screen-only">
+                    <div class="b03dn-toolbar-toggle-row">
+                        <button
+                            type="button"
+                            id="b03dnFilterToggle"
+                            class="b03dn-filter-toggle"
+                            aria-controls="b03dnToolbarBody"
+                            aria-expanded="true"
+                            title="Ẩn / hiện bộ lọc"
+                            aria-label="Ẩn hoặc hiện bộ lọc báo cáo"
+                        >
+                            <span>Bộ lọc</span>
+                            <svg
+                                class="b03dn-filter-toggle-ico"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="b03dnToolbarBody" class="b03dn-toolbar-body">
+                        <div class="b03dn-filter-bar b03dn-filter-bar--scope">
+                            <div class="b03dn-f">
+                                <label for="b03dnFilterCompany">Công ty</label>
+                                <select id="b03dnFilterCompany" class="b03dn-sel-wide">
+                                    <t t-foreach="b03dn_filter_companies" t-as="c">
+                                        <option t-att-value="c.id" t-out="c.name"
+                                            t-att-selected="'selected' if b03dn_selected_company_id and c.id == b03dn_selected_company_id else None"/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="b03dn-f">
+                                <label for="b03dnFilterTemplate">Mẫu báo cáo</label>
+                                <select id="b03dnFilterTemplate" class="b03dn-sel-wide">
+                                    <t t-foreach="b03dn_filter_templates" t-as="tpl">
+                                        <option t-att-value="tpl.id" t-out="tpl.name"
+                                            t-att-selected="'selected' if b03dn_selected_template_id and tpl.id == b03dn_selected_template_id else None"/>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="b03dn-filter-bar b03dn-filter-bar--dates">
+                            <div class="b03dn-date-cluster">
+                                <span class="b03dn-inline-sec">Năm nay</span>
+                                <div class="b03dn-f">
+                                    <label for="b03dnDf">Từ</label>
+                                    <input type="date" id="b03dnDf" t-att-value="b03dn_ui_filter_date_from"/>
+                                </div>
+                                <div class="b03dn-f">
+                                    <label for="b03dnDt">Đến</label>
+                                    <input type="date" id="b03dnDt" t-att-value="b03dn_ui_filter_date_to"/>
+                                </div>
+                            </div>
+                            <span class="b03dn-bar-sep" aria-hidden="true"/>
+                            <div class="b03dn-date-cluster">
+                                <span class="b03dn-inline-sec">Năm trước</span>
+                                <div class="b03dn-f">
+                                    <label for="b03dnDfc">Từ</label>
+                                    <input type="date" id="b03dnDfc" t-att-value="b03dn_ui_filter_date_from_cmp"/>
+                                </div>
+                                <div class="b03dn-f">
+                                    <label for="b03dnDtc">Đến</label>
+                                    <input type="date" id="b03dnDtc" t-att-value="b03dn_ui_filter_date_to_cmp"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hidden: signature_date cho filter snapshot (sync với inline picker) -->
+                        <input type="date" id="b03dnSigDate" style="display:none" t-att-value="b03dn_ui_filter_signature_date"/>
+                        <div class="b03dn-filter-bar b03dn-filter-bar--money">
+                            <div class="b03dn-f b03dn-f--money-unit">
+                                <label for="b03dnMoneyUnit">Đơn vị tính</label>
+                                <select
+                                    id="b03dnMoneyUnit"
+                                    name="b03dnMoneyUnit"
+                                    class="b03dn-money-unit-inline"
+                                    title="Quy đổi hiển thị số (màn hình; khi in dùng dòng bên dưới)"
+                                    t-att-data-initial-money-unit="b03dn_money_unit_select_value"
+                                    aria-label="Đơn vị tiền tệ"
+                                >
+                                    <option value="1">Đồng</option>
+                                    <option value="1000">Ngàn đồng</option>
+                                    <option value="1000000">Triệu đồng</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="b03dnReportDataHost">
+                <table class="b03dn-header-table">
+                    <tr>
+                        <td colspan="3" class="b03dn-hdr-left">
+                            <div>Đơn vị báo cáo: <t t-out="company.name if company else ''"/></div>
+                            <div>Địa chỉ: <t t-out="b03dn_company_address"/></div>
+                        </td>
+                        <td colspan="2" class="b03dn-hdr-right">
+                            <div class="mau" t-out="b03dn_form_title"/>
+                            <div class="tt" t-out="b03dn_form_legal_reference"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="b03dn-title">BÁO CÁO LƯU CHUYỂN TIỀN TỆ</div>
+                <div class="b03dn-subtitle">(Theo phương pháp trực tiếp) (*)</div>
+                <div class="b03dn-year-line" t-out="b03dn_year_line"/>
+                <div class="b03dn-dvt-line">
+                    <div id="b03dnMoneyUnitCaption" class="b03dn-money-unit-caption">
+                        <t t-out="b03dn_money_unit_label"/>
+                    </div>
+                </div>
+
+                <div class="b03dn-grid-wrap">
+                <table class="b03dn-grid-table">
+                    <thead>
+                        <tr>
+                            <th class="b03dn-chi-tieu">Chỉ tiêu</th>
+                            <th class="b03dn-ma">Mã số</th>
+                            <th class="b03dn-tm">Thuyết minh</th>
+                            <th class="b03dn-money">Năm nay</th>
+                            <th class="b03dn-money">Năm trước</th>
+                        </tr>
+                        <tr class="b03dn-colnum">
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="rows" t-as="row">
+                            <t t-set="line" t-value="row['line']"/>
+                            <tr t-att-class="b03dn_row_row_classes(line)">
+                                <td t-att-class="b03dn_chi_tieu_td_class(line)">
+                                    <div class="b03dn-line-name-html" t-field="line.name"/>
+                                </td>
+                                <td class="b03dn-ma" style="text-align:center;">
+                                    <span t-if="not line.display_type" t-out="line.code"/>
+                                </td>
+                                <td class="b03dn-tm" style="text-align:center;">
+                                    <t t-if="b03dn_tm_is_hyperlink(line)">
+                                        <span
+                                            class="b03dn-tm-link"
+                                            t-att-data-b03dn-tm-att="b03dn_tm_attachment_id(line) or ''"
+                                            t-att-data-b03dn-tm-code="b03dn_tm_expected_file_code(line)"
+                                            t-att-data-b03dn-tm-did="b03dn_document_dossier_id"
+                                            t-attf-title="Mã tệp: {{ b03dn_tm_expected_file_code(line) }}"
+                                            t-out="line.explanation_ref or ''"
+                                        />
+                                    </t>
+                                    <t t-else="">
+                                        <span t-out="line.explanation_ref or ''"/>
+                                    </t>
+                                </td>
+                                <td class="b03dn-money">
+                                    <t t-if="b03dn_line_shows_money_columns(line)">
+                                        <t t-if="row['aml_domain_current']">
+                                            <span t-att-domain="domain_for_cell(row['aml_domain_current'])" res-model="account.move.line">
+                                                <span class="b03dn-amt" t-att-data-vnd="row['amount_current']" t-out="format_b03dn_amount(row['amount_current'])"/>
+                                            </span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="b03dn-amt" t-att-data-vnd="row['amount_current']" t-out="format_b03dn_amount(row['amount_current'])"/>
+                                        </t>
+                                    </t>
+                                </td>
+                                <td class="b03dn-money">
+                                    <t t-if="b03dn_line_shows_money_columns(line)">
+                                        <t t-if="row['aml_domain_previous']">
+                                            <span t-att-domain="domain_for_cell(row['aml_domain_previous'])" res-model="account.move.line">
+                                                <span class="b03dn-amt" t-att-data-vnd="row['amount_previous']" t-out="format_b03dn_amount(row['amount_previous'])"/>
+                                            </span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="b03dn-amt" t-att-data-vnd="row['amount_previous']" t-out="format_b03dn_amount(row['amount_previous'])"/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                </div>
+
+                <div class="b03dn-lap-wrapper">
+                    <t t-out="b03dn_lap_place_text"/>
+                    <span id="b03dnLapDateDisplay" title="Nhấn để chọn ngày ký" t-out="b03dn_lap_date_text"/>
+                    <input type="date" id="b03dnSignatureDateInline" class="b03dn-sig-datepicker" title="Nhấn để chọn ngày" t-att-value="b03dn_today_iso"/>
+                </div>
+
+                <table class="b03dn-sig"><tr>
+                    <td style="width:33%">Người lập biểu</td>
+                    <td style="width:33%">Kế toán trưởng</td>
+                    <td style="width:33%">Giám đốc</td>
+                </tr><tr class="sub">
+                    <td class="sub">(Ký, họ tên)</td>
+                    <td class="sub">(Ký, họ tên)</td>
+                    <td class="sub">(Ký, họ tên, đóng dấu)</td>
+                </tr><tr class="b03dn-sig-spacer">
+                    <td class="b03dn-sig-gap-cell" colspan="3"><div class="b03dn-sig-gap" aria-hidden="true">&#8203;</div></td>
+                </tr></table>
+
+                <div class="b03dn-foot-note">
+                    - Số chứng chỉ hành nghề;<br/>
+                    - Đơn vị cung cấp dịch vụ kế toán<br/>
+                    Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề,
+                    tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.
+                </div>
+                </div>
+
+                <script type="text/javascript"><![CDATA[
+(function () {
+    function b03dnParseVnd(el) {
+        var raw = el.getAttribute("data-vnd");
+        if (raw === null || raw === "") { return 0; }
+        var s = String(raw).replace(/\s/g, "").replace(/\u00a0/g, "");
+        var x = parseFloat(s.replace(",", "."));
+        return isNaN(x) ? 0 : x;
+    }
+    /** Số chữ số thập phân sau khi chia đơn vị — khớp res.currency.decimal_places + formatLang trên server */
+    function b03dnCurrencyDecimalPlaces() {
+        var root = document.getElementById("b03dn_report_root");
+        if (!root) { return 0; }
+        var n = parseInt(root.getAttribute("data-b03dn-currency-dp"), 10);
+        if (isNaN(n) || n < 0) { return 0; }
+        return n > 16 ? 16 : n;
+    }
+    function b03dnRoundScaled(val, dp) {
+        if (dp <= 0) {
+            return Math.round(val);
+        }
+        var p = Math.pow(10, dp);
+        return Math.round(val * p) / p;
+    }
+    /**
+     * Quy đổi từ số tiền gốc (VND) theo divisor; làm tròn giống tiền tệ (vd 123.456.789 đ → ngàn: 123.457).
+     */
+    function b03dnFormatFromVnd(vnd, divisor) {
+        var dp = b03dnCurrencyDecimalPlaces();
+        var d = divisor || 1;
+        var v = Number(vnd);
+        if (isNaN(v)) { v = 0; }
+        var neg = v < 0;
+        var u = Math.abs(v) / d;
+        u = b03dnRoundScaled(u, dp);
+        var s = u.toLocaleString("vi-VN", {
+            minimumFractionDigits: dp,
+            maximumFractionDigits: dp
+        });
+        return neg ? "(" + s + ")" : s;
+    }
+    function b03dnMoneyUnitCaptionText(val) {
+        var v = String(val || "1");
+        if (v === "1000") { return "Đơn vị tính: Ngàn đồng"; }
+        if (v === "1000000") { return "Đơn vị tính: Triệu đồng"; }
+        return "Đơn vị tính: Đồng";
+    }
+    function b03dnApplyMoneyUnit() {
+        var root = document.getElementById("b03dn_report_root");
+        var sel = document.getElementById("b03dnMoneyUnit");
+        if (!root || !sel) { return; }
+        var div = parseFloat(sel.value, 10) || 1;
+        var nodes = root.querySelectorAll(".b03dn-amt[data-vnd]");
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].textContent = b03dnFormatFromVnd(b03dnParseVnd(nodes[i]), div);
+        }
+        var cap = document.getElementById("b03dnMoneyUnitCaption");
+        if (cap) {
+            cap.textContent = b03dnMoneyUnitCaptionText(sel.value);
+        }
+    }
+    /**
+     * Sau AJAX thay bảng: OWL enrich không chạy lại — gắn drill-down gửi postMessage (cùng domain string như enrich).
+     * Bỏ qua node đã bọc &lt;a&gt; từ lần load đầu.
+     */
+    function b03dnWireDrilldown(scope) {
+        var root = scope || document;
+        var nodes = root.querySelectorAll("[res-model][domain]");
+        for (var i = 0; i < nodes.length; i++) {
+            var el = nodes[i];
+            if (el.dataset.b03dnDrillWired) { continue; }
+            if (el.closest && el.closest('a[href]')) { continue; }
+            el.dataset.b03dnDrillWired = "1";
+            el.style.cursor = "pointer";
+            el.addEventListener("click", function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                try {
+                    window.parent.postMessage({
+                        type: "b03dn_drilldown",
+                        resModel: this.getAttribute("res-model"),
+                        domain: this.getAttribute("domain"),
+                    }, "*");
+                } catch (e) { /* */ }
+            });
+        }
+    }
+    function b03dnWireTmLinks(scope) {
+        var root = scope || document;
+        var nodes = root.querySelectorAll(".b03dn-tm-link[data-b03dn-tm-code]");
+        for (var i = 0; i < nodes.length; i++) {
+            var el = nodes[i];
+            if (el.dataset.b03dnTmWired) { continue; }
+            el.dataset.b03dnTmWired = "1";
+            el.addEventListener("click", function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                var aid = this.getAttribute("data-b03dn-tm-att");
+                var code = this.getAttribute("data-b03dn-tm-code");
+                var did = this.getAttribute("data-b03dn-tm-did");
+                try {
+                    var n = aid && String(aid).trim() ? parseInt(aid, 10) : 0;
+                    if (!isNaN(n) && n > 0) {
+                        window.parent.postMessage({
+                            type: "b03dn_tm_document",
+                            attachmentId: n,
+                        }, "*");
+                        return;
+                    }
+                    if (code && did) {
+                        window.parent.postMessage({
+                            type: "b03dn_tm_find_item",
+                            dossierId: parseInt(did, 10) || 0,
+                            fileCode: code,
+                        }, "*");
+                    }
+                } catch (e2) { /* */ }
+            });
+        }
+    }
+    window.__b03dnGetFilterSnapshot = function () {
+        var mu = document.getElementById("b03dnMoneyUnit");
+        return {
+            company_id: parseInt(document.getElementById("b03dnFilterCompany").value, 10) || 0,
+            template_id: parseInt(document.getElementById("b03dnFilterTemplate").value, 10) || 0,
+            date_from: document.getElementById("b03dnDf").value || "",
+            date_to: document.getElementById("b03dnDt").value || "",
+            date_from_cmp: document.getElementById("b03dnDfc").value || "",
+            date_to_cmp: document.getElementById("b03dnDtc").value || "",
+            signature_date: (function() { var s = document.getElementById("b03dnSigDate"); return s ? s.value : ""; }()),
+            money_unit: mu ? parseInt(mu.value, 10) || 1 : 1
+        };
+    };
+    var reloadTimer = null;
+    function b03dnScheduleReload() {
+        clearTimeout(reloadTimer);
+        reloadTimer = setTimeout(function () {
+            var el = document.getElementById("b03dnReportReload");
+            if (!el) { return; }
+            var opts = JSON.parse(el.textContent);
+            opts.b03dn_ui_filters = window.__b03dnGetFilterSnapshot();
+            var path = window.location.pathname.split("?")[0];
+            var url = path + "?options=" + encodeURIComponent(JSON.stringify(opts));
+            var host = document.getElementById("b03dnReportDataHost");
+            if (!host) {
+                window.location = url;
+                return;
+            }
+            host.style.opacity = "0.45";
+            host.style.pointerEvents = "none";
+            fetch(url, { credentials: "same-origin" })
+                .then(function (resp) { return resp.text(); })
+                .then(function (html) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, "text/html");
+                    var newHost = doc.getElementById("b03dnReportDataHost");
+                    var newReload = doc.getElementById("b03dnReportReload");
+                    if (newHost) {
+                        host.innerHTML = newHost.innerHTML;
+                    }
+                    if (newReload) {
+                        el.textContent = newReload.textContent;
+                    }
+                    b03dnWireDrilldown(host);
+                    b03dnWireTmLinks(host);
+                    b03dnApplyMoneyUnit();
+                    b03dnWireSignaturePicker();
+                    host.style.opacity = "";
+                    host.style.pointerEvents = "";
+                })
+                .catch(function () {
+                    window.location = url;
+                });
+        }, 450);
+    }
+    var moneyUnitSel = document.getElementById("b03dnMoneyUnit");
+    if (moneyUnitSel) {
+        var initialMu = moneyUnitSel.getAttribute("data-initial-money-unit");
+        var muSt = null;
+        try { muSt = sessionStorage.getItem("b03dnMoneyUnit"); } catch (eMu) { /* */ }
+        if (initialMu === "1" || initialMu === "1000" || initialMu === "1000000") {
+            moneyUnitSel.value = initialMu;
+        } else if (muSt === "1" || muSt === "1000" || muSt === "1000000") {
+            moneyUnitSel.value = muSt;
+        }
+        moneyUnitSel.addEventListener("change", function () {
+            try {
+                sessionStorage.setItem("b03dnMoneyUnit", moneyUnitSel.value);
+            } catch (eSt) { /* */ }
+            b03dnApplyMoneyUnit();
+        });
+        b03dnApplyMoneyUnit();
+    }
+    ["b03dnFilterCompany", "b03dnFilterTemplate", "b03dnDf", "b03dnDt", "b03dnDfc", "b03dnDtc"].forEach(function (id) {
+        var n = document.getElementById(id);
+        if (n) { n.addEventListener("change", b03dnScheduleReload); }
+    });
+    var b03dnToolbar = document.getElementById("b03dnToolbar");
+    var b03dnToolbarBody = document.getElementById("b03dnToolbarBody");
+    var b03dnFilterToggle = document.getElementById("b03dnFilterToggle");
+    if (b03dnToolbar && b03dnToolbarBody && b03dnFilterToggle) {
+        function b03dnApplyToolbarCollapsed(collapsed) {
+            b03dnToolbar.classList.toggle("b03dn-toolbar-collapsed", collapsed);
+            b03dnToolbarBody.classList.toggle("b03dn-toolbar-body--hidden", collapsed);
+            b03dnFilterToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+            try {
+                sessionStorage.setItem("b03dnToolbarCollapsed", collapsed ? "1" : "0");
+            } catch (e1) { /* private mode */ }
+        }
+        try {
+            if (sessionStorage.getItem("b03dnToolbarCollapsed") === "1") {
+                b03dnApplyToolbarCollapsed(true);
+            }
+        } catch (e2) { /* */ }
+        b03dnFilterToggle.addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            b03dnApplyToolbarCollapsed(
+                !b03dnToolbar.classList.contains("b03dn-toolbar-collapsed"),
+            );
+        });
+    }
+    
+    function b03dnWireSignaturePicker() {
+        var sigInline = document.getElementById("b03dnSignatureDateInline");
+        var sigDisplay = document.getElementById("b03dnLapDateDisplay");
+        var sigHidden = document.getElementById("b03dnSigDate");
+        if (!sigInline || !sigDisplay) return;
+        if (sigInline.dataset.b03dnSigWired) return;
+        sigInline.dataset.b03dnSigWired = "1";
+        sigInline.addEventListener("change", function () {
+            if (!this.value) return;
+            var d = new Date(this.value + 'T00:00:00');
+            var dd = String(d.getDate()).padStart(2, '0');
+            var mm = String(d.getMonth() + 1).padStart(2, '0');
+            var yy = d.getFullYear();
+            sigDisplay.textContent = "ngày " + dd + " tháng " + mm + " năm " + yy;
+            if (sigHidden) { sigHidden.value = this.value; }
+            b03dnScheduleReload();
+        });
+    }
+    b03dnWireSignaturePicker();
+    b03dnWireDrilldown(document);
+    b03dnWireTmLinks(document);
+
+})();
+                ]]></script>
+            </div>
+        </t>
+    </template>
+</odoo>

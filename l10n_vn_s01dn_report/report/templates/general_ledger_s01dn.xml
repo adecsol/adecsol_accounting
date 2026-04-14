@@ -1,0 +1,2987 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- ==========================================================
+         Entry-point
+         ========================================================== -->
+    <template id="general_ledger_s01dn">
+        <t t-set="title" t-value="s01dn_report_document_title"/>
+        <t t-call="account_financial_report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="account_financial_report.internal_layout">
+                    <t t-call="l10n_vn_s01dn_report.report_gl_s01dn_base"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- ==========================================================
+         Base layout
+         ========================================================== -->
+    <template id="report_gl_s01dn_base">
+        <style>
+            /* ---- Thanh công cụ: luôn hiển thị, sticky trong khung báo cáo ---- */
+            #s01dnToolbar {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                background: #fff !important;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,.08);
+                padding: 12px 14px;
+                margin: 0 0 12px 0;
+                font-family: Arial, Helvetica, sans-serif;
+                box-sizing: border-box;
+            }
+            #s01dnToolbar.s01dn-toolbar-collapsed {
+                padding: 8px 10px;
+            }
+            .s01dn-toolbar-toggle-row {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 8px;
+                margin-bottom: 8px;
+            }
+            #s01dnToolbar.s01dn-toolbar-collapsed .s01dn-toolbar-toggle-row {
+                margin-bottom: 0;
+            }
+            .s01dn-filter-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                border: 1px solid #ced4da;
+                background: #fff;
+                border-radius: 6px;
+                padding: 5px 10px;
+                cursor: pointer;
+                font-size: 11px;
+                font-weight: 600;
+                color: #495057;
+                line-height: 1.2;
+            }
+            .s01dn-filter-toggle:hover {
+                background: #f8f9fa;
+                border-color: #adb5bd;
+                color: #212529;
+            }
+            .s01dn-filter-toggle .s01dn-filter-toggle-ico {
+                display: block;
+                transition: transform 0.2s ease;
+                flex-shrink: 0;
+            }
+            #s01dnToolbar.s01dn-toolbar-collapsed .s01dn-filter-toggle .s01dn-filter-toggle-ico {
+                transform: rotate(-90deg);
+            }
+            .s01dn-toolbar-body--hidden {
+                display: none !important;
+            }
+            #s01dnToolbar .s01dn-search-wrap {
+                display: block !important;
+            }
+            #filterSearch,
+            #s01dnToolbar .s01dn-search-wrap input {
+                display: block !important;
+                visibility: visible !important;
+                width: 100% !important;
+                box-sizing: border-box;
+                min-height: 28px;
+                height: 28px;
+                padding: 3px 8px !important;
+                font-size: 12px !important;
+                line-height: 1.35;
+                border: 1px solid #ced4da !important;
+                border-radius: 4px;
+                background: #fff !important;
+                color: #212529 !important;
+            }
+            #s01dnToolbar .s01dn-search-label {
+                display: block !important;
+                font-size: 11px;
+                font-weight: 600;
+                color: #6c757d;
+                margin: 0 0 4px 0;
+            }
+            #s01dnToolbar .s01dn-search-wrap input:focus {
+                outline: none; border-color: #0d6efd;
+                box-shadow: 0 0 0 2px rgba(13,110,253,.15);
+            }
+
+
+
+            /* ---- Enterprise-style compact filter rows ---- */
+            .s01dn-filter-bar {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 6px 12px;
+                padding: 6px 0;
+            }
+            .s01dn-filter-bar + .s01dn-filter-bar {
+                border-top: 1px solid #e9ecef;
+            }
+            .s01dn-filter-bar .s01dn-bar-sep {
+                width: 1px; height: 20px; background: #dee2e6; flex-shrink: 0;
+            }
+            /* Inline field: label + input side-by-side */
+            .s01dn-f {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 12px;
+                white-space: nowrap;
+            }
+            .s01dn-f > label {
+                font-size: 11px;
+                font-weight: 600;
+                color: #6c757d;
+                margin: 0;
+            }
+            .s01dn-f input[type="date"] {
+                height: 28px; padding: 0 6px; font-size: 12px;
+                border: 1px solid #ced4da; border-radius: 4px;
+                background: #fff; min-width: 0; width: 130px;
+            }
+            .s01dn-f input[type="date"]:focus,
+            .s01dn-f select:focus {
+                outline: none; border-color: #0d6efd;
+                box-shadow: 0 0 0 2px rgba(13,110,253,.12);
+            }
+            .s01dn-f select {
+                height: 28px; padding: 0 6px; font-size: 12px;
+                border: 1px solid #ced4da; border-radius: 4px;
+                background: #fff; min-width: 0;
+            }
+            .s01dn-f select.s01dn-code-sel {
+                min-width: 10rem; max-width: 18rem;
+            }
+            /* Checkbox item in filter bar */
+            .s01dn-chk {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 11px;
+                font-weight: 500;
+                color: #495057;
+                cursor: pointer;
+                white-space: nowrap;
+                margin: 0;
+            }
+            .s01dn-chk input[type="checkbox"] { margin: 0; }
+            /* Push item to the right */
+            .s01dn-bar-right { margin-left: auto; }
+
+            /* ---- Dropdown nhiều lựa chọn (checkbox) ---- */
+            .s01dn-dd { position: relative; display: inline-flex; vertical-align: middle; }
+            .s01dn-dd-btn {
+                display: flex; align-items: center; gap: 6px;
+                height: 28px; padding: 0 8px;
+                font-size: 12px; line-height: 1.2;
+                border: 1px solid #ced4da; border-radius: 4px;
+                background: #fff; cursor: pointer; text-align: left;
+                white-space: nowrap;
+            }
+            .s01dn-dd-btn:hover { border-color: #adb5bd; background: #f8f9fa; }
+            .s01dn-dd-btn .s01dn-dd-lbl {
+                max-width: 100px; overflow: hidden; text-overflow: ellipsis;
+                white-space: nowrap; color: #495057; font-weight: 500;
+            }
+            .s01dn-dd-btn .s01dn-dd-prefix {
+                color: #6c757d; font-weight: 600; font-size: 11px;
+            }
+            .s01dn-dd-panel {
+                display: none;
+                position: absolute; left: 0; top: calc(100% + 2px);
+                min-width: 240px; max-width: min(320px, 90vw);
+                max-height: 260px; overflow-y: auto;
+                background: #fff; border: 1px solid #ced4da; border-radius: 6px;
+                box-shadow: 0 6px 16px rgba(0,0,0,.12);
+                z-index: 1100;
+                padding: 6px 0;
+            }
+            .s01dn-dd.open .s01dn-dd-panel { display: block; }
+            .s01dn-dd-tools {
+                display: flex; gap: 8px; padding: 4px 10px 6px;
+                border-bottom: 1px solid #eee; margin-bottom: 4px;
+            }
+            .s01dn-dd-tools button {
+                font-size: 11px; padding: 2px 8px; border: none; background: none;
+                color: #0d6efd; cursor: pointer; text-decoration: underline;
+            }
+            .s01dn-dd-tools button:hover { color: #0a58ca; }
+            .s01dn-dd-panel label {
+                display: flex; align-items: center; gap: 6px;
+                margin: 0; padding: 3px 10px; font-size: 12px; font-weight: normal;
+                cursor: pointer; white-space: nowrap;
+            }
+            .s01dn-dd-panel label:hover { background: #f8f9fa; }
+            .s01dn-dd-panel input[type="checkbox"] { margin: 0; flex-shrink: 0; }
+            /* Giống Excel: đơn vị tiền căn phải dưới tiêu đề */
+            .s01dn-money-unit-below-year,
+            .s01dn-excel-money-row {
+                margin-top: 6px;
+            }
+            .s01dn-money-unit-below-year .s01dn-money-unit-caption,
+            .s01dn-excel-money-row .s01dn-money-unit-caption {
+                font-size: 11px;
+                font-style: italic;
+                color: #444;
+            }
+            .s01dn-excel-header {
+                font-family: Arial, Helvetica, sans-serif;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .s01dn-excel-header-top {
+                display: flex; align-items: flex-start;
+                gap: 16px; width: 100%;
+            }
+            .s01dn-excel-co-name {
+                font-size: 13px; flex: 1 1 0; min-width: 0; text-align: left;
+            }
+            /* S01-DN + ban hành: nửa phải khối, chữ căn phải → sát mép phải trang */
+            .s01dn-excel-form {
+                font-size: 14px; flex: 1 1 0; min-width: 0; text-align: right;
+            }
+            .s01dn-excel-form em { font-size: 11px; }
+            .s01dn-excel-addr-row {
+                display: flex; align-items: flex-start;
+                gap: 16px; margin-top: 4px; font-size: 12px; width: 100%;
+            }
+            .s01dn-excel-addr-row > div:first-child {
+                flex: 1 1 0; min-width: 0; text-align: left;
+            }
+            .s01dn-excel-addr-row .s01dn-excel-addr-right {
+                flex: 1 1 0; min-width: 0; text-align: right;
+            }
+            /* Tiêu đề + kỳ (từ ngày–đến ngày): giữa theo độ rộng trang */
+            .s01dn-excel-title-block {
+                text-align: center; margin: 14px 0 6px; width: 100%;
+            }
+            .s01dn-excel-title-block h3 { font-weight: bold; margin: 0 0 4px; font-size: 18px; }
+            .s01dn-excel-title-block .s01dn-report-period {
+                font-weight: bold; font-style: italic;
+            }
+            .s01dn-excel-money-row {
+                text-align: right; margin-bottom: 10px; width: 100%;
+            }
+            .s01dn-excel-footer { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+            .s01dn-excel-footer .s01dn-footer-meta-row {
+                display: flex; justify-content: flex-start; align-items: flex-start;
+                gap: 16px; margin-bottom: 4px;
+            }
+            .s01dn-excel-footer .s01dn-footer-left-lines { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+            /*
+             * Dòng ngày ký: cùng 3 cột với hàng chữ ký — căn giữa cột 3 trùng tâm với "Giám đốc",
+             * nằm dưới "Ngày mở sổ" và sát phía trên chức danh Giám đốc.
+             */
+            .s01dn-excel-footer .s01dn-footer-sign-date-row {
+                display: flex; justify-content: space-between; align-items: flex-end;
+                margin-top: 6px; margin-bottom: 2px;
+            }
+            .s01dn-excel-footer .s01dn-footer-sign-date-row .s01dn-footer-sign-col {
+                flex: 1; padding: 0 6px; box-sizing: border-box;
+            }
+            .s01dn-excel-footer .s01dn-footer-sign-date-row .s01dn-footer-sign-date {
+                text-align: center; white-space: nowrap; font-style: italic;
+            }
+            .s01dn-excel-footer .s01dn-footer-sign-row {
+                display: flex; justify-content: space-between; text-align: center;
+                margin-top: 6px;
+            }
+            .s01dn-excel-footer .s01dn-footer-sign-col { flex: 1; padding: 0 6px; }
+            .s01dn-excel-footer .s01dn-footer-sign-col .s01dn-sign-title { font-weight: bold; margin-bottom: 6px; }
+            .s01dn-excel-footer .s01dn-footer-sign-col .s01dn-sign-sub { font-size: 10px; }
+            /*
+             * Dòng số trang nội dung: CHỈ ẩn trên màn hình (@media screen).
+             * Không dùng display:none toàn cục — một số engine in vẫn coi phần tử là không hiển thị.
+             */
+            @media screen {
+                .s01dn-footer-pages-print-only {
+                    display: none !important;
+                }
+                body.s01dn--measuring-print .s01dn-footer-pages-print-only {
+                    display: block !important;
+                    visibility: visible !important;
+                }
+            }
+            #s01dnToolbar input[type="date"].s01dn-date {
+                height: 30px;
+                padding: 2px 8px;
+                font-size: 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                background: #fff;
+                min-width: 132px;
+            }
+
+            /* Cột: header full width trang; chỉ phần bảng cuộn ngang khi rộng hơn khổ */
+            .s01dn-sheet {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                min-width: 0;
+            }
+            .s01dn-sheet-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+                min-width: 0;
+            }
+            /* Rộng = bảng (max-content); không chứa header → tiêu đề/S01-DN căn theo trang */
+            .s01dn-sheet-inner {
+                display: inline-block;
+                vertical-align: top;
+                width: max-content;
+                box-sizing: border-box;
+            }
+            .s01dn-sheet .s01dn-screen-table-host {
+                width: auto;
+                max-width: none;
+            }
+            .s01dn-sheet .s01dn-wrap {
+                overflow-x: visible;
+                max-width: none;
+            }
+            /* Trong khối sheet, bảng không bị max-width:100% cắt ngang (inner = max-content theo bảng) */
+            .s01dn-sheet-inner .s01dn table {
+                max-width: none;
+            }
+
+            /*
+             * Màn hình: cố định header bảng khi cuộn dọc (sticky thead).
+             * Khung .s01dn-sheet-scroll cuộn dọc để position:sticky hoạt động ổn định (overflow-x không cắt sticky).
+             * 3 hàng thead: top lũy kế — có thể tinh chỉnh bằng --s01dn-thead-r1 / --s01dn-thead-r2 nếu font đổi.
+             */
+            @media screen {
+                .s01dn-sheet-scroll {
+                    overflow-x: auto;
+                    overflow-y: auto;
+                    max-height: calc(100vh - 12rem);
+                }
+                .s01dn-sheet-scroll .s01dn thead tr:nth-child(1) th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0;
+                    z-index: 12;
+                    background: #FFFFCC !important;
+                    box-shadow: 0 1px 0 #999;
+                }
+                .s01dn-sheet-scroll .s01dn thead tr:nth-child(2) th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: var(--s01dn-thead-r1, 44px);
+                    z-index: 11;
+                    background: #FFFFCC !important;
+                    box-shadow: 0 1px 0 #999;
+                }
+                .s01dn-sheet-scroll .s01dn thead tr:nth-child(3) th {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: calc(var(--s01dn-thead-r1, 44px) + var(--s01dn-thead-r2, 36px));
+                    z-index: 10;
+                    background: #FFFFCC !important;
+                    box-shadow: 0 1px 0 #999;
+                }
+            }
+
+            /* ---- Table ---- */
+            .s01dn-wrap { overflow-x: auto; }
+            .s01dn table {
+                border-collapse: collapse; font-size: 11px;
+                font-family: 'Arial', serif;
+                table-layout: auto;
+                width: max-content;
+                max-width: 100%;
+            }
+            .s01dn th, .s01dn td { border: 1px solid #999; padding: 2px 4px;
+                                    vertical-align: middle; }
+            .s01dn th { background: #FFFFCC; text-align: center; font-weight: bold;
+                        white-space: nowrap; }
+            .s01dn td { white-space: nowrap; }
+            .s01dn .num { text-align: right; }
+            .s01dn .ctr { text-align: center; }
+            /* Diễn giải, Số hiệu: tiêu đề căn giữa, nội dung căn trái */
+            .s01dn th.s01dn-col-doc {
+                text-align: center;
+                white-space: normal;
+                word-break: break-word;
+                min-width: 13em;
+                max-width: 32em;
+                width: 17em;
+            }
+            .s01dn td.desc {
+                text-align: left;
+                white-space: normal;
+                word-break: break-word;
+                min-width: 13em;
+                max-width: 32em;
+                width: 17em;
+            }
+            .s01dn th.s01dn-col-entry { text-align: center; }
+            .s01dn td.s01dn-entry-cell {
+                text-align: left;
+            }
+            /* Ghi chú: tiêu đề giữa, nội dung trái; cột rộng hơn Diễn giải */
+            .s01dn th.s01dn-col-note {
+                text-align: center;
+                white-space: normal;
+                word-break: break-word;
+                min-width: 20em;
+                width: 22em;
+                max-width: 42em;
+            }
+            .s01dn td.col-note {
+                text-align: left;
+                white-space: normal;
+                word-break: break-word;
+                min-width: 20em;
+                width: 22em;
+                max-width: 42em;
+            }
+            .s01dn .row-total td { font-weight: normal; }
+            .s01dn .row-closing td { font-weight: normal; font-style: normal; }
+            .s01dn .row-month-hdr td { font-weight: normal; background: #fafafa; }
+            .s01dn-entry-cell { white-space: nowrap; }
+            .s01dn-entry-num { margin-right: 4px; }
+            .s01dn-move-ico {
+                display: inline-block;
+                vertical-align: middle;
+                color: #0d6efd;
+                line-height: 0;
+                text-decoration: none;
+                opacity: 0.88;
+            }
+            .s01dn-move-ico:hover { opacity: 1; color: #0a58ca; }
+            .s01dn-move-ico svg { display: block; }
+            .s01dn-hidden { display: none !important; }
+
+            /*
+             * Chiều cao vùng nội dung: @page margin trên 2cm + dưới 2.5cm — engine quy đổi mm→px;
+             * JS đọc getBoundingClientRect().height để mô phỏng mục lục khớp khổ in.
+             */
+            .s01dn-page-body-probe {
+                position: absolute;
+                left: -99999px;
+                top: 0;
+                width: 1px;
+                height: calc(297mm - 2cm - 2.5cm);
+                margin: 0;
+                padding: 0;
+                border: 0;
+                overflow: hidden;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .s01dn-screen-table-host {
+                width: auto;
+            }
+            /* In: trang 1 = nhật ký A–I + F–G; các trang sau = Diễn giải (E) + H + tối đa 6 TK/trang */
+            .s01dn-print-chunk-wrap {
+                display: none;
+            }
+            .s01dn-print-chunk-meta {
+                font-size: 11px;
+                color: #333;
+                margin: 6px 0 10px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            /* Số trang từng tờ in: dùng #s01dnPrintFixedPageNum + counter (xem @media print) */
+            .s01dn-print-chunk-footer {
+                display: none !important;
+            }
+            .s01dn-print-chunk {
+                page-break-after: always;
+                break-after: page;
+            }
+            .s01dn-print-chunk:not(:first-child) {
+                page-break-before: always;
+                break-before: page;
+            }
+            .s01dn-print-chunk--last {
+                page-break-after: auto;
+                break-after: auto;
+            }
+            /* Ước lượng số trang (màn hình): bật tạm để đo chiều cao chunk, khớp khổ ngang A3 landscape */
+            .s01dn-print-chunk-wrap.s01dn-measure-layout {
+                display: block !important;
+                position: absolute !important;
+                left: -99999px !important;
+                top: 0 !important;
+                /* A3 ngang: 420mm − lề trái 3cm − lề phải 1cm = 380mm @ 96dpi (~1436px) — khớp @media print @page */
+                width: 1436px !important;
+                max-width: 1436px !important;
+                visibility: hidden !important;
+                height: auto !important;
+                overflow: visible !important;
+                pointer-events: none !important;
+            }
+            .s01dn-print-chunk-wrap.s01dn-measure-layout.s01dn-print-chunks-ready {
+                display: block !important;
+            }
+
+            /*
+             * Đo cao khối in (mục lục / tóm tắt theo trang).
+             * Khớp @page A3 ngang, margin 2cm 1cm 2.5cm 3cm — bề rộng nội dung ~380mm (~1436px @ 96dpi).
+             */
+            body.s01dn--measuring-print #s01dnReportPrintHeader,
+            body.s01dn--measuring-print #s01dnPrintChunkWrap.s01dn-print-chunks-ready,
+            body.s01dn--measuring-print #s01dnReportPrintFooter {
+                position: absolute !important;
+                left: -18000px !important;
+                top: 0 !important;
+                visibility: hidden !important;
+                width: 1436px !important;
+                max-width: 1436px !important;
+                display: block !important;
+                height: auto !important;
+                overflow: visible !important;
+                pointer-events: none !important;
+            }
+            body.s01dn--measuring-print #s01dnPrintChunkWrap.s01dn-print-chunks-ready .s01dn-print-chunk {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            body.s01dn--measuring-print .s01dn-print-chunk-wrap .s01dn-wrap {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            /*
+             * Khớp @media print .s01dn (bảng 7pt, th 6.5pt, ledger thead 6pt, padding 0 1px)
+             * để offsetHeight khi đo mô phỏng trùng engine in — tránh lệch số trang với counter(pages).
+             */
+            body.s01dn--measuring-print .s01dn-print-chunk-wrap .s01dn table {
+                font-size: 7pt !important;
+                font-family: Arial, Helvetica, sans-serif !important;
+                table-layout: fixed !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                border-collapse: collapse !important;
+            }
+            body.s01dn--measuring-print .s01dn-print-chunk-wrap .s01dn th,
+            body.s01dn--measuring-print .s01dn-print-chunk-wrap .s01dn td {
+                padding: 0 1px !important;
+                border: 1px solid #444 !important;
+                line-height: 1.2 !important;
+                box-sizing: border-box !important;
+            }
+            body.s01dn--measuring-print .s01dn-print-chunk-wrap .s01dn th {
+                font-size: 6.5pt !important;
+            }
+            body.s01dn--measuring-print
+                .s01dn-print-chunk-wrap
+                .s01dn-print-chunk--ledger
+                .s01dn
+                thead
+                th {
+                font-size: 6pt !important;
+                line-height: 1.15 !important;
+            }
+            body.s01dn--measuring-print .s01dn-print-toc-title {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                font-size: 11pt !important;
+                margin: 0 0 12px !important;
+            }
+            body.s01dn--measuring-print .s01dn-print-toc-table {
+                font-size: 9pt !important;
+            }
+            body.s01dn--measuring-print #s01dnReportPrintHeader {
+                margin-bottom: 8px !important;
+            }
+            /* Khớp @media print #s01dnReportPrintFooter — offsetHeight không gồm margin */
+            body.s01dn--measuring-print #s01dnReportPrintFooter {
+                margin-top: 16px !important;
+            }
+            body.s01dn--measuring-print .s01dn-sheet-scroll {
+                max-height: none !important;
+            }
+
+            /* ---- In: ẩn toolbar; chia trang theo nhóm TK; khổ ngang A3 ---- */
+            @media print {
+                /* Lề trái 0.19"; tránh khoảng trống do @page + Bootstrap container */
+                /* Số trang hiện tại (không /tổng): margin box Chrome; tránh lệch với số trang thực tế */
+                /* Lề trái/phải đối xứng để khối nội dung cân giữa theo chiều ngang */
+                @page {
+                    size: A3 landscape;
+                    /* Lề dưới 2.5cm: chừa chỗ cho margin box + tránh chữ “Trang x/y” sát mép giấy */
+                    margin: 2cm 1cm 2.5cm 3cm;
+                    /*
+                     * Cùng counter(pages) với góc phải — không dùng JS mô phỏng (tránh lệch khi đổi filter / máy in).
+                     * Chuỗi dùng nháy đơn để khỏi escape trong XML.
+                     */
+                    @bottom-left {
+                        content: '- Sổ này có ' counter(pages, decimal-leading-zero) ' trang nội dung, đánh số từ trang số 01 đến trang ' counter(pages, decimal-leading-zero) '.';
+                        font-size: 7.5pt;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #222;
+                        vertical-align: top;
+                        text-align: left;
+                        white-space: normal;
+                        line-height: 1.2;
+                        padding: 0 2mm 3mm 0;
+                    }
+                    @bottom-right {
+                        content: "Trang " counter(page, decimal-leading-zero) " / " counter(pages, decimal-leading-zero);
+                        font-size: 9pt;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #222;
+                        vertical-align: top;
+                        text-align: right;
+                        white-space: nowrap;
+                        padding: 0 0 3mm 0;
+                    }
+                }
+                html, body, body.o_body_html {
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    max-width: none !important;
+                    width: 100% !important;
+                }
+                #wrapwrap,
+                #wrapwrap > main {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    max-width: none !important;
+                    width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+                body .container,
+                body .container-fluid {
+                    margin: 0 !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    max-width: none !important;
+                    width: 100% !important;
+                }
+                .article.o_account_financial_reports_page {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100% !important;
+                    max-width: none !important;
+                    box-sizing: border-box !important;
+                }
+                #s01dnToolbar {
+                    display: none !important;
+                    visibility: hidden !important;
+                }
+                .s01dn-page-body-probe {
+                    display: none !important;
+                }
+                /* Footer số trang wkhtml của internal_layout — không dùng khi in kiểu Excel */
+                .article.o_account_financial_reports_page + .footer {
+                    display: none !important;
+                }
+                .page {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    width: 100% !important;
+                    max-width: none !important;
+                    box-sizing: border-box !important;
+                }
+                .s01dn-screen-table-host {
+                    display: none !important;
+                }
+                .s01dn-sheet {
+                    overflow: visible !important;
+                    width: 100% !important;
+                    max-width: none !important;
+                }
+                .s01dn-sheet-scroll {
+                    overflow: visible !important;
+                    width: 100% !important;
+                    max-width: none !important;
+                    max-height: none !important;
+                }
+                .s01dn-sheet-scroll .s01dn thead th {
+                    position: static !important;
+                    top: auto !important;
+                    z-index: auto !important;
+                    box-shadow: none !important;
+                }
+                /*
+                 * Full chiều ngang khi in: bảng sổ cái (H+TK) dùng hết khổ; block để thead lặp đúng.
+                 * JS beforeprint cũng gán width 100% cho .s01dn-sheet-inner.
+                 */
+                .s01dn-sheet-inner {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-width: 0 !important;
+                    box-sizing: border-box !important;
+                    overflow: visible !important;
+                }
+                .s01dn-sheet .s01dn-wrap {
+                    overflow: visible !important;
+                }
+                /* Header / footer gốc giống Excel. Có mục lục: tiêu đề chuyển vào chunk nhật ký (một lần), không lặp trên trang mục lục. */
+                #s01dnReportPrintHeader {
+                    display: block !important;
+                    visibility: visible !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    page-break-after: avoid;
+                    page-break-inside: avoid;
+                    margin-bottom: 8px;
+                }
+                #s01dnReportPrintFooter {
+                    display: block !important;
+                    visibility: visible !important;
+                    width: 100% !important;
+                    page-break-inside: avoid;
+                    margin-top: 16px;
+                }
+                #s01dnReportPrintFooter .s01dn-footer-pages-print-only,
+                .s01dn-excel-footer .s01dn-footer-pages-print-only {
+                    display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    height: auto !important;
+                    max-height: none !important;
+                    overflow: visible !important;
+                    position: static !important;
+                    clip: auto !important;
+                    -webkit-line-clamp: unset !important;
+                    color: #000 !important;
+                    font-size: inherit !important;
+                }
+                /* Bản HTML của dòng số trang: ẩn khi in — đã in ở @page @bottom-left (counter(pages)). */
+                #s01dnReportPrintFooter #s01dnFooterBookPagesLine {
+                    display: none !important;
+                    height: 0 !important;
+                    min-height: 0 !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    overflow: hidden !important;
+                    visibility: hidden !important;
+                }
+                .s01dn-print-chunk-wrap.s01dn-print-chunks-ready {
+                    display: block !important;
+                    visibility: visible !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    box-sizing: border-box !important;
+                }
+                /* Mỗi chunk + bảng in dùng hết bề ngang vùn in (tránh bảng co theo max-content, mép phải trống) */
+                .s01dn-print-chunk-wrap.s01dn-print-chunks-ready .s01dn-print-chunk {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+                .s01dn-print-chunk-wrap.s01dn-print-chunks-ready .s01dn-wrap {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                }
+                .s01dn-wrap {
+                    overflow: visible !important;
+                    max-width: none !important;
+                }
+                .s01dn table {
+                    font-size: 7pt;
+                    table-layout: fixed !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    border-collapse: collapse !important;
+                    page-break-inside: auto;
+                    break-inside: auto;
+                }
+                .s01dn th, .s01dn td {
+                    padding: 0 1px;
+                    border: 1px solid #444;
+                    line-height: 1.2;
+                    vertical-align: middle !important;
+                    text-align: center;
+                    box-sizing: border-box !important;
+                }
+                .s01dn th {
+                    font-size: 6.5pt;
+                    background: #FFFFCC !important;
+                }
+                /* Số: căn phải; Diễn giải / Số hiệu / Ghi chú: tiêu đề giữa, nội dung trái */
+                .s01dn td.num,
+                .s01dn th.num {
+                    text-align: right !important;
+                }
+                .s01dn th.s01dn-col-doc,
+                .s01dn th.s01dn-col-entry,
+                .s01dn th.s01dn-col-note {
+                    text-align: center !important;
+                }
+                .s01dn td.desc,
+                .s01dn td.s01dn-entry-cell,
+                .s01dn td.col-note {
+                    text-align: left !important;
+                }
+                .s01dn th.s01dn-col-doc,
+                .s01dn td.desc {
+                    max-width: none;
+                    width: auto;
+                    min-width: 0;
+                }
+                .s01dn th.s01dn-col-note,
+                .s01dn td.col-note {
+                    white-space: normal;
+                    word-break: break-word;
+                    min-width: 0;
+                    width: auto;
+                    max-width: none;
+                }
+                /* Trang mục lục in (một tờ): gom tóm tắt các trang nội dung — thay hàng lặp trong thead */
+                .s01dn-print-chunk--toc .s01dn-print-toc-wrap {
+                    width: 100% !important;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #111;
+                }
+                .s01dn-print-toc-header-clone.s01dn-excel-header {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    margin: 0 0 10px !important;
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                }
+                .s01dn-print-toc-title {
+                    display: block;
+                    width: 100% !important;
+                    text-align: center !important;
+                    font-weight: bold;
+                    font-size: 11pt;
+                    margin: 0 0 12px;
+                    letter-spacing: 0.02em;
+                }
+                .s01dn-print-toc-table {
+                    width: 100% !important;
+                    border-collapse: collapse;
+                    font-size: 9pt;
+                    table-layout: fixed;
+                }
+                .s01dn-print-toc-table th,
+                .s01dn-print-toc-table td {
+                    border: 1px solid #333 !important;
+                    padding: 4px 8px !important;
+                    vertical-align: middle !important;
+                }
+                .s01dn-print-toc-table thead th {
+                    background: #FFFFCC !important;
+                    font-weight: bold;
+                    text-align: center !important;
+                }
+                .s01dn-print-toc-table .s01dn-print-toc-col-page {
+                    width: 4em;
+                    min-width: 5.5em;
+                    white-space: nowrap;
+                    text-align: center !important;
+                }
+                .s01dn-print-toc-table tbody td.s01dn-print-toc-summary {
+                    text-align: left !important;
+                    word-break: break-word;
+                }
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link,
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:link,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:link,
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:visited,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:visited,
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:hover,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:hover,
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:active,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:active,
+                .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:focus,
+                .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:focus {
+                    color: inherit;
+                    cursor: pointer;
+                    text-decoration: none !important;
+                    text-decoration-line: none !important;
+                    -webkit-text-decoration: none !important;
+                }
+                .s01dn-print-chunk--journal tr[id^="s01dn-toc-h-"],
+                .s01dn-print-chunk--ledger tr[id^="s01dn-toc-h-"] {
+                    scroll-margin-top: 1.25rem;
+                }
+                @media print {
+                    .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link,
+                    .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link,
+                    .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:link,
+                    .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:link,
+                    .s01dn-print-toc-table td.s01dn-print-toc-col-page a.s01dn-toc-link:visited,
+                    .s01dn-print-toc-table td.s01dn-print-toc-summary a.s01dn-toc-link:visited {
+                        color: inherit;
+                        text-decoration: none !important;
+                        text-decoration-line: none !important;
+                        -webkit-text-decoration: none !important;
+                    }
+                }
+                /* Legacy catalog row (không còn chèn); giữ style nếu DOM cũ */
+                .s01dn-print-catalog-row td {
+                    border: 1px solid #333 !important;
+                    background: #f0f4f8 !important;
+                    padding: 4px 6px !important;
+                    vertical-align: middle !important;
+                    text-align: left !important;
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                }
+                .s01dn-print-catalog-inner {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 7pt;
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #111;
+                }
+                .s01dn-print-catalog-inner th,
+                .s01dn-print-catalog-inner td {
+                    border: 1px solid #666;
+                    padding: 2px 5px;
+                    vertical-align: middle;
+                }
+                .s01dn-print-catalog-inner th {
+                    background: #FFFFCC !important;
+                    font-weight: bold;
+                    white-space: nowrap;
+                    width: 7.5em;
+                    text-align: center;
+                }
+                .s01dn-print-catalog-inner td {
+                    text-align: left;
+                }
+                thead,
+                .s01dn thead {
+                    display: table-header-group !important;
+                }
+                .s01dn thead {
+                    page-break-after: avoid;
+                }
+                tbody {
+                    display: table-row-group;
+                }
+                /* Không in mô tả đầu chunk; trang mục lục: .s01dn-print-chunk--toc */
+                .s01dn-print-chunk-meta {
+                    display: none !important;
+                }
+                /* Sổ cái (Diễn giải + H + TK): full ngang trang, bọc chữ */
+                .s01dn-print-chunk--ledger .s01dn-wrap {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .s01dn-print-chunk--ledger .s01dn table {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    table-layout: fixed;
+                }
+                .s01dn-print-chunk--ledger .s01dn th,
+                .s01dn-print-chunk--ledger .s01dn td {
+                    min-width: 0 !important;
+                    white-space: normal !important;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    word-break: break-word;
+                    vertical-align: middle !important;
+                    hyphens: auto;
+                }
+                .s01dn-print-chunk--ledger .s01dn .num,
+                .s01dn-print-chunk--ledger .s01dn td.ctr {
+                    word-break: normal;
+                    overflow-wrap: normal;
+                }
+                .s01dn-print-chunk--ledger .s01dn td.num {
+                    white-space: nowrap !important;
+                }
+                .s01dn-print-chunk--ledger .s01dn th.s01dn-col-doc {
+                    text-align: center !important;
+                }
+                .s01dn-print-chunk--ledger .s01dn td.desc {
+                    text-align: left !important;
+                }
+                /* Độ rộng cột: JS gắn colgroup (Diễn giải + H + các cặp Nợ/Có) */
+                .s01dn-print-chunk--ledger .s01dn table colgroup.s01dn-ledger-colwidth col {
+                    box-sizing: border-box;
+                }
+                .s01dn-print-chunk--ledger .s01dn thead th {
+                    font-size: 6pt;
+                    line-height: 1.15;
+                }
+                /* Nhật ký in: full ngang + colgroup (tỉ lệ cột như mẫu) — tránh khoảng trống phải */
+                .s01dn-print-chunk--journal .s01dn-wrap {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .s01dn-print-chunk--journal .s01dn table {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    table-layout: fixed !important;
+                }
+                .s01dn-print-chunk--journal .s01dn th,
+                .s01dn-print-chunk--journal .s01dn td {
+                    min-width: 0 !important;
+                    white-space: normal !important;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    word-break: break-word;
+                    vertical-align: middle !important;
+                }
+                .s01dn-print-chunk--journal .s01dn th.s01dn-col-doc,
+                .s01dn-print-chunk--journal .s01dn th.s01dn-col-entry,
+                .s01dn-print-chunk--journal .s01dn th.s01dn-col-note {
+                    min-width: 0 !important;
+                    max-width: none !important;
+                    text-align: center !important;
+                }
+                .s01dn-print-chunk--journal .s01dn td.desc,
+                .s01dn-print-chunk--journal .s01dn td.s01dn-entry-cell,
+                .s01dn-print-chunk--journal .s01dn td.col-note {
+                    min-width: 0 !important;
+                    max-width: none !important;
+                    text-align: left !important;
+                }
+                .s01dn-print-chunk--journal .s01dn td.num {
+                    white-space: nowrap !important;
+                }
+                .s01dn-print-chunk--journal .s01dn table colgroup.s01dn-journal-colwidth col {
+                    box-sizing: border-box;
+                }
+                /* Giữ 3 dòng thead dính nhau; tránh tách riêng một dòng thead */
+                .s01dn thead tr {
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                }
+                /*
+                 * Hàng chi tiết có thể cao: cho phép ngắt trong tr (theo ô); KHÔNG ép break-inside trên td
+                 * để tránh engine bỏ lặp thead ở trang tiếp theo.
+                 */
+                .s01dn tbody tr[data-row-type="line"] {
+                    page-break-inside: auto;
+                    break-inside: auto;
+                }
+                .s01dn .row-total,
+                .s01dn .row-closing,
+                .s01dn .row-month-hdr {
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                }
+                .s01dn-move-ico {
+                    display: none !important;
+                }
+                #s01dnReportPrintHeader .s01dn-excel-header-top,
+                #s01dnReportPrintHeader .s01dn-excel-addr-row,
+                #s01dnReportPrintFooter .s01dn-footer-meta-row,
+                #s01dnReportPrintFooter .s01dn-footer-sign-date-row,
+                #s01dnReportPrintFooter .s01dn-footer-sign-row {
+                    display: flex !important;
+                }
+            }
+        </style>
+
+        <!-- ==================== Nội dung báo cáo ==================== -->
+        <div class="page">
+            <div id="s01dnPageBodyProbe" class="s01dn-page-body-probe" aria-hidden="true"/>
+        <!-- Payload reload báo cáo từ DB (options=...) — không escape JSON -->
+        <script type="application/json" id="s01dnReportReload" t-out="s01dn_report_reload_json"/>
+        <t t-set="echo" t-value="s01dn_echo or {}"/>
+        <t t-set="echo_accounts" t-value="echo.get('account_ids')"/>
+        <t t-set="echo_journals" t-value="echo.get('journal_names')"/>
+        <!-- ==================== Thanh tìm kiếm + bộ lọc (đầu trang, trong .page) ==================== -->
+        <div id="s01dnToolbar" class="s01dn-toolbar-screen-only">
+            <div class="s01dn-toolbar-toggle-row">
+                <button type="button" id="s01dnFilterToggle" class="s01dn-filter-toggle"
+                        aria-controls="s01dnToolbarBody" aria-expanded="true"
+                        title="Ẩn / hiện bộ lọc">
+                    <span>Bộ lọc</span>
+                    <svg class="s01dn-filter-toggle-ico" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="s01dnToolbarBody" class="s01dn-toolbar-body">
+            <!-- Row 1: dates + target_move + filter dropdowns + search -->
+            <div class="s01dn-filter-bar">
+                <span class="s01dn-f">
+                    <label for="s01dnDateRange">Kỳ</label>
+                    <select id="s01dnDateRange" name="s01dnDateRange" t-att-data-initial-id="echo.get('date_range_id')">
+                        <option value="">Tùy chọn...</option>
+                        <t t-if="s01dn_date_ranges">
+                            <t t-foreach="s01dn_date_ranges" t-as="dr">
+                                <option t-att-value="dr['id']" t-att-data-start="dr['date_start']" t-att-data-end="dr['date_end']">
+                                    <t t-esc="dr['name']"/>
+                                </option>
+                            </t>
+                        </t>
+                    </select>
+                </span>
+                <span class="s01dn-f">
+                    <label for="s01dnDateFrom">Từ</label>
+                    <input type="date" id="s01dnDateFrom" name="s01dnDateFrom"
+                           t-att-min="s01dn_wizard_date_min or None"
+                           t-att-max="s01dn_wizard_date_max or None"
+                           t-att-value="s01dn_filter_date_from"/>
+                </span>
+                <span class="s01dn-f">
+                    <label for="s01dnDateTo">Đến</label>
+                    <input type="date" id="s01dnDateTo" name="s01dnDateTo"
+                           t-att-min="s01dn_wizard_date_min or None"
+                           t-att-max="s01dn_wizard_date_max or None"
+                           t-att-value="s01dn_filter_date_to"/>
+                </span>
+                <span class="s01dn-f">
+                    <label for="s01dnTargetMove">Bút toán</label>
+                    <select id="s01dnTargetMove" name="s01dnTargetMove"
+                            t-att-data-initial-wizard="s01dn_tb_target_move">
+                        <option value="posted">Đã ghi sổ</option>
+                        <option value="all">Tất cả</option>
+                    </select>
+                </span>
+                <span class="s01dn-bar-sep"/>
+                <div class="s01dn-dd" data-dd="account">
+                    <button type="button" class="s01dn-dd-btn" aria-expanded="false">
+                        <span class="s01dn-dd-prefix">Tài khoản</span>
+                        <span class="s01dn-dd-lbl" id="lblAccount">Tất cả</span>
+                        <span class="text-muted">▾</span>
+                    </button>
+                    <div class="s01dn-dd-panel">
+                        <div class="s01dn-dd-tools">
+                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
+                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                        </div>
+                        <t t-foreach="s01dn_filter_accounts" t-as="acc">
+                            <label>
+                                <t t-set="chk_a" t-value="echo_accounts is None or acc['id'] in echo_accounts"/>
+                                <input type="checkbox" class="cb-account" t-att-value="acc['id']"
+                                       t-att-data-code="acc['code']"
+                                       t-att-data-type="acc.get('account_type', '')"
+                                       t-att-checked="chk_a if chk_a else None"/>
+                                <span><t t-esc="acc['code']"/> — <t t-esc="acc['name']"/></span>
+                            </label>
+                        </t>
+                    </div>
+                </div>
+                <div class="s01dn-dd" data-dd="journal">
+                    <button type="button" class="s01dn-dd-btn" aria-expanded="false">
+                        <span class="s01dn-dd-prefix">Nhật ký</span>
+                        <span class="s01dn-dd-lbl" id="lblJournal">Tất cả</span>
+                        <span class="text-muted">▾</span>
+                    </button>
+                    <div class="s01dn-dd-panel">
+                        <div class="s01dn-dd-tools">
+                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
+                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                        </div>
+                        <t t-foreach="s01dn_filter_journals" t-as="jn">
+                            <label>
+                                <t t-set="chk_j" t-value="echo_journals is None or jn in echo_journals"/>
+                                <input type="checkbox" class="cb-journal" t-att-value="jn" t-att-checked="chk_j if chk_j else None"/>
+                                <span><t t-esc="jn"/></span>
+                            </label>
+                        </t>
+                    </div>
+                </div>
+                <div class="s01dn-dd" data-dd="partner">
+                    <button type="button" class="s01dn-dd-btn" aria-expanded="false">
+                        <span class="s01dn-dd-prefix">Đối tác</span>
+                        <span class="s01dn-dd-lbl" id="lblPartner">Tất cả</span>
+                        <span class="text-muted">▾</span>
+                    </button>
+                    <div class="s01dn-dd-panel">
+                        <div class="s01dn-dd-tools">
+                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
+                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                        </div>
+                        <t t-set="echo_partners" t-value="echo.get('partner_ids')"/>
+                        <t t-foreach="s01dn_filter_partners" t-as="ptn">
+                            <label>
+                                <t t-set="chk_p" t-value="echo_partners is None or (str(ptn['id']) in [str(x) for x in (echo_partners or [])])"/>
+                                <input type="checkbox" class="cb-partner" t-att-value="ptn['id']" t-att-checked="chk_p if chk_p else None"/>
+                                <span><t t-esc="ptn['name']"/></span>
+                            </label>
+                        </t>
+                    </div>
+                </div>
+
+                <span class="s01dn-bar-sep"/>
+                <div class="s01dn-search-wrap" style="flex:1 1 140px;min-width:120px;max-width:260px;">
+                    <input type="text" id="filterSearch" name="filterSearch"
+                           placeholder="🔍 Tìm kiếm..."
+                           t-att-value="echo.get('search') or ''"/>
+                </div>
+            </div>
+            <!-- Row 2: checkboxes + code range + money unit -->
+            <div class="s01dn-filter-bar">
+
+
+
+                <span class="s01dn-bar-sep"/>
+
+                <span class="s01dn-f s01dn-bar-right">
+                    <label for="s01dnMoneyUnit">Đơn vị</label>
+                    <select id="s01dnMoneyUnit" name="s01dnMoneyUnit"
+                            title="Quy đổi hiển thị số trên báo cáo (chỉ giao diện)"
+                            t-att-data-initial-money-unit="s01dn_money_unit_select_value">
+                        <option value="1">Đồng</option>
+                        <option value="1000">Ngàn đồng</option>
+                        <option value="1000000">Triệu đồng</option>
+                    </select>
+                </span>
+            </div>
+            </div>
+        </div>
+
+            <div class="s01dn-sheet">
+            <!-- Header full width trang: tiêu đề + kỳ báo cáo giữa trang; S01-DN, thông tư, đơn vị tính căn phải trang -->
+            <div id="s01dnReportPrintHeader" class="s01dn-excel-header">
+                <div class="s01dn-excel-header-top mb-1">
+                    <div class="s01dn-excel-co-name">
+                        <strong>Đơn vị: </strong><t t-out="s01dn_company_name_upper"/>
+                    </div>
+                    <div class="s01dn-excel-form">
+                        <strong>Mẫu số S01-DN</strong>
+                    </div>
+                </div>
+                <div class="s01dn-excel-addr-row">
+                    <div>
+                        <strong>Địa chỉ: </strong><span t-out="s01dn_company_address"/>
+                    </div>
+                    <div class="s01dn-excel-addr-right">
+                        <em>(Ban hành theo Thông tư số 200/2014/TT-BTC
+                        <br/>Ngày 22/12/2014 của Bộ Tài chính)</em>
+                    </div>
+                </div>
+                <div class="s01dn-excel-title-block">
+                    <h3>NHẬT KÝ - SỔ CÁI</h3>
+                    <span class="s01dn-report-period"><t t-out="report_period_range"/></span>
+                </div>
+                <div class="s01dn-excel-money-row s01dn-money-unit-below-year">
+                    <div id="s01dnMoneyUnitCaption" class="s01dn-money-unit-caption">
+                        <t t-out="s01dn_money_unit_label"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s01dn-sheet-scroll">
+            <div class="s01dn-sheet-inner">
+            <!-- Bảng màn hình (khi in sẽ ẩn, thay bằng bảng đã tách nhóm TK) -->
+            <div id="s01dnScreenTableHost" class="s01dn-screen-table-host"
+                 t-att-data-s01dn-n-accounts="s01dn_n_accounts">
+            <div class="s01dn-wrap s01dn">
+                <table id="s01dnTable">
+                    <!-- ========== TABLE HEADER ========== -->
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="min-width:35px;">Thứ tự<br/>dòng</th>
+                            <th rowspan="2" style="min-width:75px;">Ngày, tháng, năm<br/>ghi sổ</th>
+                            <th colspan="2">Chứng từ</th>
+                            <th rowspan="2" class="s01dn-col-doc">Diễn giải</th>
+                            <th rowspan="2" style="min-width:7em;">Số tiền<br/>phát sinh</th>
+                            <th rowspan="2" class="s01dn-col-note">Ghi chú</th>
+                            <th colspan="2" class="s01dn-print-fg">Số hiệu TK đối ứng</th>
+                            <th rowspan="2" class="s01dn-h-plus" style="min-width:35px;">Thứ tự<br/>dòng</th>
+                            <t t-foreach="accounts_ordered" t-as="acc">
+                                <th colspan="2" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                    TK <t t-out="acc['code']"/>
+                                </th>
+                            </t>
+                        </tr>
+                        <tr>
+                            <th class="s01dn-col-entry" style="min-width:100px;">Số hiệu</th>
+                            <th style="min-width:75px;">Ngày, tháng, năm</th>
+                            <th class="s01dn-print-fg" style="min-width:65px;">Nợ</th>
+                            <th class="s01dn-print-fg" style="min-width:65px;">Có</th>
+                            <t t-foreach="accounts_ordered" t-as="acc">
+                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">Nợ</th>
+                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">Có</th>
+                            </t>
+                        </tr>
+                        <tr>
+                            <th>A</th><th>B</th><th class="s01dn-col-entry">C</th><th>D</th>
+                            <th class="s01dn-col-doc">E</th><th>1</th><th>I</th>
+                            <th class="s01dn-print-fg">F</th><th class="s01dn-print-fg">G</th><th class="s01dn-h-plus">H</th>
+                            <t t-set="col_idx" t-value="2"/>
+                            <t t-foreach="accounts_ordered" t-as="acc">
+                                <th t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"><t t-out="col_idx"/></th>
+                                <th t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"><t t-out="col_idx + 1"/></th>
+                                <t t-set="col_idx" t-value="col_idx + 2"/>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ========== OPENING BALANCE ========== -->
+                        <tr class="row-total" data-row-type="opening">
+                            <td/><td/><td/><td/>
+                            <td class="desc">- Số dư đầu năm</td>
+                            <td class="num">
+                                <span class="s01dn-amt" t-att-data-vnd="total_opening">
+                                    <t t-out="total_opening"
+                                       t-options="{'widget': 'float', 'precision': 0}"/>
+                                </span>
+                            </td>
+                            <td/>
+                            <td class="s01dn-print-fg"/><td class="s01dn-print-fg"/><td class="s01dn-h-plus"/>
+                            <t t-foreach="accounts_ordered" t-as="acc">
+                                <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                    <t t-set="ob" t-value="opening_per_acc.get(acc['id'], {})"/>
+                                    <t t-if="ob.get('debit')">
+                                        <span class="s01dn-amt" t-att-data-vnd="ob['debit']">
+                                            <t t-out="ob['debit']"
+                                               t-options="{'widget': 'float', 'precision': 0}"/>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                    <t t-if="ob.get('credit')">
+                                        <span class="s01dn-amt" t-att-data-vnd="ob['credit']">
+                                            <t t-out="ob['credit']"
+                                               t-options="{'widget': 'float', 'precision': 0}"/>
+                                        </span>
+                                    </t>
+                                </td>
+                            </t>
+                        </tr>
+
+                        <!-- ========== DETAIL LINES ========== -->
+                        <t t-foreach="detail_rows" t-as="r">
+                            <!-- Month separator -->
+                            <t t-if="r['type'] == 'month_header'">
+                                <tr class="row-month-hdr"
+                                    t-attf-data-month="{{r['month_num']}}"
+                                    data-row-type="month-header">
+                                    <td/><td/><td/><td/>
+                                    <td class="desc"><t t-out="r['label']"/></td>
+                                    <td/><td/>
+                                    <td class="s01dn-print-fg"/><td class="s01dn-print-fg"/><td class="s01dn-h-plus"/>
+                                    <t t-foreach="accounts_ordered" t-as="acc">
+                                        <td t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"/>
+                                        <td t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"/>
+                                    </t>
+                                </tr>
+                            </t>
+                            <!-- Move line -->
+                            <t t-if="r['type'] == 'line'">
+                                <tr data-row-type="line"
+                                    t-attf-data-month="{{r['month_num']}}"
+                                    t-attf-data-journal="{{r['journal_name']}}"
+                                    t-attf-data-state="{{r['move_state']}}"
+                                    t-attf-data-account-id="{{r['account_id']}}">
+                                    <td class="ctr"><t t-out="r['line_no']"/></td>
+                                    <td class="ctr">
+                                        <t t-out="r['date']" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                    <td class="s01dn-entry-cell">
+                                        <span class="s01dn-entry-num"><t t-out="r['entry']"/></span>
+                                        <t t-if="r.get('move_id')">
+                                            <a class="s01dn-move-ico"
+                                               t-attf-href="/web#id={{ r['move_id'] }}&amp;model=account.move&amp;view_type=form"
+                                               target="_blank" rel="noopener noreferrer"
+                                               title="Mở chứng từ">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                                    <polyline points="15 3 21 3 21 9"/>
+                                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                                </svg>
+                                            </a>
+                                        </t>
+                                    </td>
+                                    <td class="ctr">
+                                        <t t-out="r['entry_date']" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                    <td class="desc"><t t-out="r['ref_label']"/></td>
+                                    <td class="num">
+                                        <span class="s01dn-amt" t-att-data-vnd="r['amount']">
+                                            <t t-out="r['amount']"
+                                               t-options="{'widget': 'float', 'precision': 0}"/>
+                                        </span>
+                                    </td>
+                                    <td class="col-note"/>
+                                    <td class="ctr s01dn-print-fg"><t t-out="r['cp_debit']"/></td>
+                                    <td class="ctr s01dn-print-fg"><t t-out="r['cp_credit']"/></td>
+                                    <!-- A và H: cùng thứ tự dòng toàn sổ (line_no), không dùng month_line_no -->
+                                    <td class="ctr s01dn-h-plus"><t t-out="r['line_no']"/></td>
+                                    <t t-foreach="accounts_ordered" t-as="acc">
+                                        <t t-if="acc['id'] == r['account_id']">
+                                            <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                                <t t-if="r['debit']">
+                                                    <span class="s01dn-amt" t-att-data-vnd="r['debit']">
+                                                        <t t-out="r['debit']"
+                                                           t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </span>
+                                                </t>
+                                            </td>
+                                            <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                                <t t-if="r['credit']">
+                                                    <span class="s01dn-amt" t-att-data-vnd="r['credit']">
+                                                        <t t-out="r['credit']"
+                                                           t-options="{'widget': 'float', 'precision': 0}"/>
+                                                    </span>
+                                                </t>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"/>
+                                            <td t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus"/>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </t>
+                        </t>
+
+                        <!-- ========== MONTHLY SUMMARIES ========== -->
+                        <t t-foreach="monthly_summaries" t-as="ms">
+                            <!-- Period total -->
+                            <tr class="row-total"
+                                t-attf-data-summary-month="{{ms['month']}}"
+                                data-row-type="summary-period">
+                                <td/><td/><td/><td/>
+                                <td class="desc"><t t-out="ms['period_label']"/></td>
+                                <td class="num">
+                                    <t t-if="ms['period_total']">
+                                        <span class="s01dn-amt" t-att-data-vnd="ms['period_total']">
+                                            <t t-out="ms['period_total']"
+                                               t-options="{'widget': 'float', 'precision': 0}"/>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td/><td class="s01dn-print-fg"/><td class="s01dn-print-fg"/><td class="s01dn-h-plus"/>
+                                <t t-foreach="accounts_ordered" t-as="acc">
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['period_acc_d'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['period_acc_c'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                </t>
+                            </tr>
+                            <!-- Closing balance -->
+                            <tr class="row-closing"
+                                t-attf-data-summary-month="{{ms['month']}}"
+                                data-row-type="summary-closing">
+                                <td/><td/><td/><td/>
+                                <td class="desc"><t t-out="ms['closing_label']"/></td>
+                                <td class="num">
+                                    <span class="s01dn-amt" t-att-data-vnd="ms['closing_col1']">
+                                        <t t-out="ms['closing_col1']"
+                                           t-options="{'widget': 'float', 'precision': 0}"/>
+                                    </span>
+                                </td>
+                                <td/><td class="s01dn-print-fg"/><td class="s01dn-print-fg"/><td class="s01dn-h-plus"/>
+                                <t t-foreach="accounts_ordered" t-as="acc">
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['closing_acc_d'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['closing_acc_c'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                </t>
+                            </tr>
+                            <!-- Cumulative -->
+                            <tr class="row-total"
+                                t-attf-data-summary-month="{{ms['month']}}"
+                                data-row-type="summary-cumul">
+                                <td/><td/><td/><td/>
+                                <td class="desc"><t t-out="ms['cumul_label']"/></td>
+                                <td class="num">
+                                    <t t-if="ms['cumul_total']">
+                                        <span class="s01dn-amt" t-att-data-vnd="ms['cumul_total']">
+                                            <t t-out="ms['cumul_total']"
+                                               t-options="{'widget': 'float', 'precision': 0}"/>
+                                        </span>
+                                    </t>
+                                </td>
+                                <td/><td class="s01dn-print-fg"/><td class="s01dn-print-fg"/><td class="s01dn-h-plus"/>
+                                <t t-foreach="accounts_ordered" t-as="acc">
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['cumul_acc_d'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                    <td t-attf-class="num acc-col acc-{{acc['id']}} s01dn-h-plus">
+                                        <t t-set="v" t-value="ms['cumul_acc_c'].get(acc['id'], 0)"/>
+                                        <t t-if="v">
+                                            <span class="s01dn-amt" t-att-data-vnd="v">
+                                                <t t-out="v"
+                                                   t-options="{'widget': 'float', 'precision': 0}"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+            <!-- Vùng in: trang 1 = nhật ký A–I + đối ứng F–G; tiếp theo = E + H + tối đa 6 TK/trang -->
+            <div id="s01dnPrintChunkWrap" class="s01dn-print-chunk-wrap" aria-hidden="true"/>
+
+            </div><!-- /.s01dn-sheet-inner -->
+            </div><!-- /.s01dn-sheet-scroll -->
+            </div><!-- /.s01dn-sheet -->
+
+            <!-- Footer: dòng số trang khi in lấy từ @page @bottom-left (counter(pages)); ô này ẩn khi in -->
+            <div id="s01dnReportPrintFooter" class="s01dn-excel-footer">
+                <div class="s01dn-footer-meta-row">
+                    <div class="s01dn-footer-left-lines">
+                        <div id="s01dnFooterBookPagesLine" class="s01dn-footer-pages s01dn-footer-pages-print-only"></div>
+                        <div>
+                            - Ngày mở sổ: <t t-out="s01dn_footer_open_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="s01dn-footer-sign-date-row">
+                    <div class="s01dn-footer-sign-col"></div>
+                    <div class="s01dn-footer-sign-col"></div>
+                    <div class="s01dn-footer-sign-col">
+                        <div class="s01dn-footer-sign-date">
+                            <t t-out="s01dn_footer_sign_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="s01dn-footer-sign-row">
+                    <div class="s01dn-footer-sign-col">
+                        <div class="s01dn-sign-title">Người ghi sổ</div>
+                        <div class="s01dn-sign-sub">(Ký, họ tên)</div>
+                    </div>
+                    <div class="s01dn-footer-sign-col">
+                        <div class="s01dn-sign-title">Kế toán trưởng</div>
+                        <div class="s01dn-sign-sub">(Ký, họ tên)</div>
+                    </div>
+                    <div class="s01dn-footer-sign-col">
+                        <div class="s01dn-sign-title">Giám đốc</div>
+                        <div class="s01dn-sign-sub">(Ký, họ tên, đóng dấu)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== JAVASCRIPT ==================== -->
+        <script type="text/javascript">
+            (function () {
+                'use strict';
+
+                var table    = document.getElementById('s01dnTable');
+                var searchIn = document.getElementById('filterSearch');
+                var dfIn     = document.getElementById('s01dnDateFrom');
+                var dtIn     = document.getElementById('s01dnDateTo');
+                var targetMoveSel = document.getElementById('s01dnTargetMove');
+                var drIn = document.getElementById('s01dnDateRange');
+                if (drIn) {
+                    var drId = drIn.getAttribute('data-initial-id');
+                    if (drId) drIn.value = drId;
+                }
+
+
+                var toolbar  = document.getElementById('s01dnToolbar');
+                var toolbarBody = document.getElementById('s01dnToolbarBody');
+                var btnFilterToggle = document.getElementById('s01dnFilterToggle');
+                var screenTableHost = document.getElementById('s01dnScreenTableHost');
+                var printChunkWrap = document.getElementById('s01dnPrintChunkWrap');
+                if (targetMoveSel) {
+                    var tmv = targetMoveSel.getAttribute('data-initial-wizard');
+                    if (tmv === 'posted' || tmv === 'all') {
+                        targetMoveSel.value = tmv;
+                    }
+                }
+
+                if (!table) return;
+
+                /** Trang 1: nhật ký A–I + F–G; các trang sau: Diễn giải (E) + H + tối đa N TK (sổ cái). */
+                var S01DN_ACCOUNTS_PER_PRINT_PAGE = 12;
+                /**
+                 * A3 ngang + @page margin 2cm trên / 2.5cm dưới: thân trang ≈ 297 − 20 − 25 mm.
+                 * Bề ngang đo layout (CSS .s01dn-measure-layout width) phải khớp lề in: 420−30−10 mm.
+                 * Nếu đổi khổ/margin @page — cập nhật đồng thời S01DN_PAGE_BODY_H_PX và width trong CSS.
+                 */
+                var S01DN_PRINT_MM_TO_PX = 96 / 25.4;
+                /** Dự phòng khi không đọc được #s01dnPageBodyProbe (fallback 96dpi). */
+                var S01DN_PAGE_BODY_H_PX = (297 - 20 - 25) * S01DN_PRINT_MM_TO_PX;
+                /**
+                 * Trừ px: thead lặp trên mỗi trang bảng, làm tròn, orphan/widow — engine in thường chia sớm hơn DOM.
+                 */
+                var S01DN_PAGE_BODY_FUDGE_PX = 52;
+                /**
+                 * Dự phòng thêm cho @page @bottom-right (\"Trang xx / yy\") + lệch Chromium so với vùng nội dung.
+                 */
+                var S01DN_PAGE_BODY_PRINT_MARGIN_BOX_PX = 40;
+                /** Cộng vào chiều cao mỗi dòng tbody khi mô phỏng (px) — bù làm tròn / subpixel. */
+                var S01DN_SIM_ROW_SLACK_PX = 0.45;
+                /** Khi có mục lục: chuyển #s01dnReportPrintHeader xuống chunk nhật ký — khôi phục khi đóng in. */
+                var S01DN_PRINT_HEADER_RESTORE = null;
+
+                function s01dnEffectivePageBodyPx() {
+                    var base = S01DN_PAGE_BODY_H_PX;
+                    var probe = document.getElementById('s01dnPageBodyProbe');
+                    if (probe) {
+                        try {
+                            void probe.offsetHeight;
+                            var rh = probe.getBoundingClientRect().height;
+                            if (rh &gt; 80) {
+                                base = rh;
+                            }
+                        } catch (e) {
+                            /* fallback S01DN_PAGE_BODY_H_PX */
+                        }
+                    }
+                    return Math.max(
+                        120,
+                        base
+                            - S01DN_PAGE_BODY_FUDGE_PX
+                            - S01DN_PAGE_BODY_PRINT_MARGIN_BOX_PX,
+                    );
+                }
+
+                /** Xóa placeholder dòng số trang (in thật dùng @page @bottom-left + counter(pages)). */
+                function s01dnClearFooterBookPagesLine() {
+                    var el = document.getElementById('s01dnFooterBookPagesLine');
+                    if (el) el.textContent = '';
+                }
+
+                /** Luôn lấy #s01dnTable hiện tại (sau AJAX innerHTML node cũ bị thay — không giữ ref cũ). */
+                function s01dnRefreshTableRef() {
+                    table = document.getElementById('s01dnTable');
+                    return table;
+                }
+
+                function s01dnRefreshFooterBookPagesOnly() {
+                    if (!printChunkWrap || !printChunkWrap.classList.contains('s01dn-print-chunks-ready')) {
+                        return;
+                    }
+                    var pageBodyPx = s01dnEffectivePageBodyPx();
+                    document.body.classList.add('s01dn--measuring-print');
+                    try {
+                        void printChunkWrap.offsetHeight;
+                        s01dnRunPrintPageSimulation(pageBodyPx);
+                    } finally {
+                        document.body.classList.remove('s01dn--measuring-print');
+                    }
+                }
+
+                function s01dnFinalizePrintChunks() {
+                    s01dnSyncSheetInnerWidth();
+                    void printChunkWrap &amp;&amp; printChunkWrap.offsetHeight;
+                }
+
+                function s01dnAccIdFromCell(el) {
+                    if (!el || !el.classList) return null;
+                    var cl = el.classList;
+                    for (var i = 0; i &lt; cl.length; i++) {
+                        var m = cl[i].match(/^acc-(\d+)$/);
+                        if (m) return parseInt(m[1], 10);
+                    }
+                    return null;
+                }
+
+                function s01dnStripIds(root) {
+                    if (!root || !root.querySelectorAll) return;
+                    var nodes = root.querySelectorAll('[id]');
+                    for (var i = 0; i &lt; nodes.length; i++) {
+                        nodes[i].removeAttribute('id');
+                    }
+                }
+
+                /** Tổng số cột hiệu dụng (cộng colspan) để gán colspan cho hàng mục lục in. */
+                function s01dnTableColCount(tbl) {
+                    var tr = tbl.querySelector('tbody tr');
+                    if (!tr) {
+                        tr = tbl.querySelector('thead tr:last-of-type');
+                    }
+                    if (!tr) return 1;
+                    var n = 0;
+                    for (var c = 0; c &lt; tr.cells.length; c++) {
+                        n += tr.cells[c].colSpan || 1;
+                    }
+                    return n;
+                }
+
+                /** Mã TK từ thead (sau khi đã strip cột — chỉ phần sổ cái). */
+                function s01dnLedgerAccountCodesFromTable(tbl) {
+                    var tr = tbl.querySelector('thead tr');
+                    if (!tr) return [];
+                    var out = [];
+                    var ths = tr.querySelectorAll('th.acc-col');
+                    for (var i = 0; i &lt; ths.length; i++) {
+                        var m = String(ths[i].textContent || '').match(/TK\s*(\S+)/);
+                        if (m) out.push(m[1]);
+                    }
+                    return out;
+                }
+
+                var S01DN_SUMMARY_JOURNAL =
+                    'Nhật ký chung — các chỉ tiêu cột A, B, C, D, E, cột 1 (số tiền phát sinh), I; ' +
+                    'cột đối ứng F, G; theo Mẫu số S01-DN (Thông tư 200/2014/TT-BTC).';
+
+                function s01dnSummaryLedgerLine(codesText) {
+                    return (
+                        'Chi tiết theo tài khoản — các TK: ' + codesText + '; ' +
+                        'cột Diễn giải (E), thứ tự dòng (H), các cặp Nợ/Có theo số thứ tự cột TT200.'
+                    );
+                }
+
+                /** Hậu tố mục lục theo tờ: nhật ký / từng khối TK (tránh lặp nhãn giống hệt). */
+                function s01dnTocChunkSuffix(meta) {
+                    if (!meta) return '';
+                    if (meta.kind === 'journal') {
+                        return 'Nhật ký chung';
+                    }
+                    var c = meta.codesText || '(theo bảng)';
+                    return 'TK ' + String(c).trim();
+                }
+
+                function s01dnTocHeadingLine(baseLabel, meta) {
+                    var b = String(baseLabel || '').trim();
+                    var s = s01dnTocChunkSuffix(meta);
+                    if (!s) return b;
+                    return b + ' - ' + s;
+                }
+
+                /** Các dòng diễn giải dùng làm mục lục (khớp cột Diễn giải trên sổ). */
+                var S01DN_TOC_HEADING_TYPES = {
+                    opening: true,
+                    'month-header': true,
+                    'summary-period': true,
+                    'summary-closing': true,
+                    'summary-cumul': true,
+                };
+
+                function s01dnMaybeRecordHeading(tr, page, headingState, meta) {
+                    if (!tr || !headingState) return;
+                    var rt = tr.getAttribute('data-row-type');
+                    if (!S01DN_TOC_HEADING_TYPES[rt]) return;
+                    var td = tr.querySelector('td.desc');
+                    var label = (td &amp;&amp; String(td.textContent || '').trim()) || '';
+                    if (!label) return;
+                    headingState.entries.push({
+                        label: s01dnTocHeadingLine(label, meta),
+                        page: page,
+                        anchorId: tr.id || '',
+                    });
+                }
+
+                /**
+                 * Một lần duyệt tbody: mọi dòng heading (theo thứ tự dòng).
+                 * Lặp lại cho từng tờ in (nhật ký + từng khối sổ TK) để đủ chỗ giữ chỗ mục lục.
+                 */
+                function s01dnCollectHeadingTocLabelsStatic() {
+                    var tbl = document.getElementById('s01dnTable');
+                    if (!tbl) return [];
+                    var tbody = tbl.querySelector('tbody');
+                    if (!tbody) return [];
+                    var trs = tbody.querySelectorAll('tr');
+                    var oneSheet = [];
+                    for (var ti = 0; ti &lt; trs.length; ti++) {
+                        var tr = trs[ti];
+                        var rt = tr.getAttribute('data-row-type');
+                        if (!S01DN_TOC_HEADING_TYPES[rt]) continue;
+                        var td = tr.querySelector('td.desc');
+                        var label = (td &amp;&amp; String(td.textContent || '').trim()) || '';
+                        if (label) oneSheet.push(label);
+                    }
+                    var suffixes = [];
+                    if (
+                        printChunkWrap &amp;&amp;
+                        printChunkWrap.classList.contains('s01dn-print-chunks-ready')
+                    ) {
+                        var hasJ2 = printChunkWrap.querySelector(
+                            '.s01dn-print-chunk--journal',
+                        );
+                        var led2 = printChunkWrap.querySelectorAll(
+                            '.s01dn-print-chunk--ledger',
+                        );
+                        if (hasJ2) suffixes.push('Nhật ký chung');
+                        for (var si = 0; si &lt; led2.length; si++) {
+                            var c2 =
+                                led2[si].getAttribute('data-s01dn-ledger-codes') ||
+                                '(theo bảng)';
+                            suffixes.push('TK ' + String(c2).trim());
+                        }
+                    }
+                    if (suffixes.length &lt; 1) suffixes.push('Nhật ký chung');
+                    var out = [];
+                    for (var sh = 0; sh &lt; suffixes.length; sh++) {
+                        for (var j = 0; j &lt; oneSheet.length; j++) {
+                            out.push(oneSheet[j] + ' - ' + suffixes[sh]);
+                        }
+                    }
+                    return out;
+                }
+
+                /**
+                 * Gán id neo cho từng dòng heading trên bản in (nhật ký rồi từng khối sổ),
+                 * thứ tự khớp mô phỏng mục lục — dùng cho liên kết #fragment.
+                 */
+                function s01dnAssignHeadingAnchorIds() {
+                    if (!printChunkWrap) return;
+                    var seq = 0;
+                    function walkChunk(chunkEl) {
+                        if (!chunkEl) return;
+                        var tbl = chunkEl.querySelector('table');
+                        if (!tbl) return;
+                        var tbody = tbl.querySelector('tbody');
+                        if (!tbody) return;
+                        var trs = tbody.querySelectorAll('tr');
+                        for (var ri = 0; ri &lt; trs.length; ri++) {
+                            var tr = trs[ri];
+                            var rt = tr.getAttribute('data-row-type');
+                            if (!S01DN_TOC_HEADING_TYPES[rt]) continue;
+                            tr.id = 's01dn-toc-h-' + seq;
+                            seq++;
+                        }
+                    }
+                    var jc = printChunkWrap.querySelector('.s01dn-print-chunk--journal');
+                    walkChunk(jc);
+                    var led = printChunkWrap.querySelectorAll('.s01dn-print-chunk--ledger');
+                    for (var li = 0; li &lt; led.length; li++) {
+                        walkChunk(led[li]);
+                    }
+                }
+
+                /** Chiều cao bố cục gồm margin dọc (offsetHeight không tính margin). */
+                function s01dnMeasureBlockHeight(el) {
+                    if (!el) return 0;
+                    var h = el.offsetHeight;
+                    var sh = el.scrollHeight;
+                    var base = Math.ceil(Math.max(h || 0, sh || 0));
+                    try {
+                        var st = window.getComputedStyle(el);
+                        var mt = parseFloat(st.marginTop) || 0;
+                        var mb = parseFloat(st.marginBottom) || 0;
+                        return Math.ceil(base + mt + mb);
+                    } catch (e) {
+                        return base;
+                    }
+                }
+
+                function s01dnNewSimState(pageBodyPx) {
+                    return {
+                        cursor: 1,
+                        used: 0,
+                        pageH: pageBodyPx,
+                        summaries: [],
+                    };
+                }
+
+                function s01dnEnsureSummaries(state) {
+                    while (state.summaries.length &lt; state.cursor) {
+                        state.summaries.push('');
+                    }
+                }
+
+                function s01dnMergeSummary(state, txt) {
+                    if (!txt) return;
+                    s01dnEnsureSummaries(state);
+                    var ix = state.cursor - 1;
+                    if (state.summaries[ix]) state.summaries[ix] += '; ';
+                    state.summaries[ix] += txt;
+                }
+
+                /** Khối cao h: gán nhãn tờ đầu / tờ tiếp theo của khối (theo từng tờ in). */
+                function s01dnConsumeBlockHeight(state, h, labelFirst, labelCont) {
+                    if (h &lt; 1e-3) return;
+                    var started = false;
+                    while (h &gt; 1e-3) {
+                        var space = state.pageH - state.used;
+                        var take = Math.min(h, space);
+                        if (take &lt; 1e-3) {
+                            state.cursor++;
+                            state.used = 0;
+                            continue;
+                        }
+                        s01dnMergeSummary(state, !started ? labelFirst : labelCont);
+                        started = true;
+                        state.used += take;
+                        h -= take;
+                        if (h &gt; 1e-3) {
+                            state.cursor++;
+                            state.used = 0;
+                        }
+                    }
+                }
+
+                function s01dnBreakBeforeNextChunk(state) {
+                    if (state.used &gt; 1e-3) {
+                        state.cursor++;
+                        state.used = 0;
+                    }
+                }
+
+                function s01dnFinalizeSimTotalPages(state) {
+                    return state.used &gt; 1e-3 ? state.cursor : Math.max(1, state.cursor - 1);
+                }
+
+                function s01dnConsumeTocChunkParts(state, tocChunk) {
+                    if (!tocChunk) return;
+                    var tocHdr = tocChunk.querySelector('.s01dn-print-toc-header-clone');
+                    if (tocHdr) {
+                        s01dnConsumeBlockHeight(
+                            state,
+                            s01dnMeasureBlockHeight(tocHdr),
+                            'Mục lục — khối tiêu đề (đơn vị, S01-DN, kỳ)',
+                            'Mục lục (tiếp)',
+                        );
+                    }
+                    var title = tocChunk.querySelector('.s01dn-print-toc-title');
+                    var tbl = tocChunk.querySelector('.s01dn-print-toc-table');
+                    s01dnConsumeBlockHeight(
+                        state,
+                        s01dnMeasureBlockHeight(title),
+                        'Mục lục — tiêu đề',
+                        'Mục lục — tiêu đề (tiếp)',
+                    );
+                    if (!tbl) return;
+                    var ith = tbl.querySelector('thead');
+                    var itb = tbl.querySelector('tbody');
+                    if (ith) {
+                        s01dnConsumeBlockHeight(
+                            state,
+                            s01dnMeasureBlockHeight(ith),
+                            'Mục lục — tiêu đề bảng',
+                            'Mục lục (tiếp)',
+                        );
+                    }
+                    if (itb) {
+                        var trs = itb.querySelectorAll('tr');
+                        for (var ri = 0; ri &lt; trs.length; ri++) {
+                            s01dnConsumeBlockHeight(
+                                state,
+                                s01dnMeasureBlockHeight(trs[ri]),
+                                'Mục lục — danh sách theo từng trang',
+                                'Mục lục (tiếp)',
+                            );
+                        }
+                    }
+                }
+
+                function s01dnPaginateDataTableChunk(chunkEl, state, meta) {
+                    if (!chunkEl) return;
+                    var lh = meta &amp;&amp; meta.leadingHeaderEl;
+                    if (lh) {
+                        s01dnConsumeBlockHeight(
+                            state,
+                            s01dnMeasureBlockHeight(lh),
+                            'Tiêu đề báo cáo, đơn vị, kỳ, Mẫu S01-DN',
+                            'Tiêu đề (tiếp)',
+                        );
+                    }
+                    var tbl = chunkEl.querySelector('table');
+                    if (!tbl) return;
+                    var thead = tbl.querySelector('thead');
+                    var tbody = tbl.querySelector('tbody');
+                    if (!tbody) return;
+                    var slack = S01DN_SIM_ROW_SLACK_PX;
+                    var theadH = s01dnMeasureBlockHeight(thead) + slack;
+                    var trs = tbody.querySelectorAll('tr');
+                    var headingState = meta &amp;&amp; meta.headingState;
+                    var i = 0;
+                    while (i &lt; trs.length) {
+                        var curPage = state.cursor;
+                        var rowH = s01dnMeasureBlockHeight(trs[i]) + slack;
+                        var atTop = state.used &lt; 1e-3;
+                        var leader = atTop ? theadH : 0;
+                        var need = rowH + leader;
+                        var space = state.pageH - state.used;
+                        if (need &lt;= space + 1e-3) {
+                            if (leader &gt; 1e-3) {
+                                var isCont = i &gt; 0;
+                                var lbl =
+                                    meta.kind === 'journal'
+                                        ? isCont
+                                            ? S01DN_SUMMARY_JOURNAL + ' (tiếp)'
+                                            : S01DN_SUMMARY_JOURNAL
+                                        : isCont
+                                          ? s01dnSummaryLedgerLine(meta.codesText) + ' (tiếp)'
+                                          : s01dnSummaryLedgerLine(meta.codesText);
+                                s01dnMergeSummary(state, lbl);
+                            }
+                            state.used += need;
+                            if (headingState) {
+                                s01dnMaybeRecordHeading(trs[i], curPage, headingState, meta);
+                            }
+                            i++;
+                        } else {
+                            if (atTop &amp;&amp; need &gt; state.pageH + 1e-3) {
+                                var isC = i &gt; 0;
+                                var lb =
+                                    meta.kind === 'journal'
+                                        ? isC
+                                            ? S01DN_SUMMARY_JOURNAL + ' (tiếp)'
+                                            : S01DN_SUMMARY_JOURNAL
+                                        : isC
+                                          ? s01dnSummaryLedgerLine(meta.codesText) + ' (tiếp)'
+                                          : s01dnSummaryLedgerLine(meta.codesText);
+                                s01dnMergeSummary(state, lb);
+                                if (headingState) {
+                                    s01dnMaybeRecordHeading(trs[i], curPage, headingState, meta);
+                                }
+                                state.cursor++;
+                                state.used = 0;
+                                i++;
+                            } else {
+                                state.cursor++;
+                                state.used = 0;
+                            }
+                        }
+                    }
+                }
+
+                /** Mô phỏng phân trang (mục lục / tóm tắt theo trang). Dòng “Sổ này có … trang” lấy từ @page margin. */
+                function s01dnRunPrintPageSimulationOnce(pageBodyPx) {
+                    var headerEl = document.getElementById('s01dnReportPrintHeader');
+                    var footerEl = document.getElementById('s01dnReportPrintFooter');
+                    var tocChunk = printChunkWrap.querySelector('.s01dn-print-chunk--toc');
+                    var journalChunk = printChunkWrap.querySelector('.s01dn-print-chunk--journal');
+                    var ledgerChunks = printChunkWrap.querySelectorAll('.s01dn-print-chunk--ledger');
+                    var state = s01dnNewSimState(pageBodyPx);
+                    var headingState = { entries: [] };
+                    var headerInJournal =
+                        headerEl &amp;&amp;
+                        journalChunk &amp;&amp;
+                        journalChunk.contains(headerEl);
+                    if (!headerInJournal) {
+                        s01dnConsumeBlockHeight(
+                            state,
+                            s01dnMeasureBlockHeight(headerEl),
+                            'Tiêu đề báo cáo, đơn vị, kỳ, Mẫu S01-DN',
+                            'Tiêu đề (tiếp)',
+                        );
+                    }
+                    s01dnConsumeTocChunkParts(state, tocChunk);
+                    s01dnBreakBeforeNextChunk(state);
+                    s01dnPaginateDataTableChunk(journalChunk, state, {
+                        kind: 'journal',
+                        codesText: '',
+                        headingState: headingState,
+                        leadingHeaderEl: headerInJournal ? headerEl : null,
+                    });
+                    for (var li = 0; li &lt; ledgerChunks.length; li++) {
+                        s01dnBreakBeforeNextChunk(state);
+                        var codes = ledgerChunks[li].getAttribute('data-s01dn-ledger-codes') || '(theo bảng)';
+                        s01dnPaginateDataTableChunk(ledgerChunks[li], state, {
+                            kind: 'ledger',
+                            codesText: codes,
+                            headingState: headingState,
+                        });
+                    }
+                    s01dnConsumeBlockHeight(
+                        state,
+                        s01dnMeasureBlockHeight(footerEl),
+                        'Phần ký: người ghi sổ, kế toán trưởng, giám đốc; ngày mở sổ',
+                        'Phần ký (tiếp)',
+                    );
+                    var total = s01dnFinalizeSimTotalPages(state);
+                    var sumOut = state.summaries.slice(0, total);
+                    while (sumOut.length &lt; total) sumOut.push('');
+                    return {
+                        totalPages: total,
+                        summaries: sumOut,
+                        headingToc: headingState.entries.slice(),
+                    };
+                }
+
+                function s01dnRunPrintPageSimulation(pageBodyPx) {
+                    return s01dnRunPrintPageSimulationOnce(pageBodyPx);
+                }
+
+                function s01dnFillTocPlaceholderRows(tbody, n, labelHints) {
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    for (var i = 0; i &lt; n; i++) {
+                        var tr = document.createElement('tr');
+                        var tdP = document.createElement('td');
+                        tdP.className = 's01dn-print-toc-col-page';
+                        tdP.textContent = '\u2014';
+                        var tdS = document.createElement('td');
+                        tdS.className = 's01dn-print-toc-summary';
+                        var hint =
+                            labelHints &amp;&amp; labelHints[i]
+                                ? String(labelHints[i]).trim()
+                                : '';
+                        tdS.textContent = hint
+                            ? hint +
+                              ' — Mục lục (giữ chỗ chiều cao; theo diễn giải cột E trên sổ).'
+                            : 'Trang ' +
+                              String(i + 1) +
+                              ' — Mục lục (giữ chỗ; độ cao gần nội dung thật). Nội dung báo cáo S01-DN theo từng tờ in.';
+                        tr.appendChild(tdS);
+                        tr.appendChild(tdP);
+                        tbody.appendChild(tr);
+                    }
+                }
+
+                function s01dnFinalizeTocPerPage() {
+                    if (!printChunkWrap || !printChunkWrap.classList.contains('s01dn-print-chunks-ready')) {
+                        return;
+                    }
+                    var tocChunk = printChunkWrap.querySelector('.s01dn-print-chunk--toc');
+                    if (!tocChunk) return;
+                    var tocTable = tocChunk.querySelector('.s01dn-print-toc-table');
+                    if (!tocTable) return;
+                    var tbody = tocTable.querySelector('tbody');
+                    if (!tbody) return;
+                    var pageBodyPx = s01dnEffectivePageBodyPx();
+                    var staticLabels = s01dnCollectHeadingTocLabelsStatic();
+                    var useHeadingToc = staticLabels.length &gt; 0;
+                    var tocPlaceholderRows = useHeadingToc ? staticLabels.length : 6;
+                    var prevTotal = -1;
+                    var sim = { totalPages: 1, summaries: [], headingToc: [] };
+                    document.body.classList.add('s01dn--measuring-print');
+                    try {
+                        for (var iter = 0; iter &lt; 28; iter++) {
+                            s01dnFillTocPlaceholderRows(
+                                tbody,
+                                tocPlaceholderRows,
+                                useHeadingToc ? staticLabels : null,
+                            );
+                            void printChunkWrap.offsetHeight;
+                            void tocChunk.offsetHeight;
+                            sim = s01dnRunPrintPageSimulation(pageBodyPx);
+                            if (iter &gt; 0 &amp;&amp; sim.totalPages === prevTotal) {
+                                break;
+                            }
+                            prevTotal = sim.totalPages;
+                        }
+                        s01dnFillTocPlaceholderRows(
+                            tbody,
+                            useHeadingToc ? tocPlaceholderRows : sim.totalPages,
+                            useHeadingToc ? staticLabels : null,
+                        );
+                        void printChunkWrap.offsetHeight;
+                        sim = s01dnRunPrintPageSimulation(pageBodyPx);
+                    } finally {
+                        document.body.classList.remove('s01dn--measuring-print');
+                    }
+
+                    function s01dnApplyTocDomFromSim(s) {
+                        tbody.innerHTML = '';
+                        var useH =
+                            useHeadingToc &amp;&amp; s.headingToc &amp;&amp; s.headingToc.length &gt; 0;
+                        if (useH) {
+                            for (var hi = 0; hi &lt; s.headingToc.length; hi++) {
+                                var tr2 = document.createElement('tr');
+                                var tdp = document.createElement('td');
+                                tdp.className = 's01dn-print-toc-col-page';
+                                var tds = document.createElement('td');
+                                tds.className = 's01dn-print-toc-summary';
+                                var item = s.headingToc[hi];
+                                var aid = item.anchorId || '';
+                                var pg = String(item.page);
+                                var lab = item.label || '\u2014';
+                                if (aid) {
+                                    var ap = document.createElement('a');
+                                    ap.className = 's01dn-toc-link';
+                                    ap.href = '#' + aid;
+                                    ap.textContent = pg;
+                                    ap.setAttribute(
+                                        'title',
+                                        'Đến dòng mục này trên sổ (click hoặc Ctrl+click)',
+                                    );
+                                    tdp.appendChild(ap);
+                                    var al = document.createElement('a');
+                                    al.className = 's01dn-toc-link';
+                                    al.href = '#' + aid;
+                                    al.textContent = lab;
+                                    al.setAttribute(
+                                        'title',
+                                        'Đến dòng mục này trên sổ (click hoặc Ctrl+click)',
+                                    );
+                                    tds.appendChild(al);
+                                } else {
+                                    tdp.textContent = pg;
+                                    tds.textContent = lab;
+                                }
+                                tr2.appendChild(tds);
+                                tr2.appendChild(tdp);
+                                tbody.appendChild(tr2);
+                            }
+                            return;
+                        }
+                        for (var p = 0; p &lt; s.totalPages; p++) {
+                            var tr3 = document.createElement('tr');
+                            var tdp2 = document.createElement('td');
+                            tdp2.className = 's01dn-print-toc-col-page';
+                            tdp2.textContent = String(p + 1);
+                            var tds2 = document.createElement('td');
+                            tds2.className = 's01dn-print-toc-summary';
+                            tds2.textContent = s.summaries[p] || '\u2014';
+                            tr3.appendChild(tds2);
+                            tr3.appendChild(tdp2);
+                            tbody.appendChild(tr3);
+                        }
+                    }
+
+                    document.body.classList.add('s01dn--measuring-print');
+                    try {
+                        var it2;
+                        for (it2 = 0; it2 &lt; 28; it2++) {
+                            s01dnApplyTocDomFromSim(sim);
+                            void printChunkWrap.offsetHeight;
+                            void tocChunk.offsetHeight;
+                            var nextSim = s01dnRunPrintPageSimulation(pageBodyPx);
+                            if (nextSim.totalPages === sim.totalPages) {
+                                sim = nextSim;
+                                s01dnApplyTocDomFromSim(sim);
+                                break;
+                            }
+                            sim = nextSim;
+                        }
+                        if (it2 &gt;= 28) {
+                            s01dnApplyTocDomFromSim(sim);
+                        }
+                    } finally {
+                        document.body.classList.remove('s01dn--measuring-print');
+                    }
+                }
+
+                function s01dnBuildPrintTocChunk() {
+                    var chunk = document.createElement('div');
+                    chunk.className = 's01dn-print-chunk s01dn-print-chunk--toc';
+                    var wrap = document.createElement('div');
+                    wrap.className = 's01dn-print-toc-wrap';
+                    var hdrSrc = document.getElementById('s01dnReportPrintHeader');
+                    if (hdrSrc) {
+                        var hdrClone = hdrSrc.cloneNode(true);
+                        hdrClone.removeAttribute('id');
+                        hdrClone.classList.add('s01dn-print-toc-header-clone');
+                        s01dnStripIds(hdrClone);
+                        wrap.appendChild(hdrClone);
+                    }
+                    var title = document.createElement('div');
+                    title.className = 's01dn-print-toc-title';
+                    title.textContent = 'MỤC LỤC';
+                    var tblEl = document.createElement('table');
+                    tblEl.className = 's01dn-print-toc-table';
+                    tblEl.setAttribute('role', 'presentation');
+                    var thead = document.createElement('thead');
+                    var hr = document.createElement('tr');
+                    var thSum = document.createElement('th');
+                    thSum.className = 's01dn-print-toc-col-summary';
+                    thSum.textContent = 'Diễn giải';
+                    var thPage = document.createElement('th');
+                    thPage.className = 's01dn-print-toc-col-page';
+                    thPage.textContent = 'Trang';
+                    hr.appendChild(thSum);
+                    hr.appendChild(thPage);
+                    thead.appendChild(hr);
+                    var tbod = document.createElement('tbody');
+                    tblEl.appendChild(thead);
+                    tblEl.appendChild(tbod);
+                    wrap.appendChild(title);
+                    wrap.appendChild(tblEl);
+                    chunk.appendChild(wrap);
+                    return chunk;
+                }
+
+                function s01dnGetOrderedAccountIds(tbl) {
+                    var tr = tbl.querySelector('thead tr');
+                    if (!tr) return [];
+                    var out = [];
+                    for (var i = 0; i &lt; tr.children.length; i++) {
+                        var cell = tr.children[i];
+                        if (!cell.classList.contains('acc-col')) continue;
+                        var id = s01dnAccIdFromCell(cell);
+                        if (id !== null) out.push(id);
+                    }
+                    return out;
+                }
+
+                function s01dnStripAccountColumns(tbl, keep) {
+                    var rows = tbl.querySelectorAll('tr');
+                    for (var r = 0; r &lt; rows.length; r++) {
+                        var tr = rows[r];
+                        for (var c = tr.children.length - 1; c >= 0; c--) {
+                            var cell = tr.children[c];
+                            if (!cell.classList || !cell.classList.contains('acc-col')) {
+                                continue;
+                            }
+                            var aid = s01dnAccIdFromCell(cell);
+                            if (aid === null) continue;
+                            if (!keep.has(aid)) tr.removeChild(cell);
+                        }
+                    }
+                }
+
+                /** Trang nhật ký: bỏ cột H + mọi cột TK (.s01dn-h-plus); giữ A–I + F–G (.s01dn-print-fg). */
+                function s01dnStripHPlusCells(tbl) {
+                    var rows = tbl.querySelectorAll('tr');
+                    for (var r = 0; r &lt; rows.length; r++) {
+                        var tr = rows[r];
+                        for (var c = tr.children.length - 1; c >= 0; c--) {
+                            var cell = tr.children[c];
+                            if (cell.classList &amp;&amp; cell.classList.contains('s01dn-h-plus')) {
+                                tr.removeChild(cell);
+                            }
+                        }
+                    }
+                }
+
+                /**
+                 * Trang sổ cái: giữ Diễn giải (E: .s01dn-col-doc / .desc), cột H và TK (.s01dn-h-plus).
+                 * Bỏ A–D, số tiền (1), ghi chú (I), đối ứng F–G.
+                 */
+                function s01dnCellKeptInLedger(cell) {
+                    if (!cell.classList) return false;
+                    return (
+                        cell.classList.contains('s01dn-col-doc') ||
+                        cell.classList.contains('desc') ||
+                        cell.classList.contains('s01dn-h-plus')
+                    );
+                }
+
+                function s01dnStripJournalCells(tbl) {
+                    var rows = tbl.querySelectorAll('thead tr, tbody tr');
+                    for (var r = 0; r &lt; rows.length; r++) {
+                        var tr = rows[r];
+                        for (var c = tr.children.length - 1; c >= 0; c--) {
+                            var cell = tr.children[c];
+                            if (s01dnCellKeptInLedger(cell)) continue;
+                            tr.removeChild(cell);
+                        }
+                    }
+                }
+
+                function s01dnRenumTT200ColumnRow(tbl, accountStartIndex) {
+                    var thead = tbl.querySelector('thead');
+                    if (!thead) return;
+                    var trs = thead.querySelectorAll('tr');
+                    if (trs.length &lt; 3) return;
+                    var trNum = trs[2];
+                    var ths = trNum.querySelectorAll('th.acc-col');
+                    var base = 2 + accountStartIndex * 2;
+                    for (var j = 0; j &lt; ths.length; j += 2) {
+                        ths[j].textContent = String(base);
+                        if (ths[j + 1]) ths[j + 1].textContent = String(base + 1);
+                        base += 2;
+                    }
+                }
+
+                /**
+                 * Sổ cái khi in: colgroup % (Diễn giải + H + các cặp Nợ/Có).
+                 * Khi ít TK/trang, tăng nhẹ trọng số H (cột thứ tự dòng).
+                 */
+                function s01dnApplyLedgerPrintColWidths(tbl) {
+                    var thead = tbl.querySelector('thead');
+                    if (!thead) return;
+                    var tr0 = thead.querySelector('tr');
+                    if (!tr0) return;
+                    var nAcc = tr0.querySelectorAll('th.acc-col').length;
+                    if (nAcc &lt;= 0) return;
+                    var old = tbl.querySelector('colgroup.s01dn-ledger-colwidth');
+                    if (old) old.remove();
+                    var spare = Math.max(0, S01DN_ACCOUNTS_PER_PRINT_PAGE - nAcc);
+                    /* Nhiều cặp Nợ/Có → giảm trọng số để tránh tràn khổ in */
+                    var wDoc = nAcc &gt;= 10 ? 128 : (nAcc &gt;= 8 ? 136 : 145);
+                    var wH = 32 + spare * 12;
+                    var wNum = nAcc &gt;= 12 ? 54 : (nAcc &gt;= 10 ? 58 : (nAcc &gt;= 8 ? 65 : 72));
+                    var total = wDoc + wH + wNum * 2 * nAcc;
+                    var cg = document.createElement('colgroup');
+                    cg.className = 's01dn-ledger-colwidth';
+                    var cDoc = document.createElement('col');
+                    cDoc.style.width = (100 * wDoc / total).toFixed(4) + '%';
+                    cg.appendChild(cDoc);
+                    var cH = document.createElement('col');
+                    cH.style.width = (100 * wH / total).toFixed(4) + '%';
+                    cg.appendChild(cH);
+                    var pCol = (100 * wNum / total).toFixed(4) + '%';
+                    for (var k = 0; k &lt; 2 * nAcc; k++) {
+                        var cx = document.createElement('col');
+                        cx.style.width = pCol;
+                        cg.appendChild(cx);
+                    }
+                    tbl.insertBefore(cg, tbl.firstChild);
+                }
+
+                /**
+                 * Nhật ký (A–I + F–G): 9 cột — C (Số hiệu CT), E (Diễn giải) rộng hơn để tận dụng khổ ngang.
+                 */
+                function s01dnApplyJournalPrintColWidths(tbl) {
+                    var old = tbl.querySelector('colgroup.s01dn-journal-colwidth');
+                    if (old) old.remove();
+                    /* A–I + F–G: thu nhẹ C/E/cột số để vừa khổ A3 ngang có lề */
+                    var weights = [32, 70, 98, 70, 168, 84, 198, 58, 58];
+                    var sum = 0;
+                    for (var i = 0; i &lt; weights.length; i++) sum += weights[i];
+                    var cg = document.createElement('colgroup');
+                    cg.className = 's01dn-journal-colwidth';
+                    for (var j = 0; j &lt; weights.length; j++) {
+                        var c = document.createElement('col');
+                        c.style.width = (100 * weights[j] / sum).toFixed(4) + '%';
+                        cg.appendChild(c);
+                    }
+                    tbl.insertBefore(cg, tbl.firstChild);
+                }
+
+                function s01dnGetSheetInner() {
+                    return document.querySelector('.s01dn-sheet-inner');
+                }
+                /** Đo cao 2 hàng đầu thead → CSS --s01dn-thead-r1/r2 cho sticky header màn hình */
+                function s01dnSyncStickyTheadOffsets() {
+                    var scroll = document.querySelector('.s01dn-sheet-scroll');
+                    if (!scroll || !table) return;
+                    var thead = table.querySelector('thead');
+                    if (!thead) return;
+                    var trs = thead.querySelectorAll('tr');
+                    if (trs.length &lt; 3) return;
+                    var r1 = trs[0].getBoundingClientRect().height;
+                    var r2 = trs[1].getBoundingClientRect().height;
+                    scroll.style.setProperty('--s01dn-thead-r1', r1 + 'px');
+                    scroll.style.setProperty('--s01dn-thead-r2', r2 + 'px');
+                }
+                /** Cùng chiều ngang với bảng (header in ngoài inner, căn theo trang) */
+                function s01dnSyncSheetInnerWidth() {
+                    var inner = s01dnGetSheetInner();
+                    if (!inner) return;
+                    if (printChunkWrap &amp;&amp; printChunkWrap.classList.contains('s01dn-print-chunks-ready')) {
+                        inner.style.boxSizing = 'border-box';
+                        inner.style.width = '100%';
+                        inner.style.maxWidth = '100%';
+                        s01dnSyncStickyTheadOffsets();
+                        return;
+                    }
+                    inner.style.removeProperty('max-width');
+                    var tbl = table;
+                    if (!tbl) {
+                        inner.style.removeProperty('width');
+                        inner.style.removeProperty('box-sizing');
+                        s01dnSyncStickyTheadOffsets();
+                        return;
+                    }
+                    var w = tbl.scrollWidth || tbl.offsetWidth;
+                    if (w &gt; 0) {
+                        inner.style.boxSizing = 'border-box';
+                        inner.style.width = w + 'px';
+                    } else {
+                        inner.style.removeProperty('width');
+                        inner.style.removeProperty('box-sizing');
+                    }
+                    s01dnSyncStickyTheadOffsets();
+                }
+
+                function s01dnRestorePrintHeaderFromToc() {
+                    var h = document.getElementById('s01dnReportPrintHeader');
+                    if (!h || !S01DN_PRINT_HEADER_RESTORE) return;
+                    var p = S01DN_PRINT_HEADER_RESTORE.parent;
+                    var before = S01DN_PRINT_HEADER_RESTORE.before;
+                    S01DN_PRINT_HEADER_RESTORE = null;
+                    if (!p || !p.appendChild) return;
+                    try {
+                        if (before &amp;&amp; before.parentNode === p) {
+                            p.insertBefore(h, before);
+                        } else {
+                            p.appendChild(h);
+                        }
+                    } catch (eR) { /* */ }
+                }
+
+                /**
+                 * Có mục lục: bỏ tiêu đề phía trên mục lục — chỉ in một lần đầu trang nhật ký (tránh lặp).
+                 */
+                function s01dnRelocatePrintHeaderForToc(injectCatalog) {
+                    if (!injectCatalog || !printChunkWrap) return;
+                    var toc = printChunkWrap.querySelector('.s01dn-print-chunk--toc');
+                    var jc = printChunkWrap.querySelector('.s01dn-print-chunk--journal');
+                    var h = document.getElementById('s01dnReportPrintHeader');
+                    if (!toc || !jc || !h) return;
+                    if (jc.contains(h)) return;
+                    var sheet = document.querySelector('.s01dn-sheet');
+                    var scroll = sheet &amp;&amp; sheet.querySelector('.s01dn-sheet-scroll');
+                    if (!sheet || !scroll) return;
+                    S01DN_PRINT_HEADER_RESTORE = { parent: h.parentNode, before: h.nextSibling };
+                    jc.insertBefore(h, jc.firstChild);
+                }
+
+                function s01dnClearPrintChunks() {
+                    s01dnRestorePrintHeaderFromToc();
+                    if (!printChunkWrap) return;
+                    printChunkWrap.innerHTML = '';
+                    printChunkWrap.classList.remove('s01dn-print-chunks-ready');
+                    printChunkWrap.setAttribute('aria-hidden', 'true');
+                    s01dnSyncSheetInnerWidth();
+                }
+
+                function s01dnBuildPrintChunks() {
+                    s01dnRefreshTableRef();
+                    s01dnClearPrintChunks();
+                    if (!printChunkWrap || !table) return;
+                    var ids = s01dnGetOrderedAccountIds(table);
+                    var accPer = S01DN_ACCOUNTS_PER_PRINT_PAGE;
+                    var nAcc = ids.length;
+                    var nAccChunks = nAcc &gt; 0 ? Math.ceil(nAcc / accPer) : 0;
+                    var floorPages = 1 + nAccChunks;
+                    var nBodyRows = table.querySelectorAll('tbody tr').length;
+                    /* Nhiều tờ in hoặc bảng dài: một trang mục lục gom tóm tắt, không lặp hàng trong thead */
+                    var injectCatalog = floorPages &gt; 1 || nBodyRows &gt; 42;
+
+                    function pushChunk(isLast, patchTbl, isLedger, isJournal) {
+                        var chunk = document.createElement('div');
+                        chunk.className = 's01dn-print-chunk';
+                        if (isLast) chunk.classList.add('s01dn-print-chunk--last');
+                        if (isLedger) chunk.classList.add('s01dn-print-chunk--ledger');
+                        if (isJournal) chunk.classList.add('s01dn-print-chunk--journal');
+                        var tblClone = table.cloneNode(true);
+                        tblClone.removeAttribute('id');
+                        patchTbl(tblClone);
+                        if (isJournal) s01dnApplyJournalPrintColWidths(tblClone);
+                        if (isLedger) s01dnApplyLedgerPrintColWidths(tblClone);
+                        var innerWrap = document.createElement('div');
+                        innerWrap.className = 's01dn-wrap s01dn';
+                        innerWrap.appendChild(tblClone);
+                        chunk.appendChild(innerWrap);
+                        if (isLedger) {
+                            var codes = s01dnLedgerAccountCodesFromTable(tblClone);
+                            chunk.setAttribute(
+                                'data-s01dn-ledger-codes',
+                                codes.length ? codes.join(', ') : '(theo bảng)',
+                            );
+                        }
+                        printChunkWrap.appendChild(chunk);
+                    }
+
+                    if (injectCatalog) {
+                        printChunkWrap.appendChild(s01dnBuildPrintTocChunk());
+                    }
+
+                    pushChunk(
+                        nAccChunks === 0,
+                        function (tc) { s01dnStripHPlusCells(tc); },
+                        false,
+                        true,
+                    );
+
+                    for (var ci = 0; ci &lt; nAccChunks; ci++) {
+                        var start = ci * accPer;
+                        var end = Math.min(start + accPer, ids.length);
+                        var slice = ids.slice(start, end);
+                        var keep = new Set(slice);
+                        pushChunk(
+                            ci === nAccChunks - 1,
+                            function (tc) {
+                                s01dnStripJournalCells(tc);
+                                s01dnStripAccountColumns(tc, keep);
+                                s01dnRenumTT200ColumnRow(tc, start);
+                            },
+                            true,
+                            false,
+                        );
+                    }
+
+                    printChunkWrap.classList.add('s01dn-print-chunks-ready');
+                    printChunkWrap.setAttribute('aria-hidden', 'false');
+                    s01dnAssignHeadingAnchorIds();
+                    s01dnRelocatePrintHeaderForToc(injectCatalog);
+                    /* In chụp layout ngay: đồng bộ layout (tránh rAF trễ hơn bản in). */
+                    void printChunkWrap.offsetHeight;
+                    if (injectCatalog) {
+                        s01dnFinalizeTocPerPage();
+                    } else {
+                        s01dnRefreshFooterBookPagesOnly();
+                    }
+                    s01dnFinalizePrintChunks();
+
+                    window.requestAnimationFrame(function () {
+                        if (injectCatalog) {
+                            s01dnFinalizeTocPerPage();
+                        } else {
+                            s01dnRefreshFooterBookPagesOnly();
+                        }
+                        s01dnFinalizePrintChunks();
+                    });
+                }
+
+                function s01dnPreparePrintLayout() {
+                    s01dnBuildPrintChunks();
+                }
+
+                window.addEventListener('beforeprint', function () {
+                    s01dnPreparePrintLayout();
+                });
+                window.addEventListener('afterprint', function () {
+                    s01dnClearPrintChunks();
+                    s01dnSyncSheetInnerWidth();
+                });
+                /* Một số trình duyệt vào chế độ in không kịp beforeprint — bổ sung khi print media bật */
+                var mqPrintChunk = window.matchMedia('print');
+                function s01dnOnPrintMq(mql) {
+                    if (mql.matches) {
+                        s01dnPreparePrintLayout();
+                    }
+                    /* Dọn DOM chỉ sau khi đóng hộp thoại in (afterprint); tránh xóa nhầm khi mở in */
+                }
+                if (mqPrintChunk.addEventListener) {
+                    mqPrintChunk.addEventListener('change', function () {
+                        s01dnOnPrintMq(mqPrintChunk);
+                    });
+                } else if (mqPrintChunk.addListener) {
+                    mqPrintChunk.addListener(function () {
+                        s01dnOnPrintMq(mqPrintChunk);
+                    });
+                }
+
+                if (toolbar &amp;&amp; toolbarBody &amp;&amp; btnFilterToggle) {
+                    function s01dnApplyToolbarCollapsed(collapsed) {
+                        toolbar.classList.toggle('s01dn-toolbar-collapsed', collapsed);
+                        toolbarBody.classList.toggle('s01dn-toolbar-body--hidden', collapsed);
+                        btnFilterToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                        try {
+                            sessionStorage.setItem('s01dnToolbarCollapsed', collapsed ? '1' : '0');
+                        } catch (e1) { /* private mode */ }
+                    }
+                    try {
+                        if (sessionStorage.getItem('s01dnToolbarCollapsed') === '1') {
+                            s01dnApplyToolbarCollapsed(true);
+                        }
+                    } catch (e2) { /* */ }
+                    btnFilterToggle.addEventListener('click', function (ev) {
+                        ev.stopPropagation();
+                        s01dnApplyToolbarCollapsed(
+                            !toolbar.classList.contains('s01dn-toolbar-collapsed'),
+                        );
+                    });
+                }
+
+                function s01dnConfirmManyPrintPages() {
+                    if (!screenTableHost) return true;
+                    var n = parseInt(
+                        screenTableHost.getAttribute('data-s01dn-n-accounts') || '0',
+                        10,
+                    );
+                    if (isNaN(n)) n = 0;
+                    var accPer = S01DN_ACCOUNTS_PER_PRINT_PAGE;
+                    var nAccChunks = n &gt; 0 ? Math.ceil(n / accPer) : 0;
+                    var pages = 1 + nAccChunks;
+                    if (pages &gt; 1) {
+                        pages += 1;
+                    }
+                    if (pages &lt; 15) return true;
+                    return window.confirm(
+                        'Báo cáo có ' + n + ' tài khoản — dự kiến khoảng ' + pages +
+                        ' trang in (trang 1 mục lục nội dung khi nhiều tờ; trang 2 nhật ký A–I+F–G; sau đó H + tối đa ' + accPer + ' TK). ' +
+                        'Có thể mất thời gian và nhiều giấy. Xuất Excel thường thuận tiện hơn.\n\n' +
+                        'Vẫn mở hộp thoại in?',
+                    );
+                }
+
+                window.__s01dnConfirmPrintBeforeDialog = s01dnConfirmManyPrintPages;
+
+                /* ---- Đơn vị tiền (đồng / ngàn / triệu) — chỉ đổi hiển thị, data-vnd = VND ---- */
+                var moneyUnitSel = document.getElementById('s01dnMoneyUnit');
+                function s01dnParseVnd(el) {
+                    var raw = el.getAttribute('data-vnd');
+                    if (raw === null || raw === '') return 0;
+                    var s = String(raw).replace(/\s/g, '').replace(/\u00a0/g, '');
+                    var x = parseFloat(s.replace(',', '.'), 10);
+                    return isNaN(x) ? 0 : x;
+                }
+                function s01dnFormatFromVnd(vnd, divisor) {
+                    var d = divisor || 1;
+                    var v = Number(vnd);
+                    if (isNaN(v)) v = 0;
+                    var x = v / d;
+                    if (d &lt;= 1) {
+                        return Math.round(x).toLocaleString('vi-VN');
+                    }
+                    return x.toLocaleString('vi-VN', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 6,
+                    });
+                }
+                function s01dnMoneyUnitCaptionText(val) {
+                    var d = String(val == null ? '1' : val);
+                    if (d === '1000') return 'Đơn vị tính: Ngàn đồng';
+                    if (d === '1000000') return 'Đơn vị tính: Triệu đồng';
+                    return 'Đơn vị tính: Đồng';
+                }
+                function s01dnApplyMoneyUnit() {
+                    if (!moneyUnitSel || !table) return;
+                    var div = parseFloat(moneyUnitSel.value, 10) || 1;
+                    var nodes = table.querySelectorAll('.s01dn-amt[data-vnd]');
+                    for (var im = 0; im &lt; nodes.length; im++) {
+                        var el = nodes[im];
+                        el.textContent = s01dnFormatFromVnd(s01dnParseVnd(el), div);
+                    }
+                    var cap = document.getElementById('s01dnMoneyUnitCaption');
+                    if (cap) {
+                        cap.textContent = s01dnMoneyUnitCaptionText(moneyUnitSel.value);
+                    }
+                    window.requestAnimationFrame(function () {
+                        s01dnSyncSheetInnerWidth();
+                    });
+                }
+                if (moneyUnitSel) {
+                    var initialMu = moneyUnitSel.getAttribute('data-initial-money-unit');
+                    var muSt = null;
+                    try { muSt = sessionStorage.getItem('s01dnMoneyUnit'); } catch (eMu) { /* */ }
+                    if (initialMu === '1' || initialMu === '1000' || initialMu === '1000000') {
+                        moneyUnitSel.value = initialMu;
+                    } else if (muSt === '1' || muSt === '1000' || muSt === '1000000') {
+                        moneyUnitSel.value = muSt;
+                    } else {
+                        moneyUnitSel.value = '1';
+                    }
+                    moneyUnitSel.addEventListener('change', function () {
+                        try {
+                            sessionStorage.setItem('s01dnMoneyUnit', moneyUnitSel.value);
+                        } catch (eSt) { /* */ }
+                        s01dnApplyMoneyUnit();
+                    });
+                    s01dnApplyMoneyUnit();
+                }
+
+                var reloadTimer = null;
+                function scheduleReload() {
+                    clearTimeout(reloadTimer);
+                    reloadTimer = setTimeout(function () {
+                        var el = document.getElementById('s01dnReportReload');
+                        if (!el) return;
+                        /*
+                         * Trước khi thay DOM: xóa chunk in + dòng số trang — tránh in/mô phỏng dùng bảng cũ
+                         * hoặc giữ text \"…16 trang\" khi dữ liệu mới chỉ còn 13 trang.
+                         */
+                        s01dnClearPrintChunks();
+                        s01dnClearFooterBookPagesLine();
+                        var opts = JSON.parse(el.textContent);
+                        opts.s01dn_ui_filters = window.__s01dnGetFilterSnapshot();
+                        var path = window.location.pathname;
+                        var url = path + '?options=' + encodeURIComponent(JSON.stringify(opts));
+
+                        /* ---- AJAX partial reload: only update data, keep toolbar ---- */
+                        var host = document.getElementById('s01dnScreenTableHost');
+                        if (!host) { window.location = url; return; }
+
+                        /* Show loading indicator */
+                        host.style.opacity = '0.4';
+                        host.style.pointerEvents = 'none';
+
+                        fetch(url, { credentials: 'same-origin' })
+                            .then(function (resp) { return resp.text(); })
+                            .then(function (html) {
+                                var parser = new DOMParser();
+                                var doc = parser.parseFromString(html, 'text/html');
+                                /* Replace data table */
+                                var newHost = doc.getElementById('s01dnScreenTableHost');
+                                if (newHost) {
+                                    host.innerHTML = newHost.innerHTML;
+                                }
+                                /* Update header (year/period title may change) */
+                                var hdr = document.getElementById('s01dnReportPrintHeader');
+                                var newHdr = doc.getElementById('s01dnReportPrintHeader');
+                                if (hdr &amp;&amp; newHdr) hdr.innerHTML = newHdr.innerHTML;
+                                /* Update footer */
+                                var ftr = document.getElementById('s01dnReportPrintFooter');
+                                var newFtr = doc.getElementById('s01dnReportPrintFooter');
+                                if (ftr &amp;&amp; newFtr) ftr.innerHTML = newFtr.innerHTML;
+                                /* Update JSON reload payload */
+                                var newEl = doc.getElementById('s01dnReportReload');
+                                if (newEl) el.textContent = newEl.textContent;
+                                s01dnRefreshTableRef();
+                                s01dnClearPrintChunks();
+                                s01dnClearFooterBookPagesLine();
+                                /* Re-apply money unit and sync layout */
+                                host.style.opacity = '';
+                                host.style.pointerEvents = '';
+                                if (typeof s01dnApplyMoneyUnit === 'function') s01dnApplyMoneyUnit();
+                                s01dnSyncSheetInnerWidth();
+                            })
+                            .catch(function () {
+                                /* Fallback: full reload */
+                                window.location = url;
+                            });
+                    }, 450);
+                }
+
+
+
+                function updateDdLabel(dd) {
+                    if (!dd) return;
+                    var boxes = dd.querySelectorAll('input[type="checkbox"]');
+                    var lbl = dd.querySelector('.s01dn-dd-lbl');
+                    if (!lbl || !boxes.length) return;
+                    var checked = 0;
+                    for (var i = 0; i &lt; boxes.length; i++) { if (boxes[i].checked) checked++; }
+                    if (checked === 0) { lbl.textContent = 'Không có'; }
+                    else if (checked === boxes.length) { lbl.textContent = 'Tất cả'; }
+                    else { lbl.textContent = checked + '/' + boxes.length; }
+                }
+
+                function snapshotCheckboxSet(selector, asNum) {
+                    var boxes = document.querySelectorAll(selector);
+                    if (boxes.length === 0) return null;
+                    var s = [];
+                    var n = boxes.length;
+                    for (var i = 0; i &lt; n; i++) {
+                        if (boxes[i].checked) {
+                            var v = boxes[i].value;
+                            s.push(asNum ? (parseInt(v, 10) || 0) : v);
+                        }
+                    }
+                    if (s.length === 0) return [];
+                    if (s.length === n) return null;
+                    return s;
+                }
+
+                window.__s01dnGetFilterSnapshot = function () {
+                    var muVal = '1';
+                    if (moneyUnitSel &amp;&amp; moneyUnitSel.value) {
+                        muVal = moneyUnitSel.value;
+                    }
+                    return {
+                        date_range_id: drIn &amp;&amp; drIn.value ? parseInt(drIn.value, 10) : false,
+                        date_from: dfIn &amp;&amp; dfIn.value ? dfIn.value : '',
+                        date_to: dtIn &amp;&amp; dtIn.value ? dtIn.value : '',
+                        account_ids: snapshotCheckboxSet('.cb-account', true),
+                        journal_names: snapshotCheckboxSet('.cb-journal', false),
+                        partner_ids: snapshotCheckboxSet('.cb-partner', true),
+                        search: (searchIn &amp;&amp; searchIn.value ? searchIn.value : '').trim(),
+                        money_unit: muVal,
+                        target_move: targetMoveSel &amp;&amp; targetMoveSel.value
+                            ? targetMoveSel.value : 'posted'
+                    };
+                };
+
+                function updateDdLabels() {
+                    function lbl(sel, elId, noun) {
+                        var el = document.getElementById(elId);
+                        if (!el) return;
+                        var boxes = document.querySelectorAll(sel);
+                        if (boxes.length === 0) { el.textContent = '—'; return; }
+                        var c = 0, t = boxes.length;
+                        for (var i = 0; i &lt; boxes.length; i++) if (boxes[i].checked) c++;
+                        if (c === 0) el.textContent = 'Không chọn';
+                        else if (c === t) el.textContent = 'Tất cả';
+                        else el.textContent = c + ' ' + noun;
+                    }
+                    lbl('.cb-account', 'lblAccount', 'TK');
+                    lbl('.cb-journal', 'lblJournal', 'sổ');
+                    lbl('.cb-partner', 'lblPartner', 'đối tác');
+                }
+
+                /* ---- Dropdown ---- */
+                var dds = document.querySelectorAll('.s01dn-dd');
+                for (var d = 0; d &lt; dds.length; d++) {
+                    (function (dd) {
+                        var btn = dd.querySelector('.s01dn-dd-btn');
+                        var panel = dd.querySelector('.s01dn-dd-panel');
+                        if (btn) {
+                            btn.addEventListener('click', function (ev) {
+                                ev.stopPropagation();
+                                var open = dd.classList.contains('open');
+                                for (var k = 0; k &lt; dds.length; k++) dds[k].classList.remove('open');
+                                if (!open) dd.classList.add('open');
+                            });
+                        }
+                        var allBtn = dd.querySelector('.s01-dd-all');
+                        var noneBtn = dd.querySelector('.s01-dd-none');
+                        if (allBtn) allBtn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            var cbs = dd.querySelectorAll('input[type="checkbox"]');
+                            for (var i = 0; i &lt; cbs.length; i++) cbs[i].checked = true;
+                            updateDdLabels();
+                            scheduleReload();
+                        });
+                        if (noneBtn) noneBtn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            var cbs = dd.querySelectorAll('input[type="checkbox"]');
+                            for (var i = 0; i &lt; cbs.length; i++) cbs[i].checked = false;
+                            updateDdLabels();
+                            scheduleReload();
+                        });
+                        if (panel) panel.addEventListener('click', function (e) { e.stopPropagation(); });
+                        function onAccountJournalCbToggle() {
+                            updateDdLabels();
+                            scheduleReload();
+                        }
+                        var cbs = dd.querySelectorAll('input[type="checkbox"]');
+                        for (var i = 0; i &lt; cbs.length; i++) {
+                            cbs[i].addEventListener('change', onAccountJournalCbToggle);
+                            cbs[i].addEventListener('input', onAccountJournalCbToggle);
+                        }
+                    })(dds[d]);
+                }
+
+                document.addEventListener('click', function () {
+                    for (var k = 0; k &lt; dds.length; k++) dds[k].classList.remove('open');
+                });
+
+                if (dfIn) dfIn.addEventListener('change', function() { if (drIn) drIn.value = ''; scheduleReload(); });
+                if (dtIn) dtIn.addEventListener('change', function() { if (drIn) drIn.value = ''; scheduleReload(); });
+                if (drIn) {
+                    drIn.addEventListener('change', function () {
+                        var opt = drIn.options[drIn.selectedIndex];
+                        if (opt &amp;&amp; opt.value) {
+                            if (dfIn) dfIn.value = opt.getAttribute('data-start') || '';
+                            if (dtIn) dtIn.value = opt.getAttribute('data-end') || '';
+                        }
+                        scheduleReload();
+                    });
+                }
+                if (targetMoveSel) targetMoveSel.addEventListener('change', scheduleReload);
+                /* Checkbox change delegation: all checkboxes in filter-bar rows */
+                function onToolbarCheckboxToggle(ev) {
+                    var t = ev &amp;&amp; ev.target;
+                    if (!t || t.type !== 'checkbox') return;
+                    scheduleReload();
+                }
+                var filterBars = document.querySelectorAll('#s01dnToolbar .s01dn-filter-bar');
+                for (var fb = 0; fb &lt; filterBars.length; fb++) {
+                    filterBars[fb].addEventListener('change', onToolbarCheckboxToggle);
+                }
+
+
+                var searchTimer = null;
+                if (searchIn) {
+                    searchIn.addEventListener('input', function () {
+                        clearTimeout(searchTimer);
+                        searchTimer = setTimeout(scheduleReload, 400);
+                    });
+                }
+
+                updateDdLabels();
+                var s01dnSheetResizeTimer = null;
+                window.addEventListener('resize', function () {
+                    if (s01dnSheetResizeTimer) clearTimeout(s01dnSheetResizeTimer);
+                    s01dnSheetResizeTimer = setTimeout(function () {
+                        s01dnSyncSheetInnerWidth();
+                    }, 150);
+                });
+                window.requestAnimationFrame(function () {
+                    s01dnSyncSheetInnerWidth();
+                });
+            })();
+        </script>
+    </template>
+</odoo>

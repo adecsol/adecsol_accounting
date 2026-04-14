@@ -1,0 +1,485 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* document_profile
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-13 07:28+0000\n"
+"PO-Revision-Date: 2026-04-13 07:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_dossier.py:0
+msgid "%s — Files by Code"
+msgstr "%s — Tệp theo mã"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__active
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__active
+msgid "Active"
+msgstr "Đang hoạt động"
+
+#. module: document_profile
+#: model:res.groups,name:document_profile.group_document_profile_manager
+msgid "Administrator"
+msgstr "Quản trị viên"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Archive"
+msgstr "Lưu trữ"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_search
+msgid "Archived"
+msgstr "Đã lưu trữ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__attachment_ids
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_form
+msgid "Attachments"
+msgstr "Tệp đính kèm"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__company_id
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__company_id
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_item__code
+msgid ""
+"Computed from dossier code, «File Code Format», and reference (e.g. "
+"explanation 05 → ADE.FIN.05.01-05). Adjust via the Reference field."
+msgstr ""
+"Được tính toán từ mã hồ sơ, «Định dạng mã hồ sơ» và tham chiếu (ví dụ: giải "
+"thích 05 → ADE.FIN.05.01-05). Điều chỉnh thông qua trường Tham chiếu."
+
+#. module: document_profile
+#: model:res.groups,comment:document_profile.group_document_profile_manager
+msgid "Configure profile sets and manage dossiers and attachments."
+msgstr "Định cấu hình bộ hồ sơ và quản lý hồ sơ cũng như tệp đính kèm."
+
+#. module: document_profile
+#: model_terms:ir.actions.act_window,help:document_profile.action_document_profile_dossier
+msgid "Create a dossier or open one from Document Profile Sets."
+msgstr "Tạo một hồ sơ hoặc mở một hồ sơ từ Bộ Hồ sơ Tài liệu."
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__create_uid
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__create_uid
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__create_date
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__create_date
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__create_date
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__name
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__display_name
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__display_name
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: document_profile
+#: model:ir.actions.act_window,name:document_profile.action_document_profile_dossier
+#: model:ir.ui.menu,name:document_profile.menu_document_profile_dossier
+msgid "Document Dossiers"
+msgstr "Hồ sơ tài liệu"
+
+#. module: document_profile
+#: model:ir.module.category,name:document_profile.module_category_document_profile
+msgid "Document Profile"
+msgstr "Hồ sơ tài liệu"
+
+#. module: document_profile
+#: model:ir.model,name:document_profile.model_document_profile_set
+msgid "Document Profile Set"
+msgstr "Bộ hồ sơ tài liệu"
+
+#. module: document_profile
+#: model:ir.actions.act_window,name:document_profile.action_document_profile_set
+msgid "Document Profile Sets"
+msgstr "Bộ hồ sơ tài liệu"
+
+#. module: document_profile
+#: model:ir.ui.menu,name:document_profile.menu_document_profile
+msgid "Document Profiles"
+msgstr "Hồ sơ tài liệu"
+
+#. module: document_profile
+#: model:ir.model,name:document_profile.model_document_profile_dossier
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__dossier_id
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+msgid "Dossier"
+msgstr "Hồ sơ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__code
+msgid "Dossier Code"
+msgstr "Mã hồ sơ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__dossier_code_format
+msgid "Dossier Code Format"
+msgstr "Định dạng mã hồ sơ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__dossier_code_format_locked
+msgid "Dossier Code Format Locked"
+msgstr "Định dạng mã hồ sơ đã bị khóa"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__name
+msgid "Dossier Name"
+msgstr "Tên hồ sơ"
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_dossier.py:0
+msgid "Dossier code «%s» already exists in this profile set."
+msgstr "Mã hồ sơ «%s» đã tồn tại trong bộ hồ sơ này."
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__dossier_ids
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_tree
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Dossiers"
+msgstr "Hồ sơ"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Download all files"
+msgstr "Tải xuống tất cả các tệp"
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_dossier__item_ids
+msgid ""
+"Each line: file code (matching codes inferred from reports) and attachments."
+msgstr ""
+"Mỗi dòng bao gồm: mã tệp (mã trùng khớp được suy ra từ báo cáo) và các tệp "
+"đính kèm."
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__code
+msgid "File Code"
+msgstr "Mã tệp"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__file_code_format
+msgid "File Code Format"
+msgstr "Định dạng mã tệp"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__file_code_format_locked
+msgid "File Code Format Locked"
+msgstr "Định dạng mã tệp đã bị khóa"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_form
+msgid "File by code"
+msgstr "Tệp theo mã"
+
+#. module: document_profile
+#: model:ir.model,name:document_profile.model_document_profile_item
+msgid "File code and attachments (per dossier / profile set)"
+msgstr "Mã tệp và tệp đính kèm (mỗi hồ sơ / bộ hồ sơ)"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "File codes and upload for this dossier"
+msgstr "Mã tệp và tải lên cho hồ sơ này"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__item_ids
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__item_ids
+msgid "Files by Code"
+msgstr "Tệp theo Mã"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_tree
+msgid "Files by code"
+msgstr "Tệp theo mã"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_search
+msgid "Has file lines"
+msgstr "Có dòng tệp"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__id
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__id
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__id
+msgid "ID"
+msgstr "ID"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_search
+msgid "In use"
+msgstr "Đang sử dụng"
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_item.py:0
+msgid "Invalid dossier."
+msgstr "Hồ sơ không hợp lệ."
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__write_uid
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__write_uid
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__write_date
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__write_date
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_dossier__company_id
+#: model:ir.model.fields,help:document_profile.field_document_profile_item__company_id
+#: model:ir.model.fields,help:document_profile.field_document_profile_set__company_id
+msgid "Leave empty to apply to all companies."
+msgstr "Để trống để áp dụng cho tất cả các công ty."
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Lock format (read-only)"
+msgstr "Định dạng khóa (chỉ đọc)"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_tree
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_tree
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_tree
+msgid "Name"
+msgstr "Tên"
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_set__dossier_code_format
+msgid ""
+"One format placeholder for the dossier sequence number (e.g. ADE.FIN.05.%02d"
+" → ADE.FIN.05.01)."
+msgstr ""
+"Một ký tự thay thế cho số thứ tự hồ sơ (ví dụ: ADE.FIN.05.%02d → "
+"ADE.FIN.05.01)."
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__profile_set_id
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__profile_set_id
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Profile Set"
+msgstr "Bộ hồ sơ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_set__name
+msgid "Profile Set Name"
+msgstr "Tên bộ hồ sơ"
+
+#. module: document_profile
+#: model:ir.ui.menu,name:document_profile.menu_document_profile_set
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_search
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_tree
+msgid "Profile Sets"
+msgstr "Bộ hồ sơ"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__reference_key
+msgid "Reference"
+msgstr "Tham khảo"
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_item__reference_key
+msgid ""
+"Reference segment used in «File Code Format» (e.g. 05). Defaults increment "
+"within the same dossier to avoid duplicate file codes. Changing dossier or "
+"file formats on the profile set will recompute file codes."
+msgstr ""
+"Phân đoạn tham chiếu được sử dụng trong «Định dạng mã tệp» (ví dụ: 05). Giá "
+"trị mặc định tăng dần trong cùng một hồ sơ để tránh trùng lặp mã tệp. Việc "
+"thay đổi định dạng hồ sơ hoặc tệp trên bộ hồ sơ sẽ tính toán lại mã tệp."
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Restore"
+msgstr "Khôi phục"
+
+#. module: document_profile
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_dossier__sequence_number
+#: model:ir.model.fields,field_description:document_profile.field_document_profile_item__sequence
+msgid "Sequence"
+msgstr "Trình tự"
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid ""
+"The dossier code format must be unique: another profile set already uses "
+"this pattern."
+msgstr ""
+"Định dạng mã hồ sơ phải là duy nhất: một bộ hồ sơ khác đã sử dụng mẫu này."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid ""
+"The dossier code format must have exactly one placeholder (e.g. "
+"ADE.FIN.05.%02d)."
+msgstr ""
+"Định dạng mã hồ sơ phải có chính xác một ký tự đại diện (ví dụ: "
+"ADE.FIN.05.%02d)."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_item.py:0
+msgid "The dossier does not belong to the profile set of this line."
+msgstr "Hồ sơ không thuộc bộ hồ sơ của dòng này."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_item.py:0
+msgid "The dossier must belong to the selected profile set."
+msgstr "Hồ sơ phải thuộc bộ hồ sơ đã chọn."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_dossier.py:0
+#: model:ir.model.constraint,message:document_profile.constraint_document_profile_dossier_document_profile_dossier_set_seq_uniq
+msgid "The dossier sequence must be unique within the profile set."
+msgstr "Trình tự hồ sơ phải là duy nhất trong bộ hồ sơ."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_item.py:0
+#: model:ir.model.constraint,message:document_profile.constraint_document_profile_item_document_profile_item_code_uniq
+msgid "The file code must be unique across the database."
+msgstr "Mã tệp phải là duy nhất trên cơ sở dữ liệu."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid "There are no files attached to this profile set."
+msgstr "Không có tệp nào được đính kèm với bộ hồ sơ này."
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_set__file_code_format
+msgid ""
+"Two %s placeholders: dossier code and reference key (e.g. ADE.FIN.05.01-05)."
+" Used on «Files by code» lines in each dossier; other addons may use the "
+"same convention to infer file codes from report references."
+msgstr ""
+"Hai ký hiệu %s dùng để thay thế: mã hồ sơ và khóa tham chiếu (ví dụ: "
+"ADE.FIN.05.01-05). Được sử dụng trên các dòng \"Tệp theo mã\" trong mỗi hồ "
+"sơ; các tiện ích bổ sung khác cũng có thể sử dụng quy ước tương tự để suy ra"
+" mã tệp từ các tham chiếu báo cáo."
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Unlock format"
+msgstr "Định dạng mở khóa"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "Upload files"
+msgstr "Tải tệp lên"
+
+#. module: document_profile
+#: model:res.groups,name:document_profile.group_document_profile_user
+msgid "User"
+msgstr "Người dùng"
+
+#. module: document_profile
+#: model:res.groups,comment:document_profile.group_document_profile_user
+msgid "View document profile sets, dossiers, and file lines."
+msgstr "Xem bộ hồ sơ tài liệu, hồ sơ và dòng tệp."
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_set__dossier_code_format_locked
+msgid "When set, the dossier code format cannot be edited until unlocked."
+msgstr ""
+"Khi được đặt, định dạng mã hồ sơ không thể chỉnh sửa cho đến khi mở khóa."
+
+#. module: document_profile
+#: model:ir.model.fields,help:document_profile.field_document_profile_set__file_code_format_locked
+msgid "When set, the file code format cannot be edited until unlocked."
+msgstr ""
+"Khi được đặt, định dạng mã tệp không thể chỉnh sửa cho đến khi mở khóa."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid "You cannot change the dossier code format while it is locked."
+msgstr "Bạn không thể thay đổi định dạng mã hồ sơ khi nó bị khóa."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid "You cannot change the file code format while it is locked."
+msgstr "Bạn không thể thay đổi định dạng mã tệp khi nó bị khóa."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_set.py:0
+msgid "You must enter a dossier code format."
+msgstr "Bạn phải nhập định dạng mã hồ sơ."
+
+#. module: document_profile
+#. odoo-python
+#: code:addons/document_profile/models/document_profile_item.py:0
+msgid "You must enter a reference."
+msgstr "Bạn phải nhập một tham chiếu."
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "[Customer].[Project].[Person].%02d"
+msgstr "[Khách hàng].[Dự án].[Người thực hiện].%02d"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_item_form
+msgid "e.g. Annex — signed PDF"
+msgstr "ví dụ: Phụ lục - PDF đã ký"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_set_form
+msgid "e.g. Audit · Company X"
+msgstr "ví dụ: Kiểm toán · Công ty X"
+
+#. module: document_profile
+#: model_terms:ir.ui.view,arch_db:document_profile.view_document_profile_dossier_form
+msgid "e.g. Project dossier · 2025"
+msgstr "ví dụ: Hồ sơ dự án · 2025"

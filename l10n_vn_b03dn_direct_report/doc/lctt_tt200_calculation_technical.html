@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>B03-DN / TT200 — Tóm tắt cách tính chỉ tiêu (kỹ thuật)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --surface: rgba(255, 255, 255, 0.96);
+            --surface2: #e8eef5;
+            --text: #152238;
+            --muted: #546e7a;
+            --primary: #0d47a1;
+            --primary-mid: #1565c0;
+            --accent: #00838f;
+            --accent2: #0d9488;
+            --green: #2e7d32;
+            --orange: #e65100;
+            --border: rgba(13, 71, 161, 0.16);
+            --radius: 14px;
+            --shadow: 0 8px 28px rgba(13, 71, 161, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --table-head: #e3f2fd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: rgba(22, 34, 54, 0.96);
+                --surface2: rgba(30, 48, 78, 0.88);
+                --text: #e8eef5;
+                --muted: #90a4ae;
+                --border: rgba(100, 181, 246, 0.22);
+                --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+                --table-head: rgba(13, 71, 161, 0.35);
+                --green: #66bb6a;
+                --orange: #ff9800;
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, sans-serif;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -5%, rgba(13, 71, 161, 0.07), transparent 50%),
+                linear-gradient(180deg, #eef3f9 0%, #f8fafc 45%, #f0f7fa 100%);
+            min-height: 100vh;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background:
+                    radial-gradient(ellipse 70% 45% at 15% 0%, rgba(21, 101, 192, 0.18), transparent 55%),
+                    linear-gradient(180deg, #0d1520 0%, #121c2a 55%, #0f1722 100%);
+            }
+        }
+        .topbar {
+            background: linear-gradient(125deg, #0d47a1 0%, #1565c0 42%, #00838f 100%);
+            color: #fff;
+            padding: 1.9rem 1.5rem 2rem;
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .topbar h1 {
+            margin: 0;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .topbar p { margin: 0.45rem 0 0; opacity: 0.97; font-size: 0.92rem; }
+        .topbar code { background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.35); border-radius: 6px; }
+        .layout { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+        section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.35rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+        h2 {
+            margin: 0 0 0.75rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.45rem;
+            color: var(--primary);
+        }
+        h3 { margin: 1rem 0 0.45rem; font-size: 0.95rem; font-weight: 600; color: var(--accent); }
+        p { margin: 0.5rem 0; }
+        .muted { color: var(--muted); font-size: 0.88rem; }
+        ol, ul { margin: 0.45rem 0; padding-left: 1.35rem; }
+        li { margin: 0.3rem 0; }
+        li::marker { color: var(--accent2); }
+        code {
+            font-family: "IBM Plex Mono", ui-monospace, monospace;
+            font-size: 0.84em;
+            background: var(--surface2);
+            padding: 0.12em 0.35em;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        pre {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 0.76rem;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.85rem 1rem;
+            overflow-x: auto;
+            margin: 0.65rem 0;
+            box-shadow: inset 0 0 0 1px rgba(13, 71, 161, 0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin: 0.65rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0.65rem 0; border-radius: 12px; }
+        table.data-sample { min-width: 48rem; }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: var(--table-head);
+            color: var(--primary);
+            font-family: "Outfit", sans-serif;
+            font-weight: 600;
+        }
+        .note {
+            border-left: 3px solid var(--orange);
+            padding: 0.6rem 0.9rem;
+            margin: 0.75rem 0;
+            background: rgba(230, 81, 0, 0.08);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 0.88rem;
+        }
+        .ok {
+            border-left-color: var(--green);
+            background: rgba(46, 125, 50, 0.1);
+        }
+        nav a { color: var(--primary-mid); font-weight: 600; }
+        nav a:hover { color: var(--accent); }
+        a { color: var(--primary-mid); font-weight: 600; }
+        a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <h1>B03-DN / Thông tư 200 — Cách tính giá trị chỉ tiêu (tài liệu kỹ thuật)</h1>
+    <p>Phương pháp trực tiếp · Module <code>l10n_vn_b03dn_direct_report</code> · Đối tượng: developer / triển khai</p>
+</header>
+
+<div class="layout">
+
+<section id="scope">
+    <h2>1. Phạm vi</h2>
+    <p>Báo cáo <strong>B03-DN — Lưu chuyển tiền tệ, phương pháp trực tiếp</strong> theo hướng dẫn <strong>Thông tư 200/2014</strong> (TT200). Số liệu không hard-code trong Python: mỗi <strong>chỉ tiêu</strong> là một dòng cấu hình <code>l10n.vn.b03dn.line</code> trong template <code>l10n.vn.b03dn.template</code>.</p>
+    <p class="muted">Engine tính toán: model abstract <code>l10n.vn.b03dn.engine</code>, method <code>compute_period(template, company, date_from, date_to)</code> → <code>lines_by_code[code] = { amount, aml_ids }</code>.</p>
+</section>
+
+<section id="flow">
+    <h2>2. Luồng tổng thể (đầu vào → đầu ra)</h2>
+    <pre>
+INPUT
+  template.line_ids (sorted sequence, id)
+  company, date_from, date_to
+
+BƯỚC A — Tập TK tiền
+  _cash_account_ids: cash_account_ids HOẶC (111%, 112%, 113% + b03dn_cash_equiv_account_ids)
+
+BƯỚC B — Dòng tiền trong kỳ
+  account.move.line: account_id ∈ cash, date ∈ [from,to], posted
+
+BƯỚC C — Fragment
+  Mỗi dòng tiền + các dòng cùng move → 1..N fragment:
+    cash_aml_id, amount (&gt;0), is_inflow, counterpart_code, counterpart_account_id
+
+BƯỚC D — Gán leaf (first match)
+  Với mỗi fragment, duyệt leaf theo sequence:
+    chọn pattern theo is_inflow → so khớp đối ứng → tag include/exclude → extra_domain
+    signed = amount nếu inflow else -amount; × amount_multiplier
+    buckets[code] += signed ; break
+
+BƯỚC E — opening_cash, fx_adjustment (không qua fragment)
+
+BƯỚC F — aggregate (sum_expression, lặp đến ổn định)
+
+OUTPUT
+  { lines_by_code, account_ids }
+    </pre>
+</section>
+
+<section id="inflow">
+    <h2>3. Xác định tiền vào / ra (<code>is_inflow</code>)</h2>
+    <p>Trong <code>_fragment_from_cash_line</code> (trên <strong>một</strong> <code>account.move.line</code> là TK tiền):</p>
+    <table>
+        <tr><th>Điều kiện (sau làm tròn tiền tệ)</th><th><code>is_inflow</code></th><th>Đối ứng lấy từ</th></tr>
+        <tr><td>Nợ tiền &gt; 0, Có tiền ≈ 0</td><td><code>True</code></td><td>Các dòng khác trên move có <strong>Có &gt; 0</strong> → <code>credit_pairs()</code></td></tr>
+        <tr><td>Có tiền &gt; 0, Nợ tiền ≈ 0</td><td><code>False</code></td><td>Các dòng khác có <strong>Nợ &gt; 0</strong> → <code>debit_pairs()</code></td></tr>
+        <tr><td>Khác (vd cả Nợ và Có tiền)</td><td>—</td><td>Không tạo fragment (return [])</td></tr>
+    </table>
+    <p>Chứng từ chỉ quyết giữa các TK tiền → bỏ qua (không fragment).</p>
+    <p>Nhiều đối ứng cùng phía → <code>_allocate_split_amounts</code> chia <code>amount</code> cho từng fragment.</p>
+</section>
+
+<section id="patterns">
+    <h2>4. <code>credit_account_patterns</code> và <code>debit_account_patterns</code></h2>
+    <p>Hai trường Char, danh sách mẫu mã TK phân tách dấu phẩy. Quy ước: hậu tố <code>%</code> = prefix; không có <code>%</code> = khớp đúng mã.</p>
+    <p><strong>Sau</strong> khi đã biết <code>is_inflow</code> của fragment, hàm <code>_leaf_rule_counterpart_pattern_source(rule, is_inflow)</code>:</p>
+    <ul>
+        <li><code>is_inflow True</code> → dùng <strong>chỉ</strong> <code>rule.credit_account_patterns</code> (đối ứng phía <strong>Có</strong>, khớp cột «TK Có» trên bảng TT200 cho luồng thu tiền).</li>
+        <li><code>is_inflow False</code> → dùng <strong>chỉ</strong> <code>rule.debit_account_patterns</code> (đối ứng phía <strong>Nợ</strong>, «TK Nợ» cho luồng chi).</li>
+    </ul>
+    <p>Với <strong>mỗi leaf</strong> đang xét, parse pattern của <strong>chính leaf đó</strong>, so với <code>frag["counterpart_code"]</code> (có thể tách nhiều mã nếu chuỗi có dấu phẩy) qua <code>_code_matches_patterns</code>.</p>
+    <div class="note ok">Rule leaf bị bỏ qua nếu <strong>không</strong> có pattern (sau parse) <strong>và</strong> không có <code>tag_ids</code> — cho phép skip leaf “trống”.</div>
+</section>
+
+<section id="tags">
+    <h2>5. Thẻ và domain</h2>
+    <ul>
+        <li><code>exclude_tag_ids</code>: nếu bất kỳ thẻ loại trừ nào có trong “pool” (theo <code>tag_source</code> giống thẻ yêu cầu) → không khớp leaf này.</li>
+        <li><code>tag_ids</code> + <code>tag_match_mode</code> (<code>all</code>/<code>any</code>): pool từ <code>tag_source</code> (<code>counterpart_account</code> / <code>cash_line</code> / <code>either</code>).</li>
+        <li><code>extra_domain</code>: domain Odoo trên <strong>dòng tiền</strong>, <code>safe_eval</code>, áp sau khi khớp pattern.</li>
+    </ul>
+</section>
+
+<section id="priority">
+    <h2>6. Ưu tiên leaf</h2>
+    <p><code>leaf_lines_ord</code> = leaf sort theo <code>(sequence, id)</code>. Với mỗi fragment, duyệt leaf theo thứ tự; <strong>leaf đầu tiên thỏa đủ điều kiện</strong> nhận fragment → <code>break</code>. Các leaf sau <strong>không</strong> được xét cho fragment đó.</p>
+</section>
+
+<section id="line-kind">
+    <h2>7. <code>line_kind</code> (cách có số cho “chỉ tiêu”)</h2>
+    <table>
+        <tr><th>line_kind</th><th>Nguồn số</th><th>Ghi chú</th></tr>
+        <tr><td><code>none</code></td><td>0</td><td>Tiêu đề / trống</td></tr>
+        <tr><td><code>leaf</code></td><td>Cộng dồn <code>signed</code> từ fragment khớp</td><td><code>aml_ids</code> = id các <strong>dòng tiền</strong></td></tr>
+        <tr><td><code>opening_cash</code></td><td>SQL <code>SUM(debit-credit)</code> TK tiền, <code>date &lt; date_from</code></td><td>Không drill-down như leaf</td></tr>
+        <tr><td><code>fx_adjustment</code></td><td>Tổng <code>balance</code> AML trong kỳ, TK khớp <code>fx_account_patterns</code></td><td>Mặc định kiểu 413%</td></tr>
+        <tr><td><code>aggregate</code></td><td><code>sum_expression</code> (vd <code>01+02+…</code>)</td><td>Cộng amount, union <code>aml_ids</code></td></tr>
+    </table>
+</section>
+
+<section id="tt200">
+    <h2>8. Liên hệ TT200</h2>
+    <p>Bảng Thông tư (Chỉ tiêu / Mã số / TK Nợ / TK Có) được <strong>phản ánh</strong> trong cấu hình template dữ liệu <code>data/b03dn_template_tt200_direct.xml</code>: tên chỉ tiêu, <code>code</code>, <code>debit_account_patterns</code>, <code>credit_account_patterns</code>, loại dòng (leaf / tổng hợp / đầu kỳ / tỷ giá).</p>
+    <p class="muted">Cột TK tiền (111, 112…) trên TT200 thường chỉ để đối chiếu; engine quét TK tiền theo <code>_cash_account_ids</code>, không lọc bằng hai pattern trên cho “cột tiền”.</p>
+</section>
+
+<section id="examples">
+    <h2>9. Ví dụ minh họa — data vào / data ra</h2>
+    <p class="muted">Đơn vị: VND. Giả sử chỉ quét TK tiền <strong>1111</strong>. Template rút gọn hai leaf: <code>sequence</code> 10 → mã <strong>01</strong> (<code>credit_account_patterns = 511%,131%</code>); <code>sequence</code> 20 → mã <strong>02</strong> (<code>debit_account_patterns = 331%</code>). <code>amount_multiplier = 1</code>, không thẻ, không <code>extra_domain</code>.</p>
+
+    <h3>9.1. Thu tiền bán hàng (tiền vào)</h3>
+    <p><strong>Data vào</strong> — các dòng <code>account.move.line</code> (cùng chứng từ A, đã post, trong kỳ):</p>
+    <table>
+        <tr><th>id</th><th>Move</th><th>TK</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td>100</td><td>A</td><td>1111</td><td>20.000.000</td><td>0</td></tr>
+        <tr><td>101</td><td>A</td><td>5111</td><td>0</td><td>20.000.000</td></tr>
+    </table>
+    <p><strong>Bước quét tiền:</strong> vào <code>cash_amls</code> chỉ dòng <strong>100</strong> (TK 1111).</p>
+    <p><strong>Data trung gian — fragment:</strong></p>
+    <pre>
+cash_aml_id=100, amount=20_000_000, is_inflow=True,
+counterpart_code="5111", counterpart_account_id=&lt;id 5111&gt;
+    </pre>
+    <p><strong>Gán leaf:</strong> <code>is_inflow</code> → dùng <code>credit_account_patterns</code> của từng leaf; mã <strong>01</strong> khớp tiền tố <code>511%</code>. <code>signed = +20.000.000</code>.</p>
+    <p><strong>Data ra</strong> — phần <code>lines_by_code</code> (trích):</p>
+    <pre>
+"01": { amount: 20_000_000, aml_ids: [100] }
+    </pre>
+
+    <h3>9.2. Chi trả nhà cung cấp (tiền ra)</h3>
+    <p><strong>Data vào</strong> — chứng từ B:</p>
+    <table>
+        <tr><th>id</th><th>Move</th><th>TK</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td>200</td><td>B</td><td>3311</td><td>10.000.000</td><td>0</td></tr>
+        <tr><td>201</td><td>B</td><td>1111</td><td>0</td><td>10.000.000</td></tr>
+    </table>
+    <p><strong><code>cash_amls</code>:</strong> dòng <strong>201</strong>.</p>
+    <p><strong>Fragment:</strong></p>
+    <pre>
+cash_aml_id=201, amount=10_000_000, is_inflow=False,
+counterpart_code="3311"
+    </pre>
+    <p><strong>Gán leaf:</strong> dùng <code>debit_account_patterns</code> → mã <strong>02</strong> khớp <code>331%</code>. <code>signed = -10.000.000</code>.</p>
+    <p><strong>Data ra:</strong></p>
+    <pre>
+"02": { amount: -10_000_000, aml_ids: [201] }
+    </pre>
+
+    <h3>9.3. Một lần xuất quỹ, hai đối ứng Nợ (phân bổ)</h3>
+    <p><strong>Data vào</strong> — chứng từ C (trả NCC + VAT cùng một dòng Có tiền):</p>
+    <table>
+        <tr><th>id</th><th>Move</th><th>TK</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td>301</td><td>C</td><td>3311</td><td>20.000.000</td><td>0</td></tr>
+        <tr><td>302</td><td>C</td><td>3331</td><td>3.600.000</td><td>0</td></tr>
+        <tr><td>303</td><td>C</td><td>1111</td><td>0</td><td>23.600.000</td></tr>
+    </table>
+    <p><strong><code>cash_amls</code>:</strong> dòng <strong>303</strong> (Có 23.600.000).</p>
+    <p><strong>Data trung gian — hai fragment</strong> (trọng số Nợ 20M và 3,6M):</p>
+    <pre>
+{ cash_aml_id:303, amount≈20_000_000, is_inflow:False, counterpart_code:"3311" }
+{ cash_aml_id:303, amount≈3_600_000,  is_inflow:False, counterpart_code:"3331" }
+    </pre>
+    <p>Giả sử còn leaf mã <strong>05</strong> với <code>debit_account_patterns = 333%</code> (hoặc <code>3331</code> chính xác) và <code>sequence</code> sao cho thử sau mã 02: fragment <strong>3311</strong> khớp <strong>02</strong> trước; fragment <strong>3331</strong> không khớp <code>331%</code> → thử tiếp → khớp <strong>05</strong>. <strong>Data ra</strong> kiểu: <code>"02": -20.000.000</code>, <code>"05": -3.600.000</code> (cùng <code>aml_ids</code> chứa 303 nếu cả hai phần đều từ dòng tiền đó).</p>
+
+    <div class="note ok"><strong>Drill-down <code>aml_ids</code>:</strong> với leaf, tập id trỏ tới <strong>dòng tiền</strong> (<code>cash_aml_id</code>), không nhất thiết là dòng doanh thu hay phải trả.</div>
+
+    <h3>9.4. Bộ chứng từ mẫu — 27 bút toán (đủ mọi leaf 01–07, 21–27, 31–36 + nội bộ tiền)</h3>
+    <p class="muted">Căn cứ <code>data/b03dn_template_tt200_direct.xml</code>. Số tiền VND minh họa — có thể thay đổi tùy ý.</p>
+
+    <h4 id="sample-journal-input">9.4.1. Đầu vào đầy đủ — <code>account.move.line</code> (27 chứng từ, 55 dòng)</h4>
+    <p>Đây là <strong>dữ liệu gốc</strong> trước khi engine tách <code>cash_amls</code> / fragment: mỗi <strong>BT</strong> là một chứng từ cân Nợ/Có; chỉ các dòng TK thuộc nhóm tiền (1111, 1121, …) được coi là <strong>dòng tiền</strong> để ghép đối ứng.</p>
+    <div class="table-scroll">
+    <table class="data-sample">
+        <tr><th>BT</th><th>#</th><th>Diễn giải</th><th>TK</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td rowspan="2">B01</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>50.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu bán hàng</td><td>5111</td><td>—</td><td>50.000.000</td></tr>
+        <tr><td rowspan="2">B02</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>30.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Phải thu khách hàng</td><td>1311</td><td>—</td><td>30.000.000</td></tr>
+        <tr><td rowspan="2">B03</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>8.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu dịch vụ</td><td>5151</td><td>—</td><td>8.000.000</td></tr>
+        <tr><td rowspan="2">B04</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>5.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Người mua trả tiền trước</td><td>1211</td><td>—</td><td>5.000.000</td></tr>
+        <tr><td rowspan="2">B05</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>1.200.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Thu nhập khác</td><td>7111</td><td>—</td><td>1.200.000</td></tr>
+        <tr><td rowspan="2">B06</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>400.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu TC (lãi gửi)</td><td>5151</td><td>—</td><td>400.000</td></tr>
+        <tr><td rowspan="2">B07</td><td>1</td><td>Phải trả người bán</td><td>3311</td><td>18.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>18.000.000</td></tr>
+        <tr><td rowspan="2">B08</td><td>1</td><td>Chi phí mua hàng (hàng tồn kho)</td><td>1521</td><td>7.500.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>7.500.000</td></tr>
+        <tr><td rowspan="2">B09</td><td>1</td><td>Chi phí nhân công</td><td>3341</td><td>22.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>22.000.000</td></tr>
+        <tr><td rowspan="2">B10</td><td>1</td><td>Chi phí lãi vay</td><td>6354</td><td>1.100.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>1.100.000</td></tr>
+        <tr><td rowspan="2">B11</td><td>1</td><td>Thuế TNDN hiện hành</td><td>3334</td><td>4.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>4.000.000</td></tr>
+        <tr><td rowspan="2">B12</td><td>1</td><td>Chi phí dịch vụ mua ngoài</td><td>8111</td><td>900.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>900.000</td></tr>
+        <tr><td rowspan="2">B13</td><td>1</td><td>Thuế GTGT phải nộp</td><td>3331</td><td>12.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>12.000.000</td></tr>
+        <tr><td rowspan="3">B14</td><td>1</td><td>Phải trả người bán</td><td>3311</td><td>20.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Thuế GTGT phải nộp</td><td>3331</td><td>3.600.000</td><td>—</td></tr>
+        <tr><td>3</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>23.600.000</td></tr>
+        <tr><td rowspan="2">B15</td><td>1</td><td>TSCĐ (mua sắm)</td><td>2111</td><td>45.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>45.000.000</td></tr>
+        <tr><td rowspan="2">B16</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>6.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>DT khác (thanh lý TSCĐ)</td><td>5117</td><td>—</td><td>6.000.000</td></tr>
+        <tr><td rowspan="2">B17</td><td>1</td><td>Đầu tư nắm giữ đến đáo hạn</td><td>1281</td><td>10.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>10.000.000</td></tr>
+        <tr><td rowspan="2">B18</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>10.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Đầu tư nắm giữ đến đáo hạn</td><td>1281</td><td>—</td><td>10.000.000</td></tr>
+        <tr><td rowspan="2">B19</td><td>1</td><td>Đầu tư vào công ty khác</td><td>2211</td><td>15.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>15.000.000</td></tr>
+        <tr><td rowspan="2">B20</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>15.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Đầu tư vào công ty khác</td><td>2211</td><td>—</td><td>15.000.000</td></tr>
+        <tr><td rowspan="2">B21</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>50.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Vốn đầu tư của chủ sở hữu</td><td>4111</td><td>—</td><td>50.000.000</td></tr>
+        <tr><td rowspan="2">B22</td><td>1</td><td>Vốn đầu tư của chủ sở hữu</td><td>4111</td><td>5.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>5.000.000</td></tr>
+        <tr><td rowspan="2">B23</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>100.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Phải trả (khoản vay)</td><td>3411</td><td>—</td><td>100.000.000</td></tr>
+        <tr><td rowspan="2">B24</td><td>1</td><td>Phải trả (khoản vay)</td><td>3411</td><td>40.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>40.000.000</td></tr>
+        <tr><td rowspan="2">B25</td><td>1</td><td>Phải trả thuê tài chính</td><td>3412</td><td>3.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>3.000.000</td></tr>
+        <tr><td rowspan="2">B26</td><td>1</td><td>Phải trả cổ tức</td><td>4211</td><td>8.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>8.000.000</td></tr>
+        <tr><td rowspan="2">B27</td><td>1</td><td>Tiền mặt (quỹ)</td><td>1111</td><td>20.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>20.000.000</td></tr>
+    </table>
+    </div>
+
+    <h4>9.4.2. Bảng tra nhanh (1 dòng / chứng từ)</h4>
+    <p class="muted">Cột «Kỳ vọng» là mã leaf sau bước <em>first match</em> (trừ B27 không sinh fragment).</p>
+    <div class="table-scroll">
+    <table class="data-sample">
+        <tr><th>BT</th><th>Diễn giải</th><th>TK tiền</th><th>Inflow?</th><th>Đối ứng (mã TK)</th><th>Số</th><th>Kỳ vọng <code>code</code></th></tr>
+        <tr><td>B01</td><td>Thu bán hàng</td><td>1121</td><td>Y</td><td>5111 Cr</td><td>50.000.000</td><td>01</td></tr>
+        <tr><td>B02</td><td>Thu khách (131)</td><td>1121</td><td>Y</td><td>1311 Cr</td><td>30.000.000</td><td>01</td></tr>
+        <tr><td>B03</td><td>Thu dịch vụ (515)</td><td>1121</td><td>Y</td><td>5151 Cr</td><td>8.000.000</td><td>01</td></tr>
+        <tr><td>B04</td><td>Thu nhận trước (121)</td><td>1121</td><td>Y</td><td>1211 Cr</td><td>5.000.000</td><td>01</td></tr>
+        <tr><td>B05</td><td>Thu khác HĐKD</td><td>1121</td><td>Y</td><td>7111 Cr</td><td>1.200.000</td><td>06</td></tr>
+        <tr><td>B06</td><td>Lãi tiền gửi (515)</td><td>1121</td><td>Y</td><td>5151 Cr</td><td>400.000</td><td>01</td></tr>
+        <tr><td>B07</td><td>Trả NCC</td><td>1121</td><td>N</td><td>3311 Dr</td><td>18.000.000</td><td>02</td></tr>
+        <tr><td>B08</td><td>Mua hàng trả tiền (152)</td><td>1121</td><td>N</td><td>1521 Dr</td><td>7.500.000</td><td>02</td></tr>
+        <tr><td>B09</td><td>Chi lương</td><td>1121</td><td>N</td><td>3341 Dr</td><td>22.000.000</td><td>03</td></tr>
+        <tr><td>B10</td><td>Chi lãi vay (6354)</td><td>1121</td><td>N</td><td>6354 Dr</td><td>1.100.000</td><td>04</td></tr>
+        <tr><td>B11</td><td>Nộp TNDN (3334)</td><td>1121</td><td>N</td><td>3334 Dr</td><td>4.000.000</td><td>05</td></tr>
+        <tr><td>B12</td><td>Chi DV mua ngoài (811)</td><td>1121</td><td>N</td><td>8111 Dr</td><td>900.000</td><td>07</td></tr>
+        <tr><td>B13</td><td>Nộp GTGT (3331)</td><td>1121</td><td>N</td><td>3331 Dr</td><td>12.000.000</td><td>07</td></tr>
+        <tr><td>B14</td><td>Một CT: NCC+GTGT</td><td>1121</td><td>N</td><td>3311 Dr 20M ; 3331 Dr 3,6M</td><td>23.600.000</td><td>02 (−20M) + 07 (−3,6M)</td></tr>
+        <tr><td>B15</td><td>Mua TSCĐ</td><td>1121</td><td>N</td><td>2111 Dr</td><td>45.000.000</td><td>21</td></tr>
+        <tr><td>B16</td><td>Thanh lý TSCĐ</td><td>1121</td><td>Y</td><td>5117 Cr</td><td>6.000.000</td><td>22</td></tr>
+        <tr><td>B17</td><td>Cho vay</td><td>1121</td><td>N</td><td>1281 Dr</td><td>10.000.000</td><td>23</td></tr>
+        <tr><td>B18</td><td>Thu hồi cho vay</td><td>1121</td><td>Y</td><td>1281 Cr</td><td>10.000.000</td><td>24</td></tr>
+        <tr><td>B19</td><td>Góp vốn DN khác</td><td>1121</td><td>N</td><td>2211 Dr</td><td>15.000.000</td><td>25</td></tr>
+        <tr><td>B20</td><td>Thoái vốn</td><td>1121</td><td>Y</td><td>2211 Cr</td><td>15.000.000</td><td>26</td></tr>
+        <tr><td>B21</td><td>Nhận vốn chủ</td><td>1121</td><td>Y</td><td>4111 Cr</td><td>50.000.000</td><td>31</td></tr>
+        <tr><td>B22</td><td>Trả vốn / CP quỹ</td><td>1121</td><td>N</td><td>4111 Dr</td><td>5.000.000</td><td>32</td></tr>
+        <tr><td>B23</td><td>Nhận vay</td><td>1121</td><td>Y</td><td>3411 Cr</td><td>100.000.000</td><td>33</td></tr>
+        <tr><td>B24</td><td>Trả gốc vay</td><td>1121</td><td>N</td><td>3411 Dr</td><td>40.000.000</td><td>34</td></tr>
+        <tr><td>B25</td><td>Trả gốc thuê TC</td><td>1121</td><td>N</td><td>3412 Dr</td><td>3.000.000</td><td>35</td></tr>
+        <tr><td>B26</td><td>Chi cổ tức</td><td>1121</td><td>N</td><td>4211 Dr</td><td>8.000.000</td><td>36</td></tr>
+        <tr><td>B27</td><td>1121 → 1111 nội bộ</td><td>1111+1121</td><td>—</td><td>chỉ tiền ↔ tiền</td><td>20.000.000</td><td><em>không fragment</em></td></tr>
+    </table>
+    </div>
+    <p class="muted">Để đối chiếu nhanh: cộng dồn cột «Số» theo từng <code>code</code> (inflow = dương, outflow = âm trong <code>lines_by_code</code>) sẽ khớp logic Bước D trong mục 2 — ngoại trừ dòng tổng <code>20</code>, <code>30</code>, <code>40</code>, <code>50</code>, <code>60</code>, <code>61</code>, <code>70</code> đến từ <code>aggregate</code> / <code>opening_cash</code> / <code>fx_adjustment</code>.</p>
+
+    <h3>9.5. Báo cáo (đầu ra) từ đúng bộ B01–B26 — <code>lines_by_code</code> và aggregate</h3>
+    <p>Giả định kỳ báo cáo chỉ chứa các chứng từ tiền tương ứng <strong>9.4.1</strong> (và không có phát sinh tiền khác). Khi đó <code>compute_period</code> cho phần leaf có dạng (trích — <code>aml_ids</code> bỏ qua ở đây):</p>
+    <pre>
+// Leaf (VND) — dấu: inflow +, outflow −
+"01":  93_400_000    // B01+B02+B03+B04+B06
+"02": -45_500_000    // B07+B08+B14(20M)
+"03": -22_000_000    // B09
+"04":  -1_100_000    // B10
+"05":  -4_000_000    // B11
+"06":   1_200_000    // B05
+"07": -16_500_000    // B12+B13+B14(3,6M)
+"21": -45_000_000    // B15
+"22":   6_000_000    // B16
+"23": -10_000_000    // B17
+"24":  10_000_000    // B18
+"25": -15_000_000    // B19
+"26":  15_000_000    // B20
+"27":           0    // không có fragment chỉ khớp 27 trong bộ mẫu
+"31":  50_000_000    // B21
+"32":  -5_000_000    // B22
+"33": 100_000_000    // B23
+"34": -40_000_000    // B24
+"35":  -3_000_000    // B25
+"36":  -8_000_000    // B26
+    </pre>
+    <p>Sau bước <code>aggregate</code> (theo <code>sum_expression</code> trong XML): <code>20 = 01+02+03+04+05+06+07 → 5_500_000</code>; <code>30 = 21+…+27 → -39_000_000</code>; <code>40 = 31+…+36 → 94_000_000</code>; <code>50 = 20+30+40 → 60_500_000</code>. Bút <strong>B27</strong> không thay đổi bất kỳ bucket leaf nào. <code>60</code> (đầu kỳ), <code>61</code> (FX), <code>70</code> (cuối kỳ) cần thêm dữ liệu ngoài bộ chứng từ mẫu.</p>
+    <p class="muted">Quản lý: <a href="lctt_tt200_calculation_management.html">lctt_tt200_calculation_management.html</a> · Cấu hình template (dev): <a href="b03dn_template_config_dev.html">b03dn_template_config_dev.html</a></p>
+</section>
+
+<section id="files">
+    <h2>10. File tham chiếu trong repo</h2>
+    <ul>
+        <li><code>models/b03dn_engine.py</code> — <code>compute_period</code>, <code>_fragment_from_cash_line</code>, match</li>
+        <li><code>models/b03dn_template.py</code> — field template line</li>
+        <li><code>data/b03dn_template_tt200_direct.xml</code> — mặc định TT200</li>
+    </ul>
+    <p>Quản lý: <a href="lctt_tt200_calculation_management.html">lctt_tt200_calculation_management.html</a> · Kế toán (template): <a href="b03dn_template_config_user.html">b03dn_template_config_user.html</a></p>
+</section>
+
+</div>
+</body>
+</html>

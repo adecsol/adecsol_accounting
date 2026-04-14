@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_vn_b03dn_template_tree" model="ir.ui.view">
+        <field name="name">l10n.vn.b03dn.template.tree</field>
+        <field name="model">l10n.vn.b03dn.template</field>
+        <field name="arch" type="xml">
+            <list string="Mẫu B03-DN">
+                <field name="name"/>
+                <field name="circular_type"/>
+                <field name="company_id"/>
+                <field name="document_dossier_id" optional="hide"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_l10n_vn_b03dn_template_form" model="ir.ui.view">
+        <field name="name">l10n.vn.b03dn.template.form</field>
+        <field name="model">l10n.vn.b03dn.template</field>
+        <field name="arch" type="xml">
+            <form string="Mẫu B03-DN">
+                <sheet>
+                    <field
+                        name="b03dn_tag_config_alert"
+                        nolabel="1"
+                        colspan="2"
+                        readonly="1"
+                        invisible="not b03dn_tag_config_alert"
+                    />
+                    <group>
+                        <field name="name"/>
+                        <field name="circular_type"/>
+                        <field name="active"/>
+                        <field name="company_id"/>
+                        <field
+                            name="document_dossier_id"
+                            domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]"
+                        />
+                        <field name="cash_account_ids" widget="many2many_tags"/>
+                    </group>
+                    <field
+                        name="line_ids"
+                        widget="b03dn_template_line_one2many"
+                        context="{'default_template_id': id}"
+                    >
+                        <list
+                            editable="bottom"
+                            string="Chỉ tiêu"
+                            decoration-bf="display_type == 'line_section'"
+                            decoration-it="display_type == 'line_note'"
+                        >
+                            <control>
+                                <create
+                                    name="b03dn_add_line"
+                                    string="Thêm chỉ tiêu"
+                                    context="{'default_display_type': False}"
+                                />
+                                <create
+                                    name="b03dn_add_section"
+                                    string="Thêm phần"
+                                    context="{'default_display_type': 'line_section'}"
+                                />
+                                <create
+                                    name="b03dn_add_note"
+                                    string="Thêm ghi chú"
+                                    context="{'default_display_type': 'line_note'}"
+                                />
+                            </control>
+                            <field name="sequence" widget="handle"/>
+                            <field name="display_type" column_invisible="True"/>
+                            <field
+                                name="name"
+                                widget="html"
+                                required="not display_type"
+                            />
+                            <field name="code"/>
+                            <field
+                                name="debit_account_patterns"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="credit_account_patterns"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="exclude_account_patterns"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="explanation_ref"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="sum_expression"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="use_opening_cash_balance"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="amount_multiplier"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="tag_ids"
+                                widget="many2many_tags"
+                                optional="show"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="exclude_tag_ids"
+                                widget="many2many_tags"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="tag_match_mode"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="tag_source"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="fx_account_patterns"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                            <field
+                                name="extra_domain"
+                                optional="hide"
+                                invisible="display_type"
+                            />
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_l10n_vn_b03dn_template" model="ir.actions.act_window">
+        <field name="name">B03-DN — Mẫu báo cáo</field>
+        <field name="res_model">l10n.vn.b03dn.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem
+        id="menu_l10n_vn_b03dn_template"
+        name="Mẫu B03-DN"
+        parent="account.menu_finance_configuration"
+        action="action_l10n_vn_b03dn_template"
+        sequence="95"
+    />
+</odoo>

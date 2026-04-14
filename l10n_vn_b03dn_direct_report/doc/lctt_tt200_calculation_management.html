@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Lưu chuyển tiền tệ (B03-DN) — Hiểu cách có con số</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --surface: rgba(255, 255, 255, 0.96);
+            --text: #152238;
+            --muted: #546e7a;
+            --primary: #0d47a1;
+            --primary-mid: #1565c0;
+            --accent: #00838f;
+            --accent2: #0d9488;
+            --table-head: #e3f2fd;
+            --border: rgba(13, 71, 161, 0.16);
+            --radius: 14px;
+            --shadow: 0 8px 28px rgba(13, 71, 161, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --surface: rgba(22, 34, 54, 0.96);
+                --text: #e8eef5;
+                --muted: #90a4ae;
+                --border: rgba(100, 181, 246, 0.22);
+                --table-head: rgba(13, 71, 161, 0.35);
+                --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            }
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Be Vietnam Pro", system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -5%, rgba(13, 71, 161, 0.07), transparent 50%),
+                linear-gradient(180deg, #eef3f9 0%, #f8fafc 45%, #f0f7fa 100%);
+            min-height: 100vh;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background:
+                    radial-gradient(ellipse 70% 45% at 15% 0%, rgba(21, 101, 192, 0.18), transparent 55%),
+                    linear-gradient(180deg, #0d1520 0%, #121c2a 50%, #0f1722 100%);
+            }
+        }
+        .hero {
+            background: linear-gradient(125deg, #0d47a1 0%, #1565c0 42%, #00838f 100%);
+            color: #fff;
+            padding: 2.85rem 1.5rem 3.1rem;
+            text-align: center;
+            box-shadow: 0 12px 40px rgba(13, 71, 161, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .hero h1 {
+            margin: 0 0 0.65rem;
+            font-family: "Outfit", "Be Vietnam Pro", sans-serif;
+            font-size: clamp(1.35rem, 4vw, 1.85rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .hero p {
+            margin: 0 auto;
+            max-width: 38rem;
+            opacity: 0.98;
+            font-size: 1.05rem;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+        }
+        .wrap {
+            max-width: 44rem;
+            margin: -1.75rem auto 0;
+            padding: 0 1.25rem 3.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.65rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            margin: 0 0 0.75rem;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.45rem;
+        }
+        .card h3 {
+            margin: 1.15rem 0 0.5rem;
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        p { margin: 0.6rem 0; }
+        ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+        li { margin: 0.4rem 0; }
+        li::marker { color: var(--accent2); }
+        .muted { color: var(--muted); font-size: 0.95rem; }
+        .highlight {
+            background: linear-gradient(135deg, rgba(227, 242, 253, 0.9) 0%, rgba(224, 247, 250, 0.65) 100%);
+            border-radius: var(--radius);
+            padding: 1rem 1.15rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+        @media (prefers-color-scheme: dark) {
+            .highlight {
+                background: linear-gradient(135deg, rgba(13, 71, 161, 0.28) 0%, rgba(0, 131, 143, 0.18) 100%);
+            }
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-top: 2rem;
+        }
+        .footer-note a { color: var(--primary-mid); font-weight: 600; text-decoration: none; }
+        .footer-note a:hover { color: var(--accent); text-decoration: underline; }
+        table.ex {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            margin: 0.75rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        table.ex th, table.ex td {
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.55rem;
+            text-align: left;
+        }
+        table.ex th {
+            background: var(--table-head);
+            color: var(--primary);
+            font-weight: 600;
+            font-family: "Outfit", sans-serif;
+        }
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0.75rem 0;
+            border-radius: 12px;
+        }
+        table.ex.wide { min-width: 52rem; font-size: 0.85rem; }
+        table.ex.wide th, table.ex.wide td { vertical-align: top; }
+        a { color: var(--primary-mid); font-weight: 600; }
+        a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Báo cáo Lưu chuyển tiền tệ<br/><span style="font-weight:600;font-size:0.92em">Mẫu B03-DN — Phương pháp trực tiếp (Thông tư 200)</span></h1>
+    <p>Cách hiểu <strong>con số trên từng chỉ tiêu</strong> mà không cần nắm chi tiết kỹ thuật phần mềm.</p>
+</header>
+
+<div class="wrap">
+
+<div class="card">
+    <h2>Báo cáo lấy số từ đâu?</h2>
+    <p>Hệ thống đọc <strong>sổ kế toán đã ghi nhận</strong> (bút toán đã duyệt) trong <strong>kỳ báo cáo</strong> bạn chọn. Nó tập trung vào các khoản <strong>tiền mặt, tiền gửi, tương đương tiền</strong> (theo danh mục tài khoản cấu hình cho doanh nghiệp).</p>
+    <p>Mỗi lần tiền <strong>tăng</strong> hoặc <strong>giảm</strong> trên các tài khoản đó, hệ thống xem <strong>cùng một chứng từ</strong> có những tài khoản nào “đối ứng” để hiểu <strong>vì sao</strong> tiền vào hay ra: bán hàng, trả nhà cung cấp, trả lương, vay trả nợ, v.v.</p>
+</div>
+
+<div class="card">
+    <h2>Tiền vào và tiền ra được hiểu thế nào?</h2>
+    <ul>
+        <li><strong>Tiền vào:</strong> trên sổ, dòng tiền thể hiện <strong>Nợ</strong> tài khoản tiền (tiền về quỹ). Đối ứng thường là doanh thu, phải thu khách hàng… — đúng tinh thần cột <strong>TK Có</strong> trên bảng hướng dẫn Thông tư cho từng chỉ tiêu thu.</li>
+        <li><strong>Tiền ra:</strong> dòng tiền có phát sinh <strong>Có</strong> (tiền đi ra). Đối ứng thường là chi phí, phải trả… — tương ứng cột <strong>TK Nợ</strong> trên bảng cho từng chỉ tiêu chi.</li>
+    </ul>
+    <p class="muted">Nếu một chứng từ chỉ chuyển tiền từ tài khoản tiền này sang tài khoản tiền khác, báo cáo trực tiếp thường <strong>không tính</strong> như một dòng kinh doanh/đầu tư/tài chính — vì không có tác động “lý do” bên ngoài nhóm tiền.</p>
+</div>
+
+<div class="card">
+    <h2>Mỗi dòng trên báo cáo (mã 01, 02, …) tính ra sao?</h2>
+    <p>Trên phần mềm, mỗi mã chỉ tiêu có <strong>quy tắc gán</strong> đã được thiết lập cho doanh nghiệp, <strong>bám theo Thông tư 200</strong> (chỉ tiêu, mã số, gợi ý tài khoản đối ứng Nợ/Có).</p>
+    <div class="highlight">
+        <p style="margin:0"><strong>Cách đọc đơn giản:</strong> hệ thống cộng các khoản tiền vào/ra mà <strong>đối ứng khớp đúng nhóm tài khoản</strong> đã gắn cho chỉ tiêu đó. Thuộc nhóm nào trước thì vào chỉ tiêu đó (thứ tự ưu tiên do cấu hình quy định, để tránh một giao dịch bị tính hai lần hoài vào hai dòng khác nhau).</p>
+    </div>
+    <p>Có thể dùng thêm <strong>nhãn (thẻ)</strong> trên tài khoản hoặc trên bút toán để <strong>loại trừ</strong> hoặc <strong>bắt buộc</strong> một số trường hợp đặc biệt (ví dụ tách khoản chi không thuộc chỉ tiêu đang xét).</p>
+</div>
+
+<div class="card">
+    <h2>Ví dụ minh họa (≥ 20 bút toán — số liệu mẫu)</h2>
+    <p>Giả định: doanh nghiệp dùng <strong>template TT200 mặc định</strong> trong module (<code>b03dn_template_tt200_direct.xml</code>), tài khoản tiền gộp <strong>111%, 112%, 113%</strong>. Mỗi dòng dưới đây là <strong>một chứng từ (một bút toán)</strong> đã ghi; cột «Mã» là chỉ tiêu lá (leaf) mà luồng tiền <strong>thường</strong> được gán — theo thứ tự ưu tiên <code>sequence</code> trong cấu hình (leaf đầu tiên khớp pattern nhận fragment).</p>
+    <p class="muted">Số tiền chỉ mang tính minh họa (đơn vị VND). Bút toán <strong>B27</strong> là chuyển tiền giữa các TK tiền: báo cáo trực tiếp thường <strong>không tạo</strong> dòng chỉ tiêu kinh doanh/đầu tư/tài chính.</p>
+
+    <h3 id="sample-journal-input">Dữ liệu đầu vào — sổ chi tiết (27 chứng từ, 55 dòng Nợ/Có)</h3>
+    <p>Đây là <strong>đầu vào thực tế</strong> kiểu <code>account.move.line</code>: mỗi nhóm cùng <strong>BT</strong> là một chứng từ đã post; engine chỉ lấy các dòng có TK thuộc nhóm tiền (111/112/113…) làm <strong>dòng tiền</strong>, rồi ghép đối ứng trên cùng chứng từ.</p>
+    <div class="table-scroll">
+    <table class="ex wide">
+        <tr><th>BT</th><th>#</th><th>Diễn giải</th><th>TK</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td rowspan="2">B01</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>50.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu bán hàng</td><td>5111</td><td>—</td><td>50.000.000</td></tr>
+        <tr><td rowspan="2">B02</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>30.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Phải thu khách hàng</td><td>1311</td><td>—</td><td>30.000.000</td></tr>
+        <tr><td rowspan="2">B03</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>8.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu dịch vụ</td><td>5151</td><td>—</td><td>8.000.000</td></tr>
+        <tr><td rowspan="2">B04</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>5.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Người mua trả tiền trước</td><td>1211</td><td>—</td><td>5.000.000</td></tr>
+        <tr><td rowspan="2">B05</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>1.200.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Thu nhập khác</td><td>7111</td><td>—</td><td>1.200.000</td></tr>
+        <tr><td rowspan="2">B06</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>400.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Doanh thu TC (lãi gửi)</td><td>5151</td><td>—</td><td>400.000</td></tr>
+        <tr><td rowspan="2">B07</td><td>1</td><td>Phải trả người bán</td><td>3311</td><td>18.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>18.000.000</td></tr>
+        <tr><td rowspan="2">B08</td><td>1</td><td>Chi phí mua hàng (hàng tồn kho)</td><td>1521</td><td>7.500.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>7.500.000</td></tr>
+        <tr><td rowspan="2">B09</td><td>1</td><td>Chi phí nhân công</td><td>3341</td><td>22.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>22.000.000</td></tr>
+        <tr><td rowspan="2">B10</td><td>1</td><td>Chi phí lãi vay</td><td>6354</td><td>1.100.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>1.100.000</td></tr>
+        <tr><td rowspan="2">B11</td><td>1</td><td>Thuế TNDN hiện hành</td><td>3334</td><td>4.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>4.000.000</td></tr>
+        <tr><td rowspan="2">B12</td><td>1</td><td>Chi phí dịch vụ mua ngoài</td><td>8111</td><td>900.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>900.000</td></tr>
+        <tr><td rowspan="2">B13</td><td>1</td><td>Thuế GTGT phải nộp</td><td>3331</td><td>12.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>12.000.000</td></tr>
+        <tr><td rowspan="3">B14</td><td>1</td><td>Phải trả người bán</td><td>3311</td><td>20.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Thuế GTGT phải nộp</td><td>3331</td><td>3.600.000</td><td>—</td></tr>
+        <tr><td>3</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>23.600.000</td></tr>
+        <tr><td rowspan="2">B15</td><td>1</td><td>TSCĐ (mua sắm)</td><td>2111</td><td>45.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>45.000.000</td></tr>
+        <tr><td rowspan="2">B16</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>6.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>DT khác (thanh lý TSCĐ)</td><td>5117</td><td>—</td><td>6.000.000</td></tr>
+        <tr><td rowspan="2">B17</td><td>1</td><td>Đầu tư nắm giữ đến đáo hạn</td><td>1281</td><td>10.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>10.000.000</td></tr>
+        <tr><td rowspan="2">B18</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>10.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Đầu tư nắm giữ đến đáo hạn</td><td>1281</td><td>—</td><td>10.000.000</td></tr>
+        <tr><td rowspan="2">B19</td><td>1</td><td>Đầu tư vào công ty khác</td><td>2211</td><td>15.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>15.000.000</td></tr>
+        <tr><td rowspan="2">B20</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>15.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Đầu tư vào công ty khác</td><td>2211</td><td>—</td><td>15.000.000</td></tr>
+        <tr><td rowspan="2">B21</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>50.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Vốn đầu tư của chủ sở hữu</td><td>4111</td><td>—</td><td>50.000.000</td></tr>
+        <tr><td rowspan="2">B22</td><td>1</td><td>Vốn đầu tư của chủ sở hữu</td><td>4111</td><td>5.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>5.000.000</td></tr>
+        <tr><td rowspan="2">B23</td><td>1</td><td>Tiền gửi NH</td><td>1121</td><td>100.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Phải trả người bán (khoản vay)</td><td>3411</td><td>—</td><td>100.000.000</td></tr>
+        <tr><td rowspan="2">B24</td><td>1</td><td>Phải trả người bán (khoản vay)</td><td>3411</td><td>40.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>40.000.000</td></tr>
+        <tr><td rowspan="2">B25</td><td>1</td><td>Phải trả thuê tài chính</td><td>3412</td><td>3.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>3.000.000</td></tr>
+        <tr><td rowspan="2">B26</td><td>1</td><td>Phải trả cổ tức</td><td>4211</td><td>8.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>8.000.000</td></tr>
+        <tr><td rowspan="2">B27</td><td>1</td><td>Tiền mặt (quỹ)</td><td>1111</td><td>20.000.000</td><td>—</td></tr>
+        <tr><td>2</td><td>Tiền gửi NH</td><td>1121</td><td>—</td><td>20.000.000</td></tr>
+    </table>
+    </div>
+    <p class="muted">Chi tiết giống hệt nằm trong tài liệu kỹ thuật (<a href="lctt_tt200_calculation_technical.html#sample-journal-input">mục 9.4.1</a>) để dev đối chiếu với báo cáo.</p>
+
+    <h3>Bảng chứng từ mẫu theo từng nhóm chỉ tiêu (tra nhanh)</h3>
+    <div class="table-scroll">
+    <table class="ex wide">
+        <tr>
+            <th>BT</th>
+            <th>Nghiệp vụ (tóm tắt)</th>
+            <th>Tiền (TK)</th>
+            <th>Chiều</th>
+            <th>Đối ứng chính (TK)</th>
+            <th>Mã</th>
+            <th>Ghi chú nhanh</th>
+        </tr>
+        <tr><td>B01</td><td>Thu tiền bán hàng, ghi nhận DT ngay</td><td>1121</td><td>Vào</td><td>5111 (Có)</td><td>01</td><td>Tiền vào, đối ứng Có là DT</td></tr>
+        <tr><td>B02</td><td>Thu tiền khách (giảm phải thu)</td><td>1121</td><td>Vào</td><td>1311 (Có)</td><td>01</td><td>Khớp nhóm <code>131%</code> trên leaf 01</td></tr>
+        <tr><td>B03</td><td>Thu tiền cung cấp dịch vụ</td><td>1121</td><td>Vào</td><td>5151 (Có)</td><td>01</td><td>Leaf 01 có <code>515%</code>; (trùng pattern với 27 nhưng 01 đứng trước)</td></tr>
+        <tr><td>B04</td><td>Thu nhận trước của khách bằng tiền</td><td>1121</td><td>Vào</td><td>1211 (Có)</td><td>01</td><td>Khớp <code>121%</code></td></tr>
+        <tr><td>B05</td><td>Thu khác phục vụ HĐKD (bán phế liệu…)</td><td>1121</td><td>Vào</td><td>7111 (Có)</td><td>06</td><td>Thu khác HĐKD</td></tr>
+        <tr><td>B06</td><td>Thu tiền lãi gửi NH (phản ánh qua 515)</td><td>1121</td><td>Vào</td><td>5151 (Có)</td><td>01</td><td>Với template mặc định, thường vào 01 trước 27</td></tr>
+        <tr><td>B07</td><td>Chi trả nhà cung cấp (giảm phải trả)</td><td>1121</td><td>Ra</td><td>3311 (Nợ)</td><td>02</td><td>Chi trả NCC</td></tr>
+        <tr><td>B08</td><td>Chi mua hàng tồn kho (trả luôn tiền)</td><td>1121</td><td>Ra</td><td>1521 (Nợ)</td><td>02</td><td>Nhóm <code>152%</code> thuộc leaf 02</td></tr>
+        <tr><td>B09</td><td>Chi trả người lao động (lương)</td><td>1121</td><td>Ra</td><td>3341 (Nợ)</td><td>03</td><td>Chi lương</td></tr>
+        <tr><td>B10</td><td>Chi trả lãi vay (phí tài chính)</td><td>1121</td><td>Ra</td><td>6354 (Nợ)</td><td>04</td><td>Leaf 04 gồm <code>335%</code>, <code>6354%</code>, <code>242%</code></td></tr>
+        <tr><td>B11</td><td>Nộp thuế thu nhập DN (TNDN)</td><td>1121</td><td>Ra</td><td>3334 (Nợ)</td><td>05</td><td>Khớp <code>3334%</code></td></tr>
+        <tr><td>B12</td><td>Chi dịch vụ mua ngoài (QLDN, tiền)</td><td>1121</td><td>Ra</td><td>8111 (Nợ)</td><td>07</td><td>Khớp <code>811%</code> trên leaf 07</td></tr>
+        <tr><td>B13</td><td>Nộp thuế GTGT (phải nộp)</td><td>1121</td><td>Ra</td><td>3331 (Nợ)</td><td>07</td><td>Khớp <code>333%</code> trên leaf 07</td></tr>
+        <tr><td>B14</td><td>Chi một lần: trả NCC + nộp thuế GTGT</td><td>1121</td><td>Ra</td><td>3311 + 3331 (Nợ)</td><td>02 + 07</td><td>Hai đối ứng Nợ → hai fragment (phân bổ theo tỷ lệ số Nợ)</td></tr>
+        <tr><td>B15</td><td>Mua TSCĐ, thanh toán ngay</td><td>1121</td><td>Ra</td><td>2111 (Nợ)</td><td>21</td><td>Đầu tư TS cố định</td></tr>
+        <tr><td>B16</td><td>Thanh lý TSCĐ, thu tiền</td><td>1121</td><td>Vào</td><td>5117 (Có)</td><td>22</td><td>Thu từ thanh lý — nhóm <code>5117%</code></td></tr>
+        <tr><td>B17</td><td>Cho vay, chuyển tiền</td><td>1121</td><td>Ra</td><td>1281 (Nợ)</td><td>23</td><td>Đầu tư nắm giữ đến đáo hạn / cho vay</td></tr>
+        <tr><td>B18</td><td>Thu hồi cho vay</td><td>1121</td><td>Vào</td><td>1281 (Có)</td><td>24</td><td>Tiền về từ khoản cho vay</td></tr>
+        <tr><td>B19</td><td>Góp vốn đầu tư vào công ty khác</td><td>1121</td><td>Ra</td><td>2211 (Nợ)</td><td>25</td><td>Chi đầu tư góp vốn</td></tr>
+        <tr><td>B20</td><td>Thu hồi vốn góp (thoái vốn)</td><td>1121</td><td>Vào</td><td>2211 (Có)</td><td>26</td><td>Thu hồi đầu tư</td></tr>
+        <tr><td>B21</td><td>Nhận vốn góp / phát hành CP</td><td>1121</td><td>Vào</td><td>4111 (Có)</td><td>31</td><td>Hoạt động tài chính — thu vốn chủ</td></tr>
+        <tr><td>B22</td><td>Chi trả vốn / mua cổ phiếu quỹ</td><td>1121</td><td>Ra</td><td>4111 (Nợ)</td><td>32</td><td>Giảm vốn chủ (minh họa TK nhóm 411)</td></tr>
+        <tr><td>B23</td><td>Nhận tiền vay ngắn/dài hạn</td><td>1121</td><td>Vào</td><td>3411 (Có)</td><td>33</td><td>Thu từ đi vay</td></tr>
+        <tr><td>B24</td><td>Trả gốc vay</td><td>1121</td><td>Ra</td><td>3411 (Nợ)</td><td>34</td><td>Trả nợ gốc</td></tr>
+        <tr><td>B25</td><td>Trả gốc thuê tài chính</td><td>1121</td><td>Ra</td><td>3412 (Nợ)</td><td>35</td><td>Khớp <code>3412%</code></td></tr>
+        <tr><td>B26</td><td>Chi trả cổ tức, LN đã phân phối</td><td>1121</td><td>Ra</td><td>4211 (Nợ)</td><td>36</td><td>Khớp <code>421%</code></td></tr>
+        <tr><td>B27</td><td>Chuyển khoản từ NH về quỹ tiền mặt</td><td>1111 ↔ 1121</td><td>Nội bộ</td><td>—</td><td>—</td><td>Chỉ đổi chỗ giữa TK tiền → không vào các mã 01–36</td></tr>
+    </table>
+    </div>
+
+    <h3>Các bút toán mẫu sẽ lên báo cáo như thế nào?</h3>
+    <p>Trên mẫu B03-DN phương pháp trực tiếp, engine ghi nhận <strong>tiền vào kỳ báo cáo là số dương</strong>, <strong>tiền ra là số âm</strong> (cùng kỳ, sau khi Có/Bỏ qua nội bộ tiền). Mỗi chứng từ có dòng tiền chỉ làm thay đổi <strong>đúng một (hoặc vài) chỉ tiêu lá</strong> tương ứng; drill-down thường trỏ về <strong>dòng sổ tiền</strong> của chứng từ đó.</p>
+    <p class="muted">Dưới đây dùng <strong>đúng bộ số minh họa</strong> trong bảng kỹ thuật (B01–B26 có cột số; B27 không tăng giảm tiền ra/vào LCTT). <strong>Mã 60, 61, 70</strong> phụ thuộc số dư đầu kỳ / bút tỷ giá / công thức cuối — <strong>không</strong> suy ra chỉ từ 27 chứng từ này.</p>
+
+    <h4>Đóng góp từng bút toán → dòng chỉ tiêu và số</h4>
+    <div class="table-scroll">
+    <table class="ex wide">
+        <tr><th>BT</th><th>Mã</th><th>Diễn giải chỉ tiêu (rút gọn)</th><th>Số trên báo cáo (VND)</th></tr>
+        <tr><td>B01</td><td>01</td><td>Thu tiền bán hàng, cung cấp dịch vụ và kinh doanh</td><td><strong>+50.000.000</strong></td></tr>
+        <tr><td>B02</td><td>01</td><td>Cùng mã 01</td><td><strong>+30.000.000</strong></td></tr>
+        <tr><td>B03</td><td>01</td><td>Cùng mã 01</td><td><strong>+8.000.000</strong></td></tr>
+        <tr><td>B04</td><td>01</td><td>Cùng mã 01</td><td><strong>+5.000.000</strong></td></tr>
+        <tr><td>B05</td><td>06</td><td>Tiền thu khác từ hoạt động kinh doanh</td><td><strong>+1.200.000</strong></td></tr>
+        <tr><td>B06</td><td>01</td><td>Cùng mã 01 (lãi ghi 515 — ưu tiên leaf 01)</td><td><strong>+400.000</strong></td></tr>
+        <tr><td>B07</td><td>02</td><td>Tiền chi trả cho người cung cấp hàng hoá, dịch vụ</td><td><strong>−18.000.000</strong></td></tr>
+        <tr><td>B08</td><td>02</td><td>Cùng mã 02</td><td><strong>−7.500.000</strong></td></tr>
+        <tr><td>B09</td><td>03</td><td>Tiền chi trả cho người lao động</td><td><strong>−22.000.000</strong></td></tr>
+        <tr><td>B10</td><td>04</td><td>Tiền lãi vay đã trả</td><td><strong>−1.100.000</strong></td></tr>
+        <tr><td>B11</td><td>05</td><td>Thuế TNDN đã nộp</td><td><strong>−4.000.000</strong></td></tr>
+        <tr><td>B12</td><td>07</td><td>Tiền chi khác cho hoạt động kinh doanh</td><td><strong>−900.000</strong></td></tr>
+        <tr><td>B13</td><td>07</td><td>Cùng mã 07 (nộp thuế GTGT)</td><td><strong>−12.000.000</strong></td></tr>
+        <tr><td>B14</td><td>02 và 07</td><td>Một chứng từ, hai fragment: trả NCC → 02; nộp GTGT → 07</td><td><strong>−20.000.000</strong> và <strong>−3.600.000</strong></td></tr>
+        <tr><td>B15</td><td>21</td><td>Tiền chi mua sắm, xây dựng TSCĐ… (đầu tư)</td><td><strong>−45.000.000</strong></td></tr>
+        <tr><td>B16</td><td>22</td><td>Tiền thu thanh lý, nhượng bán TSCĐ…</td><td><strong>+6.000.000</strong></td></tr>
+        <tr><td>B17</td><td>23</td><td>Tiền chi cho vay, mua công cụ nợ…</td><td><strong>−10.000.000</strong></td></tr>
+        <tr><td>B18</td><td>24</td><td>Tiền thu hồi cho vay, bán lại công cụ nợ…</td><td><strong>+10.000.000</strong></td></tr>
+        <tr><td>B19</td><td>25</td><td>Tiền chi đầu tư góp vốn vào đơn vị khác</td><td><strong>−15.000.000</strong></td></tr>
+        <tr><td>B20</td><td>26</td><td>Tiền thu hồi đầu tư vốn vào đơn vị khác</td><td><strong>+15.000.000</strong></td></tr>
+        <tr><td>B21</td><td>31</td><td>Tiền thu từ phát hành CP, nhận vốn góp…</td><td><strong>+50.000.000</strong></td></tr>
+        <tr><td>B22</td><td>32</td><td>Tiền chi trả vốn góp, mua lại CP…</td><td><strong>−5.000.000</strong></td></tr>
+        <tr><td>B23</td><td>33</td><td>Tiền thu từ đi vay</td><td><strong>+100.000.000</strong></td></tr>
+        <tr><td>B24</td><td>34</td><td>Tiền trả nợ gốc vay</td><td><strong>−40.000.000</strong></td></tr>
+        <tr><td>B25</td><td>35</td><td>Tiền trả nợ gốc thuê tài chính</td><td><strong>−3.000.000</strong></td></tr>
+        <tr><td>B26</td><td>36</td><td>Cổ tức, lợi nhuận đã trả cho chủ sở hữu</td><td><strong>−8.000.000</strong></td></tr>
+        <tr><td>B27</td><td>—</td><td>Không vào các chỉ tiêu 01–36 (chỉ đổi TK tiền)</td><td><strong>0</strong> trên các dòng lá</td></tr>
+    </table>
+    </div>
+
+    <h4>Cộng dồn theo mã chỉ tiêu (cùng bộ B01–B26)</h4>
+    <p>Nếu trong kỳ <strong>chỉ</strong> có các bút toán tiền tương ứng B01–B26, các dòng lá có tổng sau (làm tròn đúng số trong bảng mẫu):</p>
+    <table class="ex">
+        <tr><th>Mã</th><th>Tổng (VND)</th><th>Nhóm</th></tr>
+        <tr><td>01</td><td>+93.400.000</td><td>I. HĐKD</td></tr>
+        <tr><td>06</td><td>+1.200.000</td><td>I. HĐKD</td></tr>
+        <tr><td>02</td><td>−45.500.000</td><td>I. HĐKD</td></tr>
+        <tr><td>03</td><td>−22.000.000</td><td>I. HĐKD</td></tr>
+        <tr><td>04</td><td>−1.100.000</td><td>I. HĐKD</td></tr>
+        <tr><td>05</td><td>−4.000.000</td><td>I. HĐKD</td></tr>
+        <tr><td>07</td><td>−16.500.000</td><td>I. HĐKD</td></tr>
+        <tr><td><strong>20</strong></td><td><strong>+5.500.000</strong></td><td><em>Lưu chuyển thuần HĐKD</em> (= 01+02+…+07)</td></tr>
+        <tr><td>21</td><td>−45.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>22</td><td>+6.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>23</td><td>−10.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>24</td><td>+10.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>25</td><td>−15.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>26</td><td>+15.000.000</td><td>II. Đầu tư</td></tr>
+        <tr><td>27</td><td>0</td><td>II. Đầu tư (bộ mẫu không có luồng chỉ khớp riêng 27)</td></tr>
+        <tr><td><strong>30</strong></td><td><strong>−39.000.000</strong></td><td><em>Lưu chuyển thuần đầu tư</em> (= 21+…+27)</td></tr>
+        <tr><td>31</td><td>+50.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td>32</td><td>−5.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td>33</td><td>+100.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td>34</td><td>−40.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td>35</td><td>−3.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td>36</td><td>−8.000.000</td><td>III. Tài chính</td></tr>
+        <tr><td><strong>40</strong></td><td><strong>+94.000.000</strong></td><td><em>Lưu chuyển thuần tài chính</em> (= 31+…+36)</td></tr>
+        <tr><td><strong>50</strong></td><td><strong>+60.500.000</strong></td><td><em>Lưu chuyển thuần trong kỳ</em> (= 20+30+40)</td></tr>
+    </table>
+    <p class="muted">Số trên giao diện báo cáo có thể định dạng theo mặt nạ tiền tệ; nhiều mẫu in vẫn thể hiện «chi» bằng số dương kèm tiêu đề cột — nhưng <strong>trong dữ liệu tính toán của module</strong> chi thường là <strong>âm</strong> như bảng trên.</p>
+
+    <p class="muted">Chi phí bán hàng / QLDN thường hạch toán qua <code>641%</code>, <code>642%</code>… Nếu các TK đó <strong>không</strong> nằm trong <code>debit_account_patterns</code> của leaf 07, luồng tiền có thể không vào mã 07 — cần chỉnh template hoặc thống nhất danh mục TK với bộ phận kế toán.</p>
+
+    <h3>Hai bút toán “xương sống” (đọc nhanh luồng tiền)</h3>
+    <p><strong>Thu từ bán hàng (B01):</strong></p>
+    <table class="ex">
+        <tr><th>Diễn giải</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td>Tiền gửi ngân hàng</td><td>50.000.000</td><td>—</td></tr>
+        <tr><td>Doanh thu bán hàng</td><td>—</td><td>50.000.000</td></tr>
+    </table>
+    <p><strong>Chi trả NCC (B07):</strong></p>
+    <table class="ex">
+        <tr><th>Diễn giải</th><th>Nợ</th><th>Có</th></tr>
+        <tr><td>Phải trả người bán</td><td>18.000.000</td><td>—</td></tr>
+        <tr><td>Tiền gửi ngân hàng</td><td>—</td><td>18.000.000</td></tr>
+    </table>
+
+    <div class="highlight">
+        <p style="margin:0"><strong>Tóm ý:</strong> Mỗi khoản trên LCTT là hệ quả của <strong>bút toán đã post</strong> có dòng <strong>tiền</strong> và <strong>đối ứng</strong> trên cùng chứng từ. Thứ tự leaf trong template quyết định chỉ tiêu nào “ăn trước” khi nhiều pattern có thể cùng khớp.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Các dòng “tổng” và dòng đầu kỳ / tỷ giá</h2>
+    <ul>
+        <li><strong>Tổng phần</strong> (ví dụ lưu chuyển thuần từ hoạt động kinh doanh): thường là <strong>cộng các dòng nhỏ</strong> bên dưới đã tính trước.</li>
+        <li><strong>Tiền và tương đương tiền đầu kỳ:</strong> lấy <strong>số dư đầu kỳ</strong> của nhóm tài khoản tiền trên sổ, trước ngày bắt đầu kỳ báo cáo. (Theo văn bản Thông tư, có thể đối chiếu với chỉ tiêu tương ứng trên bảng cân đối kế toán nếu sổ thống nhất.)</li>
+        <li><strong>Ảnh hưởng tỷ giá:</strong> gom các bút toán đánh giá chênh lệch tỷ giá theo tài khoản quy định (thường nhóm 413…), trong kỳ.</li>
+        <li><strong>Cuối kỳ (hoặc dòng đối chiếu):</strong> thường là <strong>công thức</strong>: biến động trong kỳ + đầu kỳ + tỷ giá. Số cuối có thể đối chiếu với bảng cân đối nếu toàn bộ luồng và công thức nhất quán.</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>Điều cần nhớ khi đọc số cho lãnh đạo</h2>
+    <ul>
+        <li>Báo cáo phản ánh <strong>hạch toán thực tế</strong>: nếu bút toán sai tài khoản hoặc tách chứng từ chưa chuẩn, luồng tiền hiển thị sẽ lệch so với ý nghĩa quản trị.</li>
+        <li>Cấu hình chỉ tiêu có thể <strong>điều chỉnh theo DN</strong> nhưng nên giữ đúng tinh thần <strong>Thông tư 200</strong> để so sánh được với hướng dẫn và với đối tác.</li>
+        <li>Nhiều chỉ tiêu cho phép <strong>bấm vào số</strong> để xem chi tiết các bút toán tiền liên quan (khi triển khai đủ tính năng drill-down).</li>
+    </ul>
+</div>
+
+<p class="footer-note">Kỹ thuật: <a href="lctt_tt200_calculation_technical.html">TT200 · Engine</a> · Cấu hình template (kế toán): <a href="b03dn_template_config_user.html">b03dn_template_config_user.html</a></p>
+
+</div>
+</body>
+</html>
