@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="trial_balance_wizard_inherit_adecsol" model="ir.ui.view">
+        <field name="name">trial.balance.wizard.inherit.adecsol</field>
+        <field name="model">trial.balance.report.wizard</field>
+        <field name="inherit_id" ref="account_financial_report.trial_balance_wizard"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='journal_ids']" position="replace"/>
+            <xpath expr="//label[@for='journal_ids']" position="replace"/>
+
+            <xpath expr="//field[@name='target_move']" position="after">
+                <label for="journal_ids" string="Sổ nhật ký"/>
+                <div class="o_row">
+                    <field name="journal_ids" 
+                           widget="many2many_tags" 
+                           options="{'no_create': True}" 
+                           placeholder="Chọn sổ nhật ký..."/>
+                </div>
+            </xpath>
+
+            <xpath expr="//footer//button[@name='button_export_xlsx']" position="after">
+                <span class="or_sep"> or </span>
+                <button name="action_export_balance_sheet_tt200" 
+                        string="Bảng cân đối số phát sinh (S06-DN)" 
+                        type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

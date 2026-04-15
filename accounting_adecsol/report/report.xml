@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="trial_balance_xlsx_action" model="ir.actions.report">
+        <field name="name">Bảng cân đối số phát sinh (S06-DN)</field>
+        <field name="model">trial.balance.report.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">accounting_adecsol.trial_balance_xlsx</field>
+        <field name="report_file">Bang_can_doi_so_phat_sinh_S06_DN</field>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="balance_sheet_xlsx_action" model="ir.actions.report">
+        <field name="name">Bảng cân đối kế toán (B01-DN)</field>
+        <field name="model">accounting.report</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">accounting_adecsol.balance_sheet_xlsx</field>
+        <field name="report_file">Bang_can_doi_ke_toan_B01_DN</field>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Profit & Loss B02-DN Report Action -->
+    <record id="profit_loss_xlsx_action" model="ir.actions.report">
+        <field name="name">Báo cáo KQHĐKD B02-DN</field>
+        <field name="model">accounting.report</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">accounting_adecsol.profit_loss_xlsx</field>
+        <field name="report_file">Bao_cao_KQHĐKD_B02_DN</field>
+        <!-- <field name="binding_model_id" ref="model_accounting_report"/> -->
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

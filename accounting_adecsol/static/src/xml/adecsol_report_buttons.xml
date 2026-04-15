@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="accounting_adecsol.ReportActionButtons" t-inherit="web.ReportAction" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_report_print')]" position="after">
+            <t t-if="isAccountFinancialReport">
+                <button type="button" 
+                        class="btn btn-secondary ms-1 d-print-none" 
+                        t-on-click="onExecuteB01DN">
+                    <i class="fa fa-file-excel-o me-1"/> B01-DN
+                </button>
+            </t>
+        </xpath>
+    </t>
+</templates>

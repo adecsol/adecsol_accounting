@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="closing_template_tt200" model="account.fiscalyear.closing.template">
+            <field name="name">Thông tư 200: Kết chuyển và Đóng/Mở sổ (ADEC SOL)</field>
+            <field name="chart_template">vn</field>
+            <field name="check_draft_moves">True</field>
+        </record>
+
+        <record id="config_tt200_revenue" model="account.fiscalyear.closing.config.template">
+            <field name="template_id" ref="closing_template_tt200"/>
+            <field name="name">1. Kết chuyển doanh thu, thu nhập</field>
+            <field name="code">REV_TO_911</field>
+            <field name="sequence">10</field>
+            <field name="move_type">closing</field>
+        </record>
+        <record id="type_tt200_revenue" model="account.fiscalyear.closing.type.template">
+            <field name="template_config_id" ref="config_tt200_revenue"/>
+            <field name="account_type">income</field>
+            <field name="closing_type">balance</field>
+        </record>
+        <record id="map_tt200_revenue_all" model="account.fiscalyear.closing.mapping.template">
+            <field name="template_config_id" ref="config_tt200_revenue"/>
+            <field name="name">Kết chuyển 511, 515, 711 sang 911</field>
+            <field name="src_accounts">511%,515%,711%</field>
+            <field name="dest_account">911</field>
+        </record>
+
+        <record id="config_tt200_expense" model="account.fiscalyear.closing.config.template">
+            <field name="template_id" ref="closing_template_tt200"/>
+            <field name="name">2. Kết chuyển chi phí</field>
+            <field name="code">EXP_TO_911</field>
+            <field name="sequence">20</field>
+            <field name="move_type">closing</field>
+        </record>
+        <record id="type_tt200_expense" model="account.fiscalyear.closing.type.template">
+            <field name="template_config_id" ref="config_tt200_expense"/>
+            <field name="account_type">expense</field>
+            <field name="closing_type">balance</field>
+        </record>
+        <record id="map_tt200_expense_all" model="account.fiscalyear.closing.mapping.template">
+            <field name="template_config_id" ref="config_tt200_expense"/>
+            <field name="name">Kết chuyển 6%, 8% sang 911</field>
+            <field name="src_accounts">621%,622%,627%,632%,635%,641%,642%,811%,821%</field>
+            <field name="dest_account">911</field>
+        </record>
+
+        <record id="config_tt200_profit" model="account.fiscalyear.closing.config.template">
+            <field name="template_id" ref="closing_template_tt200"/>
+            <field name="name">3. Kết chuyển lãi/lỗ</field>
+            <field name="code">PL_TO_421</field>
+            <field name="sequence">30</field>
+            <field name="move_type">loss_profit</field>
+        </record>
+        <record id="type_tt200_profit" model="account.fiscalyear.closing.type.template">
+            <field name="template_config_id" ref="config_tt200_profit"/>
+            <field name="account_type">equity</field>
+            <field name="closing_type">balance</field>
+        </record>
+        <record id="map_tt200_pl" model="account.fiscalyear.closing.mapping.template">
+            <field name="template_config_id" ref="config_tt200_profit"/>
+            <field name="name">Kết chuyển lãi lỗ (911 sang 4212)</field>
+            <field name="src_accounts">911</field>
+            <field name="dest_account">4212</field>
+        </record>
+
+        <record id="config_tt200_close_balance" model="account.fiscalyear.closing.config.template">
+            <field name="template_id" ref="closing_template_tt200"/>
+            <field name="name">4. Khóa sổ cuối năm (Tài sản/Nguồn vốn)</field>
+            <field name="code">CLOSE_BS</field>
+            <field name="sequence">40</field>
+            <field name="move_type">closing</field>
+        </record>
+        <record id="type_tt200_close_asset" model="account.fiscalyear.closing.type.template">
+            <field name="template_config_id" ref="config_tt200_close_balance"/>
+            <field name="account_type">asset_receivable</field>
+            <field name="closing_type">unreconciled</field>
+        </record>
+        <record id="map_tt200_close_asset" model="account.fiscalyear.closing.mapping.template">
+            <field name="template_config_id" ref="config_tt200_close_balance"/>
+            <field name="name">Khóa sổ tài khoản loại 1, 2, 3, 4</field>
+            <field name="src_accounts">1%,2%,3%,4%</field>
+            <field name="dest_account"></field>
+        </record>
+
+        <record id="config_tt200_open_balance" model="account.fiscalyear.closing.config.template">
+            <field name="template_id" ref="closing_template_tt200"/>
+            <field name="name">5. Mở sổ đầu năm mới</field>
+            <field name="code">OPEN_BS</field>
+            <field name="sequence">50</field>
+            <field name="move_type">opening</field>
+            <field name="inverse">CLOSE_BS</field>
+        </record>
+        <record id="type_tt200_open_asset" model="account.fiscalyear.closing.type.template">
+            <field name="template_config_id" ref="config_tt200_open_balance"/>
+            <field name="account_type">asset_receivable</field>
+            <field name="closing_type">unreconciled</field>
+        </record>
+    </data>
+</odoo>

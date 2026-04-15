@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Kế thừa view accounting.report để thêm button B02-DN -->
+    <!-- <record id="accounting_report_view_inherit_b02dn" model="ir.ui.view">
+        <field name="name">accounting.report.view.inherit.b02dn</field>
+        <field name="model">accounting.report</field> 
+        <field name="inherit_id" ref="accounting_pdf_reports.accounting_report_view"/>
+        <field name="arch" type="xml">
+             check_report và thêm button B02-DN sau nó -->
+            <!-- <xpath expr="//footer/button[@name='check_report']" position="after"> -->
+                <!-- Thêm button B02-DN, KHÔNG thêm B01-DN ở đây -->
+                <!-- <span class="or_sep"> or </span>
+                <button name="action_export_b02dn_excel" 
+                        string="Báo cáo KQHĐKD (B02-DN) - Excel" 
+                        type="object" 
+                        class="btn-primary"/>
+            </xpath> -->
+        <!-- </field>
+    </record> -->
+</odoo>

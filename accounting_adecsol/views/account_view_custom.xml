@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record id="view_account_search_adecsol" model="ir.ui.view">
+        <field name="name">account.account.search.adecsol</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//searchpanel/field[@name='account_type']" position="attributes">
+                <attribute name="string">Phân loại tài khoản</attribute>
+                <attribute name="enable_counters">1</attribute>
+                <attribute name="icon">fa-list</attribute>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

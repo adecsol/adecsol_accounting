@@ -1,0 +1,1301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="acc_vn_111" model="account.account">
+            <field name="code">111</field>
+            <field name="name">Tiền mặt</field>
+            <field name="account_type">asset_cash</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_112" model="account.account">
+            <field name="code">112</field>
+            <field name="name">Tiền gửi không kỳ hạn</field>
+            <field name="account_type">asset_cash</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1121" model="account.account">
+            <field name="code">1121</field>
+            <field name="name">Tài khoản tạm thời ngân hàng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1130" model="account.account">
+            <field name="code">1130</field>
+            <field name="name">Tiền đang chuyển</field>
+            <field name="account_type">asset_cash</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1131" model="account.account">
+            <field name="code">1131</field>
+            <field name="name">Biên lai chưa thanh toán</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1132" model="account.account">
+            <field name="code">1132</field>
+            <field name="name">Khoản chi chưa thanh toán</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1210" model="account.account">
+            <field name="code">1210</field>
+            <field name="name">Chứng khoán kinh doanh</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12811" model="account.account">
+            <field name="code">12811</field>
+            <field name="name">Tiền gửi có kỳ hạn - dưới 3 tháng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12812" model="account.account">
+            <field name="code">12812</field>
+            <field name="name">Tiền gửi có kỳ hạn - 3-12 tháng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12813" model="account.account">
+            <field name="code">12813</field>
+            <field name="name">Tiền gửi có kỳ hạn - dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12822" model="account.account">
+            <field name="code">12822</field>
+            <field name="name">Trái phiếu - 3-12 tháng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12823" model="account.account">
+            <field name="code">12823</field>
+            <field name="name">Trái phiếu - dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12831" model="account.account">
+            <field name="code">12831</field>
+            <field name="name">Cho vay - ngắn hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12832" model="account.account">
+            <field name="code">12832</field>
+            <field name="name">Cho vay - dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12881" model="account.account">
+            <field name="code">12881</field>
+            <field name="name">Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - dưới 3 tháng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12882" model="account.account">
+            <field name="code">12882</field>
+            <field name="name">Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - 3-12 tháng</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_12883" model="account.account">
+            <field name="code">12883</field>
+            <field name="name">Các khoản đầu tư khác nắm giữ đến ngày đáo hạn - dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1311" model="account.account">
+            <field name="code">1311</field>
+            <field name="name">Phải thu của khách hàng - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1312" model="account.account">
+            <field name="code">1312</field>
+            <field name="name">Phải thu của khách hàng - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1331" model="account.account">
+            <field name="code">1331</field>
+            <field name="name">Thuế GTGT HHDV mua vào</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1332" model="account.account">
+            <field name="code">1332</field>
+            <field name="name">Thuế GTGT được khấu trừ của tài sản cố định</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1361" model="account.account">
+            <field name="code">1361</field>
+            <field name="name">Vốn kinh doanh ở các đơn vị trực thuộc</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13621" model="account.account">
+            <field name="code">13621</field>
+            <field name="name">Phải thu nội bộ về chênh lệch tỷ giá - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13622" model="account.account">
+            <field name="code">13622</field>
+            <field name="name">Phải thu nội bộ về chênh lệch tỷ giá - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13631" model="account.account">
+            <field name="code">13631</field>
+            <field name="name">Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13632" model="account.account">
+            <field name="code">13632</field>
+            <field name="name">Phải thu nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13681" model="account.account">
+            <field name="code">13681</field>
+            <field name="name">Phải thu nội bộ khác - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13682" model="account.account">
+            <field name="code">13682</field>
+            <field name="name">Phải thu nội bộ khác - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13811" model="account.account">
+            <field name="code">13811</field>
+            <field name="name">Tài sản thiếu chờ xử lý - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13812" model="account.account">
+            <field name="code">13812</field>
+            <field name="name">Tài sản thiếu chờ xử lý - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13831" model="account.account">
+            <field name="code">13831</field>
+            <field name="name">Thuế TTĐB của hàng nhập khẩu - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13832" model="account.account">
+            <field name="code">13832</field>
+            <field name="name">Thuế TTĐB của hàng nhập khẩu - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13881" model="account.account">
+            <field name="code">13881</field>
+            <field name="name">Phải thu khác - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_13882" model="account.account">
+            <field name="code">13882</field>
+            <field name="name">Phải thu khác - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1411" model="account.account">
+            <field name="code">1411</field>
+            <field name="name">Tạm ứng - ngắn hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1412" model="account.account">
+            <field name="code">1412</field>
+            <field name="name">Tạm ứng - dài hạn</field>
+            <field name="account_type">asset_receivable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_1510" model="account.account">
+            <field name="code">1510</field>
+            <field name="name">Hàng mua đang đi đường</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1520" model="account.account">
+            <field name="code">1520</field>
+            <field name="name">Nguyên liệu, vật liệu</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1531" model="account.account">
+            <field name="code">1531</field>
+            <field name="name">Công cụ, dụng cụ - ngắn hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1532" model="account.account">
+            <field name="code">1532</field>
+            <field name="name">Công cụ, dụng cụ - Dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1541" model="account.account">
+            <field name="code">1541</field>
+            <field name="name">Chi phí sản xuất, kinh doanh dở dang - ngắn hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1542" model="account.account">
+            <field name="code">1542</field>
+            <field name="name">Chi phí sản xuất, kinh doanh dở dang - Dài hạn</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1550" model="account.account">
+            <field name="code">1550</field>
+            <field name="name">Sản phẩm</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1560" model="account.account">
+            <field name="code">1560</field>
+            <field name="name">Hàng hoá</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1570" model="account.account">
+            <field name="code">1570</field>
+            <field name="name">Hàng gửi đi bán</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1580" model="account.account">
+            <field name="code">1580</field>
+            <field name="name">Hàng hóa kho bảo thuế</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_1710" model="account.account">
+            <field name="code">1710</field>
+            <field name="name">Giao dịch mua bán lại trái phiếu chính phủ</field>
+            <field name="account_type">asset_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2110" model="account.account">
+            <field name="code">2110</field>
+            <field name="name">Tài sản cố định hữu hình</field>
+            <field name="account_type">asset_fixed</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2120" model="account.account">
+            <field name="code">2120</field>
+            <field name="name">Tài sản cố định thuê tài chính</field>
+            <field name="account_type">asset_fixed</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2130" model="account.account">
+            <field name="code">2130</field>
+            <field name="name">Tài sản cố định vô hình</field>
+            <field name="account_type">asset_fixed</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2141" model="account.account">
+            <field name="code">2141</field>
+            <field name="name">Hao mòn TSCĐ hữu hình</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2142" model="account.account">
+            <field name="code">2142</field>
+            <field name="name">Hao mòn TSCĐ thuê tài chính</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2143" model="account.account">
+            <field name="code">2143</field>
+            <field name="name">Hao mòn TSCĐ vô hình</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2147" model="account.account">
+            <field name="code">2147</field>
+            <field name="name">Hao mòn bất động sản đầu tư</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_21511" model="account.account">
+            <field name="code">21511</field>
+            <field name="name">Súc vật nuôi cho sản phẩm định kỳ chưa đạt đến giai đoạn trưởng thành</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_215121" model="account.account">
+            <field name="code">215121</field>
+            <field name="name">Nguyên giá</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_215122" model="account.account">
+            <field name="code">215122</field>
+            <field name="name">Giá trị khấu hao luỹ kế</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_21521" model="account.account">
+            <field name="code">21521</field>
+            <field name="name">Súc vật nuôi lấy sản phẩm một lần - Ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_21522" model="account.account">
+            <field name="code">21522</field>
+            <field name="name">Súc vật nuôi lấy sản phẩm một lần - Dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_21531" model="account.account">
+            <field name="code">21531</field>
+            <field name="name">Cây trồng theo mùa vụ hoặc lấy sản phẩm một lần - Ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_21532" model="account.account">
+            <field name="code">21532</field>
+            <field name="name">Cây trồng theo mùa vụ hoặc lấy sản phẩm một lần - Dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2170" model="account.account">
+            <field name="code">2170</field>
+            <field name="name">Bất động sản đầu tư</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2210" model="account.account">
+            <field name="code">2210</field>
+            <field name="name">Đầu tư vào công ty con</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2220" model="account.account">
+            <field name="code">2220</field>
+            <field name="name">Đầu tư vào công ty liên doanh, liên kết</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22811" model="account.account">
+            <field name="code">22811</field>
+            <field name="name">Đầu tư góp vốn vào đơn vị khác - ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22812" model="account.account">
+            <field name="code">22812</field>
+            <field name="name">Đầu tư góp vốn vào đơn vị khác - dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22881" model="account.account">
+            <field name="code">22881</field>
+            <field name="name">Đầu tư khác - ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22882" model="account.account">
+            <field name="code">22882</field>
+            <field name="name">Đầu tư khác - dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2291" model="account.account">
+            <field name="code">2291</field>
+            <field name="name">Dự phòng giảm giá chứng khoán kinh doanh</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22921" model="account.account">
+            <field name="code">22921</field>
+            <field name="name">Dự phòng tổn thất đầu tư vào đơn vị khác- ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22922" model="account.account">
+            <field name="code">22922</field>
+            <field name="name">Dự phòng tổn thất đầu tư vào hợp đồng BBC- ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22923" model="account.account">
+            <field name="code">22923</field>
+            <field name="name">Dự phòng tổn thất đầu tư vào đơn vị khác- dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22924" model="account.account">
+            <field name="code">22924</field>
+            <field name="name">Dự phòng tổn thất đầu tư vào đơn vị khác nắm giữ đến ngày đáo hạn - dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22931" model="account.account">
+            <field name="code">22931</field>
+            <field name="name">Dự phòng phải thu khó đòi - ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22932" model="account.account">
+            <field name="code">22932</field>
+            <field name="name">Dự phòng phải thu khó đòi - dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22941" model="account.account">
+            <field name="code">22941</field>
+            <field name="name">Dự phòng giảm giá hàng tồn kho</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22942" model="account.account">
+            <field name="code">22942</field>
+            <field name="name">Dự phòng giảm giá hàng tồn kho- chi phí sản xuất, kinh doanh dở dang dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22943" model="account.account">
+            <field name="code">22943</field>
+            <field name="name">Dự phòng giảm giá hàng tồn kho- thiết bị, vật tư, phụ tùng thay thế dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22951" model="account.account">
+            <field name="code">22951</field>
+            <field name="name">Dự phòng tổn thất tài sản sinh học - Ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_22952" model="account.account">
+            <field name="code">22952</field>
+            <field name="name">Dự phòng tổn thất tài sản sinh học - Dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2411" model="account.account">
+            <field name="code">2411</field>
+            <field name="name">Mua sắm TSCĐ</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2412" model="account.account">
+            <field name="code">2412</field>
+            <field name="name">Xây dựng cơ bản</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2413" model="account.account">
+            <field name="code">2413</field>
+            <field name="name">Sửa chữa, bảo dưỡng định kỳ TSCĐ</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2414" model="account.account">
+            <field name="code">2414</field>
+            <field name="name">Nâng cấp, cải tạo TSCĐ</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2421" model="account.account">
+            <field name="code">2421</field>
+            <field name="name">Chi phí chờ phân bổ - ngắn hạn</field>
+            <field name="account_type">asset_prepayments</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2422" model="account.account">
+            <field name="code">2422</field>
+            <field name="name">Chi phí chờ phân bổ - dài hạn</field>
+            <field name="account_type">asset_prepayments</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2430" model="account.account">
+            <field name="code">2430</field>
+            <field name="name">Tài sản thuế thu nhập hoãn lại</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2441" model="account.account">
+            <field name="code">2441</field>
+            <field name="name">Ký quỹ, ký cược - ngắn hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_2442" model="account.account">
+            <field name="code">2442</field>
+            <field name="name">Ký quỹ, ký cược - dài hạn</field>
+            <field name="account_type">asset_non_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3311" model="account.account">
+            <field name="code">3311</field>
+            <field name="name">Phải trả cho người bán - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3312" model="account.account">
+            <field name="code">3312</field>
+            <field name="name">Phải trả cho người bán - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3320" model="account.account">
+            <field name="code">3320</field>
+            <field name="name">Phải trả cổ tức, lợi nhuận</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33311" model="account.account">
+            <field name="code">33311</field>
+            <field name="name">Thuế GTGT đầu ra</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33312" model="account.account">
+            <field name="code">33312</field>
+            <field name="name">Thuế GTGT hàng nhập khẩu</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33321" model="account.account">
+            <field name="code">33321</field>
+            <field name="name">Thuế tiêu thụ đặc biệt - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33322" model="account.account">
+            <field name="code">33322</field>
+            <field name="name">Thuế tiêu thụ đặc biệt - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33331" model="account.account">
+            <field name="code">33331</field>
+            <field name="name">Thuế xuất, nhập khẩu - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33332" model="account.account">
+            <field name="code">33332</field>
+            <field name="name">Thuế xuất, nhập khẩu - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33341" model="account.account">
+            <field name="code">33341</field>
+            <field name="name">Thuế thu nhập doanh nghiệp - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33342" model="account.account">
+            <field name="code">33342</field>
+            <field name="name">Thuế thu nhập doanh nghiệp - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33351" model="account.account">
+            <field name="code">33351</field>
+            <field name="name">Thuế thu nhập cá nhân - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33352" model="account.account">
+            <field name="code">33352</field>
+            <field name="name">Thuế thu nhập cá nhân - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33361" model="account.account">
+            <field name="code">33361</field>
+            <field name="name">Thuế tài nguyên - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33362" model="account.account">
+            <field name="code">33362</field>
+            <field name="name">Thuế tài nguyên - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33371" model="account.account">
+            <field name="code">33371</field>
+            <field name="name">Thuế nhà đất, tiền thuê đất - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33372" model="account.account">
+            <field name="code">33372</field>
+            <field name="name">Thuế nhà đất, tiền thuê đất - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33381" model="account.account">
+            <field name="code">33381</field>
+            <field name="name">Thuế bảo vệ môi trường</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33382" model="account.account">
+            <field name="code">33382</field>
+            <field name="name">Các loại thuế khác</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_33391" model="account.account">
+            <field name="code">33391</field>
+            <field name="name">Phí, lệ phí và các khoản phải nộp khác - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33392" model="account.account">
+            <field name="code">33392</field>
+            <field name="name">Phí, lệ phí và các khoản phải nộp khác - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3341" model="account.account">
+            <field name="code">3341</field>
+            <field name="name">Phải trả công nhân viên - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3342" model="account.account">
+            <field name="code">3342</field>
+            <field name="name">Phải trả công nhân viên - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3351" model="account.account">
+            <field name="code">3351</field>
+            <field name="name">Chi phí phải trả - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3352" model="account.account">
+            <field name="code">3352</field>
+            <field name="name">Chi phí phải trả - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3361" model="account.account">
+            <field name="code">3361</field>
+            <field name="name">Phải trả nội bộ về vốn kinh doanh</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33621" model="account.account">
+            <field name="code">33621</field>
+            <field name="name">Phải trả nội bộ về chênh lệch tỉ giá - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33622" model="account.account">
+            <field name="code">33622</field>
+            <field name="name">Phải trả nội bộ về chênh lệch tỉ giá - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33631" model="account.account">
+            <field name="code">33631</field>
+            <field name="name">Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33632" model="account.account">
+            <field name="code">33632</field>
+            <field name="name">Phải trả nội bộ về chi phí đi vay đủ điều kiện được vốn hoá - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33681" model="account.account">
+            <field name="code">33681</field>
+            <field name="name">Phải trả nội bộ khác - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33682" model="account.account">
+            <field name="code">33682</field>
+            <field name="name">Phải trả nội bộ khác -  dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_3370" model="account.account">
+            <field name="code">3370</field>
+            <field name="name">Thanh toán theo tiến độ hợp đồng xây dựng</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33811" model="account.account">
+            <field name="code">33811</field>
+            <field name="name">Tài sản thừa chờ giải quyết - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33812" model="account.account">
+            <field name="code">33812</field>
+            <field name="name">Tài sản thừa chờ giải quyết - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33821" model="account.account">
+            <field name="code">33821</field>
+            <field name="name">Kinh phí công đoàn - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33822" model="account.account">
+            <field name="code">33822</field>
+            <field name="name">Kinh phí công đoàn - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33831" model="account.account">
+            <field name="code">33831</field>
+            <field name="name">Bảo hiểm xã hội - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33832" model="account.account">
+            <field name="code">33832</field>
+            <field name="name">Bảo hiểm xã hội - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33841" model="account.account">
+            <field name="code">33841</field>
+            <field name="name">Bảo hiểm y tế - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33842" model="account.account">
+            <field name="code">33842</field>
+            <field name="name">Bảo hiểm y tế - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33861" model="account.account">
+            <field name="code">33861</field>
+            <field name="name">Bảo hiểm thất nghiệp - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33862" model="account.account">
+            <field name="code">33862</field>
+            <field name="name">Bảo hiểm thất nghiệp - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33871" model="account.account">
+            <field name="code">33871</field>
+            <field name="name">Doanh thu chưa thực hiện - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33872" model="account.account">
+            <field name="code">33872</field>
+            <field name="name">Doanh thu chưa thực hiện - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33881" model="account.account">
+            <field name="code">33881</field>
+            <field name="name">Phải trả, phải nộp khác - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_33882" model="account.account">
+            <field name="code">33882</field>
+            <field name="name">Phải trả, phải nộp khác - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_34111" model="account.account">
+            <field name="code">34111</field>
+            <field name="name">Các khoản đi vay - ngắn hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_34112" model="account.account">
+            <field name="code">34112</field>
+            <field name="name">Các khoản đi vay - dài hạn</field>
+            <field name="account_type">liability_payable</field>
+            <field name="reconcile" eval="True"/>
+        </record>
+        <record id="acc_vn_34121" model="account.account">
+            <field name="code">34121</field>
+            <field name="name">Nợ thuê tài chính - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_34122" model="account.account">
+            <field name="code">34122</field>
+            <field name="name">Nợ thuê tài chính - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_34311" model="account.account">
+            <field name="code">34311</field>
+            <field name="name">Trái phiếu thường - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_34312" model="account.account">
+            <field name="code">34312</field>
+            <field name="name">Trái phiếu thường - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3432" model="account.account">
+            <field name="code">3432</field>
+            <field name="name">Trái phiếu chuyển đổi</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3441" model="account.account">
+            <field name="code">3441</field>
+            <field name="name">Nhận ký quỹ, ký cược - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3442" model="account.account">
+            <field name="code">3442</field>
+            <field name="name">Nhận ký quỹ, ký cược - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3470" model="account.account">
+            <field name="code">3470</field>
+            <field name="name">Thuế thu nhập hoãn lại phải trả</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35211" model="account.account">
+            <field name="code">35211</field>
+            <field name="name">Dự phòng bảo hành sản phẩm hàng hoá - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35212" model="account.account">
+            <field name="code">35212</field>
+            <field name="name">Dự phòng bảo hành sản phẩm hàng hoá - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35221" model="account.account">
+            <field name="code">35221</field>
+            <field name="name">Dự phòng bảo hành công trình xây dựng - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35222" model="account.account">
+            <field name="code">35222</field>
+            <field name="name">Dự phòng bảo hành công trình xây dựng - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35231" model="account.account">
+            <field name="code">35231</field>
+            <field name="name">Dự phòng tái cơ cấu doanh nghiệp - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35232" model="account.account">
+            <field name="code">35232</field>
+            <field name="name">Dự phòng tái cơ cấu doanh nghiệp - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35251" model="account.account">
+            <field name="code">35251</field>
+            <field name="name">Dự phòng phải trả khác - ngắn hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_35252" model="account.account">
+            <field name="code">35252</field>
+            <field name="name">Dự phòng phải trả khác - dài hạn</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3531" model="account.account">
+            <field name="code">3531</field>
+            <field name="name">Quỹ khen thưởng</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3532" model="account.account">
+            <field name="code">3532</field>
+            <field name="name">Quỹ phúc lợi</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3533" model="account.account">
+            <field name="code">3533</field>
+            <field name="name">Quỹ phúc lợi đã hình thành TSCĐ</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3534" model="account.account">
+            <field name="code">3534</field>
+            <field name="name">Quỹ thưởng ban quản lý điều hành công ty</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3561" model="account.account">
+            <field name="code">3561</field>
+            <field name="name">Quỹ phát triển khoa học và công nghệ</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3562" model="account.account">
+            <field name="code">3562</field>
+            <field name="name">Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_3570" model="account.account">
+            <field name="code">3570</field>
+            <field name="name">Quỹ bình ổn giá</field>
+            <field name="account_type">liability_current</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_41111" model="account.account">
+            <field name="code">41111</field>
+            <field name="name">Cổ phiếu phổ thông có quyền biểu quyết</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_411121" model="account.account">
+            <field name="code">411121</field>
+            <field name="name">Cổ phiếu ưu đãi - Nợ phải trả</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_411122" model="account.account">
+            <field name="code">411122</field>
+            <field name="name">Cổ phiếu ưu đãi - Vốn chủ sở hữu</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4112" model="account.account">
+            <field name="code">4112</field>
+            <field name="name">Thặng dư vốn</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4113" model="account.account">
+            <field name="code">4113</field>
+            <field name="name">Quyền chọn chuyển đổi trái phiếu</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4118" model="account.account">
+            <field name="code">4118</field>
+            <field name="name">Vốn khác</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4120" model="account.account">
+            <field name="code">4120</field>
+            <field name="name">Chênh lệch đánh giá lại tài sản</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4130" model="account.account">
+            <field name="code">4130</field>
+            <field name="name">Chênh lệch tỷ giá hối đoái</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4140" model="account.account">
+            <field name="code">4140</field>
+            <field name="name">Quỹ đầu tư phát triển</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4180" model="account.account">
+            <field name="code">4180</field>
+            <field name="name">Các quỹ khác thuộc vốn chủ sở hữu</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4190" model="account.account">
+            <field name="code">4190</field>
+            <field name="name">Cổ phiếu mua lại của chính mình</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4211" model="account.account">
+            <field name="code">4211</field>
+            <field name="name">Lợi nhuận sau thuế chưa phân phối năm trước</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_4212" model="account.account">
+            <field name="code">4212</field>
+            <field name="name">Lợi nhuận sau thuế chưa phân phối năm nay</field>
+            <field name="account_type">equity</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_5110" model="account.account">
+            <field name="code">5110</field>
+            <field name="name">Doanh thu bán hàng và cung cấp dịch vụ</field>
+            <field name="account_type">income</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_5150" model="account.account">
+            <field name="code">5150</field>
+            <field name="name">Doanh thu hoạt động tài chính</field>
+            <field name="account_type">income</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_5210" model="account.account">
+            <field name="code">5210</field>
+            <field name="name">Các khoản giảm trừ doanh thu</field>
+            <field name="account_type">income</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6210" model="account.account">
+            <field name="code">6210</field>
+            <field name="name">Chi phí nguyên liệu, vật liệu trực tiếp</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6220" model="account.account">
+            <field name="code">6220</field>
+            <field name="name">Chi phí nhân công trực tiếp</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6231" model="account.account">
+            <field name="code">6231</field>
+            <field name="name">Chi phí nhân công</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6232" model="account.account">
+            <field name="code">6232</field>
+            <field name="name">Chi phí nguyên, vật liệu</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6233" model="account.account">
+            <field name="code">6233</field>
+            <field name="name">Chi phí dụng cụ sản xuất</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6234" model="account.account">
+            <field name="code">6234</field>
+            <field name="name">Chi phí khấu hao máy thi công</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6237" model="account.account">
+            <field name="code">6237</field>
+            <field name="name">Chi phí dịch vụ mua ngoài</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6238" model="account.account">
+            <field name="code">6238</field>
+            <field name="name">Chi phí bằng tiền khác</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6271" model="account.account">
+            <field name="code">6271</field>
+            <field name="name">Chi phí nhân viên phân xưởng</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6272" model="account.account">
+            <field name="code">6272</field>
+            <field name="name">Chi phí nguyên, vật liệu</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6273" model="account.account">
+            <field name="code">6273</field>
+            <field name="name">Chi phí dụng cụ sản xuất</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6274" model="account.account">
+            <field name="code">6274</field>
+            <field name="name">Chi phí khấu hao TSCĐ</field>
+            <field name="account_type">expense_depreciation</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6275" model="account.account">
+            <field name="code">6275</field>
+            <field name="name">Thuế, phí, lệ phí</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6277" model="account.account">
+            <field name="code">6277</field>
+            <field name="name">Chi phí dịch vụ mua ngoài</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6278" model="account.account">
+            <field name="code">6278</field>
+            <field name="name">Chi phí bằng tiền khác</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6320" model="account.account">
+            <field name="code">6320</field>
+            <field name="name">Giá vốn hàng bán</field>
+            <field name="account_type">expense_direct_cost</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6350" model="account.account">
+            <field name="code">6350</field>
+            <field name="name">Chi phí tài chính</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6351" model="account.account">
+            <field name="code">6351</field>
+            <field name="name">Chi phí tài chính</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6411" model="account.account">
+            <field name="code">6411</field>
+            <field name="name">Chi phí nhân viên</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6412" model="account.account">
+            <field name="code">6412</field>
+            <field name="name">Chi phí nguyên vật liệu, bao bì</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6413" model="account.account">
+            <field name="code">6413</field>
+            <field name="name">Chi phí dụng cụ, đồ dùng</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6414" model="account.account">
+            <field name="code">6414</field>
+            <field name="name">Chi phí khấu hao TSCĐ</field>
+            <field name="account_type">expense_depreciation</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6415" model="account.account">
+            <field name="code">6415</field>
+            <field name="name">Thuế, phí, lệ phí</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6417" model="account.account">
+            <field name="code">6417</field>
+            <field name="name">Chi phí dịch vụ mua ngoài</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6418" model="account.account">
+            <field name="code">6418</field>
+            <field name="name">Chi phí bằng tiền khác</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6421" model="account.account">
+            <field name="code">6421</field>
+            <field name="name">Chi phí nhân viên</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6422" model="account.account">
+            <field name="code">6422</field>
+            <field name="name">Chi phí vật liệu quản lý</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6423" model="account.account">
+            <field name="code">6423</field>
+            <field name="name">Chi phí đồ dùng văn phòng</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6424" model="account.account">
+            <field name="code">6424</field>
+            <field name="name">Chi phí khấu hao TSCĐ</field>
+            <field name="account_type">expense_depreciation</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6425" model="account.account">
+            <field name="code">6425</field>
+            <field name="name">Thuế, phí và lệ phí</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6426" model="account.account">
+            <field name="code">6426</field>
+            <field name="name">Chi phí dự phòng</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6427" model="account.account">
+            <field name="code">6427</field>
+            <field name="name">Chi phí dịch vụ mua ngoài</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_6428" model="account.account">
+            <field name="code">6428</field>
+            <field name="name">Chi phí bằng tiền khác</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_7110" model="account.account">
+            <field name="code">7110</field>
+            <field name="name">Thu nhập khác</field>
+            <field name="account_type">income_other</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_8110" model="account.account">
+            <field name="code">8110</field>
+            <field name="name">Chi phí khác</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_82111" model="account.account">
+            <field name="code">82111</field>
+            <field name="name">Chi phí thuế thu nhập doanh nghiệp hiện hành theo quy định của Luật thuế thu nhập doanh nghiệp</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_82112" model="account.account">
+            <field name="code">82112</field>
+            <field name="name">Chi phí thuế thu nhập doanh nghiệp bổ sung theo quy định về thuế tối thiểu toàn cầu</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_8212" model="account.account">
+            <field name="code">8212</field>
+            <field name="name">Chi phí thuế thu nhập doanh nghiệp hoãn lại</field>
+            <field name="account_type">expense</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+        <record id="acc_vn_9110" model="account.account">
+            <field name="code">9110</field>
+            <field name="name">Xác định kết quả kinh doanh</field>
+            <field name="account_type">equity_unaffected</field>
+            <field name="reconcile" eval="False"/>
+        </record>
+    </data>
+</odoo>

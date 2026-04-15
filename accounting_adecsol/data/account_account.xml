@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- 111 - Tiền mặt -->
+    <record id="acc_111" model="account.account">
+        <field name="code">111</field>
+        <field name="name">Tiền mặt</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 112 - Tiền gửi không kỳ hạn -->
+    <record id="acc_112" model="account.account">
+        <field name="code">112</field>
+        <field name="name">Tiền gửi không kỳ hạn</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 1121 - Tài khoản tạm thời ngân hàng -->
+    <record id="acc_1121" model="account.account">
+        <field name="code">1121</field>
+        <field name="name">Tài khoản tạm thời ngân hàng</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 1130 - Tiền đang chuyển -->
+    <record id="acc_1130" model="account.account">
+        <field name="code">1130</field>
+        <field name="name">Tiền đang chuyển</field>
+        <field name="account_type">asset_cash</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 1131 - Biên lai chưa thanh toán -->
+    <record id="acc_1131" model="account.account">
+        <field name="code">1131</field>
+        <field name="name">Biên lai chưa thanh toán</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 1132 - Khoản chi chưa thanh toán -->
+    <record id="acc_1132" model="account.account">
+        <field name="code">1132</field>
+        <field name="name">Khoản chi chưa thanh toán</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_11"/>
+    </record>
+
+    <!-- 1210 - Chứng khoán kinh doanh -->
+    <record id="acc_1210" model="account.account">
+        <field name="code">1210</field>
+        <field name="name">Chứng khoán kinh doanh</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_12"/>
+    </record>
+
+    <!-- 1311 - Phải thu của khách hàng - ngắn hạn -->
+    <record id="acc_1311" model="account.account">
+        <field name="code">1311</field>
+        <field name="name">Phải thu của khách hàng - ngắn hạn</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_13"/>
+    </record>
+
+    <!-- 1312 - Phải thu của khách hàng - dài hạn -->
+    <record id="acc_1312" model="account.account">
+        <field name="code">1312</field>
+        <field name="name">Phải thu của khách hàng - dài hạn</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_13"/>
+    </record>
+
+    <!-- 1331 - Thuế GTGT HHDV mua vào -->
+    <record id="acc_1331" model="account.account">
+        <field name="code">1331</field>
+        <field name="name">Thuế GTGT HHDV mua vào</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_13"/>
+    </record>
+
+    <!-- 1332 - Thuế GTGT được khấu trừ của tài sản cố định -->
+    <record id="acc_1332" model="account.account">
+        <field name="code">1332</field>
+        <field name="name">Thuế GTGT được khấu trừ của tài sản cố định</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_13"/>
+    </record>
+
+    <!-- 1361 - Vốn kinh doanh ở các đơn vị trực thuộc -->
+    <record id="acc_1361" model="account.account">
+        <field name="code">1361</field>
+        <field name="name">Vốn kinh doanh ở các đơn vị trực thuộc</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_13"/>
+    </record>
+
+    <!-- 1411 - Tạm ứng - ngắn hạn -->
+    <record id="acc_1411" model="account.account">
+        <field name="code">1411</field>
+        <field name="name">Tạm ứng - ngắn hạn</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_15"/>
+    </record>
+
+    <!-- 1412 - Tạm ứng - dài hạn -->
+    <record id="acc_1412" model="account.account">
+        <field name="code">1412</field>
+        <field name="name">Tạm ứng - dài hạn</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_15"/>
+    </record>
+
+    <!-- 1510 - Hàng mua đang đi đường -->
+    <record id="acc_1510" model="account.account">
+        <field name="code">1510</field>
+        <field name="name">Hàng mua đang đi đường</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1520 - Nguyên liệu, vật liệu -->
+    <record id="acc_1520" model="account.account">
+        <field name="code">1520</field>
+        <field name="name">Nguyên liệu, vật liệu</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1531 - Công cụ, dụng cụ - ngắn hạn -->
+    <record id="acc_1531" model="account.account">
+        <field name="code">1531</field>
+        <field name="name">Công cụ, dụng cụ - ngắn hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1532 - Công cụ, dụng cụ - Dài hạn -->
+    <record id="acc_1532" model="account.account">
+        <field name="code">1532</field>
+        <field name="name">Công cụ, dụng cụ - Dài hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1541 - Chi phí sản xuất, kinh doanh dở dang - ngắn hạn -->
+    <record id="acc_1541" model="account.account">
+        <field name="code">1541</field>
+        <field name="name">Chi phí sản xuất, kinh doanh dở dang - ngắn hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1542 - Chi phí sản xuất, kinh doanh dở dang - Dài hạn -->
+    <record id="acc_1542" model="account.account">
+        <field name="code">1542</field>
+        <field name="name">Chi phí sản xuất, kinh doanh dở dang - Dài hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1550 - Sản phẩm -->
+    <record id="acc_1550" model="account.account">
+        <field name="code">1550</field>
+        <field name="name">Sản phẩm</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1560 - Hàng hoá -->
+    <record id="acc_1560" model="account.account">
+        <field name="code">1560</field>
+        <field name="name">Hàng hoá</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1570 - Hàng gửi đi bán -->
+    <record id="acc_1570" model="account.account">
+        <field name="code">1570</field>
+        <field name="name">Hàng gửi đi bán</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1580 - Hàng hóa kho bảo thuế -->
+    <record id="acc_1580" model="account.account">
+        <field name="code">1580</field>
+        <field name="name">Hàng hóa kho bảo thuế</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_14"/>
+    </record>
+
+    <!-- 1710 - Giao dịch mua bán lại trái phiếu chính phủ -->
+    <record id="acc_1710" model="account.account">
+        <field name="code">1710</field>
+        <field name="name">Giao dịch mua bán lại trái phiếu chính phủ</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_16"/>
+    </record>
+
+    <!-- 2110 - Tài sản cố định hữu hình -->
+    <record id="acc_2110" model="account.account">
+        <field name="code">2110</field>
+        <field name="name">Tài sản cố định hữu hình</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2120 - Tài sản cố định thuê tài chính -->
+    <record id="acc_2120" model="account.account">
+        <field name="code">2120</field>
+        <field name="name">Tài sản cố định thuê tài chính</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2130 - Tài sản cố định vô hình -->
+    <record id="acc_2130" model="account.account">
+        <field name="code">2130</field>
+        <field name="name">Tài sản cố định vô hình</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2141 - Hao mòn TSCĐ hữu hình -->
+    <record id="acc_2141" model="account.account">
+        <field name="code">2141</field>
+        <field name="name">Hao mòn TSCĐ hữu hình</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2142 - Hao mòn TSCĐ thuê tài chính -->
+    <record id="acc_2142" model="account.account">
+        <field name="code">2142</field>
+        <field name="name">Hao mòn TSCĐ thuê tài chính</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2143 - Hao mòn TSCĐ vô hình -->
+    <record id="acc_2143" model="account.account">
+        <field name="code">2143</field>
+        <field name="name">Hao mòn TSCĐ vô hình</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2147 - Hao mòn bất động sản đầu tư -->
+    <record id="acc_2147" model="account.account">
+        <field name="code">2147</field>
+        <field name="name">Hao mòn bất động sản đầu tư</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_21"/>
+    </record>
+
+    <!-- 2170 - Bất động sản đầu tư -->
+    <record id="acc_2170" model="account.account">
+        <field name="code">2170</field>
+        <field name="name">Bất động sản đầu tư</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_22"/>
+    </record>
+
+    <!-- 2210 - Đầu tư vào công ty con -->
+    <record id="acc_2210" model="account.account">
+        <field name="code">2210</field>
+        <field name="name">Đầu tư vào công ty con</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_22"/>
+    </record>
+
+    <!-- 2220 - Đầu tư vào công ty liên doanh, liên kết -->
+    <record id="acc_2220" model="account.account">
+        <field name="code">2220</field>
+        <field name="name">Đầu tư vào công ty liên doanh, liên kết</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_22"/>
+    </record>
+
+    <!-- 2291 - Dự phòng giảm giá chứng khoán kinh doanh -->
+    <record id="acc_2291" model="account.account">
+        <field name="code">2291</field>
+        <field name="name">Dự phòng giảm giá chứng khoán kinh doanh</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_22"/>
+    </record>
+
+    <!-- 2411 - Mua sắm TSCĐ -->
+    <record id="acc_2411" model="account.account">
+        <field name="code">2411</field>
+        <field name="name">Mua sắm TSCĐ</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_23"/>
+    </record>
+
+    <!-- 2412 - Xây dựng cơ bản -->
+    <record id="acc_2412" model="account.account">
+        <field name="code">2412</field>
+        <field name="name">Xây dựng cơ bản</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_24"/>
+    </record>
+
+    <!-- 2413 - Sửa chữa, bảo dưỡng định kỳ TSCĐ -->
+    <record id="acc_2413" model="account.account">
+        <field name="code">2413</field>
+        <field name="name">Sửa chữa, bảo dưỡng định kỳ TSCĐ</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_25"/>
+    </record>
+
+    <!-- 2414 - Nâng cấp, cải tạo TSCĐ -->
+    <record id="acc_2414" model="account.account">
+        <field name="code">2414</field>
+        <field name="name">Nâng cấp, cải tạo TSCĐ</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_26"/>
+    </record>
+
+    <!-- 2421 - Chi phí chờ phân bổ - ngắn hạn -->
+    <record id="acc_2421" model="account.account">
+        <field name="code">2421</field>
+        <field name="name">Chi phí chờ phân bổ - ngắn hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_24"/>
+    </record>
+
+    <!-- 2422 - Chi phí chờ phân bổ - dài hạn -->
+    <record id="acc_2422" model="account.account">
+        <field name="code">2422</field>
+        <field name="name">Chi phí chờ phân bổ - dài hạn</field>
+        <field name="account_type">asset_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_24"/>
+    </record>
+
+    <!-- 2430 - Tài sản thuế thu nhập hoãn lại -->
+    <record id="acc_2430" model="account.account">
+        <field name="code">2430</field>
+        <field name="name">Tài sản thuế thu nhập hoãn lại</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_25"/>
+    </record>
+
+    <!-- 2441 - Ký quỹ, ký cược - ngắn hạn -->
+    <record id="acc_2441" model="account.account">
+        <field name="code">2441</field>
+        <field name="name">Ký quỹ, ký cược - ngắn hạn</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_23"/>
+    </record>
+
+    <!-- 2442 - Ký quỹ, ký cược - dài hạn -->
+    <record id="acc_2442" model="account.account">
+        <field name="code">2442</field>
+        <field name="name">Ký quỹ, ký cược - dài hạn</field>
+        <field name="account_type">asset_non_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_23"/>
+    </record>
+
+    <!-- 3311 - Phải trả cho người bán - ngắn hạn -->
+    <record id="acc_3311" model="account.account">
+        <field name="code">3311</field>
+        <field name="name">Phải trả cho người bán - ngắn hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3312 - Phải trả cho người bán - dài hạn -->
+    <record id="acc_3312" model="account.account">
+        <field name="code">3312</field>
+        <field name="name">Phải trả cho người bán - dài hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3320 - Phải trả cổ tức, lợi nhuận -->
+    <record id="acc_3320" model="account.account">
+        <field name="code">3320</field>
+        <field name="name">Phải trả cổ tức, lợi nhuận</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3341 - Phải trả công nhân viên - ngắn hạn -->
+    <record id="acc_3341" model="account.account">
+        <field name="code">3341</field>
+        <field name="name">Phải trả công nhân viên - ngắn hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3342 - Phải trả công nhân viên - dài hạn -->
+    <record id="acc_3342" model="account.account">
+        <field name="code">3342</field>
+        <field name="name">Phải trả công nhân viên - dài hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3351 - Chi phí phải trả - ngắn hạn -->
+    <record id="acc_3351" model="account.account">
+        <field name="code">3351</field>
+        <field name="name">Chi phí phải trả - ngắn hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3352 - Chi phí phải trả - dài hạn -->
+    <record id="acc_3352" model="account.account">
+        <field name="code">3352</field>
+        <field name="name">Chi phí phải trả - dài hạn</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3361 - Phải trả nội bộ về vốn kinh doanh -->
+    <record id="acc_3361" model="account.account">
+        <field name="code">3361</field>
+        <field name="name">Phải trả nội bộ về vốn kinh doanh</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3370 - Thanh toán theo tiến độ hợp đồng xây dựng -->
+    <record id="acc_3370" model="account.account">
+        <field name="code">3370</field>
+        <field name="name">Thanh toán theo tiến độ hợp đồng xây dựng</field>
+        <field name="account_type">liability_payable</field>
+        <field name="reconcile" eval="True"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_33"/>
+    </record>
+
+    <!-- 3432 - Trái phiếu chuyển đổi -->
+    <record id="acc_3432" model="account.account">
+        <field name="code">3432</field>
+        <field name="name">Trái phiếu chuyển đổi</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_34"/>
+    </record>
+
+    <!-- 3441 - Nhận ký quỹ, ký cược - ngắn hạn -->
+    <record id="acc_3441" model="account.account">
+        <field name="code">3441</field>
+        <field name="name">Nhận ký quỹ, ký cược - ngắn hạn</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_34"/>
+    </record>
+
+    <!-- 3442 - Nhận ký quỹ, ký cược - dài hạn -->
+    <record id="acc_3442" model="account.account">
+        <field name="code">3442</field>
+        <field name="name">Nhận ký quỹ, ký cược - dài hạn</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_34"/>
+    </record>
+
+    <!-- 3470 - Thuế thu nhập hoãn lại phải trả -->
+    <record id="acc_3470" model="account.account">
+        <field name="code">3470</field>
+        <field name="name">Thuế thu nhập hoãn lại phải trả</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_35"/>
+    </record>
+
+    <!-- 3531 - Quỹ khen thưởng -->
+    <record id="acc_3531" model="account.account">
+        <field name="code">3531</field>
+        <field name="name">Quỹ khen thưởng</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3532 - Quỹ phúc lợi -->
+    <record id="acc_3532" model="account.account">
+        <field name="code">3532</field>
+        <field name="name">Quỹ phúc lợi</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3533 - Quỹ phúc lợi đã hình thành TSCĐ -->
+    <record id="acc_3533" model="account.account">
+        <field name="code">3533</field>
+        <field name="name">Quỹ phúc lợi đã hình thành TSCĐ</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3534 - Quỹ thưởng ban quản lý điều hành công ty -->
+    <record id="acc_3534" model="account.account">
+        <field name="code">3534</field>
+        <field name="name">Quỹ thưởng ban quản lý điều hành công ty</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3561 - Quỹ phát triển khoa học và công nghệ -->
+    <record id="acc_3561" model="account.account">
+        <field name="code">3561</field>
+        <field name="name">Quỹ phát triển khoa học và công nghệ</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3562 - Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ -->
+    <record id="acc_3562" model="account.account">
+        <field name="code">3562</field>
+        <field name="name">Quỹ phát triển khoa học và công nghệ đã hình thành TSCĐ</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 3570 - Quỹ bình ổn giá -->
+    <record id="acc_3570" model="account.account">
+        <field name="code">3570</field>
+        <field name="name">Quỹ bình ổn giá</field>
+        <field name="account_type">liability_current</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_36"/>
+    </record>
+
+    <!-- 4112 - Thặng dư vốn -->
+    <record id="acc_4112" model="account.account">
+        <field name="code">4112</field>
+        <field name="name">Thặng dư vốn</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4113 - Quyền chọn chuyển đổi trái phiếu -->
+    <record id="acc_4113" model="account.account">
+        <field name="code">4113</field>
+        <field name="name">Quyền chọn chuyển đổi trái phiếu</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4118 - Vốn khác -->
+    <record id="acc_4118" model="account.account">
+        <field name="code">4118</field>
+        <field name="name">Vốn khác</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4120 - Chênh lệch đánh giá lại tài sản -->
+    <record id="acc_4120" model="account.account">
+        <field name="code">4120</field>
+        <field name="name">Chênh lệch đánh giá lại tài sản</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4130 - Chênh lệch tỷ giá hối đoái -->
+    <record id="acc_4130" model="account.account">
+        <field name="code">4130</field>
+        <field name="name">Chênh lệch tỷ giá hối đoái</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4140 - Quỹ đầu tư phát triển -->
+    <record id="acc_4140" model="account.account">
+        <field name="code">4140</field>
+        <field name="name">Quỹ đầu tư phát triển</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4180 - Các quỹ khác thuộc vốn chủ sở hữu -->
+    <record id="acc_4180" model="account.account">
+        <field name="code">4180</field>
+        <field name="name">Các quỹ khác thuộc vốn chủ sở hữu</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4190 - Cổ phiếu mua lại của chính mình -->
+    <record id="acc_4190" model="account.account">
+        <field name="code">4190</field>
+        <field name="name">Cổ phiếu mua lại của chính mình</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_41"/>
+    </record>
+
+    <!-- 4211 - Lợi nhuận sau thuế chưa phân phối năm trước -->
+    <record id="acc_4211" model="account.account">
+        <field name="code">4211</field>
+        <field name="name">Lợi nhuận sau thuế chưa phân phối năm trước</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_42"/>
+    </record>
+
+    <!-- 4212 - Lợi nhuận sau thuế chưa phân phối năm nay -->
+    <record id="acc_4212" model="account.account">
+        <field name="code">4212</field>
+        <field name="name">Lợi nhuận sau thuế chưa phân phối năm nay</field>
+        <field name="account_type">equity</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_42"/>
+    </record>
+
+    <!-- 5110 - Doanh thu bán hàng và cung cấp dịch vụ -->
+    <record id="acc_5110" model="account.account">
+        <field name="code">5110</field>
+        <field name="name">Doanh thu bán hàng và cung cấp dịch vụ</field>
+        <field name="account_type">income</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_51"/>
+    </record>
+
+    <!-- 5150 - Doanh thu hoạt động tài chính -->
+    <record id="acc_5150" model="account.account">
+        <field name="code">5150</field>
+        <field name="name">Doanh thu hoạt động tài chính</field>
+        <field name="account_type">income</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_52"/>
+    </record>
+
+    <!-- 5210 - Các khoản giảm trừ doanh thu -->
+    <record id="acc_5210" model="account.account">
+        <field name="code">5210</field>
+        <field name="name">Các khoản giảm trừ doanh thu</field>
+        <field name="account_type">income</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_53"/>
+    </record>
+
+    <!-- 6210 - Chi phí nguyên liệu, vật liệu trực tiếp -->
+    <record id="acc_6210" model="account.account">
+        <field name="code">6210</field>
+        <field name="name">Chi phí nguyên liệu, vật liệu trực tiếp</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6220 - Chi phí nhân công trực tiếp -->
+    <record id="acc_6220" model="account.account">
+        <field name="code">6220</field>
+        <field name="name">Chi phí nhân công trực tiếp</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6231 - Chi phí nhân công -->
+    <record id="acc_6231" model="account.account">
+        <field name="code">6231</field>
+        <field name="name">Chi phí nhân công</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6232 - Chi phí nguyên, vật liệu -->
+    <record id="acc_6232" model="account.account">
+        <field name="code">6232</field>
+        <field name="name">Chi phí nguyên, vật liệu</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6233 - Chi phí dụng cụ sản xuất -->
+    <record id="acc_6233" model="account.account">
+        <field name="code">6233</field>
+        <field name="name">Chi phí dụng cụ sản xuất</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6234 - Chi phí khấu hao máy thi công -->
+    <record id="acc_6234" model="account.account">
+        <field name="code">6234</field>
+        <field name="name">Chi phí khấu hao máy thi công</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6237 - Chi phí dịch vụ mua ngoài -->
+    <record id="acc_6237" model="account.account">
+        <field name="code">6237</field>
+        <field name="name">Chi phí dịch vụ mua ngoài</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6238 - Chi phí bằng tiền khác -->
+    <record id="acc_6238" model="account.account">
+        <field name="code">6238</field>
+        <field name="name">Chi phí bằng tiền khác</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_61"/>
+    </record>
+
+    <!-- 6271 - Chi phí nhân viên phân xưởng -->
+    <record id="acc_6271" model="account.account">
+        <field name="code">6271</field>
+        <field name="name">Chi phí nhân viên phân xưởng</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6272 - Chi phí nguyên, vật liệu -->
+    <record id="acc_6272" model="account.account">
+        <field name="code">6272</field>
+        <field name="name">Chi phí nguyên, vật liệu</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6273 - Chi phí dụng cụ sản xuất -->
+    <record id="acc_6273" model="account.account">
+        <field name="code">6273</field>
+        <field name="name">Chi phí dụng cụ sản xuất</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6274 - Chi phí khấu hao TSCĐ -->
+    <record id="acc_6274" model="account.account">
+        <field name="code">6274</field>
+        <field name="name">Chi phí khấu hao TSCĐ</field>
+        <field name="account_type">expense_depreciation</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6275 - Thuế, phí, lệ phí -->
+    <record id="acc_6275" model="account.account">
+        <field name="code">6275</field>
+        <field name="name">Thuế, phí, lệ phí</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6277 - Chi phí dịch vụ mua ngoài -->
+    <record id="acc_6277" model="account.account">
+        <field name="code">6277</field>
+        <field name="name">Chi phí dịch vụ mua ngoài</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6278 - Chi phí bằng tiền khác -->
+    <record id="acc_6278" model="account.account">
+        <field name="code">6278</field>
+        <field name="name">Chi phí bằng tiền khác</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_62"/>
+    </record>
+
+    <!-- 6320 - Giá vốn hàng bán -->
+    <record id="acc_6320" model="account.account">
+        <field name="code">6320</field>
+        <field name="name">Giá vốn hàng bán</field>
+        <field name="account_type">expense_direct_cost</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_64"/>
+    </record>
+
+    <!-- 6350 - Chi phí tài chính -->
+    <record id="acc_6350" model="account.account">
+        <field name="code">6350</field>
+        <field name="name">Chi phí tài chính</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_65"/>
+    </record>
+
+    <!-- 6351 - Chi phí tài chính -->
+    <record id="acc_6351" model="account.account">
+        <field name="code">6351</field>
+        <field name="name">Chi phí tài chính</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_65"/>
+    </record>
+
+    <!-- 6411 - Chi phí nhân viên -->
+    <record id="acc_6411" model="account.account">
+        <field name="code">6411</field>
+        <field name="name">Chi phí nhân viên</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6412 - Chi phí nguyên vật liệu, bao bì -->
+    <record id="acc_6412" model="account.account">
+        <field name="code">6412</field>
+        <field name="name">Chi phí nguyên vật liệu, bao bì</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6413 - Chi phí dụng cụ, đồ dùng -->
+    <record id="acc_6413" model="account.account">
+        <field name="code">6413</field>
+        <field name="name">Chi phí dụng cụ, đồ dùng</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6414 - Chi phí khấu hao TSCĐ -->
+    <record id="acc_6414" model="account.account">
+        <field name="code">6414</field>
+        <field name="name">Chi phí khấu hao TSCĐ</field>
+        <field name="account_type">expense_depreciation</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6415 - Thuế, phí, lệ phí -->
+    <record id="acc_6415" model="account.account">
+        <field name="code">6415</field>
+        <field name="name">Thuế, phí, lệ phí</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6417 - Chi phí dịch vụ mua ngoài -->
+    <record id="acc_6417" model="account.account">
+        <field name="code">6417</field>
+        <field name="name">Chi phí dịch vụ mua ngoài</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6418 - Chi phí bằng tiền khác -->
+    <record id="acc_6418" model="account.account">
+        <field name="code">6418</field>
+        <field name="name">Chi phí bằng tiền khác</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_66"/>
+    </record>
+
+    <!-- 6421 - Chi phí nhân viên -->
+    <record id="acc_6421" model="account.account">
+        <field name="code">6421</field>
+        <field name="name">Chi phí nhân viên</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6422 - Chi phí vật liệu quản lý -->
+    <record id="acc_6422" model="account.account">
+        <field name="code">6422</field>
+        <field name="name">Chi phí vật liệu quản lý</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6423 - Chi phí đồ dùng văn phòng -->
+    <record id="acc_6423" model="account.account">
+        <field name="code">6423</field>
+        <field name="name">Chi phí đồ dùng văn phòng</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6424 - Chi phí khấu hao TSCĐ -->
+    <record id="acc_6424" model="account.account">
+        <field name="code">6424</field>
+        <field name="name">Chi phí khấu hao TSCĐ</field>
+        <field name="account_type">expense_depreciation</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6425 - Thuế, phí và lệ phí -->
+    <record id="acc_6425" model="account.account">
+        <field name="code">6425</field>
+        <field name="name">Thuế, phí và lệ phí</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6426 - Chi phí dự phòng -->
+    <record id="acc_6426" model="account.account">
+        <field name="code">6426</field>
+        <field name="name">Chi phí dự phòng</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6427 - Chi phí dịch vụ mua ngoài -->
+    <record id="acc_6427" model="account.account">
+        <field name="code">6427</field>
+        <field name="name">Chi phí dịch vụ mua ngoài</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 6428 - Chi phí bằng tiền khác -->
+    <record id="acc_6428" model="account.account">
+        <field name="code">6428</field>
+        <field name="name">Chi phí bằng tiền khác</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_63"/>
+    </record>
+
+    <!-- 7110 - Thu nhập khác -->
+    <record id="acc_7110" model="account.account">
+        <field name="code">7110</field>
+        <field name="name">Thu nhập khác</field>
+        <field name="account_type">income_other</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_71"/>
+    </record>
+
+    <!-- 8110 - Chi phí khác -->
+    <record id="acc_8110" model="account.account">
+        <field name="code">8110</field>
+        <field name="name">Chi phí khác</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_81"/>
+    </record>
+
+    <!-- 8212 - Chi phí thuế thu nhập doanh nghiệp hoãn lại -->
+    <record id="acc_8212" model="account.account">
+        <field name="code">8212</field>
+        <field name="name">Chi phí thuế thu nhập doanh nghiệp hoãn lại</field>
+        <field name="account_type">expense</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_82"/>
+    </record>
+
+    <!-- 9110 - Xác định kết quả kinh doanh -->
+    <record id="acc_9110" model="account.account">
+        <field name="code">9110</field>
+        <field name="name">Xác định kết quả kinh doanh</field>
+        <field name="account_type">equity_unaffected</field>
+        <field name="reconcile" eval="False"/>
+        <field name="company_ids" eval="[(6, 0, [2])]"/>
+        <field name="group_id" ref="group_91"/>
+    </record>
+</odoo>

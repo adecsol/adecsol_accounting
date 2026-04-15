@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="accounting_adecsol.FinancialReportButtons" t-inherit="account_financial_report.FinancialReportButtons" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_account_financial_reports_print')]" position="after">
+            <button type="button" 
+                    class="btn btn-primary o_account_financial_reports_b01dn" 
+                    t-on-click="() => this.onExecuteB01DN()">
+                B01-DN (Excel)
+            </button>
+        </xpath>
+    </t>
+</templates>

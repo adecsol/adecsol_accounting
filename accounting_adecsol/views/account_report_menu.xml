@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_accounting_vn_root" name="Kế toán Việt Nam" parent="account.menu_finance" sequence="80"/>
+
+    <menuitem id="menu_vn_bctc_year" name="Báo cáo tài chính năm" parent="menu_accounting_vn_root" sequence="10"/>
+
+    <menuitem id="menu_vn_so_ke_toan" name="Sổ kế toán" parent="menu_accounting_vn_root" sequence="5"/>
+
+    <menuitem id="menu_vn_b01_dn" name="Bảng cân đối kế toán (B 01 – DN)" 
+              parent="menu_vn_bctc_year" action="action_vn_b01_dn" sequence="1"/>
+
+    <menuitem id="menu_vn_b02_dn" name="BCKQ hoạt động KD (B 02 – DN)" 
+              parent="menu_vn_bctc_year" action="action_vn_b02_dn" sequence="2"/>
+
+    <menuitem id="menu_vn_b03_dn" name="B03-DN — Lưu chuyển tiền tệ (trực tiếp)" 
+              parent="menu_accounting_vn_root" action="action_vn_b03_dn" sequence="12"/>
+</odoo>

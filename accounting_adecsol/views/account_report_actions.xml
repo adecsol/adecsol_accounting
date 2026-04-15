@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_vn_b01_dn" model="ir.actions.act_window">
+        <field name="name">Bảng cân đối kế toán (B 01 – DN)</field>
+        <field name="res_model">account.account</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="context">{'search_default_group_by_root': 1}</field>
+    </record>
+
+    <record id="action_vn_b02_dn" model="ir.actions.act_window">
+        <field name="name">Kết quả hoạt động kinh doanh (B 02 – DN)</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">pivot,list,graph</field>
+        <field name="domain">[('account_id.code', '=ilike', '5%'), ('account_id.code', '=ilike', '6%'), ('account_id.code', '=ilike', '7%'), ('account_id.code', '=ilike', '8%'), ('account_id.code', '=ilike', '9%')]</field>
+        <field name="context">{'group_by': ['account_id', 'date:month']}</field>
+    </record>
+
+    <record id="action_vn_b03_dn" model="ir.actions.act_window">
+        <field name="name">Báo cáo lưu chuyển tiền tệ (B 03 – DN)</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">list,pivot</field>
+        <field name="domain">[('account_id.code', '=ilike', '111%'), ('account_id.code', '=ilike', '112%')]</field>
+    </record>
+</odoo>

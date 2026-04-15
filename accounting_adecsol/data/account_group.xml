@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- === TÀI SẢN NGẮN HẠN === -->
+    <!-- 1. Tiền và tương đương tiền -->
+    <record id="group_11" model="account.group">
+        <field name="name">1. Tiền và tương đương tiền</field>
+        <field name="code_prefix_start">111</field>
+        <field name="code_prefix_end">119</field>
+    </record>
+    
+    <!-- 2. Đầu tư tài chính ngắn hạn -->
+    <record id="group_12" model="account.group">
+        <field name="name">2. Đầu tư tài chính ngắn hạn</field>
+        <field name="code_prefix_start">121</field>
+        <field name="code_prefix_end">129</field>
+    </record>
+    
+    <!-- 3. Các khoản phải thu ngắn hạn -->
+    <record id="group_13" model="account.group">
+        <field name="name">3. Các khoản phải thu ngắn hạn</field>
+        <field name="code_prefix_start">131</field>
+        <field name="code_prefix_end">139</field>
+    </record>
+    
+    <!-- 4. Tạm ứng và các khoản phải thu khác -->
+    <record id="group_14" model="account.group">
+        <field name="name">4. Tạm ứng và các khoản phải thu khác</field>
+        <field name="code_prefix_start">141</field>
+        <field name="code_prefix_end">149</field>
+    </record>
+    
+    <!-- 5. Hàng tồn kho -->
+    <record id="group_15" model="account.group">
+        <field name="name">5. Hàng tồn kho</field>
+        <field name="code_prefix_start">151</field>
+        <field name="code_prefix_end">159</field>
+    </record>
+    
+    <!-- 6. Đầu tư tài chính khác -->
+    <record id="group_16" model="account.group">
+        <field name="name">6. Đầu tư tài chính khác</field>
+        <field name="code_prefix_start">171</field>
+        <field name="code_prefix_end">179</field>
+    </record>
+    
+    <!-- === TÀI SẢN DÀI HẠN === -->
+    <!-- 7. Tài sản cố định -->
+    <record id="group_21" model="account.group">
+        <field name="name">7. Tài sản cố định</field>
+        <field name="code_prefix_start">211</field>
+        <field name="code_prefix_end">216</field> <!-- CHỈ đến 216 -->
+    </record>
+    
+    <!-- 8. Bất động sản đầu tư -->
+    <record id="group_22" model="account.group">
+        <field name="name">8. Bất động sản đầu tư</field>
+        <field name="code_prefix_start">217</field>
+        <field name="code_prefix_end">229</field>
+    </record>
+    
+    <!-- 9. Tài sản dở dang và đầu tư XDCB -->
+    <record id="group_23" model="account.group">
+        <field name="name">9. Tài sản dở dang và đầu tư XDCB</field>
+        <field name="code_prefix_start">241</field>
+        <field name="code_prefix_end">241</field> <!-- CHỈ mua sắm TSCĐ -->
+    </record>
+    
+    <!-- 10. Xây dựng cơ bản -->
+    <record id="group_24" model="account.group">
+        <field name="name">10. Xây dựng cơ bản</field>
+        <field name="code_prefix_start">2412</field> <!-- 4 chữ số -->
+        <field name="code_prefix_end">2412</field>
+    </record>
+    
+    <!-- 11. Sửa chữa, bảo dưỡng -->
+    <record id="group_25" model="account.group">
+        <field name="name">11. Sửa chữa, bảo dưỡng</field>
+        <field name="code_prefix_start">2413</field>
+        <field name="code_prefix_end">2413</field>
+    </record>
+    
+    <!-- 12. Nâng cấp, cải tạo -->
+    <record id="group_26" model="account.group">
+        <field name="name">12. Nâng cấp, cải tạo</field>
+        <field name="code_prefix_start">2414</field>
+        <field name="code_prefix_end">2414</field>
+    </record>
+    
+    <!-- 13. Chi phí chờ phân bổ -->
+    <record id="group_27" model="account.group">
+        <field name="name">13. Chi phí chờ phân bổ</field>
+        <field name="code_prefix_start">242</field>
+        <field name="code_prefix_end">242</field>
+    </record>
+    
+    <!-- 14. Tài sản thuế thu nhập hoãn lại -->
+    <record id="group_28" model="account.group">
+        <field name="name">14. Tài sản thuế thu nhập hoãn lại</field>
+        <field name="code_prefix_start">243</field>
+        <field name="code_prefix_end">243</field>
+    </record>
+    
+    <!-- 15. Ký quỹ, ký cược -->
+    <record id="group_29" model="account.group">
+        <field name="name">15. Ký quỹ, ký cược</field>
+        <field name="code_prefix_start">244</field>
+        <field name="code_prefix_end">244</field>
+    </record>
+    
+    <!-- === NỢ PHẢI TRẢ === -->
+    <!-- 16. Nợ ngắn hạn -->
+    <record id="group_31" model="account.group">
+        <field name="name">16. Nợ ngắn hạn</field>
+        <field name="code_prefix_start">311</field>
+        <field name="code_prefix_end">319</field>
+    </record>
+    
+    <!-- 17. Nợ dài hạn -->
+    <record id="group_33" model="account.group">
+        <field name="name">17. Nợ dài hạn</field>
+        <field name="code_prefix_start">331</field>
+        <field name="code_prefix_end">339</field>
+    </record>
+    
+    <!-- 18. Vay và nợ thuê tài chính -->
+    <record id="group_34" model="account.group">
+        <field name="name">18. Vay và nợ thuê tài chính</field>
+        <field name="code_prefix_start">343</field>
+        <field name="code_prefix_end">344</field>
+    </record>
+    
+    <!-- 19. Thuế thu nhập hoãn lại -->
+    <record id="group_35" model="account.group">
+        <field name="name">19. Thuế thu nhập hoãn lại</field>
+        <field name="code_prefix_start">347</field>
+        <field name="code_prefix_end">347</field>
+    </record>
+    
+    <!-- 20. Quỹ và dự phòng -->
+    <record id="group_36" model="account.group">
+        <field name="name">20. Quỹ và dự phòng</field>
+        <field name="code_prefix_start">353</field>
+        <field name="code_prefix_end">357</field>
+    </record>
+    
+    <!-- === VỐN CHỦ SỞ HỮU === -->
+    <!-- 21. Vốn chủ sở hữu -->
+    <record id="group_41" model="account.group">
+        <field name="name">21. Vốn chủ sở hữu</field>
+        <field name="code_prefix_start">411</field>
+        <field name="code_prefix_end">419</field>
+    </record>
+    
+    <!-- 22. Lợi nhuận chưa phân phối -->
+    <record id="group_42" model="account.group">
+        <field name="name">22. Lợi nhuận chưa phân phối</field>
+        <field name="code_prefix_start">421</field>
+        <field name="code_prefix_end">421</field>
+    </record>
+    
+    <!-- === DOANH THU === -->
+    <!-- 23. Doanh thu bán hàng -->
+    <record id="group_51" model="account.group">
+        <field name="name">23. Doanh thu bán hàng</field>
+        <field name="code_prefix_start">511</field>
+        <field name="code_prefix_end">512</field>
+    </record>
+    
+    <!-- 24. Doanh thu hoạt động tài chính -->
+    <record id="group_52" model="account.group">
+        <field name="name">24. Doanh thu hoạt động tài chính</field>
+        <field name="code_prefix_start">515</field>
+        <field name="code_prefix_end">515</field>
+    </record>
+    
+    <!-- 25. Các khoản giảm trừ doanh thu -->
+    <record id="group_53" model="account.group">
+        <field name="name">25. Các khoản giảm trừ doanh thu</field>
+        <field name="code_prefix_start">521</field>
+        <field name="code_prefix_end">521</field>
+    </record>
+    
+    <!-- === CHI PHÍ === -->
+    <!-- 26. Chi phí sản xuất kinh doanh -->
+    <record id="group_61" model="account.group">
+        <field name="name">26. Chi phí sản xuất kinh doanh</field>
+        <field name="code_prefix_start">621</field>
+        <field name="code_prefix_end">623</field>
+    </record>
+    
+    <!-- 27. Chi phí sản xuất chung -->
+    <record id="group_62" model="account.group">
+        <field name="name">27. Chi phí sản xuất chung</field>
+        <field name="code_prefix_start">627</field>
+        <field name="code_prefix_end">627</field>
+    </record>
+    
+    <!-- 28. Chi phí quản lý doanh nghiệp -->
+    <record id="group_63" model="account.group">
+        <field name="name">28. Chi phí quản lý doanh nghiệp</field>
+        <field name="code_prefix_start">642</field>
+        <field name="code_prefix_end">642</field>
+    </record>
+    
+    <!-- 29. Giá vốn hàng bán -->
+    <record id="group_64" model="account.group">
+        <field name="name">29. Giá vốn hàng bán</field>
+        <field name="code_prefix_start">632</field>
+        <field name="code_prefix_end">632</field>
+    </record>
+    
+    <!-- 30. Chi phí tài chính -->
+    <record id="group_65" model="account.group">
+        <field name="name">30. Chi phí tài chính</field>
+        <field name="code_prefix_start">635</field>
+        <field name="code_prefix_end">635</field>
+    </record>
+    
+    <!-- 31. Chi phí bán hàng -->
+    <record id="group_66" model="account.group">
+        <field name="name">31. Chi phí bán hàng</field>
+        <field name="code_prefix_start">641</field>
+        <field name="code_prefix_end">641</field>
+    </record>
+    
+    <!-- 32. Thu nhập khác -->
+    <record id="group_71" model="account.group">
+        <field name="name">32. Thu nhập khác</field>
+        <field name="code_prefix_start">711</field>
+        <field name="code_prefix_end">711</field>
+    </record>
+    
+    <!-- 33. Chi phí khác -->
+    <record id="group_81" model="account.group">
+        <field name="name">33. Chi phí khác</field>
+        <field name="code_prefix_start">811</field>
+        <field name="code_prefix_end">811</field>
+    </record>
+    
+    <!-- 34. Chi phí thuế TNDN -->
+    <record id="group_82" model="account.group">
+        <field name="name">34. Chi phí thuế TNDN</field>
+        <field name="code_prefix_start">821</field>
+        <field name="code_prefix_end">821</field>
+    </record>
+    
+    <!-- 35. Xác định kết quả kinh doanh -->
+    <record id="group_91" model="account.group">
+        <field name="name">35. Xác định kết quả kinh doanh</field>
+        <field name="code_prefix_start">911</field>
+        <field name="code_prefix_end">911</field>
+    </record>
+</odoo>

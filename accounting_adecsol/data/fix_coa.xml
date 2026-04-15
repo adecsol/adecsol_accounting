@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="l10n_vn.2_chart1111" model="account.account">
+            <field name="code">111</field>
+            <field name="name">Tiền mặt</field>
+            <field name="account_type">asset_cash</field>
+        </record>
+    </data>
+</odoo>
