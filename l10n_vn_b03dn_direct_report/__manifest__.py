@@ -12,8 +12,6 @@
         "accounting_adecsol",
         "account_financial_report",
         "report_xlsx",
-        "mis_builder",
-        "mis_builder_cash_flow",
     ],
     "data": [
         "security/ir.model.access.csv",
