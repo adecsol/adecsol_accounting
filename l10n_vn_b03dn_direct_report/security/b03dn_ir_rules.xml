@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Kế toán: chỉ mẫu trùng thông tư của công ty hiện tại -->
     <record id="b03dn_template_rule_company_circular" model="ir.rule">
-        <field name="name">B03-DN mẫu: theo thông tư công ty</field>
+        <field name="name">B03-DN template: company circular</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_template"/>
         <field name="domain_force">[('circular_type', '=', user.company_id.circular_type)]</field>
         <field name="groups" eval="[(4, ref('account.group_account_readonly')), (4, ref('account.group_account_manager'))]"/>
     </record>
-    <!-- Settings: xem/sửa mọi mẫu (cấu hình đa thông tư) -->
     <record id="b03dn_template_rule_system_full" model="ir.rule">
-        <field name="name">B03-DN mẫu: toàn quyền (Settings)</field>
+        <field name="name">B03-DN template: full access (Settings)</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_template"/>
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('base.group_system'))]"/>
     </record>
 
     <record id="b03dn_line_rule_company_circular" model="ir.rule">
-        <field name="name">B03-DN dòng chỉ tiêu: theo thông tư công ty</field>
+        <field name="name">B03-DN line: company circular</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_line"/>
         <field name="domain_force">[('template_id.circular_type', '=', user.company_id.circular_type)]</field>
         <field name="groups" eval="[(4, ref('account.group_account_readonly')), (4, ref('account.group_account_manager'))]"/>
     </record>
     <record id="b03dn_line_rule_system_full" model="ir.rule">
-        <field name="name">B03-DN dòng chỉ tiêu: toàn quyền (Settings)</field>
+        <field name="name">B03-DN line: full access (Settings)</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_line"/>
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('base.group_system'))]"/>
     </record>
 
     <record id="b03dn_form_header_rule_company_circular" model="ir.rule">
-        <field name="name">B03-DN tiêu đề mẫu biểu: theo thông tư công ty</field>
+        <field name="name">B03-DN form header: company circular</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_form_header"/>
         <field name="domain_force">[('circular_type', '=', user.company_id.circular_type)]</field>
         <field name="groups" eval="[(4, ref('account.group_account_readonly')), (4, ref('account.group_account_manager'))]"/>
     </record>
     <record id="b03dn_form_header_rule_system_full" model="ir.rule">
-        <field name="name">B03-DN tiêu đề mẫu biểu: toàn quyền (Settings)</field>
+        <field name="name">B03-DN form header: full access (Settings)</field>
         <field name="model_id" ref="model_l10n_vn_b03dn_form_header"/>
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('base.group_system'))]"/>

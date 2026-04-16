@@ -17,7 +17,7 @@ def _b03dn_html_has_visible_text(html_value):
 
 class L10nVnB03dnTemplate(models.Model):
     _name = "l10n.vn.b03dn.template"
-    _description = "B03-DN (trực tiếp) — Mẫu báo cáo"
+    _description = "B03-DN (direct) — Report template"
 
     name = fields.Char(required=True, translate=True)
     circular_type = fields.Selection(
@@ -26,42 +26,42 @@ class L10nVnB03dnTemplate(models.Model):
             ("tt99", "TT99"),
             ("tt200", "TT200"),
         ],
-        string="Loại thông tư",
+        string="Circular type",
         default="tt200",
         required=True,
-        help="Phải khớp «Loại thông tư» trên công ty để mẫu hiển thị trên báo cáo.",
+        help="Must match «Circular type» on the company for the template to appear on the report.",
     )
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(
         "res.company",
-        string="Công ty",
-        help="Để trống: dùng cho mọi công ty.",
+        string="Company",
+        help="Leave empty: available for every company.",
     )
     document_dossier_id = fields.Many2one(
         "document.profile.dossier",
-        string="Hồ sơ thuyết minh",
+        string="Notes dossier",
         ondelete="set null",
-        help="Khi chọn: trên báo cáo HTML, cột «Thuyết minh» mở tệp có mã khớp "
-        "(tham chiếu TM trùng với dòng chỉ tiêu, vd. 05 → …-05).",
+        help="When set: on the HTML report, the «Notes» column opens files whose code matches "
+        "(reference TM aligned with the line, e.g. 05 → …-05).",
     )
     cash_account_ids = fields.Many2many(
         "account.account",
         "b03dn_template_cash_account_rel",
         "template_id",
         "account_id",
-        string="Tài khoản tiền & TĐT (override)",
-        help="Nếu đặt, chỉ các TK này được quét. Để trống: 111/112/113 theo công ty + "
-        "TK tương đương tiền trên res.company.",
+        string="Cash & cash-equivalent accounts (override)",
+        help="If set, only these accounts are scanned. If empty: 111/112/113 per company + "
+        "cash-equivalent accounts on res.company.",
         check_company=True,
     )
     line_ids = fields.One2many(
         "l10n.vn.b03dn.line",
         "template_id",
-        string="Chỉ tiêu",
+        string="Line items",
         copy=True,
     )
     b03dn_tag_config_alert = fields.Html(
-        string="Cảnh báo cấu hình thẻ",
+        string="Tag configuration warning",
         compute="_compute_b03dn_tag_config_alert",
         sanitize=False,
     )
@@ -88,8 +88,8 @@ class L10nVnB03dnTemplate(models.Model):
             )
             title = html_escape(
                 _(
-                    "Có thẻ chỉ xuất hiện trong «Thẻ yêu cầu» mà không có trong "
-                    "«Thẻ loại trừ» của bất kỳ chỉ tiêu nào trên template:"
+                    "Tags that appear only in «Required tags» and not in «Excluded tags» "
+                    "for any line on this template:"
                 )
             )
             tmpl.b03dn_tag_config_alert = Markup(
@@ -102,7 +102,7 @@ class L10nVnB03dnTemplate(models.Model):
 
 class L10nVnB03dnLine(models.Model):
     _name = "l10n.vn.b03dn.line"
-    _description = "B03-DN (trực tiếp) — Dòng chỉ tiêu / quy tắc"
+    _description = "B03-DN (direct) — Line item / rule"
     _order = "sequence, id"
 
     template_id = fields.Many2one(
@@ -114,107 +114,106 @@ class L10nVnB03dnLine(models.Model):
 
     display_type = fields.Selection(
         [
-            ("line_section", "Phần"),
-            ("line_note", "Ghi chú"),
+            ("line_section", "Section"),
+            ("line_note", "Note"),
         ],
         default=False,
-        help="Chỉ dùng cho giao diện danh sách (widget): tiêu đề phần / ghi chú; "
-        "để trống = dòng chỉ tiêu tính toán (cấu hình mẫu TK / tổng / đầu kỳ / tỷ giá).",
+        help="For list UI only (widget): section title / note; "
+        "empty = computed line item (account patterns / sum / opening / FX).",
     )
 
     code = fields.Char(
         size=8,
-        help="Mã số chỉ tiêu (vd: 01, 20, 70). Không bắt buộc trên dòng Phần / Ghi chú.",
+        help="Line code (e.g. 01, 20, 70). Optional on Section / Note lines.",
     )
     name = fields.Html(
         translate=True,
-        help="Dòng Phần / Ghi chú có thể để trống. Dòng chỉ tiêu tính toán phải có nội dung.",
+        help="Section / Note lines may be empty. Computed lines must have content.",
     )
     explanation_ref = fields.Char(
-        string="Thuyết minh",
+        string="Notes reference",
         translate=True,
-        help="Ký hiệu thuyết minh trên B03 (nếu có).",
+        help="Notes symbol on B03 (if any).",
     )
-
     debit_account_patterns = fields.Char(
-        string="Mẫu tài khoản Nợ",
-        help="Các mẫu mã tài khoản, phân tách bằng dấu phẩy (vd. 331%, 152%). "
-        "Luồng tiền ra (bên Có tiền): khớp dòng đối ứng phía Nợ (cột TK Nợ TT200; không gồm tiền).",
+        string="Debit account patterns",
+        help="Comma-separated account code patterns (e.g. 331%, 152%). "
+        "Cash outflow (credit side of cash): match counterpart debit lines (TT200 debit column; excluding cash).",
     )
     credit_account_patterns = fields.Char(
-        string="Mẫu tài khoản Có",
-        help="Các mẫu mã tài khoản, phân tách bằng dấu phẩy. "
-        "Luồng tiền vào (bên Nợ tiền): khớp dòng đối ứng phía Có (cột TK Có TT200).",
+        string="Credit account patterns",
+        help="Comma-separated account code patterns. "
+        "Cash inflow (debit side of cash): match counterpart credit lines (TT200 credit column).",
     )
     exclude_account_patterns = fields.Char(
-        string="Loại trừ mẫu TK đối ứng",
-        help="Danh sách mã TK (phân tách bằng dấu phẩy), hỗ trợ hậu tố %% như các mẫu Nợ/Có. "
-        "Nếu mã TK đối ứng (hoặc bất kỳ mã trong chuỗi đối ứng ghép) khớp một mẫu loại trừ, "
-        "luật leaf này không áp dụng cho mảnh đó (có thể rơi xuống dòng chỉ tiêu khác).",
+        string="Exclude counterpart patterns",
+        help="Comma-separated account codes, %% suffix supported like Debit/Credit patterns. "
+        "If any counterpart code (or split string) matches an exclusion pattern, "
+        "this leaf rule does not apply to that fragment (it may fall through to another line).",
     )
     amount_multiplier = fields.Float(
         default=1.0,
-        help="Nhân số sau phân bổ (thường -1 cho các khoản chi ra).",
+        help="Multiplier after allocation (usually -1 for outflows).",
     )
     tag_ids = fields.Many2many(
         "account.account.tag",
         "l10n_vn_b03dn_line_tag_rel",
         "line_id",
         "tag_id",
-        string="Thẻ yêu cầu",
+        string="Required tags",
     )
     exclude_tag_ids = fields.Many2many(
         "account.account.tag",
         "l10n_vn_b03dn_line_exclude_tag_rel",
         "line_id",
         "tag_id",
-        string="Thẻ loại trừ",
-        help="Gán thẻ cho TK (hoặc thẻ dòng tiền B03-DN trên bút toán, tùy «Nguồn thẻ») để "
-        "loại các giao dịch khớp mẫu TK nhưng không thuộc chỉ tiêu này. Cùng tập thẻ với "
-        "«Thẻ yêu cầu» để đánh giá.",
+        string="Excluded tags",
+        help="Tag accounts (or B03-DN cash-flow tags on move lines, depending on «Tag source») to "
+        "exclude transactions that match account patterns but do not belong on this line. "
+        "Use together with «Required tags» for evaluation.",
     )
     tag_match_mode = fields.Selection(
         [
-            ("all", "Phải có đủ các thẻ"),
-            ("any", "Có ít nhất một thẻ"),
+            ("all", "Must have all tags"),
+            ("any", "At least one tag"),
         ],
         default="any",
         required=True,
     )
     tag_source = fields.Selection(
         [
-            ("counterpart_account", "Thẻ trên TK đối ứng"),
-            ("cash_line", "Thẻ trên dòng tiền (B03-DN)"),
-            ("either", "Ưu tiên dòng tiền, sau đó TK đối ứng"),
+            ("counterpart_account", "Tags on counterpart account"),
+            ("cash_line", "Tags on cash line (B03-DN)"),
+            ("either", "Prefer cash line, then counterpart account"),
         ],
         default="either",
     )
 
     sum_expression = fields.Char(
-        string="Biểu thức cộng",
-        help="Ví dụ: 01+02 hoặc 20+30+40. Khi có trường này: chỉ tiêu = tổng các mã (aggregate). "
-        "Không kết hợp với pattern đầu kỳ / tỷ giá / lọc dòng tiền.",
+        string="Sum expression",
+        help="Example: 01+02 or 20+30+40. When set: line = sum of codes (aggregate). "
+        "Do not combine with opening / FX / cash filtering patterns.",
     )
 
     use_opening_cash_balance = fields.Boolean(
-        string="Tiền & TĐT đầu kỳ",
-        help="Khi bật: lấy số dư các TK tiền (theo cấu hình template) tại ngày trước kỳ báo cáo. "
-        "Không dùng chung với biểu thức cộng, mẫu tỷ giá hay pattern lọc.",
+        string="Opening cash & equivalents",
+        help="When enabled: take cash account balances (per template config) on the day before the report period. "
+        "Do not use together with sum expression, FX patterns or cash filtering.",
     )
 
     fx_account_patterns = fields.Char(
-        string="Mẫu TK cho bút từ tỷ giá",
-        help="Khi nhập: chỉ tiêu lấy tổng biến động TK khớp mẫu trong kỳ (vd. 413%%). "
-        "Không dùng chung với biểu thức cộng, đầu kỳ hay pattern lọc dòng tiền.",
+        string="FX journal account patterns",
+        help="When set: line takes total movement of matching accounts in the period (e.g. 413%%). "
+        "Do not use together with sum expression, opening or cash filtering.",
     )
 
     extra_domain = fields.Char(
-        string="Bộ lọc bổ sung (dòng bút toán)",
-        help="Chuỗi domain JSON Odoo trên account.move.line, áp dụng thêm sau khi đã khớp quy tắc chi tiết.",
+        string="Extra filter (move line)",
+        help="JSON domain string on account.move.line, applied after detailed rules match.",
     )
 
     b03dn_report_bold_amounts = fields.Boolean(
-        string="Báo cáo: in đậm số",
+        string="Report: bold amounts",
         compute="_compute_b03dn_report_bold_amounts",
     )
 
@@ -316,17 +315,17 @@ class L10nVnB03dnLine(models.Model):
             if modes == 0:
                 raise ValidationError(
                     self.env._(
-                        "Dòng tính toán phải có đúng một kiểu: biểu thức cộng, đầu kỳ tiền, "
-                        "mẫu TK tỷ giá, hoặc lọc dòng tiền (pattern Nợ/Có và/hoặc thẻ). "
-                        "(id dòng: %s)",
+                        "A computed line must have exactly one mode: sum expression, opening cash, "
+                        "FX account pattern, or cash filter (debit/credit patterns and/or tags). "
+                        "(line id: %s)",
                         line.id,
                     )
                 )
             if modes > 1:
                 raise ValidationError(
                     self.env._(
-                        "Chỉ được cấu hình một kiểu tính: tổng (biểu thức), đầu kỳ, tỷ giá, "
-                        "hoặc lọc leaf — không trộn. (id dòng: %s)",
+                        "Only one computation mode is allowed: aggregate (sum), opening, FX, "
+                        "or leaf filter — do not mix. (line id: %s)",
                         line.id,
                     )
                 )
@@ -340,7 +339,7 @@ class L10nVnB03dnLine(models.Model):
             if not c:
                 raise ValidationError(
                     self.env._(
-                        "Phải nhập mã chỉ tiêu cho dòng tính toán (id dòng: %s).",
+                        "Line code is required for computed lines (line id: %s).",
                         line.id,
                     )
                 )
@@ -353,7 +352,7 @@ class L10nVnB03dnLine(models.Model):
             if not _b03dn_html_has_visible_text(line.name):
                 raise ValidationError(
                     self.env._(
-                        "Phải nhập «Chỉ tiêu» (tên) cho dòng tính toán (id dòng: %s).",
+                        "Line name is required for computed lines (line id: %s).",
                         line.id,
                     )
                 )
@@ -374,7 +373,7 @@ class L10nVnB03dnLine(models.Model):
             if n:
                 raise ValidationError(
                     self.env._(
-                        "Mã chỉ tiêu «%s» đã tồn tại trên template này.",
+                        "Line code «%s» already exists on this template.",
                         c,
                     )
                 )

@@ -12,9 +12,9 @@
                     invisible="not is_root_company"
                 >
                     <setting
-                        string="Loại thông tư"
+                        string="Circular type"
                         company_dependent="1"
-                        help="Mẫu báo cáo lưu chuyển tiền tệ (B03-DN trực tiếp) chỉ hiển thị các template cùng thông tư."
+                        help="Cash flow report templates (B03-DN direct) only show templates for the same circular."
                     >
                         <field name="circular_type"/>
                     </setting>

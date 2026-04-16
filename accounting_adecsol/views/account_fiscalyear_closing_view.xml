@@ -13,7 +13,7 @@
                         domain="[('account_id.account_type', '=', 'income'), ('date', '&gt;=', date_start), ('date', '&lt;=', date_end), ('company_id', '=', company_id)]">
                     <div class="o_stat_info">
                         <field name="revenue_amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
-                        <span class="o_stat_text">Doanh thu</span>
+                        <span class="o_stat_text">Revenue</span>
                     </div>
                 </button>
                 <button name="%(account.action_account_moves_all_a)d" 
@@ -22,20 +22,20 @@
                         domain="[('account_id.account_type', 'in', ['expense', 'expense_direct_cost', 'expense_depreciation']), ('date', '&gt;=', date_start), ('date', '&lt;=', date_end), ('company_id', '=', company_id)]">
                     <div class="o_stat_info">
                         <field name="expense_amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
-                        <span class="o_stat_text">Chi phí</span>
+                        <span class="o_stat_text">Expenses</span>
                     </div>
                 </button>
             </xpath>
 
             <xpath expr="//field[@name='move_config_ids']/list/field[@name='journal_id']" position="attributes">
                 <attribute name="required">1</attribute>
-                <attribute name="string">Sổ nhật ký</attribute>
+                <attribute name="string">Journal</attribute>
                 <attribute name="optional">show</attribute>
             </xpath>
 
             <xpath expr="//field[@name='move_config_ids']/form//field[@name='journal_id']" position="attributes">
                 <attribute name="required">1</attribute>
-                <attribute name="string">Sổ nhật ký</attribute>
+                <attribute name="string">Journal</attribute>
             </xpath>
 
         </field>

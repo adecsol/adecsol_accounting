@@ -11,10 +11,10 @@ _logger = logging.getLogger(__name__)
 
 
 class L10nVnB03dnEngine(models.AbstractModel):
-    """Tính toán luồng tiền B03-DN (trực tiếp) từ các dòng mẫu."""
+    """Compute B03-DN (direct) cash flows from template lines."""
 
     _name = "l10n.vn.b03dn.engine"
-    _description = "B03-DN — Bộ máy tính toán"
+    _description = "B03-DN — Computation engine"
 
     @api.model
     def _cash_account_ids(self, company, template):
@@ -105,13 +105,13 @@ class L10nVnB03dnEngine(models.AbstractModel):
 
     @api.model
     def _fragment_from_cash_line(self, ml, by_move, currency, cash_account_ids=None):
-        """Một dòng tiền → 1 hoặc nhiều mảnh theo từng TK đối ứng có Nợ/Có cùng phía.
+        """Split one cash move line into one or more fragments per counterpart on the same side.
 
-        Luôn phân bổ *amount* dòng tiền theo trọng số các đối ứng (kể cả chỉ 1 đối ứng) để
-        trường hợp nhiều TK tiền trên cùng chứng từ + nhiều TK đối ứng không gán nhầm
-        nguyên số tiền vào một đối ứng.
+        The cash line *amount* is always split by counterpart weights (even with a single
+        counterpart) so that many cash accounts on one entry plus many counterparts never
+        assign the full amount to the wrong counterpart.
 
-        Bút toán chỉ chuyển qua lại giữa các TK tiền (đối ứng toàn là tiền) → không tạo mảnh.
+        Pure inter-cash moves (every counterpart is a cash account) yield no fragments.
         """
         prec = currency.decimal_places
         cash_ids = frozenset(cash_account_ids or [])
@@ -299,8 +299,8 @@ class L10nVnB03dnEngine(models.AbstractModel):
     def compute_period(self, template, company, date_from, date_to):
         """Return dict code -> {amount, aml_ids} for one period.
 
-        ``aml_ids`` (chỉ tiêu leaf / aggregate): id các dòng sổ **đối ứng** khớp fragment,
-        dùng drill-down QWeb / Excel — không còn là id dòng tiền.
+        ``aml_ids`` (leaf / aggregate lines): ids of **counterpart** move lines that match
+        the fragment, used for QWeb / Excel drill-down — not the cash line ids.
         """
         currency = company.currency_id
         account_ids = self._cash_account_ids(company, template)

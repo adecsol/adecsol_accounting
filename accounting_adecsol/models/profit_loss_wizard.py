@@ -1,22 +1,20 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import _, models
 from odoo.exceptions import UserError
+
 
 class AccountingReport(models.TransientModel):
     _inherit = "accounting.report"
 
     def action_export_b02dn_excel(self):
         """
-        Xuất báo cáo Kết quả hoạt động kinh doanh B02-DN
-        Lấy tất cả thông tin từ popup để lọc dữ liệu
+        Export income statement B02-DN (Excel).
+        Uses all filter fields from the wizard.
         """
         self.ensure_one()
-        
-        # Kiểm tra ngày
+
         if self.date_from > self.date_to:
-            raise UserError("Ngày bắt đầu không thể lớn hơn ngày kết thúc!")
-        
-        # Chuẩn bị dữ liệu từ popup - BỎ fy_start_date
+            raise UserError(_("Start date cannot be after end date."))
         data = {
             'date_from': self.date_from,
             'date_to': self.date_to,
@@ -30,6 +28,5 @@ class AccountingReport(models.TransientModel):
             'debit_credit': self.debit_credit if hasattr(self, 'debit_credit') else False,
         }
         
-        # Gọi report action và truyền data
         report = self.env.ref('accounting_adecsol.profit_loss_xlsx_action')
         return report.report_action(self, data=data)

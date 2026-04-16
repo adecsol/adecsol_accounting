@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="b03dn_form_header_tt200" model="l10n.vn.b03dn.form.header">
-        <field name="name">Tiêu đề mẫu biểu — TT200</field>
+        <field name="name">Form header — TT200</field>
         <field name="circular_type">tt200</field>
-        <field name="form_title">Mẫu số B 03 – DN</field>
-        <field name="legal_reference">(Ban hành theo Thông tư số 200/2014/TT-BTC vào ngày 22/12/2014 của Bộ Tài chính)</field>
+        <field name="form_title">Form B 03 – DN</field>
+        <field name="legal_reference">(Issued with Circular No. 200/2014/TT-BTC dated 22/12/2014 by the Ministry of Finance)</field>
     </record>
     <record id="b03dn_form_header_tt99" model="l10n.vn.b03dn.form.header">
-        <field name="name">Tiêu đề mẫu biểu — TT99</field>
+        <field name="name">Form header — TT99</field>
         <field name="circular_type">tt99</field>
-        <field name="form_title">Mẫu số B 03 – DN</field>
-        <field name="legal_reference">(Kèm theo Thông tư số 99/2025/TT-BTC ngày 27 tháng 10 năm 2025 của Bộ trưởng Bộ Tài chính)</field>
+        <field name="form_title">Form B 03 – DN</field>
+        <field name="legal_reference">(Accompanying Circular No. 99/2025/TT-BTC dated 27 October 2025 by the Minister of Finance)</field>
     </record>
 </odoo>

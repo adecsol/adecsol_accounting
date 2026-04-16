@@ -4,37 +4,37 @@
         <field name="name">l10n.vn.b03dn.report.wizard.form</field>
         <field name="model">l10n.vn.b03dn.report.wizard</field>
         <field name="arch" type="xml">
-            <form string="Lưu chuyển tiền tệ (B03 - DN) (trực tiếp)">
+            <form string="Statement of cash flows (B03-DN) (direct)">
                 <group>
                     <field name="company_id"/>
                     <field name="template_id"/>
                 </group>
-                <group string="Kỳ báo cáo (năm nay)">
+                <group string="Report period (current year)">
                     <field name="date_from"/>
                     <field name="date_to"/>
                 </group>
-                <group string="Kỳ so sánh (năm trước)">
+                <group string="Comparison period (prior year)">
                     <field name="date_from_cmp"/>
                     <field name="date_to_cmp"/>
                 </group>
-                <group string="Hiển thị">
+                <group string="Display">
                     <field name="money_unit"/>
                     <field name="signature_date"/>
                 </group>
                 <footer>
                     <button
                         name="action_open_html"
-                        string="Xem báo cáo (HTML)"
+                        string="View report (HTML)"
                         type="object"
                         class="btn-primary"
                     />
                     <button
                         name="action_export_xlsx"
-                        string="Xuất Excel"
+                        string="Export Excel"
                         type="object"
                         class="btn-secondary"
                     />
-                    <button string="Đóng" special="cancel" class="btn-secondary"/>
+                    <button string="Close" special="cancel" class="btn-secondary"/>
                 </footer>
             </form>
         </field>

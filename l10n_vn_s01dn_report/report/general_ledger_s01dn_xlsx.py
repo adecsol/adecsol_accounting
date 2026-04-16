@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields
+from odoo.tools.misc import format_date
 from datetime import datetime
 import logging
 import os
@@ -76,7 +77,7 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         accounts_ordered = res.get('accounts_ordered') or []
         if not accounts_ordered:
             sheet = workbook.add_worksheet('S01-DN')
-            sheet.write(0, 0, 'Không có dữ liệu phát sinh trong kỳ.')
+            sheet.write(0, 0, self.env._('No movements in the selected period.'))
             return True
 
         opening_balances = res['opening_balances']
@@ -98,7 +99,7 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         )
 
         for page_idx, page_accounts in enumerate(pages):
-            sheet_name = f'Trang {str(page_idx + 1).zfill(2)}'
+            sheet_name = self.env._('Page %s') % str(page_idx + 1).zfill(2)
             sheet = workbook.add_worksheet(sheet_name)
 
             row = self._write_header(
@@ -442,12 +443,12 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         sheet.merge_range(row, 0, row, 3, '', fmt_co_val)
         sheet.write_rich_string(
             row, 0,
-            fmt_co_label, 'Đơn vị: ',
+            fmt_co_label, self.env._('Company: '),
             fmt_co_val, company_name,
             fmt_co_val,
         )
         sheet.merge_range(row, 4, row, last_col,
-                          'Mẫu số S01-DN', fmt['right_bold'])
+                          self.env._('Form S01-DN'), fmt['right_bold'])
         row += 1
 
         gl_rep = self.env['report.l10n_vn_s01dn_report.general_ledger_s01dn']
@@ -471,23 +472,26 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         sheet.merge_range(row, 0, row, 3, '', addr_fmt_norm)
         sheet.write_rich_string(
             row, 0,
-            addr_fmt_bold, 'Địa chỉ: ',
+            addr_fmt_bold, self.env._('Address:  '),
             addr_fmt_norm, address_body,
             addr_fmt_norm,
         )
         sheet.merge_range(
             row, 4, row, last_col,
-            '(Ban hành theo Thông tư số 200/2014/TT-BTC\nNgày 22/12/2014 của Bộ Tài chính)',
+            self.env._(
+                '(Issued under Circular No. 200/2014/TT-BTC\n'
+                'dated 22/12/2014 by the Ministry of Finance)'
+            ),
             fmt['italic_right'],
         )
         # Chiều cao dòng đủ cho địa chỉ xuống dòng (wrap); ~2–4 dòng @ 12pt
-        addr_display_len = len('Địa chỉ: ') + len(address_body)
+        addr_display_len = len('Địa chỉ:  ') + len(address_body)
         addr_lines = max(1, (addr_display_len + 39) // 40)
         sheet.set_row(row, min(18 * addr_lines + 12, 120))
         row += 2
 
         sheet.merge_range(row, 0, row, last_col,
-                          'NHẬT KÝ - SỔ CÁI', fmt['title'])
+                          self.env._('JOURNAL – GENERAL LEDGER'), fmt['title'])
         row += 1
         period_text = gl_rep._s01dn_report_period_range_label(
             date_from, date_to,
@@ -514,33 +518,33 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         row = start_row
 
         sheet.merge_range(row, 0, row + 1, 0,
-                          'Thứ tự\ndòng', fmt['header'])
+                          self.env._('Line\nno.'), fmt['header'])
         sheet.merge_range(row, 1, row + 1, 1,
-                          'Ngày, tháng, năm\nghi sổ', fmt['header'])
-        sheet.merge_range(row, 2, row, 3, 'Chứng từ', fmt['header'])
-        sheet.write(row + 1, 2, 'Số hiệu', fmt['header'])
-        sheet.write(row + 1, 3, 'Ngày, tháng, năm', fmt['header'])
-        sheet.merge_range(row, 4, row + 1, 4, 'Diễn giải', fmt['header'])
+                          self.env._('Posting date\n(d/m/y)'), fmt['header'])
+        sheet.merge_range(row, 2, row, 3, self.env._('Voucher'), fmt['header'])
+        sheet.write(row + 1, 2, self.env._('Number'), fmt['header'])
+        sheet.write(row + 1, 3, self.env._('Date'), fmt['header'])
+        sheet.merge_range(row, 4, row + 1, 4, self.env._('Description'), fmt['header'])
         sheet.merge_range(row, 5, row + 1, 5,
-                          'Số tiền\nphát sinh', fmt['header'])
-        sheet.merge_range(row, 6, row + 1, 6, 'Ghi chú', fmt['header'])
+                          self.env._('Transaction\namount'), fmt['header'])
+        sheet.merge_range(row, 6, row + 1, 6, self.env._('Note'), fmt['header'])
         sheet.merge_range(row, 7, row, 8,
-                          'Số hiệu TK\nđối ứng', fmt['header'])
-        sheet.write(row + 1, 7, 'Nợ', fmt['header'])
-        sheet.write(row + 1, 8, 'Có', fmt['header'])
+                          self.env._('Offset account\ncode'), fmt['header'])
+        sheet.write(row + 1, 7, self.env._('Debit'), fmt['header'])
+        sheet.write(row + 1, 8, self.env._('Credit'), fmt['header'])
         sheet.merge_range(row, 9, row + 1, 9,
-                          'Thứ tự\ndòng', fmt['header'])
+                          self.env._('Line\nno.'), fmt['header'])
 
         col = FIXED_COLS
         for acc in page_accounts:
             if acc is not None:
                 code = acc.code or acc.name
-                label = f'TK {code}'
+                label = self.env._('A/C %s') % code
             else:
-                label = 'TK...'
+                label = self.env._('A/C …')
             sheet.merge_range(row, col, row, col + 1, label, fmt['header'])
-            sheet.write(row + 1, col, 'Nợ', fmt['header'])
-            sheet.write(row + 1, col + 1, 'Có', fmt['header'])
+            sheet.write(row + 1, col, self.env._('Debit'), fmt['header'])
+            sheet.write(row + 1, col + 1, self.env._('Credit'), fmt['header'])
             col += 2
 
         row += 2
@@ -571,7 +575,7 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         sheet.write(row, 1, '', fmt['opening_label'])
         sheet.write(row, 2, '', fmt['opening_label'])
         sheet.write(row, 3, '', fmt['opening_label'])
-        sheet.write(row, 4, '- Số dư đầu năm', fmt['opening_label'])
+        sheet.write(row, 4, self.env._('- Opening balance (year)'), fmt['opening_label'])
 
         if total_opening_global is not None:
             total_opening = float(total_opening_global or 0)
@@ -672,44 +676,46 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         right_end = last_col
 
         open_date_str = (
-            date_from.strftime("%d/%m/%Y") if date_from else "…………"
+            format_date(self.env, date_from) if date_from else self.env._('…………')
         )
         sheet.merge_range(
             row, 0, row, left_end,
-            '- Sổ này có ... trang nội dung. '
-            'Đánh số từ Trang 01 đến Trang ... ở góc phải cuối mỗi trang.',
+            self.env._(
+                '- This ledger has … content pages. '
+                'Numbered from Page 01 to Page … at the bottom right of each sheet.'
+            ),
             fmt['signature_left'],
         )
         row += 1
         sheet.merge_range(
             row, 0, row, left_end,
-            f'- Ngày mở sổ: {open_date_str}',
+            self.env._('- Book opened on: %s') % open_date_str,
             fmt['signature_left'],
         )
         row += 1
 
         date_str = (
-            date_to.strftime("Ngày %d tháng %m năm %Y")
-            if date_to else "Ngày ... tháng ... năm 20.."
+            format_date(self.env, date_to, date_format='long')
+            if date_to else self.env._('Day … month … year 20..')
         )
         sheet.merge_range(row, right_start, row, right_end,
                           date_str, fmt['signature_right'])
         row += 2
 
         sheet.merge_range(row, 0, row, left_end,
-                          'Người ghi sổ', fmt['signature_bold'])
+                          self.env._('Bookkeeper'), fmt['signature_bold'])
         sheet.merge_range(row, mid_start2, row, mid_end2,
-                          'Kế toán trưởng', fmt['signature_bold'])
+                          self.env._('Chief accountant'), fmt['signature_bold'])
         sheet.merge_range(row, right_start, row, right_end,
-                          'Giám đốc', fmt['signature_bold'])
+                          self.env._('Director'), fmt['signature_bold'])
         row += 1
 
         sheet.merge_range(row, 0, row, left_end,
-                          '(Ký, họ tên)', fmt['signature'])
+                          self.env._('(Signature, full name)'), fmt['signature'])
         sheet.merge_range(row, mid_start2, row, mid_end2,
-                          '(Ký, họ tên)', fmt['signature'])
+                          self.env._('(Signature, full name)'), fmt['signature'])
         sheet.merge_range(row, right_start, row, right_end,
-                          '(Ký, họ tên, đóng dấu)', fmt['signature'])
+                          self.env._('(Signature, full name, stamp)'), fmt['signature'])
 
     @staticmethod
     def _s01dn_xlsx_money_chars(val, money_div):
@@ -726,10 +732,10 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
         monthly_summaries=None, opening_balances=None,
         total_opening_global=0.0, money_div=1,
     ):
-        """Độ rộng theo nội dung; cột G (ghi chú) luôn bằng cột E (diễn giải)."""
-        maxlen_ref = len('Diễn giải')
+        """Column widths from content; note column matches description width."""
+        maxlen_ref = len(self.env._('Description'))
         max_line_no = 3
-        max_entry = len('Số hiệu')
+        max_entry = len(self.env._('Number'))
         max_cp = 6
         max_money = 6
 
@@ -779,7 +785,7 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
                         max_money, self._s01dn_xlsx_money_chars(v, money_div),
                     )
 
-        maxlen_ref = max(maxlen_ref, len('- Số dư đầu năm'))
+        maxlen_ref = max(maxlen_ref, len(self.env._('- Opening balance (year)')))
         for acc in page_accounts or []:
             if acc is None or not opening_balances:
                 continue
@@ -815,7 +821,7 @@ class GeneralLedgerS01dnXlsx(models.AbstractModel):
             money_w = w_f
             if acc is not None:
                 code = acc.code or acc.name or ''
-                hdr = max(money_w, len(f'TK {code}'))
+                hdr = max(money_w, len(self.env._('A/C %s') % code))
             else:
                 hdr = money_w
             sheet.set_column(col, col + 1, min(10, max(3, int(hdr))))

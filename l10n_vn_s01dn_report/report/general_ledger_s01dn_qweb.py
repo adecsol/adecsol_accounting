@@ -12,12 +12,160 @@ from odoo import api, fields, models
 from odoo.osv.expression import AND, OR
 from odoo.tools import date_utils
 from odoo.tools.float_utils import float_compare, float_is_zero
+from odoo.tools.misc import format_date
+from odoo.tools.translate import _
 
 
 class GeneralLedgerS01dnReport(models.AbstractModel):
     _name = 'report.l10n_vn_s01dn_report.general_ledger_s01dn'
     _inherit = 'report.account_financial_report.general_ledger'
     _description = 'S01-DN General Ledger Summary (QWeb)'
+
+    @api.model
+    def _s01dn_ui_labels(self):
+        """Static labels for QWeb toolbar and header (English source → vi_VN.po)."""
+        return {
+            'filters': _('Filters'),
+            'filter_toggle_title': _('Show / hide filters'),
+            'period': _('Period'),
+            'period_placeholder': _('Choose…'),
+            'date_from': _('From'),
+            'date_to': _('To'),
+            'target_move': _('Journal items'),
+            'posted': _('Posted'),
+            'all': _('All'),
+            'accounts': _('Accounts'),
+            'journals': _('Journals'),
+            'partners': _('Partners'),
+            'all_selected': _('All'),
+            'select_all': _('Select all'),
+            'select_none': _('Clear'),
+            'search_placeholder': _('🔍 Search…'),
+            'unit': _('Unit'),
+            'unit_tooltip': _('Scale amounts on screen (display only)'),
+            'unit_vnd': _('VND'),
+            'unit_thousand': _('Thousand VND'),
+            'unit_million': _('Million VND'),
+            'header_unit': _('Company: '),
+            'header_form': _('Form S01-DN'),
+            'header_address': _('Address: '),
+            'header_circular': _(
+                '(Issued under Circular No. 200/2014/TT-BTC\n'
+                'dated 22/12/2014 by the Ministry of Finance)'
+            ),
+            'report_title': _('JOURNAL – GENERAL LEDGER'),
+            'open_book_prefix': _('- Book opened on:'),
+            'move_entry_title': _('Open entry'),
+            'table_line_no': _('Line\nno.'),
+            'table_posting_date': _('Posting date\n(d/m/y)'),
+            'table_voucher': _('Voucher'),
+            'table_number': _('Number'),
+            'table_date': _('Date'),
+            'table_description': _('Description'),
+            'table_amount': _('Transaction\namount'),
+            'table_note': _('Note'),
+            'table_offset': _('Offset account\ncode'),
+            'table_debit': _('Debit'),
+            'table_credit': _('Credit'),
+            'acct_short': _('A/C'),
+            'opening_balance': _('- Opening balance (year)'),
+            'sign_bookkeeper': _('Bookkeeper'),
+            'sign_chief': _('Chief accountant'),
+            'sign_director': _('Director'),
+            'sign_name': _('(Signature, full name)'),
+            'sign_name_stamp': _('(Signature, full name, stamp)'),
+        }
+
+    @api.model
+    def _s01dn_css_quoted_string(self, text):
+        """JSON double-quoted literal for safe use inside CSS content: …"""
+        return json.dumps(text or '', ensure_ascii=False)
+
+    @api.model
+    def _s01dn_print_margin_box_css_fragments(self):
+        """@page margin box content: translatable strings + page counters (Chrome)."""
+        book = (
+            'content: '
+            + self._s01dn_css_quoted_string(_('- This ledger has '))
+            + ' counter(pages, decimal-leading-zero) '
+            + self._s01dn_css_quoted_string(
+                _(' content page(s), numbered from page 01 to page ')
+            )
+            + ' counter(pages, decimal-leading-zero) '
+            + self._s01dn_css_quoted_string('.')
+            + ';'
+        )
+        pager = (
+            'content: '
+            + self._s01dn_css_quoted_string(_('Page '))
+            + ' counter(page, decimal-leading-zero) '
+            + self._s01dn_css_quoted_string(_(' / '))
+            + ' counter(pages, decimal-leading-zero);'
+        )
+        return {
+            'bottom_left': Markup(book),
+            'bottom_right': Markup(pager),
+        }
+
+    @api.model
+    def _s01dn_js_i18n_dict(self):
+        """Strings used by inline report JavaScript (English source)."""
+        return {
+            'cont': _(' (cont.)'),
+            'summary_journal': _(
+                'General journal — columns A–D, E, column 1 (amount), I; '
+                'offset columns F, G; per Form S01-DN (Circular 200/2014/TT-BTC).'
+            ),
+            'ledger_detail_a': _('Details by account — accounts:'),
+            'ledger_detail_b': _(
+                '; column Description (E), line sequence (H), '
+                'Debit/Credit pairs per TT200 column order.'
+            ),
+            'toc_journal': _('General journal'),
+            'per_table': _('(per table)'),
+            'acct_prefix': _('A/C'),
+            'toc_block_title': _('TOC — header block (Company, S01-DN, period)'),
+            'toc_continued': _('TOC (continued)'),
+            'toc_heading': _('TOC — title'),
+            'toc_heading_cont': _('TOC — title (continued)'),
+            'toc_table_head': _('TOC — table header'),
+            'toc_list': _('TOC — list by page'),
+            'report_header_sim': _(
+                'Report header — Company, period, Form S01-DN'
+            ),
+            'report_header_cont': _('Header (continued)'),
+            'signature_block_sim': _(
+                'Signatures — bookkeeper, chief accountant, director; book open date'
+            ),
+            'signature_cont': _('Signatures (continued)'),
+            'toc_placeholder_hint': _(
+                ' — TOC (height placeholder; matches Description column E).'
+            ),
+            'toc_placeholder_page': _(
+                'Page %s — TOC placeholder (approximate height). '
+                'S01-DN content follows each printed sheet.'
+            ),
+            'anchor_title': _('Go to this line on the ledger (click or Ctrl+click)'),
+            'toc_title_upper': _('TABLE OF CONTENTS'),
+            'toc_col_desc': _('Description'),
+            'toc_col_page': _('Page'),
+            'confirm_print': _(
+                'This report has %s accounts — about %s '
+                'printed pages (page 1: TOC when multiple sheets; page 2: '
+                'journal A–I + F–G; then H + up to %s accounts per sheet). '
+                'Printing may take time and paper. Export to Excel is often easier.\n\n'
+                'Open the print dialog anyway?'
+            ),
+            'money_vnd': _('Unit: VND'),
+            'money_thousand': _('Unit: thousand VND'),
+            'money_million': _('Unit: million VND'),
+            'all_label': _('All'),
+            'none_label': _('None'),
+            'none_selected': _('None selected'),
+            'accounts_word': _('accounts'),
+            'journals_word': _('journals'),
+            'partners_word': _('partners'),
+        }
 
     @api.model
     def _s01dn_counterparts_and_move_meta(self, entry_ids):
@@ -359,12 +507,12 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
 
     @api.model
     def _s01dn_display_money_unit_caption(self, divisor):
-        """Dòng 'Đơn vị tính: …' theo đúng lựa chọn trên màn hình."""
+        """Display caption for the selected money unit (matches Excel / screen)."""
         return {
-            1: 'Đơn vị tính: Đồng',
-            1000: 'Đơn vị tính: Ngàn đồng',
-            1000000: 'Đơn vị tính: Triệu đồng',
-        }.get(divisor, 'Đơn vị tính: Đồng')
+            1: _('Unit: VND'),
+            1000: _('Unit: thousand VND'),
+            1000000: _('Unit: million VND'),
+        }.get(divisor, _('Unit: VND'))
 
     @api.model
     def _s01dn_coerce_report_date(self, d):
@@ -389,18 +537,18 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
         df = self._s01dn_coerce_report_date(date_from)
         dt = self._s01dn_coerce_report_date(date_to)
         if not df or not dt:
-            return 'Từ ngày ... đến ngày ...'
+            return _('From date … to date …')
         if df > dt:
             df, dt = dt, df
         if df.year != dt.year:
-            return (
-                f'Từ ngày {df.strftime("%d-%m-%Y")} '
-                f'đến ngày {dt.strftime("%d-%m-%Y")}'
-            )
+            return _('From %(df)s to %(dt)s') % {
+                'df': df.strftime('%d-%m-%Y'),
+                'dt': dt.strftime('%d-%m-%Y'),
+            }
 
         y = df.year
         if df == date(y, 1, 1) and dt == date(y, 12, 31):
-            return f'Năm {y}'
+            return _('Year %s') % y
 
         quarters = (
             ((1, 1), (3, 31), 'I'),
@@ -412,19 +560,25 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
             start = date(y, m0, d0)
             end = date(y, m1, d1)
             if df == start and dt == end:
-                return f'Quý {roman} - {y}'
+                return _('Quarter %(roman)s - %(year)s') % {
+                    'roman': roman,
+                    'year': y,
+                }
 
         if df.day == 1:
             month_last = date(
                 y, df.month, calendar.monthrange(y, df.month)[1],
             )
             if dt == month_last:
-                return f'Tháng {df.month} - {y}'
+                return _('Month %(month)s - %(year)s') % {
+                    'month': df.month,
+                    'year': y,
+                }
 
-        return (
-            f'Từ ngày {df.strftime("%d-%m-%Y")} '
-            f'đến ngày {dt.strftime("%d-%m-%Y")}'
-        )
+        return _('From %(df)s to %(dt)s') % {
+            'df': df.strftime('%d-%m-%Y'),
+            'dt': dt.strftime('%d-%m-%Y'),
+        }
 
     @api.model
     def _s01dn_format_company_address(self, company):
@@ -452,7 +606,7 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
         dt = self._s01dn_coerce_report_date(date_to)
         dfp = df.strftime('%d%m%Y') if df else ''
         dtp = dt.strftime('%d%m%Y') if dt else ''
-        return f'Nhat_ky_So_Cai_S01_DN_{dfp}_{dtp}'
+        return f'Journal_Ledger_S01_DN_{dfp}_{dtp}'
 
     @api.model
     def _get_report_values(self, docids, data):
@@ -552,7 +706,7 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
                 month_line_no = 0
                 rows.append({
                     'type': 'month_header',
-                    'label': f'- Số phát sinh tháng {current_month}',
+                    'label': _('- Movements in month %s') % current_month,
                     'month_num': current_month,
                 })
 
@@ -633,26 +787,29 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
         wiz_doc = self.env['general.ledger.report.wizard'].browse(
             docids[0],
         ) if docids else None
-        s01dn_filter_accounts, s01dn_filter_journals, s01dn_filter_partners, _ = self._s01dn_filter_m2m_choices(
-            wiz_doc, company,
-        )
+        (
+            s01dn_filter_accounts,
+            s01dn_filter_journals,
+            s01dn_filter_partners,
+            _unused_filter_cc,
+        ) = self._s01dn_filter_m2m_choices(wiz_doc, company)
 
         df_eff = res.get('date_from')
         dt_eff = res.get('date_to')
 
         def _s01dn_footer_open(d):
             if not d:
-                return '…………'
+                return _('…………')
             if isinstance(d, str):
                 d = fields.Date.from_string(d)
-            return d.strftime('%d/%m/%Y')
+            return format_date(self.env, d)
 
         def _s01dn_footer_sign(d):
             if not d:
-                return 'Ngày ... tháng ... năm 20..'
+                return _('Day … month … year 20..')
             if isinstance(d, str):
                 d = fields.Date.from_string(d)
-            return d.strftime('Ngày %d tháng %m năm %Y')
+            return format_date(self.env, d, date_format='long')
 
         addr_line = self._s01dn_format_company_address(company)
         date_ranges = self.env['date.range'].search(
@@ -672,11 +829,23 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
                 'target_move': data.get('target_move', 'all'),
             }
 
+        _margin_css = self._s01dn_print_margin_box_css_fragments()
         res.update({
+            'env': self.env,
+            's01dn_ui': self._s01dn_ui_labels(),
+            's01dn_print_margin_bottom_left': _margin_css['bottom_left'],
+            's01dn_print_margin_bottom_right': _margin_css['bottom_right'],
+            's01dn_js_i18n_json': Markup(
+                json.dumps(
+                    self._s01dn_js_i18n_dict(),
+                    ensure_ascii=False,
+                    separators=(',', ':'),
+                )
+            ),
             'accounts_ordered': accounts_ordered,
             's01dn_n_accounts': len(accounts_ordered),
             's01dn_company_name_upper': (company.name or '').upper(),
-            's01dn_company_address': addr_line or '………………',
+            's01dn_company_address': addr_line or _('………………'),
             's01dn_footer_open_date': _s01dn_footer_open(df_eff),
             's01dn_footer_sign_date': _s01dn_footer_sign(dt_eff),
             'opening_balances': opening_balances,
@@ -1160,21 +1329,22 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
             result.append({
                 'month': month,
                 'year': year,
-                'period_label': f'Cộng số phát sinh tháng {month}',
+                'period_label': _('Total movements for month %s') % month,
                 # Tổng phát sinh kỳ = tổng Nợ (= tổng Có); không cộng Nợ+Có (tránh gấp đôi)
                 'period_total': month_debit,
                 'period_debit': month_debit,
                 'period_credit': month_credit,
                 'period_acc_d': dict(acc_d),
                 'period_acc_c': dict(acc_c),
-                'closing_label': f'Số dư cuối tháng {month}',
+                'closing_label': _('Closing balance at month-end %s') % month,
                 'closing_col1': running_closing_col1,
                 'closing_total_d': sum(closing_d.values()),
                 'closing_total_c': sum(closing_c.values()),
                 'closing_acc_d': dict(closing_d),
                 'closing_acc_c': dict(closing_c),
-                'cumul_label':
-                    f'Cộng luỹ kế từ đầu quý đến tháng {month}',
+                'cumul_label': _(
+                    'Quarter-to-date cumulative through month %s'
+                ) % month,
                 'cumul_total': cumul_debit,
                 'cumul_debit': cumul_debit,
                 'cumul_credit': cumul_credit,

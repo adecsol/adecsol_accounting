@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <t t-inherit="web.ReportAction" t-inherit-mode="extension">
-        <xpath expr="//button[@t-on-click='print']" position="replace">
-            <button
-                t-if="isB03dnHtmlReport"
-                t-on-click="print"
-                type="button"
-                class="btn btn-secondary"
-                title="In QWeb: A4 dọc; lề @page; góc phải dưới: Trang xx/yy. Hộp thoại In: Margins Default hoặc None — tránh Custom trùng lề."
-            >In</button>
+        <xpath expr="//button[@t-on-click='print']" position="before">
             <button
                 t-if="isB03dnHtmlReport"
                 t-on-click="exportB03dnXlsx"
                 type="button"
                 class="btn btn-primary ms-2"
-                title="Xuất Excel B03-DN (TT200)"
-            >B03-DN (.xlsx)</button>
-            <button
-                t-if="!isB03dnHtmlReport"
-                t-on-click="print"
-                type="button"
-                class="btn btn-primary"
-                title="In"
-            >In</button>
+                t-att-title="b03dnExportXlsxTitle"
+            ><t t-esc="b03dnXlsxButtonLabel"/></button>
         </xpath>
     </t>
 </templates>

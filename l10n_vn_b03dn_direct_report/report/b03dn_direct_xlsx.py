@@ -8,7 +8,7 @@ from odoo import api, fields, models
 
 
 class _B03dnHtmlRunParser(HTMLParser):
-    """Phân tích đoạn HTML ngắn thành các đoạn chữ kèm cờ in đậm/in nghiêng."""
+    """Parse short HTML into text runs with bold/italic flags."""
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -23,7 +23,7 @@ class _B03dnHtmlRunParser(HTMLParser):
         elif t in ("i", "em"):
             self._italic += 1
         elif t == "br":
-            # Khoảng trắng thay cho xuống dòng — tránh ô cao do br + text_wrap
+            # Space instead of newline — avoid tall cells from br + text_wrap
             self.runs.append((" ", self._bold, self._italic))
 
     def handle_endtag(self, tag):
@@ -36,7 +36,7 @@ class _B03dnHtmlRunParser(HTMLParser):
     def handle_data(self, data):
         if not data:
             return
-        # Xuống dòng / tab từ XML pretty-print → khoảng; gộp khoảng dư
+        # Newlines/tabs from XML pretty-print → single spaces
         chunk = re.sub(r"[\n\r\t]+", " ", data)
         chunk = re.sub(r" {2,}", " ", chunk)
         if not chunk:
@@ -47,7 +47,7 @@ class _B03dnHtmlRunParser(HTMLParser):
 class ReportB03dnDirectXlsx(models.AbstractModel):
     _name = "report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"
     _inherit = "report.report_xlsx.abstract"
-    _description = "B03-DN — XLSX (mẫu B 03 – DN TT200)"
+    _description = "B03-DN — XLSX (form B 03 – DN TT200)"
 
     @api.model
     def _b03dn_xlsx_company_address(self, company):
@@ -116,7 +116,7 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
 
     @api.model
     def _b03dn_xlsx_normalize_name_runs(self, merged):
-        """Gom khoảng trắng / ký tự xuống dòng — ô chỉ tiêu gọn (Odoo hay lưu <p>, indent XML)."""
+        """Collapse whitespace/newlines so the line-item cell stays compact."""
         if not merged:
             return []
         cleaned = []
@@ -137,12 +137,13 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
 
     @api.model
     def _b03dn_row_name_style_flags(self, html_value):
-        """Đọc <b>/<strong>/<i>/<em> trên field name.
+        """Read <b>/<strong>/<i>/<em> on ``name``.
 
-        Trả (bold, italic) = True chỉ khi toàn bộ đoạn chữ hiển thị (sau gộp run)
-        đều in đậm / đều in nghiêng — khớp một dòng chỉ tiêu được bọc hết bởi strong+em.
+        (bold, italic) are True only when every visible run (after merging) is bold / italic —
+        i.e. the whole line label is wrapped in strong+em.
 
-        Dòng có chữ thường lẫn đậm thì (False, False) cho cột số/mã (chỉ cột tên giữ rich text).
+        Mixed plain and bold text returns (False, False) for code/notes/amount columns
+        (only the name column keeps rich text).
         """
         runs = self._b03dn_html_name_to_runs(html_value)
         substantive = [(t, b, i) for t, b, i in runs if (t or "").strip()]
@@ -154,7 +155,7 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
 
     @api.model
     def _b03dn_effective_row_style_flags(self, line):
-        """In đậm/nghiêng cho mã số, thuyết minh, cột tiền: từ HTML name + cờ báo cáo (tổng/đầu kỳ…)."""
+        """Bold/italic for code, notes, amount columns: from HTML ``name`` + report flags."""
         if not line:
             return False, False
         nb, ni = self._b03dn_row_name_style_flags(line.name)
@@ -164,13 +165,13 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
 
     @api.model
     def _b03dn_line_name_has_visible_text(self, html_value):
-        """True nếu sau khi bỏ HTML còn ký tự hiển thị (strip, không chỉ khoảng trắng)."""
+        """True if any visible characters remain after stripping HTML."""
         runs = self._b03dn_html_name_to_runs(html_value)
         return any((t or "").strip() for t, _, _ in runs)
 
     @api.model
     def _b03dn_line_shows_money_columns(self, line):
-        """Cột Năm nay / Năm trước: không ghi với section/ghi chú hoặc tên rỗng."""
+        """Current/prior year columns: hidden for section/note lines or empty names."""
         if not line:
             return False
         if getattr(line, "display_type", None):
@@ -188,7 +189,7 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         cell_fmt,
         frag_fmt_cache,
     ):
-        """Ghi ô Chỉ tiêu: in đậm/nghiêng chỉ theo HTML (field name)."""
+        """Write the line-item cell: bold/italic driven by HTML ``name`` only."""
         style_runs = []
         for text, b_tag, i_tag in self._b03dn_html_name_to_runs(html_value):
             if (
@@ -209,8 +210,8 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
             if not eb and not ei:
                 sheet.write(row, col, text0, cell_fmt)
                 return
-            # Một đoạn toàn in đậm/nghiêng: write_rich_string của xlsxwriter cần >2
-            # token (không kể cell_format) — [fmt, str] bị bỏ qua → ô trống.
+            # Fully bold/italic segment: xlsxwriter write_rich_string needs >2 tokens
+            # (excluding cell_format) — [fmt, str] alone is ignored → empty cell.
             sk_cell = ("name_cell_styled", eb, ei)
             if sk_cell not in frag_fmt_cache:
                 fd = {
@@ -257,9 +258,12 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         sheet.write_rich_string(row, col, *parts, cell_fmt)
 
     def generate_xlsx_report(self, workbook, data, objects):
+        html_report = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct"]
+        self = html_report._b03dn_env_with_user_lang(self)
+        report = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct"]
+        _ = self.env._
         data = dict(data or {})
         wizard = objects[:1]
-        report = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct"]
         payload = report._b03dn_payload_merged_with_ui(wizard, data)
         divisor = report._b03dn_money_divisor_from_filters(
             payload.get("b03dn_ui_filters") or {},
@@ -353,8 +357,9 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         form_title = hdr_vals["form_title"]
         tt_200_line = hdr_vals["legal_reference"]
         left_hdr = (
-            f"Đơn vị báo cáo: {company.name or ''}\n"
-            f"Địa chỉ: {addr}"
+            _("Company: %s") % (company.name or "")
+            + "\n"
+            + _("Address: %s") % addr
         )
         sheet.merge_range(0, 0, 0, 2, left_hdr, f_label_addr)
         sheet.merge_range(0, 3, 0, 4, "", f_hdr_right_cell)
@@ -376,9 +381,9 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         _row0_h = min(95.0, max(22.0, 11.5 * max(_lines_l, _lines_r) + 5.0))
         sheet.set_row(0, _row0_h)
 
-        sheet.merge_range(1, 0, 1, last_col, "BÁO CÁO LƯU CHUYỂN TIỀN TỆ", f_title)
+        sheet.merge_range(1, 0, 1, last_col, _("STATEMENT OF CASH FLOWS"), f_title)
         sheet.merge_range(
-            2, 0, 2, last_col, "(Theo phương pháp trực tiếp) (*)", f_subtitle
+            2, 0, 2, last_col, _("(Direct method) (*)"), f_subtitle
         )
 
         dt_to = self._b03dn_xlsx_parse_date(payload.get("date_to"))
@@ -390,13 +395,13 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
             start_of_year = date(y, 1, 1)
             end_of_year = date(y, 12, 31)
             if df_rep == start_of_year and dt_to == end_of_year:
-                b03dn_year_line = f"Năm {y}"
+                b03dn_year_line = _("Year %s") % y
             else:
                 from_str = df_rep.strftime('%d/%m/%Y') if df_rep else '…'
                 to_str = dt_to.strftime('%d/%m/%Y')
-                b03dn_year_line = f"Năm {y} (từ ngày {from_str} đến ngày {to_str})"
+                b03dn_year_line = _("Year %s (from %s to %s)") % (y, from_str, to_str)
         else:
-            b03dn_year_line = "Năm ……"
+            b03dn_year_line = _("Year …")
         
         sheet.merge_range(3, 0, 3, last_col, b03dn_year_line, f_year)
 
@@ -407,7 +412,13 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         sheet.set_row(2, 18)
 
         hdr_top = 6
-        headers = ["Chỉ tiêu", "Mã số", "Thuyết minh", "Năm nay", "Năm trước"]
+        headers = [
+            _("Line item"),
+            _("Code"),
+            _("Notes"),
+            _("Current year"),
+            _("Prior year"),
+        ]
         for col, h in enumerate(headers):
             sheet.write(hdr_top, col, h, f_hdr)
         for col in range(5):
@@ -506,26 +517,26 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
         dt_lap = self._b03dn_xlsx_parse_date(payload.get("signature_date")) or fields.Date.context_today(self)
         place = self._b03dn_xlsx_company_state_name(company) or "…"
         if dt_lap:
-            lap_line = f"{place}, " + dt_lap.strftime("ngày %d tháng %m năm %Y")
+            lap_line = _("%s, %s") % (place, dt_lap.strftime("%d/%m/%Y"))
         else:
             today_lap = fields.Date.context_today(self)
-            lap_line = f"{place}, " + today_lap.strftime("ngày %d tháng %m năm %Y")
+            lap_line = _("%s, %s") % (place, today_lap.strftime("%d/%m/%Y"))
         sheet.merge_range(r, 0, r, last_col, lap_line, f_lap_ngay)
         r += 2
 
-        sheet.write(r, 0, "Người lập biểu", f_sig_label)
-        sheet.write(r, 2, "Kế toán trưởng", f_sig_label)
-        sheet.write(r, 4, "Giám đốc", f_sig_label)
+        sheet.write(r, 0, _("Prepared by"), f_sig_label)
+        sheet.write(r, 2, _("Chief accountant"), f_sig_label)
+        sheet.write(r, 4, _("Director"), f_sig_label)
         r += 1
-        sheet.write(r, 0, "(Ký, họ tên)", f_sig_sub)
-        sheet.write(r, 2, "(Ký, họ tên)", f_sig_sub)
-        sheet.write(r, 4, "(Ký, họ tên, đóng dấu)", f_sig_sub)
+        sheet.write(r, 0, _("(Signature, full name)"), f_sig_sub)
+        sheet.write(r, 2, _("(Signature, full name)"), f_sig_sub)
+        sheet.write(r, 4, _("(Signature, full name, stamp)"), f_sig_sub)
         r += 1
         r += 5
-        sheet.merge_range(r, 0, r, last_col, "- Số chứng chỉ hành nghề;", f_sig_footer_left)
+        sheet.merge_range(r, 0, r, last_col, _("- Professional license number;"), f_sig_footer_left)
         r += 1
         sheet.merge_range(
-            r, 0, r, last_col, "- Đơn vị cung cấp dịch vụ kế toán", f_sig_footer_left
+            r, 0, r, last_col, _("- Accounting service provider"), f_sig_footer_left
         )
         r += 1
         sheet.merge_range(
@@ -533,8 +544,11 @@ class ReportB03dnDirectXlsx(models.AbstractModel):
             0,
             r,
             last_col,
-            "Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề, "
-            "tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.",
+            _(
+                "Where the preparer is an accounting firm, state the professional license number, "
+                "name and address of the accounting service provider. Where the preparer is an individual, "
+                "state the professional license number."
+            ),
             f_note_footer,
         )
 

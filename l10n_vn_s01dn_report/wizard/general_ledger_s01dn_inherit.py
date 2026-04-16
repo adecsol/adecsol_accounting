@@ -8,7 +8,7 @@ class GeneralLedgerReportWizardS01dn(models.TransientModel):
 
     @api.model
     def action_open_s01dn_html_menu(self):
-        """Menu: mở thẳng báo cáo QWeb S01-DN (không hiển thị form wizard)."""
+        """Open the S01-DN QWeb report directly from the menu (no wizard form)."""
         vals = self.default_get(list(self._fields))
         company = self.env.company
         today = fields.Date.context_today(self)
@@ -30,7 +30,7 @@ class GeneralLedgerReportWizardS01dn(models.TransientModel):
         return report.report_action(wiz, data=data)
 
     def button_export_s01dn_xlsx(self):
-        """Export Nhật ký - Sổ Cái (S01-DN) as Excel."""
+        """Export the S01-DN journal / general ledger to Excel."""
         self.ensure_one()
         self._set_default_wizard_values()
         data = self._prepare_report_data()
@@ -40,7 +40,7 @@ class GeneralLedgerReportWizardS01dn(models.TransientModel):
         return report.report_action(self, data=data)
 
     def button_view_s01dn_html(self):
-        """View Nhật ký - Sổ Cái (S01-DN) summary in QWeb HTML."""
+        """Open the S01-DN journal / general ledger summary in QWeb HTML."""
         self.ensure_one()
         self._set_default_wizard_values()
         data = self._prepare_report_data()

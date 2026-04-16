@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form wizard (tuỳ chọn): mở kế toán → báo cáo → General Ledger hoặc dùng nút S01-DN -->
     <record id="action_vn_general_ledger_s01dn" model="ir.actions.act_window">
-        <field name="name">Nhật ký - Sổ Cái (S01-DN) — Wizard</field>
+        <field name="name">General ledger (S01-DN) — Wizard</field>
         <field name="res_model">general.ledger.report.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="account_financial_report.general_ledger_wizard" />
@@ -10,7 +9,7 @@
     </record>
 
     <record id="action_open_s01dn_html_direct" model="ir.actions.server">
-        <field name="name">Nhật ký - Sổ Cái (S01-DN)</field>
+        <field name="name">General ledger (S01-DN)</field>
         <field name="model_id" ref="account_financial_report.model_general_ledger_report_wizard" />
         <field name="state">code</field>
         <field name="code">
@@ -20,7 +19,7 @@ action = env['general.ledger.report.wizard'].action_open_s01dn_html_menu()
 
     <menuitem
         id="menu_vn_s01dn_journal_ledger"
-        name="Nhật ký - Sổ Cái (S01-DN)"
+        name="General ledger (S01-DN)"
         parent="accounting_adecsol.menu_vn_so_ke_toan"
         action="action_open_s01dn_html_direct"
         sequence="10"

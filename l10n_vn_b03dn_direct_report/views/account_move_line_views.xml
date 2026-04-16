@@ -9,7 +9,7 @@
                 expr="//page[@name='information']/group/group[field[@name='account_id']]"
                 position="after"
             >
-                <group string="B03-DN — Thẻ luồng tiền">
+                <group string="B03-DN — Cash flow tags">
                     <field
                         name="b03dn_cash_flow_tag_ids"
                         widget="many2many_tags"

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo import fields, models
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import logging
@@ -10,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class ProfitLossXlsx(models.AbstractModel):
     _name = 'report.accounting_adecsol.profit_loss_xlsx'
     _inherit = 'report.report_xlsx.abstract'
-    _description = 'Báo cáo Kết quả hoạt động kinh doanh B02-DN theo TT200'
+    _description = 'Income statement B02-DN (TT200)'
 
     def generate_xlsx_report(self, workbook, data, objects):
         """
@@ -53,7 +52,8 @@ class ProfitLossXlsx(models.AbstractModel):
         # ===========================================================
         # 2. TẠO WORKBOOK VÀ FORMATS
         # ===========================================================
-        sheet = workbook.add_worksheet('B 02 – DN')
+        _ = self.env._
+        sheet = workbook.add_worksheet(_('B 02 – DN'))
         formats = self._create_excel_formats(workbook)
         
         # Đặt độ rộng cột - 5 CỘT
@@ -170,8 +170,9 @@ class ProfitLossXlsx(models.AbstractModel):
         return balances
     
     def _get_indicator_mapping(self, balances):
-        """Định nghĩa các chỉ tiêu B02-DN"""
-        
+        """B02-DN line items."""
+        _ = self.env._
+
         def get_bal(prefixes, side='credit'):
             total = 0
             for code, values in balances.items():
@@ -182,12 +183,10 @@ class ProfitLossXlsx(models.AbstractModel):
                         total += values['debit'] - values['credit']
             return total
         
-        # Doanh thu (TK 5xx)
         doanh_thu = get_bal(['511', '512'], 'credit')
         dt_tai_chinh = get_bal(['515'], 'credit')
         tn_khac = get_bal(['711'], 'credit')
         
-        # Giá vốn & Chi phí (TK 6xx, 8xx)
         gia_von = get_bal(['632'], 'debit')
         cp_tai_chinh = get_bal(['635'], 'debit')
         lai_vay = get_bal(['6351', '6352'], 'debit')
@@ -196,20 +195,18 @@ class ProfitLossXlsx(models.AbstractModel):
         cp_khac = get_bal(['811'], 'debit')
         thue_tndn = get_bal(['8211', '8212'], 'debit')
         
-        # Log để debug
-        _logger.info(f"===== B02-DN CALCULATION =====")
-        _logger.info(f"Doanh thu: {doanh_thu}")
-        _logger.info(f"Giá vốn: {gia_von}")
-        _logger.info(f"Chi phí bán hàng: {cp_ban_hang}")
-        _logger.info(f"Chi phí QLDN: {cp_qldn}")
-        _logger.info(f"Doanh thu TC: {dt_tai_chinh}")
-        _logger.info(f"Chi phí TC: {cp_tai_chinh}")
-        _logger.info(f"Thu nhập khác: {tn_khac}")
-        _logger.info(f"Chi phí khác: {cp_khac}")
-        _logger.info(f"Thuế TNDN: {thue_tndn}")
-        _logger.info("="*30)
-        
-        # Tính các chỉ tiêu tổng hợp
+        _logger.info("===== B02-DN CALCULATION =====")
+        _logger.info("Revenue: %s", doanh_thu)
+        _logger.info("COGS: %s", gia_von)
+        _logger.info("Selling expenses: %s", cp_ban_hang)
+        _logger.info("G&A expenses: %s", cp_qldn)
+        _logger.info("Financial income: %s", dt_tai_chinh)
+        _logger.info("Financial expenses: %s", cp_tai_chinh)
+        _logger.info("Other income: %s", tn_khac)
+        _logger.info("Other expenses: %s", cp_khac)
+        _logger.info("CIT: %s", thue_tndn)
+        _logger.info("=" * 30)
+
         doanh_thu_thuan = doanh_thu
         loi_nhuan_gop = doanh_thu - gia_von
         loi_nhuan_thuan = loi_nhuan_gop + (dt_tai_chinh - cp_tai_chinh) - (cp_ban_hang + cp_qldn)
@@ -218,46 +215,46 @@ class ProfitLossXlsx(models.AbstractModel):
         loi_nhuan_sau_thue = loi_nhuan_truoc_thue - thue_tndn
         
         return [
-            {'code': '1', 'name': '1. Doanh thu bán hàng và cung cấp dịch vụ', 'amount': doanh_thu, 'is_total': False, 'is_negative': False},
-            {'code': '2', 'name': '2. Các khoản giảm trừ doanh thu', 'amount': 0, 'is_total': False, 'is_negative': True},
-            {'code': '10', 'name': '3. Doanh thu thuần về bán hàng và cung cấp dịch vụ (10 = 01 - 02)', 'amount': doanh_thu_thuan, 'is_total': True, 'is_negative': False},
-            {'code': '11', 'name': '4. Giá vốn hàng bán', 'amount': -gia_von, 'is_total': False, 'is_negative': True},
-            {'code': '20', 'name': '5. Lợi nhuận gộp về bán hàng và cung cấp dịch vụ (20 = 10 - 11)', 'amount': loi_nhuan_gop, 'is_total': True, 'is_negative': False},
-            {'code': '21', 'name': '6. Doanh thu hoạt động tài chính', 'amount': dt_tai_chinh, 'is_total': False, 'is_negative': False},
-            {'code': '22', 'name': '7. Chi phí tài chính', 'amount': -cp_tai_chinh, 'is_total': False, 'is_negative': True},
-            {'code': '23', 'name': '- Trong đó: Chi phí lãi vay', 'amount': -lai_vay, 'is_total': False, 'is_negative': True},
-            {'code': '25', 'name': '8. Chi phí bán hàng', 'amount': -cp_ban_hang, 'is_total': False, 'is_negative': True},
-            {'code': '26', 'name': '9. Chi phí quản lý doanh nghiệp', 'amount': -cp_qldn, 'is_total': False, 'is_negative': True},
-            {'code': '30', 'name': '10. Lợi nhuận thuần từ hoạt động kinh doanh (30 = 20 + (21 - 22) - (25 + 26))', 'amount': loi_nhuan_thuan, 'is_total': True, 'is_negative': False},
-            {'code': '31', 'name': '11. Thu nhập khác', 'amount': tn_khac, 'is_total': False, 'is_negative': False},
-            {'code': '32', 'name': '12. Chi phí khác', 'amount': -cp_khac, 'is_total': False, 'is_negative': True},
-            {'code': '40', 'name': '13. Lợi nhuận khác (40 = 31 - 32)', 'amount': loi_nhuan_khac, 'is_total': True, 'is_negative': False},
-            {'code': '50', 'name': '14. Tổng lợi nhuận kế toán trước thuế (50 = 30 + 40)', 'amount': loi_nhuan_truoc_thue, 'is_total': True, 'is_negative': False},
-            {'code': '51', 'name': '15. Chi phí thuế TNDN hiện hành', 'amount': -thue_tndn, 'is_total': False, 'is_negative': True},
-            {'code': '52', 'name': '16. Chi phí thuế TNDN hoãn lại', 'amount': 0, 'is_total': False, 'is_negative': True},
-            {'code': '60', 'name': '17. Lợi nhuận sau thuế thu nhập doanh nghiệp (60 = 50 - 51 - 52)', 'amount': loi_nhuan_sau_thue, 'is_total': True, 'is_negative': False},
-            {'code': '70', 'name': '18. Lãi cơ bản trên cổ phiếu (*)', 'amount': 0, 'is_total': False, 'is_negative': False},
-            {'code': '71', 'name': '19. Lãi suy giảm trên cổ phiếu (*)', 'amount': 0, 'is_total': False, 'is_negative': False},
+            {'code': '1', 'name': _('1. Revenue from sales and provision of services'), 'amount': doanh_thu, 'is_total': False, 'is_negative': False},
+            {'code': '2', 'name': _('2. Revenue deductions'), 'amount': 0, 'is_total': False, 'is_negative': True},
+            {'code': '10', 'name': _('3. Net revenue from sales and provision of services (10 = 01 - 02)'), 'amount': doanh_thu_thuan, 'is_total': True, 'is_negative': False},
+            {'code': '11', 'name': _('4. Cost of goods sold'), 'amount': -gia_von, 'is_total': False, 'is_negative': True},
+            {'code': '20', 'name': _('5. Gross profit from sales and provision of services (20 = 10 - 11)'), 'amount': loi_nhuan_gop, 'is_total': True, 'is_negative': False},
+            {'code': '21', 'name': _('6. Financial income'), 'amount': dt_tai_chinh, 'is_total': False, 'is_negative': False},
+            {'code': '22', 'name': _('7. Financial expenses'), 'amount': -cp_tai_chinh, 'is_total': False, 'is_negative': True},
+            {'code': '23', 'name': _('- Including: Interest expense'), 'amount': -lai_vay, 'is_total': False, 'is_negative': True},
+            {'code': '25', 'name': _('8. Selling expenses'), 'amount': -cp_ban_hang, 'is_total': False, 'is_negative': True},
+            {'code': '26', 'name': _('9. General and administration expenses'), 'amount': -cp_qldn, 'is_total': False, 'is_negative': True},
+            {'code': '30', 'name': _('10. Operating profit (30 = 20 + (21 - 22) - (25 + 26))'), 'amount': loi_nhuan_thuan, 'is_total': True, 'is_negative': False},
+            {'code': '31', 'name': _('11. Other income'), 'amount': tn_khac, 'is_total': False, 'is_negative': False},
+            {'code': '32', 'name': _('12. Other expenses'), 'amount': -cp_khac, 'is_total': False, 'is_negative': True},
+            {'code': '40', 'name': _('13. Other profit (40 = 31 - 32)'), 'amount': loi_nhuan_khac, 'is_total': True, 'is_negative': False},
+            {'code': '50', 'name': _('14. Accounting profit before tax (50 = 30 + 40)'), 'amount': loi_nhuan_truoc_thue, 'is_total': True, 'is_negative': False},
+            {'code': '51', 'name': _('15. Current corporate income tax expense'), 'amount': -thue_tndn, 'is_total': False, 'is_negative': True},
+            {'code': '52', 'name': _('16. Deferred corporate income tax expense'), 'amount': 0, 'is_total': False, 'is_negative': True},
+            {'code': '60', 'name': _('17. Profit after corporate income tax (60 = 50 - 51 - 52)'), 'amount': loi_nhuan_sau_thue, 'is_total': True, 'is_negative': False},
+            {'code': '70', 'name': _('18. Basic earnings per share (*)'), 'amount': 0, 'is_total': False, 'is_negative': False},
+            {'code': '71', 'name': _('19. Diluted earnings per share (*)'), 'amount': 0, 'is_total': False, 'is_negative': False},
         ]
     
     def _write_report_header(self, sheet, formats, workbook, company, date_from, date_to):
-        """Ghi tiêu đề báo cáo"""
+        """Write report title block."""
+        _ = self.env._
         company_name = company.name.upper() if company and company.name else ''
         sheet.merge_range(0, 0, 0, 2, company_name, formats['title_bold'])
-        sheet.merge_range(0, 3, 0, 4, 'Mẫu số B 02-DN', 
+        sheet.merge_range(0, 3, 0, 4, _('Form B 02 – DN'),
                           workbook.add_format({'bold': True, 'align': 'right', 'font_name': 'Times New Roman'}))
-        
-        street = company.street or 'Địa chỉ: …'
+
+        street = company.street or _('Address: …')
         sheet.merge_range(1, 0, 1, 2, street, formats['normal_border'])
-        sheet.merge_range(1, 3, 1, 4, '(Ban hành theo Thông tư số 200/2014/TT-BTC)', formats['title_italic'])
-        
-        sheet.merge_range(3, 0, 3, 4, 'BÁO CÁO KẾT QUẢ HOẠT ĐỘNG KINH DOANH', 
+        sheet.merge_range(1, 3, 1, 4, _('(Issued with Circular No. 200/2014/TT-BTC)'), formats['title_italic'])
+
+        sheet.merge_range(3, 0, 3, 4, _('INCOME STATEMENT'),
                           workbook.add_format({'bold': True, 'align': 'center', 'size': 16, 'font_name': 'Times New Roman'}))
-        sheet.merge_range(4, 0, 4, 4, f'Năm {date_from.year}', 
+        sheet.merge_range(4, 0, 4, 4, _('Year %s') % date_from.year,
                           workbook.add_format({'italic': True, 'align': 'center', 'font_name': 'Times New Roman'}))
-        
-        # Header bảng - 5 CỘT
-        headers = ['CHỈ TIÊU', 'Mã số', 'Thuyết minh', 'Năm nay', 'Năm trước']
+
+        headers = [_('Indicator'), _('Code'), _('Notes'), _('Current year'), _('Prior year')]
         for col, title in enumerate(headers):
             sheet.write(6, col, title, formats['header'])
         
@@ -268,7 +265,8 @@ class ProfitLossXlsx(models.AbstractModel):
         return 8
     
     def _write_indicator_data(self, sheet, formats, workbook, indicators, start_row):
-        """Ghi dữ liệu các chỉ tiêu"""
+        """Write line items."""
+        _ = self.env._
         row = start_row
         for ind in indicators:
             code = ind['code']
@@ -277,7 +275,7 @@ class ProfitLossXlsx(models.AbstractModel):
             is_total = ind['is_total']
             is_negative = ind['is_negative']
             
-            label_format = formats['normal_border']  # Tất cả đều dùng chữ thường
+            label_format = formats['normal_border']
             code_format = formats['normal_center']
             
             if is_total:
@@ -295,31 +293,35 @@ class ProfitLossXlsx(models.AbstractModel):
             if code in ['10', '20', '30', '40', '50', '60']:
                 row += 1
         
-        # Ghi chú (*)
         row += 1
-        sheet.write(row, 0, '(*) Chỉ áp dụng tại công ty cổ phần', formats['title_italic'])
+        sheet.write(row, 0, _('(*) Applicable to joint-stock companies only'), formats['title_italic'])
         return row + 1
     
     def _write_signature(self, sheet, formats, workbook, row, date_to):
-        """Ghi phần chữ ký"""
+        """Write signature block."""
+        _ = self.env._
         row += 2
-        
-        # Dòng ngày tháng
-        date_str = date_to.strftime("Ngày %d tháng %m năm %Y") if date_to else "Ngày .. tháng .. năm 20.."
-        sheet.merge_range(row, 2, row, 4, date_str, 
+
+        if date_to:
+            date_str = _('Date: %(day)s/%(month)s/%(year)s') % {
+                'day': date_to.day,
+                'month': date_to.month,
+                'year': date_to.year,
+            }
+        else:
+            date_str = _('Date: …')
+        sheet.merge_range(row, 2, row, 4, date_str,
                           workbook.add_format({'align': 'right', 'font_name': 'Times New Roman', 'italic': True}))
         row += 2
-        
+
         no_border = workbook.add_format({'font_name': 'Times New Roman', 'align': 'center'})
         no_border_bold = workbook.add_format({'font_name': 'Times New Roman', 'bold': True, 'align': 'center'})
-        
-        # Dòng chức danh
-        sheet.write(row, 0, 'Người lập biểu', no_border_bold)
-        sheet.write(row, 1, 'Kế toán trưởng', no_border_bold)
-        sheet.write(row, 3, 'Giám đốc', no_border_bold)
+
+        sheet.write(row, 0, _('Prepared by'), no_border_bold)
+        sheet.write(row, 1, _('Chief accountant'), no_border_bold)
+        sheet.write(row, 3, _('Director'), no_border_bold)
         row += 1
-        
-        # Dòng hướng dẫn ký
-        sheet.write(row, 0, '(Ký, họ tên)', no_border)
-        sheet.write(row, 1, '(Ký, họ tên)', no_border)
-        sheet.write(row, 3, '(Ký, họ tên, đóng dấu)', no_border)
+
+        sheet.write(row, 0, _('(Signature, full name)'), no_border)
+        sheet.write(row, 1, _('(Signature, full name)'), no_border)
+        sheet.write(row, 3, _('(Signature, full name, stamp)'), no_border)

@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "depends": [
         "account",
-        "account_financial_report",  # Bắt buộc để kế thừa JS/XML của OCA
+        "account_financial_report",  # Required for OCA JS/XML inheritance
         "report_xlsx",
         "account_fiscal_year_closing",
     ],

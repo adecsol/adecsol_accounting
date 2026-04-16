@@ -1,12 +1,12 @@
-from odoo import models, api, fields
+from odoo import _, api, fields, models
+
 
 class AccountAccount(models.Model):
     _inherit = "account.account"
 
-    # Đổi tên từ root_id thành parent_level1_id để tránh trùng với core Odoo
     parent_level1_id = fields.Many2one(
-        'account.account', 
-        string='Tài khoản cấp 1 (Custom)', 
+        'account.account',
+        string=_('Level 1 account (custom)'),
         compute='_compute_parent_level1_id', 
         store=True,
         index=True

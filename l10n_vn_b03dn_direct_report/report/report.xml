@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="b03dn_direct_xlsx_action" model="ir.actions.report">
-        <field name="name">B03-DN — LCTT (XLSX)</field>
+        <field name="name">B03-DN — Cash flow (XLSX)</field>
         <field name="model">l10n.vn.b03dn.report.wizard</field>
         <field name="report_type">xlsx</field>
         <field name="report_name">l10n_vn_b03dn_direct_report.b03dn_direct_xlsx</field>
@@ -13,7 +13,7 @@
     </record>
 
     <record id="b03dn_direct_html_action" model="ir.actions.report">
-        <field name="name">Báo cáo lưu chuyển tiền tệ (B03 - DN) (trực tiếp)</field>
+        <field name="name">Statement of cash flows (B03-DN) (direct)</field>
         <field name="model">l10n.vn.b03dn.report.wizard</field>
         <field name="report_type">qweb-html</field>
         <field name="report_name">l10n_vn_b03dn_direct_report.b03dn_direct</field>

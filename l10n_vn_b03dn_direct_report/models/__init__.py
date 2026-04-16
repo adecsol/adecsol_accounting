@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from . import ir_actions_report
 from . import res_config_settings
 from . import res_company
 from . import account_move_line

@@ -4,7 +4,7 @@
         <field name="name">l10n.vn.b03dn.template.tree</field>
         <field name="model">l10n.vn.b03dn.template</field>
         <field name="arch" type="xml">
-            <list string="Mẫu B03-DN">
+            <list string="B03-DN templates">
                 <field name="name"/>
                 <field name="circular_type"/>
                 <field name="company_id"/>
@@ -17,7 +17,7 @@
         <field name="name">l10n.vn.b03dn.template.form</field>
         <field name="model">l10n.vn.b03dn.template</field>
         <field name="arch" type="xml">
-            <form string="Mẫu B03-DN">
+            <form string="B03-DN template">
                 <sheet>
                     <field
                         name="b03dn_tag_config_alert"
@@ -44,24 +44,24 @@
                     >
                         <list
                             editable="bottom"
-                            string="Chỉ tiêu"
+                            string="Line items"
                             decoration-bf="display_type == 'line_section'"
                             decoration-it="display_type == 'line_note'"
                         >
                             <control>
                                 <create
                                     name="b03dn_add_line"
-                                    string="Thêm chỉ tiêu"
+                                    string="Add line item"
                                     context="{'default_display_type': False}"
                                 />
                                 <create
                                     name="b03dn_add_section"
-                                    string="Thêm phần"
+                                    string="Add section"
                                     context="{'default_display_type': 'line_section'}"
                                 />
                                 <create
                                     name="b03dn_add_note"
-                                    string="Thêm ghi chú"
+                                    string="Add note"
                                     context="{'default_display_type': 'line_note'}"
                                 />
                             </control>
@@ -143,13 +143,13 @@
         </field>
     </record>
     <record id="action_l10n_vn_b03dn_template" model="ir.actions.act_window">
-        <field name="name">B03-DN — Mẫu báo cáo</field>
+        <field name="name">B03-DN — Report templates</field>
         <field name="res_model">l10n.vn.b03dn.template</field>
         <field name="view_mode">list,form</field>
     </record>
     <menuitem
         id="menu_l10n_vn_b03dn_template"
-        name="Mẫu B03-DN"
+        name="B03-DN templates"
         parent="account.menu_finance_configuration"
         action="action_l10n_vn_b03dn_template"
         sequence="95"

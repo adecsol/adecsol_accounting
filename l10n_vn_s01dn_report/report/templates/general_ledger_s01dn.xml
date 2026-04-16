@@ -609,16 +609,15 @@
                 /* Lề trái 0.19"; tránh khoảng trống do @page + Bootstrap container */
                 /* Số trang hiện tại (không /tổng): margin box Chrome; tránh lệch với số trang thực tế */
                 /* Lề trái/phải đối xứng để khối nội dung cân giữa theo chiều ngang */
-                @page {
+                /*
+                 * Chrome: counter(page) trong margin box cần @page :left / :right (xem dev.chrome.com/blog/print-margins).
+                 * Chuỗi chân trang lấy từ _() + nhúng an toàn (s01dn_print_margin_*).
+                 */
+                @page :left {
                     size: A3 landscape;
-                    /* Lề dưới 2.5cm: chừa chỗ cho margin box + tránh chữ “Trang x/y” sát mép giấy */
                     margin: 2cm 1cm 2.5cm 3cm;
-                    /*
-                     * Cùng counter(pages) với góc phải — không dùng JS mô phỏng (tránh lệch khi đổi filter / máy in).
-                     * Chuỗi dùng nháy đơn để khỏi escape trong XML.
-                     */
                     @bottom-left {
-                        content: '- Sổ này có ' counter(pages, decimal-leading-zero) ' trang nội dung, đánh số từ trang số 01 đến trang ' counter(pages, decimal-leading-zero) '.';
+                        <t t-out="s01dn_print_margin_bottom_left"/>
                         font-size: 7.5pt;
                         font-family: Arial, Helvetica, sans-serif;
                         color: #222;
@@ -629,7 +628,32 @@
                         padding: 0 2mm 3mm 0;
                     }
                     @bottom-right {
-                        content: "Trang " counter(page, decimal-leading-zero) " / " counter(pages, decimal-leading-zero);
+                        <t t-out="s01dn_print_margin_bottom_right"/>
+                        font-size: 9pt;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #222;
+                        vertical-align: top;
+                        text-align: right;
+                        white-space: nowrap;
+                        padding: 0 0 3mm 0;
+                    }
+                }
+                @page :right {
+                    size: A3 landscape;
+                    margin: 2cm 1cm 2.5cm 3cm;
+                    @bottom-left {
+                        <t t-out="s01dn_print_margin_bottom_left"/>
+                        font-size: 7.5pt;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #222;
+                        vertical-align: top;
+                        text-align: left;
+                        white-space: normal;
+                        line-height: 1.2;
+                        padding: 0 2mm 3mm 0;
+                    }
+                    @bottom-right {
+                        <t t-out="s01dn_print_margin_bottom_right"/>
                         font-size: 9pt;
                         font-family: Arial, Helvetica, sans-serif;
                         color: #222;
@@ -1090,16 +1114,17 @@
             <div id="s01dnPageBodyProbe" class="s01dn-page-body-probe" aria-hidden="true"/>
         <!-- Payload reload báo cáo từ DB (options=...) — không escape JSON -->
         <script type="application/json" id="s01dnReportReload" t-out="s01dn_report_reload_json"/>
+        <script type="application/json" id="s01dnJsI18n" t-out="s01dn_js_i18n_json"/>
         <t t-set="echo" t-value="s01dn_echo or {}"/>
         <t t-set="echo_accounts" t-value="echo.get('account_ids')"/>
         <t t-set="echo_journals" t-value="echo.get('journal_names')"/>
-        <!-- ==================== Thanh tìm kiếm + bộ lọc (đầu trang, trong .page) ==================== -->
+        <!-- Filter toolbar -->
         <div id="s01dnToolbar" class="s01dn-toolbar-screen-only">
             <div class="s01dn-toolbar-toggle-row">
                 <button type="button" id="s01dnFilterToggle" class="s01dn-filter-toggle"
                         aria-controls="s01dnToolbarBody" aria-expanded="true"
-                        title="Ẩn / hiện bộ lọc">
-                    <span>Bộ lọc</span>
+                        t-att-title="s01dn_ui['filter_toggle_title']">
+                    <span t-out="s01dn_ui['filters']"/>
                     <svg class="s01dn-filter-toggle-ico" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M6 9l6 6 6-6"/>
                     </svg>
@@ -1109,9 +1134,9 @@
             <!-- Row 1: dates + target_move + filter dropdowns + search -->
             <div class="s01dn-filter-bar">
                 <span class="s01dn-f">
-                    <label for="s01dnDateRange">Kỳ</label>
+                    <label for="s01dnDateRange" t-out="s01dn_ui['period']"/>
                     <select id="s01dnDateRange" name="s01dnDateRange" t-att-data-initial-id="echo.get('date_range_id')">
-                        <option value="">Tùy chọn...</option>
+                        <option value="" t-out="s01dn_ui['period_placeholder']"/>
                         <t t-if="s01dn_date_ranges">
                             <t t-foreach="s01dn_date_ranges" t-as="dr">
                                 <option t-att-value="dr['id']" t-att-data-start="dr['date_start']" t-att-data-end="dr['date_end']">
@@ -1122,38 +1147,38 @@
                     </select>
                 </span>
                 <span class="s01dn-f">
-                    <label for="s01dnDateFrom">Từ</label>
+                    <label for="s01dnDateFrom" t-out="s01dn_ui['date_from']"/>
                     <input type="date" id="s01dnDateFrom" name="s01dnDateFrom"
                            t-att-min="s01dn_wizard_date_min or None"
                            t-att-max="s01dn_wizard_date_max or None"
                            t-att-value="s01dn_filter_date_from"/>
                 </span>
                 <span class="s01dn-f">
-                    <label for="s01dnDateTo">Đến</label>
+                    <label for="s01dnDateTo" t-out="s01dn_ui['date_to']"/>
                     <input type="date" id="s01dnDateTo" name="s01dnDateTo"
                            t-att-min="s01dn_wizard_date_min or None"
                            t-att-max="s01dn_wizard_date_max or None"
                            t-att-value="s01dn_filter_date_to"/>
                 </span>
                 <span class="s01dn-f">
-                    <label for="s01dnTargetMove">Bút toán</label>
+                    <label for="s01dnTargetMove" t-out="s01dn_ui['target_move']"/>
                     <select id="s01dnTargetMove" name="s01dnTargetMove"
                             t-att-data-initial-wizard="s01dn_tb_target_move">
-                        <option value="posted">Đã ghi sổ</option>
-                        <option value="all">Tất cả</option>
+                        <option value="posted" t-out="s01dn_ui['posted']"/>
+                        <option value="all" t-out="s01dn_ui['all']"/>
                     </select>
                 </span>
                 <span class="s01dn-bar-sep"/>
                 <div class="s01dn-dd" data-dd="account">
                     <button type="button" class="s01dn-dd-btn" aria-expanded="false">
-                        <span class="s01dn-dd-prefix">Tài khoản</span>
-                        <span class="s01dn-dd-lbl" id="lblAccount">Tất cả</span>
+                        <span class="s01dn-dd-prefix" t-out="s01dn_ui['accounts']"/>
+                        <span class="s01dn-dd-lbl" id="lblAccount" t-out="s01dn_ui['all_selected']"/>
                         <span class="text-muted">▾</span>
                     </button>
                     <div class="s01dn-dd-panel">
                         <div class="s01dn-dd-tools">
-                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
-                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                            <button type="button" class="s01-dd-all" t-out="s01dn_ui['select_all']"/>
+                            <button type="button" class="s01-dd-none" t-out="s01dn_ui['select_none']"/>
                         </div>
                         <t t-foreach="s01dn_filter_accounts" t-as="acc">
                             <label>
@@ -1169,14 +1194,14 @@
                 </div>
                 <div class="s01dn-dd" data-dd="journal">
                     <button type="button" class="s01dn-dd-btn" aria-expanded="false">
-                        <span class="s01dn-dd-prefix">Nhật ký</span>
-                        <span class="s01dn-dd-lbl" id="lblJournal">Tất cả</span>
+                        <span class="s01dn-dd-prefix" t-out="s01dn_ui['journals']"/>
+                        <span class="s01dn-dd-lbl" id="lblJournal" t-out="s01dn_ui['all_selected']"/>
                         <span class="text-muted">▾</span>
                     </button>
                     <div class="s01dn-dd-panel">
                         <div class="s01dn-dd-tools">
-                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
-                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                            <button type="button" class="s01-dd-all" t-out="s01dn_ui['select_all']"/>
+                            <button type="button" class="s01-dd-none" t-out="s01dn_ui['select_none']"/>
                         </div>
                         <t t-foreach="s01dn_filter_journals" t-as="jn">
                             <label>
@@ -1189,14 +1214,14 @@
                 </div>
                 <div class="s01dn-dd" data-dd="partner">
                     <button type="button" class="s01dn-dd-btn" aria-expanded="false">
-                        <span class="s01dn-dd-prefix">Đối tác</span>
-                        <span class="s01dn-dd-lbl" id="lblPartner">Tất cả</span>
+                        <span class="s01dn-dd-prefix" t-out="s01dn_ui['partners']"/>
+                        <span class="s01dn-dd-lbl" id="lblPartner" t-out="s01dn_ui['all_selected']"/>
                         <span class="text-muted">▾</span>
                     </button>
                     <div class="s01dn-dd-panel">
                         <div class="s01dn-dd-tools">
-                            <button type="button" class="s01-dd-all">Chọn tất cả</button>
-                            <button type="button" class="s01-dd-none">Bỏ chọn</button>
+                            <button type="button" class="s01-dd-all" t-out="s01dn_ui['select_all']"/>
+                            <button type="button" class="s01-dd-none" t-out="s01dn_ui['select_none']"/>
                         </div>
                         <t t-set="echo_partners" t-value="echo.get('partner_ids')"/>
                         <t t-foreach="s01dn_filter_partners" t-as="ptn">
@@ -1212,7 +1237,7 @@
                 <span class="s01dn-bar-sep"/>
                 <div class="s01dn-search-wrap" style="flex:1 1 140px;min-width:120px;max-width:260px;">
                     <input type="text" id="filterSearch" name="filterSearch"
-                           placeholder="🔍 Tìm kiếm..."
+                           t-att-placeholder="s01dn_ui['search_placeholder']"
                            t-att-value="echo.get('search') or ''"/>
                 </div>
             </div>
@@ -1224,13 +1249,13 @@
                 <span class="s01dn-bar-sep"/>
 
                 <span class="s01dn-f s01dn-bar-right">
-                    <label for="s01dnMoneyUnit">Đơn vị</label>
+                    <label for="s01dnMoneyUnit" t-out="s01dn_ui['unit']"/>
                     <select id="s01dnMoneyUnit" name="s01dnMoneyUnit"
-                            title="Quy đổi hiển thị số trên báo cáo (chỉ giao diện)"
+                            t-att-title="s01dn_ui['unit_tooltip']"
                             t-att-data-initial-money-unit="s01dn_money_unit_select_value">
-                        <option value="1">Đồng</option>
-                        <option value="1000">Ngàn đồng</option>
-                        <option value="1000000">Triệu đồng</option>
+                        <option value="1" t-out="s01dn_ui['unit_vnd']"/>
+                        <option value="1000" t-out="s01dn_ui['unit_thousand']"/>
+                        <option value="1000000" t-out="s01dn_ui['unit_million']"/>
                     </select>
                 </span>
             </div>
@@ -1242,23 +1267,22 @@
             <div id="s01dnReportPrintHeader" class="s01dn-excel-header">
                 <div class="s01dn-excel-header-top mb-1">
                     <div class="s01dn-excel-co-name">
-                        <strong>Đơn vị: </strong><t t-out="s01dn_company_name_upper"/>
+                        <strong t-out="s01dn_ui['header_unit']"/><t t-out="s01dn_company_name_upper"/>
                     </div>
                     <div class="s01dn-excel-form">
-                        <strong>Mẫu số S01-DN</strong>
+                        <strong t-out="s01dn_ui['header_form']"/>
                     </div>
                 </div>
                 <div class="s01dn-excel-addr-row">
                     <div>
-                        <strong>Địa chỉ: </strong><span t-out="s01dn_company_address"/>
+                        <strong t-out="s01dn_ui['header_address']"/><span t-out="s01dn_company_address"/>
                     </div>
                     <div class="s01dn-excel-addr-right">
-                        <em>(Ban hành theo Thông tư số 200/2014/TT-BTC
-                        <br/>Ngày 22/12/2014 của Bộ Tài chính)</em>
+                        <em style="white-space:pre-line;" t-out="s01dn_ui['header_circular']"/>
                     </div>
                 </div>
                 <div class="s01dn-excel-title-block">
-                    <h3>NHẬT KÝ - SỔ CÁI</h3>
+                    <h3 t-out="s01dn_ui['report_title']"/>
                     <span class="s01dn-report-period"><t t-out="report_period_range"/></span>
                 </div>
                 <div class="s01dn-excel-money-row s01dn-money-unit-below-year">
@@ -1278,28 +1302,28 @@
                     <!-- ========== TABLE HEADER ========== -->
                     <thead>
                         <tr>
-                            <th rowspan="2" style="min-width:35px;">Thứ tự<br/>dòng</th>
-                            <th rowspan="2" style="min-width:75px;">Ngày, tháng, năm<br/>ghi sổ</th>
-                            <th colspan="2">Chứng từ</th>
-                            <th rowspan="2" class="s01dn-col-doc">Diễn giải</th>
-                            <th rowspan="2" style="min-width:7em;">Số tiền<br/>phát sinh</th>
-                            <th rowspan="2" class="s01dn-col-note">Ghi chú</th>
-                            <th colspan="2" class="s01dn-print-fg">Số hiệu TK đối ứng</th>
-                            <th rowspan="2" class="s01dn-h-plus" style="min-width:35px;">Thứ tự<br/>dòng</th>
+                            <th rowspan="2" style="min-width:35px;white-space:pre-line;" t-out="s01dn_ui['table_line_no']"/>
+                            <th rowspan="2" style="min-width:75px;white-space:pre-line;" t-out="s01dn_ui['table_posting_date']"/>
+                            <th colspan="2" t-out="s01dn_ui['table_voucher']"/>
+                            <th rowspan="2" class="s01dn-col-doc" t-out="s01dn_ui['table_description']"/>
+                            <th rowspan="2" style="min-width:7em;white-space:pre-line;" t-out="s01dn_ui['table_amount']"/>
+                            <th rowspan="2" class="s01dn-col-note" t-out="s01dn_ui['table_note']"/>
+                            <th colspan="2" class="s01dn-print-fg" style="white-space:pre-line;" t-out="s01dn_ui['table_offset']"/>
+                            <th rowspan="2" class="s01dn-h-plus" style="min-width:35px;white-space:pre-line;" t-out="s01dn_ui['table_line_no']"/>
                             <t t-foreach="accounts_ordered" t-as="acc">
                                 <th colspan="2" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">
-                                    TK <t t-out="acc['code']"/>
+                                    <t t-out="s01dn_ui['acct_short']"/> <t t-out="acc['code']"/>
                                 </th>
                             </t>
                         </tr>
                         <tr>
-                            <th class="s01dn-col-entry" style="min-width:100px;">Số hiệu</th>
-                            <th style="min-width:75px;">Ngày, tháng, năm</th>
-                            <th class="s01dn-print-fg" style="min-width:65px;">Nợ</th>
-                            <th class="s01dn-print-fg" style="min-width:65px;">Có</th>
+                            <th class="s01dn-col-entry" style="min-width:100px;" t-out="s01dn_ui['table_number']"/>
+                            <th style="min-width:75px;" t-out="s01dn_ui['table_date']"/>
+                            <th class="s01dn-print-fg" style="min-width:65px;" t-out="s01dn_ui['table_debit']"/>
+                            <th class="s01dn-print-fg" style="min-width:65px;" t-out="s01dn_ui['table_credit']"/>
                             <t t-foreach="accounts_ordered" t-as="acc">
-                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">Nợ</th>
-                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus">Có</th>
+                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus" t-out="s01dn_ui['table_debit']"/>
+                                <th style="min-width:75px;" t-attf-class="acc-col acc-{{acc['id']}} s01dn-h-plus" t-out="s01dn_ui['table_credit']"/>
                             </t>
                         </tr>
                         <tr>
@@ -1318,7 +1342,7 @@
                         <!-- ========== OPENING BALANCE ========== -->
                         <tr class="row-total" data-row-type="opening">
                             <td/><td/><td/><td/>
-                            <td class="desc">- Số dư đầu năm</td>
+                            <td class="desc" t-out="s01dn_ui['opening_balance']"/>
                             <td class="num">
                                 <span class="s01dn-amt" t-att-data-vnd="total_opening">
                                     <t t-out="total_opening"
@@ -1382,7 +1406,7 @@
                                             <a class="s01dn-move-ico"
                                                t-attf-href="/web#id={{ r['move_id'] }}&amp;model=account.move&amp;view_type=form"
                                                target="_blank" rel="noopener noreferrer"
-                                               title="Mở chứng từ">
+                                               t-att-title="s01dn_ui['move_entry_title']">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                                                     <polyline points="15 3 21 3 21 9"/>
@@ -1561,7 +1585,7 @@
                     <div class="s01dn-footer-left-lines">
                         <div id="s01dnFooterBookPagesLine" class="s01dn-footer-pages s01dn-footer-pages-print-only"></div>
                         <div>
-                            - Ngày mở sổ: <t t-out="s01dn_footer_open_date"/>
+                            <t t-out="s01dn_ui['open_book_prefix']"/> <t t-out="s01dn_footer_open_date"/>
                         </div>
                     </div>
                 </div>
@@ -1576,16 +1600,16 @@
                 </div>
                 <div class="s01dn-footer-sign-row">
                     <div class="s01dn-footer-sign-col">
-                        <div class="s01dn-sign-title">Người ghi sổ</div>
-                        <div class="s01dn-sign-sub">(Ký, họ tên)</div>
+                        <div class="s01dn-sign-title" t-out="s01dn_ui['sign_bookkeeper']"/>
+                        <div class="s01dn-sign-sub" t-out="s01dn_ui['sign_name']"/>
                     </div>
                     <div class="s01dn-footer-sign-col">
-                        <div class="s01dn-sign-title">Kế toán trưởng</div>
-                        <div class="s01dn-sign-sub">(Ký, họ tên)</div>
+                        <div class="s01dn-sign-title" t-out="s01dn_ui['sign_chief']"/>
+                        <div class="s01dn-sign-sub" t-out="s01dn_ui['sign_name']"/>
                     </div>
                     <div class="s01dn-footer-sign-col">
-                        <div class="s01dn-sign-title">Giám đốc</div>
-                        <div class="s01dn-sign-sub">(Ký, họ tên, đóng dấu)</div>
+                        <div class="s01dn-sign-title" t-out="s01dn_ui['sign_director']"/>
+                        <div class="s01dn-sign-sub" t-out="s01dn_ui['sign_name_stamp']"/>
                     </div>
                 </div>
             </div>
@@ -1621,6 +1645,27 @@
                 }
 
                 if (!table) return;
+
+                var S01DN_UI = {};
+                try {
+                    var _ij = document.getElementById('s01dnJsI18n');
+                    if (_ij &amp;&amp; _ij.textContent) {
+                        S01DN_UI = JSON.parse(_ij.textContent);
+                    }
+                } catch (eS01i) {
+                    S01DN_UI = {};
+                }
+                function s01dnFmt3(tpl, a, b, c) {
+                    var parts = String(tpl || '').split('%s');
+                    if (parts.length &lt; 4) {
+                        return tpl;
+                    }
+                    return parts[0] + a + parts[1] + b + parts[2] + c + parts[3];
+                }
+                function s01dnFmt1(tpl, a) {
+                    var parts = String(tpl || '').split('%s');
+                    return parts[0] + a + (parts.length &gt; 1 ? parts.slice(1).join('%s') : '');
+                }
 
                 /** Trang 1: nhật ký A–I + F–G; các trang sau: Diễn giải (E) + H + tối đa N TK (sổ cái). */
                 var S01DN_ACCOUNTS_PER_PRINT_PAGE = 12;
@@ -1737,31 +1782,29 @@
                     var out = [];
                     var ths = tr.querySelectorAll('th.acc-col');
                     for (var i = 0; i &lt; ths.length; i++) {
-                        var m = String(ths[i].textContent || '').match(/TK\s*(\S+)/);
+                        var m = String(ths[i].textContent || '').match(/(?:A\/C|TK)\s*(\S+)/);
                         if (m) out.push(m[1]);
                     }
                     return out;
                 }
 
-                var S01DN_SUMMARY_JOURNAL =
-                    'Nhật ký chung — các chỉ tiêu cột A, B, C, D, E, cột 1 (số tiền phát sinh), I; ' +
-                    'cột đối ứng F, G; theo Mẫu số S01-DN (Thông tư 200/2014/TT-BTC).';
+                var S01DN_SUMMARY_JOURNAL = S01DN_UI.summary_journal || '';
 
                 function s01dnSummaryLedgerLine(codesText) {
-                    return (
-                        'Chi tiết theo tài khoản — các TK: ' + codesText + '; ' +
-                        'cột Diễn giải (E), thứ tự dòng (H), các cặp Nợ/Có theo số thứ tự cột TT200.'
-                    );
+                    var a = S01DN_UI.ledger_detail_a || '';
+                    var b = S01DN_UI.ledger_detail_b || '';
+                    return a + ' ' + codesText + b;
                 }
 
                 /** Hậu tố mục lục theo tờ: nhật ký / từng khối TK (tránh lặp nhãn giống hệt). */
                 function s01dnTocChunkSuffix(meta) {
                     if (!meta) return '';
                     if (meta.kind === 'journal') {
-                        return 'Nhật ký chung';
+                        return S01DN_UI.toc_journal || '';
                     }
-                    var c = meta.codesText || '(theo bảng)';
-                    return 'TK ' + String(c).trim();
+                    var c = meta.codesText || (S01DN_UI.per_table || '');
+                    var ap = S01DN_UI.acct_prefix || 'A/C';
+                    return ap + ' ' + String(c).trim();
                 }
 
                 function s01dnTocHeadingLine(baseLabel, meta) {
@@ -1824,15 +1867,16 @@
                         var led2 = printChunkWrap.querySelectorAll(
                             '.s01dn-print-chunk--ledger',
                         );
-                        if (hasJ2) suffixes.push('Nhật ký chung');
+                        if (hasJ2) suffixes.push(S01DN_UI.toc_journal || '');
                         for (var si = 0; si &lt; led2.length; si++) {
                             var c2 =
                                 led2[si].getAttribute('data-s01dn-ledger-codes') ||
-                                '(theo bảng)';
-                            suffixes.push('TK ' + String(c2).trim());
+                                (S01DN_UI.per_table || '');
+                            var apx = S01DN_UI.acct_prefix || 'A/C';
+                            suffixes.push(apx + ' ' + String(c2).trim());
                         }
                     }
-                    if (suffixes.length &lt; 1) suffixes.push('Nhật ký chung');
+                    if (suffixes.length &lt; 1) suffixes.push(S01DN_UI.toc_journal || '');
                     var out = [];
                     for (var sh = 0; sh &lt; suffixes.length; sh++) {
                         for (var j = 0; j &lt; oneSheet.length; j++) {
@@ -1952,8 +1996,8 @@
                         s01dnConsumeBlockHeight(
                             state,
                             s01dnMeasureBlockHeight(tocHdr),
-                            'Mục lục — khối tiêu đề (đơn vị, S01-DN, kỳ)',
-                            'Mục lục (tiếp)',
+                            S01DN_UI.toc_block_title || '',
+                            S01DN_UI.toc_continued || '',
                         );
                     }
                     var title = tocChunk.querySelector('.s01dn-print-toc-title');
@@ -1961,8 +2005,8 @@
                     s01dnConsumeBlockHeight(
                         state,
                         s01dnMeasureBlockHeight(title),
-                        'Mục lục — tiêu đề',
-                        'Mục lục — tiêu đề (tiếp)',
+                        S01DN_UI.toc_heading || '',
+                        S01DN_UI.toc_heading_cont || '',
                     );
                     if (!tbl) return;
                     var ith = tbl.querySelector('thead');
@@ -1971,8 +2015,8 @@
                         s01dnConsumeBlockHeight(
                             state,
                             s01dnMeasureBlockHeight(ith),
-                            'Mục lục — tiêu đề bảng',
-                            'Mục lục (tiếp)',
+                            S01DN_UI.toc_table_head || '',
+                            S01DN_UI.toc_continued || '',
                         );
                     }
                     if (itb) {
@@ -1981,8 +2025,8 @@
                             s01dnConsumeBlockHeight(
                                 state,
                                 s01dnMeasureBlockHeight(trs[ri]),
-                                'Mục lục — danh sách theo từng trang',
-                                'Mục lục (tiếp)',
+                                S01DN_UI.toc_list || '',
+                                S01DN_UI.toc_continued || '',
                             );
                         }
                     }
@@ -1995,8 +2039,8 @@
                         s01dnConsumeBlockHeight(
                             state,
                             s01dnMeasureBlockHeight(lh),
-                            'Tiêu đề báo cáo, đơn vị, kỳ, Mẫu S01-DN',
-                            'Tiêu đề (tiếp)',
+                            S01DN_UI.report_header_sim || '',
+                            S01DN_UI.report_header_cont || '',
                         );
                     }
                     var tbl = chunkEl.querySelector('table');
@@ -2022,10 +2066,10 @@
                                 var lbl =
                                     meta.kind === 'journal'
                                         ? isCont
-                                            ? S01DN_SUMMARY_JOURNAL + ' (tiếp)'
+                                            ? S01DN_SUMMARY_JOURNAL + (S01DN_UI.cont || '')
                                             : S01DN_SUMMARY_JOURNAL
                                         : isCont
-                                          ? s01dnSummaryLedgerLine(meta.codesText) + ' (tiếp)'
+                                          ? s01dnSummaryLedgerLine(meta.codesText) + (S01DN_UI.cont || '')
                                           : s01dnSummaryLedgerLine(meta.codesText);
                                 s01dnMergeSummary(state, lbl);
                             }
@@ -2040,10 +2084,10 @@
                                 var lb =
                                     meta.kind === 'journal'
                                         ? isC
-                                            ? S01DN_SUMMARY_JOURNAL + ' (tiếp)'
+                                            ? S01DN_SUMMARY_JOURNAL + (S01DN_UI.cont || '')
                                             : S01DN_SUMMARY_JOURNAL
                                         : isC
-                                          ? s01dnSummaryLedgerLine(meta.codesText) + ' (tiếp)'
+                                          ? s01dnSummaryLedgerLine(meta.codesText) + (S01DN_UI.cont || '')
                                           : s01dnSummaryLedgerLine(meta.codesText);
                                 s01dnMergeSummary(state, lb);
                                 if (headingState) {
@@ -2077,8 +2121,8 @@
                         s01dnConsumeBlockHeight(
                             state,
                             s01dnMeasureBlockHeight(headerEl),
-                            'Tiêu đề báo cáo, đơn vị, kỳ, Mẫu S01-DN',
-                            'Tiêu đề (tiếp)',
+                            S01DN_UI.report_header_sim || '',
+                            S01DN_UI.report_header_cont || '',
                         );
                     }
                     s01dnConsumeTocChunkParts(state, tocChunk);
@@ -2091,7 +2135,7 @@
                     });
                     for (var li = 0; li &lt; ledgerChunks.length; li++) {
                         s01dnBreakBeforeNextChunk(state);
-                        var codes = ledgerChunks[li].getAttribute('data-s01dn-ledger-codes') || '(theo bảng)';
+                        var codes = ledgerChunks[li].getAttribute('data-s01dn-ledger-codes') || (S01DN_UI.per_table || '');
                         s01dnPaginateDataTableChunk(ledgerChunks[li], state, {
                             kind: 'ledger',
                             codesText: codes,
@@ -2101,8 +2145,8 @@
                     s01dnConsumeBlockHeight(
                         state,
                         s01dnMeasureBlockHeight(footerEl),
-                        'Phần ký: người ghi sổ, kế toán trưởng, giám đốc; ngày mở sổ',
-                        'Phần ký (tiếp)',
+                        S01DN_UI.signature_block_sim || '',
+                        S01DN_UI.signature_cont || '',
                     );
                     var total = s01dnFinalizeSimTotalPages(state);
                     var sumOut = state.summaries.slice(0, total);
@@ -2133,11 +2177,8 @@
                                 ? String(labelHints[i]).trim()
                                 : '';
                         tdS.textContent = hint
-                            ? hint +
-                              ' — Mục lục (giữ chỗ chiều cao; theo diễn giải cột E trên sổ).'
-                            : 'Trang ' +
-                              String(i + 1) +
-                              ' — Mục lục (giữ chỗ; độ cao gần nội dung thật). Nội dung báo cáo S01-DN theo từng tờ in.';
+                            ? hint + (S01DN_UI.toc_placeholder_hint || '')
+                            : s01dnFmt1(S01DN_UI.toc_placeholder_page || '', String(i + 1));
                         tr.appendChild(tdS);
                         tr.appendChild(tdP);
                         tbody.appendChild(tr);
@@ -2209,7 +2250,7 @@
                                     ap.textContent = pg;
                                     ap.setAttribute(
                                         'title',
-                                        'Đến dòng mục này trên sổ (click hoặc Ctrl+click)',
+                                        S01DN_UI.anchor_title || '',
                                     );
                                     tdp.appendChild(ap);
                                     var al = document.createElement('a');
@@ -2218,7 +2259,7 @@
                                     al.textContent = lab;
                                     al.setAttribute(
                                         'title',
-                                        'Đến dòng mục này trên sổ (click hoặc Ctrl+click)',
+                                        S01DN_UI.anchor_title || '',
                                     );
                                     tds.appendChild(al);
                                 } else {
@@ -2283,7 +2324,7 @@
                     }
                     var title = document.createElement('div');
                     title.className = 's01dn-print-toc-title';
-                    title.textContent = 'MỤC LỤC';
+                    title.textContent = S01DN_UI.toc_title_upper || '';
                     var tblEl = document.createElement('table');
                     tblEl.className = 's01dn-print-toc-table';
                     tblEl.setAttribute('role', 'presentation');
@@ -2291,10 +2332,10 @@
                     var hr = document.createElement('tr');
                     var thSum = document.createElement('th');
                     thSum.className = 's01dn-print-toc-col-summary';
-                    thSum.textContent = 'Diễn giải';
+                    thSum.textContent = S01DN_UI.toc_col_desc || '';
                     var thPage = document.createElement('th');
                     thPage.className = 's01dn-print-toc-col-page';
-                    thPage.textContent = 'Trang';
+                    thPage.textContent = S01DN_UI.toc_col_page || '';
                     hr.appendChild(thSum);
                     hr.appendChild(thPage);
                     thead.appendChild(hr);
@@ -2566,7 +2607,7 @@
                             var codes = s01dnLedgerAccountCodesFromTable(tblClone);
                             chunk.setAttribute(
                                 'data-s01dn-ledger-codes',
-                                codes.length ? codes.join(', ') : '(theo bảng)',
+                                codes.length ? codes.join(', ') : (S01DN_UI.per_table || ''),
                             );
                         }
                         printChunkWrap.appendChild(chunk);
@@ -2689,10 +2730,12 @@
                     }
                     if (pages &lt; 15) return true;
                     return window.confirm(
-                        'Báo cáo có ' + n + ' tài khoản — dự kiến khoảng ' + pages +
-                        ' trang in (trang 1 mục lục nội dung khi nhiều tờ; trang 2 nhật ký A–I+F–G; sau đó H + tối đa ' + accPer + ' TK). ' +
-                        'Có thể mất thời gian và nhiều giấy. Xuất Excel thường thuận tiện hơn.\n\n' +
-                        'Vẫn mở hộp thoại in?',
+                        s01dnFmt3(
+                            S01DN_UI.confirm_print || '',
+                            String(n),
+                            String(pages),
+                            String(accPer),
+                        ),
                     );
                 }
 
@@ -2722,9 +2765,9 @@
                 }
                 function s01dnMoneyUnitCaptionText(val) {
                     var d = String(val == null ? '1' : val);
-                    if (d === '1000') return 'Đơn vị tính: Ngàn đồng';
-                    if (d === '1000000') return 'Đơn vị tính: Triệu đồng';
-                    return 'Đơn vị tính: Đồng';
+                    if (d === '1000') return S01DN_UI.money_thousand || '';
+                    if (d === '1000000') return S01DN_UI.money_million || '';
+                    return S01DN_UI.money_vnd || '';
                 }
                 function s01dnApplyMoneyUnit() {
                     if (!moneyUnitSel || !table) return;
@@ -2833,8 +2876,8 @@
                     if (!lbl || !boxes.length) return;
                     var checked = 0;
                     for (var i = 0; i &lt; boxes.length; i++) { if (boxes[i].checked) checked++; }
-                    if (checked === 0) { lbl.textContent = 'Không có'; }
-                    else if (checked === boxes.length) { lbl.textContent = 'Tất cả'; }
+                    if (checked === 0) { lbl.textContent = S01DN_UI.none_label || ''; }
+                    else if (checked === boxes.length) { lbl.textContent = S01DN_UI.all_label || ''; }
                     else { lbl.textContent = checked + '/' + boxes.length; }
                 }
 
@@ -2881,13 +2924,13 @@
                         if (boxes.length === 0) { el.textContent = '—'; return; }
                         var c = 0, t = boxes.length;
                         for (var i = 0; i &lt; boxes.length; i++) if (boxes[i].checked) c++;
-                        if (c === 0) el.textContent = 'Không chọn';
-                        else if (c === t) el.textContent = 'Tất cả';
+                        if (c === 0) el.textContent = S01DN_UI.none_selected || '';
+                        else if (c === t) el.textContent = S01DN_UI.all_label || '';
                         else el.textContent = c + ' ' + noun;
                     }
-                    lbl('.cb-account', 'lblAccount', 'TK');
-                    lbl('.cb-journal', 'lblJournal', 'sổ');
-                    lbl('.cb-partner', 'lblPartner', 'đối tác');
+                    lbl('.cb-account', 'lblAccount', S01DN_UI.accounts_word || '');
+                    lbl('.cb-journal', 'lblJournal', S01DN_UI.journals_word || '');
+                    lbl('.cb-partner', 'lblPartner', S01DN_UI.partners_word || '');
                 }
 
                 /* ---- Dropdown ---- */

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- General Ledger wizard: footer chỉ còn S01-DN + Cancel -->
     <record id="general_ledger_wizard_s01dn_inherit" model="ir.ui.view">
         <field name="name">general.ledger.wizard.s01dn.inherit</field>
         <field name="model">general.ledger.report.wizard</field>
@@ -11,11 +10,11 @@
                 <div invisible="not only_one_unaffected_earnings_account">
                     <button
                         name="button_view_s01dn_html"
-                        string="Xem Nhật ký - Sổ Cái (S01-DN)"
+                        string="View general ledger (S01-DN)"
                         type="object"
                         class="oe_highlight"
                         default_focus="1"
-                        title="Một lần: xem báo cáo (QWeb). Hai lần liên tiếp: xuất Excel ngay."
+                        title="Once: open QWeb report. Double-click: export Excel."
                     />
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </div>

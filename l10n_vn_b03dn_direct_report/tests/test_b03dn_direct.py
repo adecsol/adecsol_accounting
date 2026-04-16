@@ -94,7 +94,7 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
         self.assertAlmostEqual(agg20, 200.0 - 80.0, places=2)
 
     def test_b03dn_leaf_exclude_account_patterns_skips_rule(self):
-        """Mẫu loại trừ TK đối ứng: khớp Nợ/Có nhưng bị skip → không ghi vào chỉ tiêu đó."""
+        """Exclude counterpart patterns: debit/credit match but rule skipped → no amount on that line."""
         company = self.env.company
         bank_journal = self.company_data["default_journal_bank"]
         liquidity = bank_journal.default_account_id
@@ -139,7 +139,7 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
             line02.write({"exclude_account_patterns": saved_excl or False})
 
     def test_b03dn_multi_counterpart_split_inflow(self):
-        """Một dòng Nợ tiền, nhiều dòng Có đối ứng → phân bổ đúng từng phần."""
+        """One cash debit line, several credit counterparts → split amounts correctly."""
         company = self.env.company
         bank_journal = self.company_data["default_journal_bank"]
         liquidity = bank_journal.default_account_id
@@ -186,7 +186,7 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
         self.assertIn(lb.id, by_code["01"]["aml_ids"])
 
     def test_b03dn_two_cash_lines_shared_revenue_credit(self):
-        """Hai dòng Nợ tiền, một dòng Có doanh thu — mỗi dòng tiền nhận đúng phần."""
+        """Two cash debit lines, one revenue credit — each cash line gets its share."""
         company = self.env.company
         bank_journal = self.company_data["default_journal_bank"]
         liq_a = bank_journal.default_account_id
@@ -225,7 +225,7 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
         self.assertAlmostEqual(by_code["01"]["amount"], 1000.0, places=2)
 
     def test_b03dn_pure_interbank_no_leaf(self):
-        """Chuyển tiền nội bộ giữa các TK tiền → không ghi nhận trên chỉ tiêu leaf."""
+        """Pure transfers between cash accounts → nothing on leaf lines."""
         company = self.env.company
         bank_journal = self.company_data["default_journal_bank"]
         liq_a = bank_journal.default_account_id
@@ -257,12 +257,12 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
         self.assertAlmostEqual(by_code["01"]["amount"], 0.0, places=2)
 
     def test_b03dn_xlsx_html_strong_preserves_text(self):
-        """Một đoạn HTML chỉ bọc <strong> phải ra đủ nội dung (tránh write_rich_string 2-token)."""
+        """A single <strong> wrapper must yield full text (avoid write_rich_string 2-token bug)."""
         xlsx = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"]
-        html = "<p><strong>I. Lưu chuyển tiền</strong></p>"
+        html = "<p><strong>I. Cash flows</strong></p>"
         runs = xlsx._b03dn_html_name_to_runs(html)
         self.assertEqual(len(runs), 1)
-        self.assertTrue(runs[0][0].startswith("I. Lưu"))
+        self.assertTrue(runs[0][0].startswith("I. Cash"))
         self.assertTrue(runs[0][1])
         self.assertFalse(runs[0][2])
 
@@ -280,36 +280,36 @@ class TestB03dnDirect(AccountTestInvoicingCommon):
         xlsx = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"]
         spacer = SimpleNamespace(
             display_type="line_section",
-            name="<p><strong>Tiêu đề</strong></p>",
+            name="<p><strong>Title</strong></p>",
         )
         self.assertFalse(xlsx._b03dn_line_shows_money_columns(spacer))
         leaf = SimpleNamespace(
             display_type=False,
-            name="<p><strong>Tiêu đề</strong></p>",
+            name="<p><strong>Title</strong></p>",
         )
         self.assertTrue(xlsx._b03dn_line_shows_money_columns(leaf))
 
     def test_b03dn_row_name_style_flags_whole_line_strong_em(self):
-        """Toàn dòng bọc strong+em → cột khác cùng hàng dùng đậm+nghiêng."""
+        """Whole line wrapped in strong+em → other columns on the row use bold+italic."""
         xlsx = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"]
-        html = "<p><strong><em>Lưu chuyển tiền thuần từ HĐKD</em></strong></p>"
+        html = "<p><strong><em>Net cash from operating activities</em></strong></p>"
         self.assertEqual(xlsx._b03dn_row_name_style_flags(html), (True, True))
 
     def test_b03dn_row_name_style_flags_mixed_runs_no_row_emphasis(self):
-        """Chữ thường + đậm lẫn nhau → không ép đậm cả hàng (chỉ cột tên giữ rich text)."""
+        """Plain + bold mixed → no row-wide bold (name column keeps rich text only)."""
         xlsx = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"]
-        html = "<p>Phần <strong>đậm</strong> cuối</p>"
+        html = "<p>Part <strong>bold</strong> at end</p>"
         self.assertEqual(xlsx._b03dn_row_name_style_flags(html), (False, False))
 
     def test_b03dn_effective_row_style_flags_or_bold_amounts(self):
         xlsx = self.env["report.l10n_vn_b03dn_direct_report.b03dn_direct_xlsx"]
         plain = SimpleNamespace(
-            name="<p>Chỉ tiêu</p>",
+            name="<p>Line item</p>",
             b03dn_report_bold_amounts=True,
         )
         self.assertEqual(xlsx._b03dn_effective_row_style_flags(plain), (True, False))
         strong = SimpleNamespace(
-            name="<p><strong>Tổng</strong></p>",
+            name="<p><strong>Total</strong></p>",
             b03dn_report_bold_amounts=False,
         )
         self.assertEqual(xlsx._b03dn_effective_row_style_flags(strong), (True, False))

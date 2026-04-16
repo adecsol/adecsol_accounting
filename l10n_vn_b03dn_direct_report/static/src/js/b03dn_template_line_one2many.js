@@ -8,8 +8,8 @@ import {
 } from "@account/components/section_and_note_fields_backend/section_and_note_fields_backend";
 
 /**
- * One2many chỉ tiêu B03-DN: cùng renderer section/note của account (gộp cột, ẩn ô),
- * thêm lớp vùng để tùy biến style backend.
+ * B03-DN line one2many: same account section/note renderer (merged columns, hidden cells),
+ * plus a row class hook for backend styling.
  */
 export class B03dnTemplateLineListRenderer extends SectionAndNoteListRenderer {
     getRowClass(record) {

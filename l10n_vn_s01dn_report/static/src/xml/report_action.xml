@@ -7,15 +7,15 @@
                 t-on-click="exportS01dnTT200"
                 type="button"
                 class="btn btn-primary"
-                title="Xuất excel Nhật ký - Sổ Cái (S01-DN)"
-            >Nhật ký - Sổ Cái (S01-DN) (.xlsx)</button>
+                title="Export general ledger (S01-DN) to Excel"
+            >General ledger (S01-DN) (.xlsx)</button>
             <button
                 t-if="isS01dnHtmlReport"
                 t-on-click="printS01dnBrowser"
                 type="button"
                 class="btn btn-secondary ms-2"
-                title="In trong trình duyệt: header Excel trang 1, footer + chữ ký trang cuối; 2–3 TK/trang tự chọn theo độ rộng A4 ngang"
-            >In</button>
+                title="Print in browser: Excel-style header on page 1, footer and signatures on last page; 2–3 accounts per page (A4 landscape)."
+            >Print</button>
             <button
                 t-if="!isS01dnHtmlReport"
                 t-on-click="print"

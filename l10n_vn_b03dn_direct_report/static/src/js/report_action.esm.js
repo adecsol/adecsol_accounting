@@ -3,10 +3,11 @@
 import { ReportAction } from "@web/webclient/actions/reports/report_action";
 import { patch } from "@web/core/utils/patch";
 import { onWillUnmount } from "@odoo/owl";
+import { _t } from "@web/core/l10n/translation";
 
 const B03DN_HTML_REPORT = "l10n_vn_b03dn_direct_report.b03dn_direct";
 const B03DN_XLSX_REPORT = "l10n_vn_b03dn_direct_report.b03dn_direct_xlsx";
-/** Cùng lề @page với QWeb — lề dưới lớn hơn một chút để margin box “Trang xx/yy”. */
+/** Same @page margins as QWeb; slightly larger bottom margin for the page x/y margin box. */
 const B03DN_PRINT_PAGE_MARGIN = "20mm 20mm 24mm 30mm";
 const B03DN_PRINT_MARGIN_STYLE_ID = "b03dn_print_margin_override";
 
@@ -19,7 +20,7 @@ patch(ReportAction.prototype, {
         if (this.props.report_name !== B03DN_HTML_REPORT) {
             return;
         }
-        /** Drill-down sau khi AJAX thay DOM trong iframe — domain gửi như chuỗi (cùng kiểu report.esm enrich). */
+        /** Drill-down after AJAX replaces DOM in iframe — domain sent as string (same pattern as report enrich). */
         this._b03dnDrillMessageHandler = (ev) => {
             const data = ev?.data;
             if (!data) {
@@ -88,8 +89,23 @@ patch(ReportAction.prototype, {
         return this.props.report_name === B03DN_HTML_REPORT;
     },
 
+    get b03dnQwebPrintTitle() {
+        return _t(
+            "QWeb print: A4 portrait; @page margins; bottom-right page x/y. Print dialog: use Default or None margins — avoid Custom overlapping."
+        );
+    },
+    get b03dnExportXlsxTitle() {
+        return _t("Export B03-DN to Excel (TT200)");
+    },
+    get b03dnPrintButtonLabel() {
+        return _t("Print");
+    },
+    get b03dnXlsxButtonLabel() {
+        return _t("B03-DN (.xlsx)");
+    },
+
     /**
-     * B03-DN HTML: không gọi in PDF mặc định — chỉ in trình duyệt (A4 dọc, CSS QWeb).
+     * B03-DN HTML: skip default PDF print — browser print only (A4 portrait, QWeb CSS).
      */
     print() {
         if (this.props.report_name === B03DN_HTML_REPORT) {
@@ -100,7 +116,7 @@ patch(ReportAction.prototype, {
     },
 
     /**
-     * Xuất Excel — gộp snapshot từ iframe (__b03dnGetFilterSnapshot) để khớp màn hình / in.
+     * Export Excel — merge snapshot from iframe (__b03dnGetFilterSnapshot) to match screen / print.
      */
     exportB03dnXlsx() {
         let uiFilters = null;
@@ -135,7 +151,7 @@ patch(ReportAction.prototype, {
         }
         const doc = win.document;
         /**
-         * Reset margin/padding thân trang + giữ @page trùng QWeb (mọi trang in đều có lề).
+         * Reset body margin/padding and keep @page identical to QWeb (every printed page has margins).
          */
         const injectPrintMarginKill = () => {
             let st = doc.getElementById(B03DN_PRINT_MARGIN_STYLE_ID);
@@ -149,7 +165,7 @@ patch(ReportAction.prototype, {
   margin: ${B03DN_PRINT_PAGE_MARGIN} !important;
   size: A4 portrait !important;
   @bottom-right {
-    content: "Trang " counter(page, decimal-leading-zero) " / " counter(pages, decimal-leading-zero);
+    content: "${_t("Page")} " counter(page, decimal-leading-zero) " / " counter(pages, decimal-leading-zero);
     font-size: 9pt;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;

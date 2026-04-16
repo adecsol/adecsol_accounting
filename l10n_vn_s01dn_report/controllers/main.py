@@ -64,7 +64,7 @@ def _s01dn_xlsx_download_filename_from_url(url):
         return None
 
     return (
-        f"Nhat_ky_So_Cai_S01_DN_{df.strftime('%d%m%Y')}_{dt.strftime('%d%m%Y')}.xlsx"
+        f"Journal_Ledger_S01_DN_{df.strftime('%d%m%Y')}_{dt.strftime('%d%m%Y')}.xlsx"
     )
 
 

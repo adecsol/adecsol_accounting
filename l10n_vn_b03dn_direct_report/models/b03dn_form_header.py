@@ -3,14 +3,14 @@ from odoo import _, api, fields, models
 
 
 class L10nVnB03dnFormHeader(models.Model):
-    """Tiêu đề góc phải trên báo cáo: «Mẫu số B 03 – DN» và dòng tham chiếu thông tư."""
+    """Right-hand report header: «Form B 03 – DN» and circular reference line."""
 
     _name = "l10n.vn.b03dn.form.header"
-    _description = "B03-DN — Tiêu đề mẫu biểu"
+    _description = "B03-DN — Form header"
     _order = "circular_type"
 
     name = fields.Char(
-        string="Mô tả",
+        string="Description",
         required=True,
         translate=True,
     )
@@ -20,54 +20,64 @@ class L10nVnB03dnFormHeader(models.Model):
             ("tt99", "TT99"),
             ("tt200", "TT200"),
         ],
-        string="Loại thông tư",
+        string="Circular type",
         required=True,
     )
     form_title = fields.Char(
-        string="Mẫu số (dòng 1)",
+        string="Form reference (line 1)",
         required=True,
         translate=True,
-        default="Mẫu số B 03 – DN",
-        help="Ví dụ: «Mẫu số B 03 – DN».",
+        default="Form B 03 – DN",
+        help="Example: «Form B 03 – DN».",
     )
     legal_reference = fields.Text(
-        string="Tham chiếu thông tư (dòng 2)",
+        string="Circular reference (line 2)",
         required=True,
         translate=True,
-        default="(Ban hành theo Thông tư số 200/2014/TT-BTC vào ngày 22/12/2014 của Bộ Tài chính)",
-        help="Dòng trong ngoặc dưới mẫu số, ví dụ căn cứ thông tư ban hành.",
+        default="(Issued with Circular No. 200/2014/TT-BTC dated 22/12/2014 by the Ministry of Finance)",
+        help="Parenthetical line under the form reference, e.g. legal basis.",
     )
 
     _sql_constraints = [
         (
             "l10n_vn_b03dn_form_header_circular_type_unique",
             "unique(circular_type)",
-            "Mỗi loại thông tư chỉ được một bản ghi cấu hình tiêu đề mẫu biểu.",
+            "Only one form header record is allowed per circular type.",
         ),
     ]
 
     @api.model
     def _default_header_values(self):
         return {
-            "form_title": _("Mẫu số B 03 – DN"),
+            "form_title": _("Form B 03 – DN"),
             "legal_reference": _(
-                "(Ban hành theo Thông tư số 200/2014/TT-BTC vào ngày 22/12/2014 của Bộ Tài chính)"
+                "(Issued with Circular No. 200/2014/TT-BTC dated 22/12/2014 by the Ministry of Finance)"
             ),
         }
 
     @api.model
     def _values_for_company(self, company):
-        """Hai dòng tiêu đề theo thông tư của công ty (hoặc mặc định).
+        """Two header lines for the company's circular (or defaults).
 
-        Dùng sudo() khi đọc: báo cáo lấy `company` từ bộ lọc (có thể khác công ty
-        active trên user); record rule theo user.company_id thì search trần sẽ
-        không trả đúng bản ghi → QWeb luôn rơi về mặc định.
+        Read with sudo(): the report may use `company` from filters (possibly
+        different from the user's active company); record rules tied to
+        user.company_id would otherwise miss the row and QWeb falls back to
+        defaults.
         """
         if not company:
             return self._default_header_values()
-        rec = self.sudo().search(
-            [("circular_type", "=", company.circular_type)],
-            limit=1,
+        lang = self.env.context.get("lang")
+        if not lang and self.env.uid:
+            lang = self.env["res.users"].browse(self.env.uid).sudo().lang
+        if not lang:
+            lang = "en_US"
+        rec = (
+            self.sudo()
+            .with_context(lang=lang)
+            .search(
+                [("circular_type", "=", company.circular_type or "tt200")],
+                limit=1,
+            )
         )
         if rec:
             return {

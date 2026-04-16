@@ -34,7 +34,7 @@ patch(ReportAction.prototype, {
             type: "ir.actions.report",
             report_type: "xlsx",
             report_name: S01DN_XLSX_REPORT,
-            report_file: "Nhat_ky_So_Cai_S01_DN",
+            report_file: "Journal_Ledger_S01_DN",
             data: baseData,
             // report_xlsx action handler JSON.stringify(context) for the URL; pass an object.
             context: this.props.context || {},

@@ -1,17 +1,13 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
-from datetime import date
+from odoo import models
 from odoo.tools import date_utils
 
 class TrialBalanceReportWizard(models.TransientModel):
     _inherit = "trial.balance.report.wizard"
 
-    # Các trường đã có sẵn trong Odoo, chỉ cần sử dụng
-    # Không cần định nghĩa lại
-
     def action_export_balance_sheet_tt200(self):
         self.ensure_one()
-        # Đảm bảo fy_start_date (Ngày đầu năm tài chính) luôn có giá trị để tính Số dư đầu kỳ cho TK loại 5-9
+        # Ensure fy_start_date is set for opening balances on accounts 5–9
         if not self.fy_start_date:
             fy_date_from, fy_date_to = date_utils.get_fiscal_year(
                 self.date_from,
@@ -21,7 +17,6 @@ class TrialBalanceReportWizard(models.TransientModel):
             self.fy_start_date = fy_date_from
         
         data = self._prepare_report_data()
-        # Thêm các trường từ popup vào data
         data['hide_account_at_0'] = self.hide_account_at_0
         data['show_hierarchy'] = self.show_hierarchy
         data['limit_hierarchy_level'] = self.limit_hierarchy_level

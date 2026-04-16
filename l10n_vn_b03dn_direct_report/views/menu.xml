@@ -2,7 +2,7 @@
 <odoo>
     <record id="accounting_adecsol.menu_vn_b03_dn" model="ir.ui.menu">
         <field name="parent_id" ref="accounting_adecsol.menu_vn_bctc_year"/>
-        <field name="name">Lưu chuyển tiền tệ (B03 - DN) (trực tiếp)</field>
+        <field name="name">Statement of cash flows (B03-DN) (direct)</field>
         <field name="action" ref="action_open_b03dn_html_direct"/>
     </record>
 </odoo>

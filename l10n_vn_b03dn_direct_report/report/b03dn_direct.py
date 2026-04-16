@@ -11,11 +11,22 @@ from odoo.tools.misc import formatLang
 
 class ReportB03dnDirect(models.AbstractModel):
     _name = "report.l10n_vn_b03dn_direct_report.b03dn_direct"
-    _description = "B03-DN — Báo cáo QWeb"
+    _description = "B03-DN — QWeb report"
+
+    @api.model
+    def _b03dn_env_with_user_lang(self, target=None):
+        """Return ``target`` with ``context['lang']`` when it was missing (XLSX, tests)."""
+        rs = target if target is not None else self
+        if rs.env.context.get("lang"):
+            return rs
+        lang = False
+        if rs.env.uid:
+            lang = rs.env["res.users"].browse(rs.env.uid).sudo().lang
+        return rs.with_context(lang=lang or "en_US")
 
     @api.model
     def _b03dn_money_divisor_from_filters(self, filters):
-        """Đồng / ngàn / triệu — khớp l10n_vn_s01dn_report (money_unit)."""
+        """VND / thousands / millions — aligned with l10n_vn_s01dn_report (money_unit)."""
         if not filters or not isinstance(filters, dict):
             return 1
         raw = filters.get("money_unit")
@@ -32,10 +43,10 @@ class ReportB03dnDirect(models.AbstractModel):
     @api.model
     def _b03dn_display_money_unit_caption(self, divisor):
         return {
-            1: "Đơn vị tính: Đồng",
-            1000: "Đơn vị tính: Ngàn đồng",
-            1000000: "Đơn vị tính: Triệu đồng",
-        }.get(divisor, "Đơn vị tính: Đồng")
+            1: self.env._("Unit: VND"),
+            1000: self.env._("Unit: thousands of VND"),
+            1000000: self.env._("Unit: millions of VND"),
+        }.get(divisor, self.env._("Unit: VND"))
 
     @api.model
     def _b03dn_coerce_ui_filters(self, raw):
@@ -55,7 +66,7 @@ class ReportB03dnDirect(models.AbstractModel):
 
     @api.model
     def _b03dn_payload_merged_with_ui(self, wizard, incoming):
-        """Gộp snapshot wizard với b03dn_ui_filters (QWeb reload / Excel). Luôn ưu tiên UI."""
+        """Merge wizard snapshot with ``b03dn_ui_filters`` (QWeb reload / Excel). UI wins."""
         incoming = dict(incoming or {})
         Wizard = self.env["l10n.vn.b03dn.report.wizard"]
         ui = self._b03dn_coerce_ui_filters(incoming.get("b03dn_ui_filters"))
@@ -99,7 +110,7 @@ class ReportB03dnDirect(models.AbstractModel):
 
     @api.model
     def _b03dn_serialize_reload_options(self, docids, b03dn_ui_filters):
-        """JSON cho ?options= — không escape trong QWeb (Markup)."""
+        """JSON for ``?options=`` — not HTML-escaped in QWeb (Markup)."""
 
         def convert(o):
             if isinstance(o, fields.Date):
@@ -140,6 +151,7 @@ class ReportB03dnDirect(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
+        self = self._b03dn_env_with_user_lang(self)
         incoming = dict(data or {})
 
         if not docids and incoming.get("doc_ids"):
@@ -166,7 +178,7 @@ class ReportB03dnDirect(models.AbstractModel):
                 return []
             if not aml_common:
                 return list(domain_list)
-            # AND tránh lỗi ghép với domain có '|' / '&' (không thể nối list đuôi).
+            # AND avoids broken composition when the domain contains leading '|' / '&'.
             return AND([domain_list, aml_common])
 
         currency = data.get("currency")
@@ -198,7 +210,7 @@ class ReportB03dnDirect(models.AbstractModel):
             return xlsx_rep._b03dn_line_shows_money_columns(line_rec)
 
         def b03dn_row_row_classes(line_rec):
-            """CSS cho <tr>: đồng bộ in đậm/nghiêng cột 2–5 với HTML name + b03dn_report_bold_amounts."""
+            """CSS classes for ``<tr>``: bold/italic cols 2–5 from HTML name + ``b03dn_report_bold_amounts``."""
             eb, ei = xlsx_rep._b03dn_effective_row_style_flags(line_rec)
             parts = []
             if eb:
@@ -208,7 +220,7 @@ class ReportB03dnDirect(models.AbstractModel):
             return " ".join(parts)
 
         def b03dn_chi_tieu_td_class(line_rec):
-            """Class cho ô Chỉ tiêu: không đặt bold trên td khi name đã bọc <strong> (tránh đậm 2 lần)."""
+            """Classes for the line-item cell: avoid bold on ``td`` when ``name`` already wraps ``<strong>``."""
             eb, ei = xlsx_rep._b03dn_effective_row_style_flags(line_rec)
             nb, ni = xlsx_rep._b03dn_row_name_style_flags(line_rec.name)
             parts = ["b03dn-chi-tieu"]
@@ -234,11 +246,12 @@ class ReportB03dnDirect(models.AbstractModel):
             dt_lap = fields.Date.from_string(dt_lap[:10])
         place_lap = xlsx_rep._b03dn_xlsx_company_state_name(company) or "…"
         b03dn_lap_place_text = f"{place_lap}, "
+        _ = self.env._
         if dt_lap and isinstance(dt_lap, date):
-            b03dn_lap_date_text = dt_lap.strftime("ngày %d tháng %m năm %Y")
+            b03dn_lap_date_text = _("dated %s") % dt_lap.strftime("%d/%m/%Y")
         else:
             today_lap = fields.Date.context_today(self)
-            b03dn_lap_date_text = today_lap.strftime("ngày %d tháng %m năm %Y")
+            b03dn_lap_date_text = _("dated %s") % today_lap.strftime("%d/%m/%Y")
 
         df_rep = data.get("date_from")
         dt_rep = data.get("date_to")
@@ -253,13 +266,13 @@ class ReportB03dnDirect(models.AbstractModel):
             start_of_year = date(y, 1, 1)
             end_of_year = date(y, 12, 31)
             if df_rep == start_of_year and dt_rep == end_of_year:
-                b03dn_year_line = f"Năm {y}"
+                b03dn_year_line = _("Year %s") % y
             else:
                 from_str = df_rep.strftime('%d/%m/%Y') if df_rep else '…'
                 to_str = dt_rep.strftime('%d/%m/%Y')
-                b03dn_year_line = f"Năm {y} (từ ngày {from_str} đến ngày {to_str})"
+                b03dn_year_line = _("Year %s (from %s to %s)") % (y, from_str, to_str)
         else:
-            b03dn_year_line = "Năm ……"
+            b03dn_year_line = _("Year …")
 
         hdr_vals = self.env["l10n.vn.b03dn.form.header"]._values_for_company(company)
 
@@ -277,7 +290,7 @@ class ReportB03dnDirect(models.AbstractModel):
             )
 
         def b03dn_tm_expected_file_code(line_rec):
-            """Mã tệp suy từ hồ sơ + định dạng bộ + cột Thuyết minh (vd. …01 + 20 → …01-20)."""
+            """Derived file code from dossier + set format + notes column (e.g. …01 + 20 → …01-20)."""
             if not dossier or not line_rec or line_rec.display_type:
                 return ""
             return (dossier.expected_code_for_reference(line_rec.explanation_ref) or "").strip()
@@ -288,6 +301,20 @@ class ReportB03dnDirect(models.AbstractModel):
             if not (line_rec.explanation_ref or "").strip():
                 return False
             return bool(b03dn_tm_expected_file_code(line_rec))
+
+        b03dn_report_i18n_json = Markup(
+            json.dumps(
+                {
+                    "datedFormat": _("dated %s"),
+                    "unitVnd": _("Unit: VND"),
+                    "unit1000": _("Unit: thousands of VND"),
+                    "unit1m": _("Unit: millions of VND"),
+                },
+                ensure_ascii=False,
+            )
+        )
+        b03dn_title_pick_signature_date = _("Click to pick signature date")
+        b03dn_title_pick_date = _("Click to pick date")
 
         return {
             "doc_ids": docids,
@@ -338,4 +365,7 @@ class ReportB03dnDirect(models.AbstractModel):
             "b03dn_tm_attachment_id": b03dn_tm_attachment_id,
             "b03dn_tm_expected_file_code": b03dn_tm_expected_file_code,
             "b03dn_tm_is_hyperlink": b03dn_tm_is_hyperlink,
+            "b03dn_report_i18n_json": b03dn_report_i18n_json,
+            "b03dn_title_pick_signature_date": b03dn_title_pick_signature_date,
+            "b03dn_title_pick_date": b03dn_title_pick_date,
         }

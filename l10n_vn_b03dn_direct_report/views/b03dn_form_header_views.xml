@@ -4,7 +4,7 @@
         <field name="name">l10n.vn.b03dn.form.header.tree</field>
         <field name="model">l10n.vn.b03dn.form.header</field>
         <field name="arch" type="xml">
-            <list string="Tiêu đề mẫu biểu B03-DN">
+            <list string="B03-DN form headers">
                 <field name="name"/>
                 <field name="circular_type"/>
                 <field name="form_title"/>
@@ -15,13 +15,13 @@
         <field name="name">l10n.vn.b03dn.form.header.form</field>
         <field name="model">l10n.vn.b03dn.form.header</field>
         <field name="arch" type="xml">
-            <form string="Tiêu đề mẫu biểu B03-DN">
+            <form string="B03-DN form header">
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="circular_type"/>
                     </group>
-                    <group string="Hiển thị báo cáo (góc phải)">
+                    <group string="Report display (top right)">
                         <field name="form_title" colspan="2"/>
                         <field name="legal_reference" colspan="2" widget="text"/>
                     </group>
@@ -30,13 +30,13 @@
         </field>
     </record>
     <record id="action_l10n_vn_b03dn_form_header" model="ir.actions.act_window">
-        <field name="name">Tiêu đề mẫu biểu B03-DN</field>
+        <field name="name">B03-DN form headers</field>
         <field name="res_model">l10n.vn.b03dn.form.header</field>
         <field name="view_mode">list,form</field>
     </record>
     <menuitem
         id="menu_l10n_vn_b03dn_form_header"
-        name="Tiêu đề mẫu biểu B03-DN"
+        name="B03-DN form headers"
         parent="account.menu_finance_configuration"
         action="action_l10n_vn_b03dn_form_header"
         sequence="96"

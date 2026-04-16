@@ -1,0 +1,838 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_vn_s01dn_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-16 07:45+0000\n"
+"PO-Revision-Date: 2026-04-16 07:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: Vietnamese (Viet Nam)\n"
+"Language: vi_VN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid " (cont.)"
+msgstr " (tiếp)"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.module.module,shortdesc
+msgid "Journal – General Ledger S01-DN (TT200)"
+msgstr "Nhật ký - Sổ Cái S01-DN (TT200)"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.module.module,summary
+msgid "Vietnam TT200 Form S01-DN journal and general ledger report"
+msgstr "Nhật ký - Sổ cái theo mẫu S01-DN, Thông tư 200/2014/TT-BTC"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "…………"
+msgstr "…………"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "………………"
+msgstr "………………"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid " — TOC (height placeholder; matches Description column E)."
+msgstr " — Mục lục (giữ chỗ chiều cao; theo diễn giải cột E trên sổ)."
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.actions.report,print_report_name:l10n_vn_s01dn_report.general_ledger_s01dn_html_action
+#: model:ir.actions.report,print_report_name:l10n_vn_s01dn_report.general_ledger_s01dn_xlsx_action
+msgid ""
+"'Journal_Ledger_S01_DN_%s_%s' % ((object.date_from.strftime('%d%m%Y') if "
+"object.date_from else ''), (object.date_to.strftime('%d%m%Y') if "
+"object.date_to else ''))"
+msgstr ""
+"'Journal_Ledger_S01_DN_%s_%s' % ((object.date_from.strftime('%d%m%Y') if "
+"object.date_from else ''), (object.date_to.strftime('%d%m%Y') if "
+"object.date_to else ''))"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"(Issued under Circular No. 200/2014/TT-BTC\n"
+"dated 22/12/2014 by the Ministry of Finance)"
+msgstr ""
+"(Ban hành theo Thông tư số 200/2014/TT-BTC\n"
+"Ngày 22/12/2014 của Bộ Tài chính)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "(Signature, full name)"
+msgstr "(Ký, họ tên)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "(Signature, full name, stamp)"
+msgstr "(Ký, họ tên, đóng dấu)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "(per table)"
+msgstr "(theo bảng)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "- Book opened on:"
+msgstr "- Ngày mở sổ:"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "- This ledger has "
+msgstr "- Sổ này có "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid " content page(s), numbered from page 01 to page "
+msgstr " trang nội dung, đánh số từ Trang 01 đến Trang "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid " / "
+msgstr " / "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Page "
+msgstr "Trang "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+#, python-format
+msgid "- Book opened on: %s"
+msgstr "- Ngày mở sổ: %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "- Movements in month %s"
+msgstr "- Số phát sinh tháng %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "- Opening balance (year)"
+msgstr "- Số dư đầu năm"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"- This ledger has … content pages. Numbered from Page 01 to Page … at the "
+"bottom right of each sheet."
+msgstr ""
+"- Sổ này có ... trang nội dung. Đánh số từ Trang 01 đến Trang ... ở góc phải"
+" cuối mỗi trang."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid ""
+"; column Description (E), line sequence (H), Debit/Credit pairs per TT200 "
+"column order."
+msgstr ""
+"; cột Diễn giải (E), thứ tự dòng (H), các cặp Nợ/Có theo số thứ tự cột "
+"TT200."
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "<span class=\"text-muted\">▾</span>"
+msgstr "<span class=\"text-muted\">▾</span>"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "A"
+msgstr "A"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "A/C"
+msgstr "TK"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+#, python-format
+msgid "A/C %s"
+msgstr "TK %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "A/C …"
+msgstr "TK …"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Accounts"
+msgstr "Tài khoản"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Address: "
+msgstr "Địa chỉ: "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Address:  "
+msgstr "Địa chỉ:  "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "All"
+msgstr "Tất cả"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "B"
+msgstr "B"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Bookkeeper"
+msgstr "Người ghi sổ"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "C"
+msgstr "C"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.general_ledger_wizard_s01dn_inherit
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Chief accountant"
+msgstr "Kế toán trưởng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Choose…"
+msgstr "Tùy chọn…"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Clear"
+msgstr "Bỏ chọn"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Closing balance at month-end %s"
+msgstr "Số dư cuối tháng %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Company: "
+msgstr "Đơn vị: "
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Credit"
+msgstr "Có"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "D"
+msgstr "D"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Date"
+msgstr "Ngày, tháng, năm"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Day … month … year 20.."
+msgstr "Ngày ... tháng ... năm 20.."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Description"
+msgstr "Diễn giải"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Details by account — accounts:"
+msgstr "Chi tiết theo tài khoản — các TK:"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Director"
+msgstr "Giám đốc"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "E"
+msgstr "E"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-javascript
+#: code:addons/l10n_vn_s01dn_report/static/src/xml/report_action.xml:0
+msgid "Export general ledger (S01-DN) to Excel"
+msgstr "Xuất sổ cái (S01-DN) ra Excel"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "F"
+msgstr "F"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.general_ledger_wizard_s01dn_inherit
+msgid "Filter journals"
+msgstr "Lọc nhật ký"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Filters"
+msgstr "Bộ lọc"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Form S01-DN"
+msgstr "Mẫu số S01-DN"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "From"
+msgstr "Từ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "From %(df)s to %(dt)s"
+msgstr "Từ ngày %(df)s đến ngày %(dt)s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "From date … to date …"
+msgstr "Từ ngày ... đến ngày ..."
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "G"
+msgstr "G"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.model,name:l10n_vn_s01dn_report.model_general_ledger_report_wizard
+msgid "General Ledger Report Wizard"
+msgstr "Thuật sỹ báo cáo sổ cái"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.model,name:l10n_vn_s01dn_report.model_report_l10n_vn_s01dn_report_general_ledger_s01dn_xlsx
+msgid "General Ledger S01-DN (Circular 200)"
+msgstr "Sổ cái S01-DN (Thông tư 200)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "General journal"
+msgstr "Nhật ký chung"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid ""
+"General journal — columns A–D, E, column 1 (amount), I; offset columns F, G;"
+" per Form S01-DN (Circular 200/2014/TT-BTC)."
+msgstr ""
+"Nhật ký chung — các chỉ tiêu cột A, B, C, D, E, cột 1 (số tiền phát sinh), "
+"I; cột đối ứng F, G; theo Mẫu số S01-DN (Thông tư 200/2014/TT-BTC)."
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.actions.server,name:l10n_vn_s01dn_report.action_open_s01dn_html_direct
+#: model:ir.ui.menu,name:l10n_vn_s01dn_report.menu_vn_s01dn_journal_ledger
+msgid "General ledger (S01-DN)"
+msgstr "Nhật ký - Sổ cái (S01-DN)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-javascript
+#: code:addons/l10n_vn_s01dn_report/static/src/xml/report_action.xml:0
+msgid "General ledger (S01-DN) (.xlsx)"
+msgstr "Nhật ký - Sổ cái (S01-DN) (.xlsx)"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.actions.act_window,name:l10n_vn_s01dn_report.action_vn_general_ledger_s01dn
+msgid "General ledger (S01-DN) — Wizard"
+msgstr "Sổ cái (S01-DN) - Wizard"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Go to this line on the ledger (click or Ctrl+click)"
+msgstr "Đến dòng mục này trên sổ (click hoặc Ctrl+click)"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "H"
+msgstr "H"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Header (continued)"
+msgstr "Tiêu đề (tiếp)"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.report_gl_s01dn_base
+msgid "I"
+msgstr "I"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "JOURNAL – GENERAL LEDGER"
+msgstr "NHẬT KÝ - SỔ CÁI"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Journal items"
+msgstr "Bút toán"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.actions.report,name:l10n_vn_s01dn_report.general_ledger_s01dn_xlsx_action
+msgid "Journal – General Ledger (S01-DN)"
+msgstr "Nhật ký - Sổ Cái (S01-DN)"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.actions.report,name:l10n_vn_s01dn_report.general_ledger_s01dn_html_action
+msgid "Journal – General Ledger S01-DN (summary)"
+msgstr "Nhật ký - Sổ Cái S01-DN (Tổng hợp)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Journals"
+msgstr "Nhật ký"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"Line\n"
+"no."
+msgstr ""
+"Thứ tự\n"
+"dòng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Million VND"
+msgstr "Triệu đồng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Month %(month)s - %(year)s"
+msgstr "Tháng %(month)s - %(year)s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "No movements in the selected period."
+msgstr "Không có dữ liệu phát sinh trong kỳ."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "None"
+msgstr "Không có"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "None selected"
+msgstr "Không chọn"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Number"
+msgstr "Số hiệu"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"Offset account\n"
+"code"
+msgstr ""
+"Số hiệu TK\n"
+"đối ứng"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.general_ledger_wizard_s01dn_inherit
+msgid "Once: open QWeb report. Double-click: export Excel."
+msgstr "Một lần: mở báo cáo QWeb. Nhấp đúp: xuất Excel."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Open entry"
+msgstr "Mở chứng từ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Page"
+msgstr "Trang"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+#, python-format
+msgid "Page %s"
+msgstr "Trang %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid ""
+"Page %s — TOC placeholder (approximate height). S01-DN content follows each "
+"printed sheet."
+msgstr ""
+"Trang %s — Mục lục (giữ chỗ; độ cao gần nội dung thật). Nội dung báo cáo "
+"S01-DN theo từng tờ in."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Partners"
+msgstr "Đối tác"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Period"
+msgstr "Kỳ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Posted"
+msgstr "Đã ghi sổ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"Posting date\n"
+"(d/m/y)"
+msgstr ""
+"Ngày, tháng, năm\n"
+"ghi sổ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-javascript
+#: code:addons/l10n_vn_s01dn_report/static/src/xml/report_action.xml:0
+msgid "Print"
+msgstr "In"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-javascript
+#: code:addons/l10n_vn_s01dn_report/static/src/xml/report_action.xml:0
+msgid ""
+"Print in browser: Excel-style header on page 1, footer and signatures on "
+"last page; 2–3 accounts per page (A4 landscape)."
+msgstr ""
+"In trên trình duyệt: tiêu đề kiểu Excel ở trang 1, chân trang và phần ký ở "
+"trang cuối; 2–3 tài khoản mỗi trang (A4 ngang)."
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Quarter %(roman)s - %(year)s"
+msgstr "Quý %(roman)s - %(year)s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Quarter-to-date cumulative through month %s"
+msgstr "Cộng luỹ kế từ đầu quý đến tháng %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Report header — Company, period, Form S01-DN"
+msgstr "Tiêu đề báo cáo, đơn vị, kỳ, Mẫu S01-DN"
+
+#. module: l10n_vn_s01dn_report
+#: model:ir.model,name:l10n_vn_s01dn_report.model_report_l10n_vn_s01dn_report_general_ledger_s01dn
+msgid "S01-DN General Ledger Summary (QWeb)"
+msgstr "Tổng hợp sổ cái S01-DN (QWeb)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Scale amounts on screen (display only)"
+msgstr "Quy đổi hiển thị số trên báo cáo (chỉ giao diện)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Select all"
+msgstr "Chọn tất cả"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Show / hide filters"
+msgstr "Ẩn / hiện bộ lọc"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Signatures (continued)"
+msgstr "Phần ký (tiếp)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Signatures — bookkeeper, chief accountant, director; book open date"
+msgstr "Phần ký: người ghi sổ, kế toán trưởng, giám đốc; ngày mở sổ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TABLE OF CONTENTS"
+msgstr "MỤC LỤC"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC (continued)"
+msgstr "Mục lục (tiếp)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC — header block (Company, S01-DN, period)"
+msgstr "Mục lục — khối tiêu đề (đơn vị, S01-DN, kỳ)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC — list by page"
+msgstr "Mục lục — danh sách theo từng trang"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC — table header"
+msgstr "Mục lục — tiêu đề bảng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC — title"
+msgstr "Mục lục — tiêu đề"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "TOC — title (continued)"
+msgstr "Mục lục — tiêu đề (tiếp)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid ""
+"This report has %s accounts — about %s printed pages (page 1: TOC when multiple sheets; page 2: journal A–I + F–G; then H + up to %s accounts per sheet). Printing may take time and paper. Export to Excel is often easier.\n"
+"\n"
+"Open the print dialog anyway?"
+msgstr ""
+"Báo cáo có %s tài khoản — dự kiến khoảng %s trang in (trang 1 mục lục nội dung khi nhiều tờ; trang 2 nhật ký A–I+F–G; sau đó H + tối đa %s TK). Có thể mất thời gian và nhiều giấy. Xuất Excel thường thuận tiện hơn.\n"
+"\n"
+"Vẫn mở hộp thoại in?"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Thousand VND"
+msgstr "Ngàn đồng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "To"
+msgstr "Đến"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Total movements for month %s"
+msgstr "Cộng số phát sinh tháng %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid ""
+"Transaction\n"
+"amount"
+msgstr ""
+"Số tiền\n"
+"phát sinh"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Unit"
+msgstr "Đơn vị"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Unit: VND"
+msgstr "Đơn vị tính: Đồng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Unit: million VND"
+msgstr "Đơn vị tính: Triệu đồng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "Unit: thousand VND"
+msgstr "Đơn vị tính: Ngàn đồng"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "VND"
+msgstr "Đồng"
+
+#. module: l10n_vn_s01dn_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_s01dn_report.general_ledger_wizard_s01dn_inherit
+msgid "View general ledger (S01-DN)"
+msgstr "Xem sổ cái (S01-DN)"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_xlsx.py:0
+msgid "Voucher"
+msgstr "Chứng từ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+#, python-format
+msgid "Year %s"
+msgstr "Năm %s"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "accounts"
+msgstr "TK"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "journals"
+msgstr "sổ"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "partners"
+msgstr "đối tác"
+
+#. module: l10n_vn_s01dn_report
+#. odoo-python
+#: code:addons/l10n_vn_s01dn_report/report/general_ledger_s01dn_qweb.py:0
+msgid "🔍 Search…"
+msgstr "🔍 Tìm kiếm…"

@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
         relation="account_move_line_b03dn_cash_flow_tag_rel",
         column1="move_line_id",
         column2="tag_id",
-        string="B03-DN — Thẻ luồng tiền (dòng)",
-        help="Tùy chọn: gắn thẻ trực tiếp lên dòng tiền; nếu trống, báo cáo dùng thẻ trên "
-        "tài khoản đối ứng theo cấu hình dòng chỉ tiêu.",
+        string="B03-DN — Cash flow tags (line)",
+        help="Optional: tag cash lines directly; if empty, the report uses tags on the "
+        "counterpart account per line configuration.",
     )

@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- GIỮ NGUYÊN - Kế thừa view accounting.report để thêm button -->
     <record id="accounting_report_view_inherit_b01dn" model="ir.ui.view">
         <field name="name">accounting.report.view.inherit.b01dn</field>
         <field name="model">accounting.report</field> 
         <field name="inherit_id" ref="accounting_pdf_reports.accounting_report_view"/>
         <field name="arch" type="xml">
             <xpath expr="//footer/button[@name='check_report']" position="after">
-                <button name="action_export_b01dn_excel" 
-                        string="Bảng Cân Đối Kế Toán (B01-DN)" 
-                        type="object" 
+                <button name="action_export_b01dn_excel"
+                        string="Balance sheet (B01-DN)"
+                        type="object"
                         class="btn-primary oe_inline"/>
                 <span class="or_sep"> or </span>
-                <button name="action_export_b02dn_excel" 
-                        string="Báo cáo KQHĐKD (B02-DN)" 
-                        type="object" 
+                <button name="action_export_b02dn_excel"
+                        string="Income statement (B02-DN)"
+                        type="object"
                         class="btn-primary oe_inline"/>
             </xpath>
         </field>
     </record>
 
-    <!-- XÓA phần action và form view cho adecsol.balance.sheet.export vì không dùng -->
-    <!-- KHÔNG CẦN: action_balance_sheet_b01dn -->
-    <!-- KHÔNG CẦN: view_balance_sheet_b01dn_form -->
 </odoo>

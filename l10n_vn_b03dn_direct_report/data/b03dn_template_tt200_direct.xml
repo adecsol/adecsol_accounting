@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="b03dn_template_tt200_direct" model="l10n.vn.b03dn.template">
-        <field name="name">B03-DN — Phương pháp trực tiếp (TT200)</field>
+        <field name="name">B03-DN — Direct method (TT200)</field>
         <field name="circular_type">tt200</field>
         <field name="active" eval="True"/>
     </record>
@@ -12,7 +12,7 @@
         <field name="code">H1</field>
         <field name="name" type="html">
             <p>
-                <strong>I. Lưu chuyển tiền từ hoạt động kinh doanh</strong>
+                <strong>I. Cash flows from operating activities</strong>
             </p>
         </field>
         <field name="display_type">line_section</field>
@@ -22,7 +22,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">10</field>
         <field name="code">01</field>
-        <field name="name">1. Thu tiền bán hàng, cung cấp dịch vụ và kinh doanh</field>
+        <field name="name">1. Cash received from sales of goods, provision of services and business activities</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">511%,131%,515%,121%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_22'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_26'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_27')])]"/>
@@ -32,7 +32,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">20</field>
         <field name="code">02</field>
-        <field name="name">2. Tiền chi trả cho người cung cấp hàng hoá, dịch vụ</field>
+        <field name="name">2. Cash paid to suppliers for goods and services</field>
         <field name="debit_account_patterns">331%,152%,153%,154%,156%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_21_asset'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_25')])]"/>
@@ -42,7 +42,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">30</field>
         <field name="code">03</field>
-        <field name="name">3. Tiền chi trả cho người lao động</field>
+        <field name="name">3. Cash paid to employees</field>
         <field name="debit_account_patterns">334%</field>
         <field name="credit_account_patterns">111%,112%</field>
         <field name="amount_multiplier">1</field>
@@ -51,7 +51,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">40</field>
         <field name="code">04</field>
-        <field name="name">4. Tiền lãi vay đã trả</field>
+        <field name="name">4. Interest paid</field>
         <field name="debit_account_patterns">335%,6354%,242%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -60,7 +60,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">50</field>
         <field name="code">05</field>
-        <field name="name">5. Thuế TNDN đã nộp</field>
+        <field name="name">5. Corporate income tax paid</field>
         <field name="debit_account_patterns">3334%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -69,7 +69,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">60</field>
         <field name="code">06</field>
-        <field name="name">6. Tiền thu khác từ hoạt động kinh doanh</field>
+        <field name="name">6. Other cash receipts from operating activities</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">711%,133%,141%,244%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_22')])]"/>
@@ -79,7 +79,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">70</field>
         <field name="code">07</field>
-        <field name="name">7. Tiền chi khác cho hoạt động kinh doanh</field>
+        <field name="name">7. Other cash payments for operating activities</field>
         <field name="debit_account_patterns">811%,161%,244%,333%,338%,344%,352%,353%,356%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_36')])]"/>
@@ -90,7 +90,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">200</field>
         <field name="code">20</field>
-        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ hoạt động kinh doanh</em></strong></p>
+        <field name="name" type="html"><p><strong><em>Net cash from operating activities</em></strong></p>
         </field>
         <field name="sum_expression">01+02+03+04+05+06+07</field>
     </record>
@@ -108,7 +108,7 @@
         <field name="code">H2</field>
         <field name="name" type="html">
             <p>
-                <strong>II. Lưu chuyển tiền tệ từ hoạt động đầu tư</strong>
+                <strong>II. Cash flows from investing activities</strong>
             </p>
         </field>
         <field name="display_type">line_section</field>
@@ -117,7 +117,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">210</field>
         <field name="code">21</field>
-        <field name="name">1. Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác</field>
+        <field name="name">1. Cash paid for purchase, construction of fixed assets and other long-term assets</field>
         <field name="debit_account_patterns">211%,213%,217%,241%,331%,3411%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_25'), ref('l10n_vn_b03dn_direct_report.tag_b03_cf_34_loan_principal')])]"/>
@@ -127,7 +127,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">220</field>
         <field name="code">22</field>
-        <field name="name">2. Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác</field>
+        <field name="name">2. Cash received from disposal of fixed assets and other long-term assets</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">711%,5117%,131%</field>
         <field name="exclude_tag_ids" eval="[(6, 0, [ref('l10n_vn_b03dn_direct_report.tag_b03_cf_26')])]"/>
@@ -137,7 +137,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">230</field>
         <field name="code">23</field>
-        <field name="name">3. Tiền chi cho vay, mua các công cụ nợ của đơn vị khác</field>
+        <field name="name">3. Cash paid for loans and purchase of debt instruments of other entities</field>
         <field name="debit_account_patterns">128%,171%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -146,7 +146,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">240</field>
         <field name="code">24</field>
-        <field name="name">4. Tiền thu hồi cho vay, bán lại công cụ nợ của đơn vị khác</field>
+        <field name="name">4. Cash received from collection of loans and sale of debt instruments</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">128%,171%</field>
         <field name="amount_multiplier">1</field>
@@ -155,7 +155,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">250</field>
         <field name="code">25</field>
-        <field name="name">5. Tiền chi đầu tư góp vốn vào đơn vị khác</field>
+        <field name="name">5. Cash paid for capital contributions to other entities</field>
         <field name="debit_account_patterns">221%,222%,2281%,331%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -164,7 +164,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">260</field>
         <field name="code">26</field>
-        <field name="name">6. Tiền thu hồi đầu tư vốn vào đơn vị khác</field>
+        <field name="name">6. Cash received from return of capital contributions</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">221%,222%,2281%,131%</field>
         <field name="amount_multiplier">1</field>
@@ -173,7 +173,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">270</field>
         <field name="code">27</field>
-        <field name="name">7. Thu lãi tiền cho vay, cổ tức và lợi nhuận được chia</field>
+        <field name="name">7. Receipts of interest, dividends and profit shares</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">515%</field>
         <field name="amount_multiplier">1</field>
@@ -183,7 +183,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">300</field>
         <field name="code">30</field>
-        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ hoạt động đầu tư</em></strong></p>
+        <field name="name" type="html"><p><strong><em>Net cash from investing activities</em></strong></p>
         </field>
         <field name="sum_expression">21+22+23+24+25+26+27</field>
     </record>
@@ -202,7 +202,7 @@
         <field name="code">H3</field>
         <field name="name" type="html">
             <p>
-                <strong>III. Lưu chuyển tiền tệ từ hoạt động tài chính</strong>
+                <strong>III. Cash flows from financing activities</strong>
             </p>
         </field>
         <field name="display_type">line_section</field>
@@ -211,7 +211,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">310</field>
         <field name="code">31</field>
-        <field name="name">1. Tiền thu từ phát hành cổ phiếu, nhận vốn góp của chủ sở hữu</field>
+        <field name="name">1. Cash received from issuance of shares and capital contributions from owners</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">411%,419%</field>
         <field name="exclude_account_patterns">41112%</field>
@@ -221,7 +221,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">320</field>
         <field name="code">32</field>
-        <field name="name">2. Tiền chi trả vốn góp cho các chủ sở hữu, mua lại cổ phiếu đã phát hành</field>
+        <field name="name">2. Cash paid to owners for capital returns and repurchase of issued shares</field>
         <field name="debit_account_patterns">411%,419%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="exclude_account_patterns">41112%</field>
@@ -231,7 +231,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">330</field>
         <field name="code">33</field>
-        <field name="name">3. Tiền thu từ đi vay</field>
+        <field name="name">3. Cash received from borrowings</field>
         <field name="debit_account_patterns">111%,112%,113%</field>
         <field name="credit_account_patterns">3411%,3431%,3432%,41112%</field>
         <field name="amount_multiplier">1</field>
@@ -240,7 +240,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">340</field>
         <field name="code">34</field>
-        <field name="name">4. Tiền trả nợ gốc vay</field>
+        <field name="name">4. Cash repayments of borrowings</field>
         <field name="debit_account_patterns">3411%,3431%,3432%,41112%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -249,7 +249,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">350</field>
         <field name="code">35</field>
-        <field name="name">5. Tiền trả nợ gốc thuê tài chính</field>
+        <field name="name">5. Cash repayments of finance lease principal</field>
         <field name="debit_account_patterns">3412%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -258,7 +258,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">360</field>
         <field name="code">36</field>
-        <field name="name">6. Cổ tức, lợi nhuận đã trả cho chủ sở hữu</field>
+        <field name="name">6. Dividends and profit paid to owners</field>
         <field name="debit_account_patterns">421%,338%</field>
         <field name="credit_account_patterns">111%,112%,113%</field>
         <field name="amount_multiplier">1</field>
@@ -268,7 +268,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">400</field>
         <field name="code">40</field>
-        <field name="name" type="html"><p><strong><em>Lưu chuyển tiền thuần từ hoạt động tài chính</em></strong></p>
+        <field name="name" type="html"><p><strong><em>Net cash from financing activities</em></strong></p>
         </field>
         <field name="sum_expression">31+32+33+34+35+36</field>
     </record>
@@ -286,7 +286,7 @@
         <field name="code">50</field>
         <field name="name" type="html">
             <p>
-                <strong>Lưu chuyển tiền thuần trong kỳ (50 = 20+30+40)</strong>
+                <strong>Net increase (decrease) in cash during the period (50 = 20+30+40)</strong>
             </p>
         </field>
         <field name="sum_expression">20+30+40</field>
@@ -305,7 +305,7 @@
         <field name="code">60</field>
         <field name="name" type="html">
             <p>
-                <strong>Tiền và tương đương tiền đầu kỳ</strong>
+                <strong>Cash and cash equivalents at beginning of period</strong>
             </p>
         </field>
         <field name="use_opening_cash_balance" eval="True"/>
@@ -322,7 +322,7 @@
         <field name="template_id" ref="b03dn_template_tt200_direct"/>
         <field name="sequence">610</field>
         <field name="code">61</field>
-        <field name="name">Ảnh hưởng của thay đổi tỷ giá hối đoái quy đổi ngoại tệ</field>
+        <field name="name">Effect of foreign exchange rate changes</field>
         <field name="fx_account_patterns">4131%</field>
     </record>
     <record id="b03dn_line_61_blank_after" model="l10n.vn.b03dn.line">
@@ -339,7 +339,7 @@
         <field name="code">70</field>
         <field name="name" type="html">
             <p>
-                <strong>Tiền và tương đương tiền cuối kỳ (70 = 50+60+61)</strong>
+                <strong>Cash and cash equivalents at end of period (70 = 50+60+61)</strong>
             </p>
         </field>
         <field name="sum_expression">50+60+61</field>

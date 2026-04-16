@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "B03-DN — Lưu chuyển tiền tệ (phương pháp trực tiếp, cấu hình)",
+    "name": "B03-DN — Statement of cash flows (direct method, configurable)",
     "version": "18.0.1.0.0",
     "category": "Accounting/Localizations",
-    "summary": "Báo cáo B03-DN TT200 trực tiếp: template/dòng cấu hình, QWeb + XLSX, drill-down",
+    "summary": "B03-DN TT200 direct cash flow: configurable template/lines, QWeb + XLSX, drill-down",
     "author": "Custom",
     "license": "AGPL-3",
     "depends": [
@@ -12,6 +12,8 @@
         "accounting_adecsol",
         "account_financial_report",
         "report_xlsx",
+        "accounting_pdf_reports",
+        "account_usability"
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -19,7 +21,7 @@
         "data/account_tags_cash_flow.xml",
         "data/b03dn_form_header_data.xml",
         "data/b03dn_template_tt200_direct.xml",
-        # "data/b03dn_template_tt99_direct.xml",
+        # "data/b03dn_template_tt99_direct.xml",    
         "views/b03dn_form_header_views.xml",
         "views/b03dn_template_views.xml",
         "views/res_config_settings_views.xml",

@@ -14,18 +14,18 @@ class AccountFiscalyearClosing(models.Model):
 
     # --- BỔ SUNG FIELDS CHO SMART BUTTONS (Cập nhật store=True) ---
     revenue_amount = fields.Float(
-        string="Tổng doanh thu", 
-        compute="_compute_closing_stats", 
+        string=_("Total revenue"),
+        compute="_compute_closing_stats",
         store=True
     )
     expense_amount = fields.Float(
-        string="Tổng chi phí", 
-        compute="_compute_closing_stats", 
+        string=_("Total expenses"),
+        compute="_compute_closing_stats",
         store=True
     )
     move_count = fields.Integer(
-        string="Số bút toán", 
-        compute="_compute_closing_stats", 
+        string=_("Journal entry count"),
+        compute="_compute_closing_stats",
         store=True
     )
 
@@ -110,7 +110,10 @@ class AccountFiscalyearClosing(models.Model):
                     if not move and data and data.get('error'):
                         pass 
                 except Exception as e:
-                    raise ValidationError(_(f"Lỗi khi tạo bút toán {config.name}: {str(e)}"))
+                    raise ValidationError(
+                        _("Error while creating journal entry for \"%(name)s\": %(error)s")
+                        % {"name": config.name, "error": str(e)}
+                    )
         return True
 
     def button_calculate(self):
@@ -179,7 +182,7 @@ class AccountFiscalyearClosingMapping(models.Model):
                     'account_id': account.id,
                     'debit': balance < 0 and -balance or 0.0,
                     'credit': balance > 0 and balance or 0.0,
-                    'name': f"Kết chuyển {description}",
+                    'name': _("Closing: %s") % description,
                     'date': date,
                     'partner_id': partner_id,
                 }
@@ -197,7 +200,7 @@ class AccountFiscalyearClosingMapping(models.Model):
                 'account_id': dest.id,
                 'debit': balance < 0 and -balance or 0.0,
                 'credit': balance > 0 and balance or 0.0,
-                'name': _("Kết chuyển số dư"),
+                'name': _("Closing balance transfer"),
                 'date': date,
                 'partner_id': partner_id,
             }

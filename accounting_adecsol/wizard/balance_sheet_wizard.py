@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
 
 class AccountingReport(models.TransientModel):
     _inherit = "accounting.report"
 
     def action_export_b01dn_excel(self):
         """
-        Xuất bảng cân đối kế toán B01-DN
-        Lấy tất cả thông tin từ popup để lọc dữ liệu
+        Export balance sheet B01-DN (Excel).
+        Uses all filter fields from the wizard.
         """
         self.ensure_one()
-        
-        # Kiểm tra ngày
+
         if self.date_from > self.date_to:
-            raise UserError("Ngày bắt đầu không thể lớn hơn ngày kết thúc!")
-        
-        # Chuẩn bị dữ liệu từ popup
+            raise UserError(_("Start date cannot be after end date."))
+
         data = {
             'date_from': self.date_from,
             'date_to': self.date_to,
@@ -29,7 +28,6 @@ class AccountingReport(models.TransientModel):
             'date_to_cmp': self.date_to_cmp if hasattr(self, 'date_to_cmp') else False,
             'debit_credit': self.debit_credit if hasattr(self, 'debit_credit') else False,
         }
-        
-        # Gọi report action và truyền data
+
         report = self.env.ref('accounting_adecsol.balance_sheet_xlsx_action')
         return report.report_action(self, data=data)

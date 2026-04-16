@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from odoo import models
 import datetime
+
+from odoo import models
+
 
 class TrialBalanceVnXlsx(models.AbstractModel):
     _name = 'report.accounting_adecsol.trial_balance_xlsx'
@@ -8,29 +10,25 @@ class TrialBalanceVnXlsx(models.AbstractModel):
 
     def generate_xlsx_report(self, workbook, data, wizards):
         wizard = wizards[0] if wizards else None
-        if not wizard: return
+        if not wizard:
+            return
 
-        # Lấy các tham số từ popup
+        _ = self.env._
         show_hierarchy = getattr(wizard, 'show_hierarchy', True)
-        
-        # BƯỚC 1: TÍNH TOÁN TẤT CẢ DỮ LIỆU
+
         all_lines = self._calculate_all_data(wizard)
-        
-        # BƯỚC 2: LỌC THEO POPUP
+
         filtered_lines = self._filter_by_popup(all_lines, wizard)
 
-        sheet = workbook.add_worksheet('Bảng CĐ Phát Sinh')
+        sheet = workbook.add_worksheet(_('Trial balance of transactions'))
         font_name = 'Times New Roman'
         
-        # --- ĐỊNH DẠNG CƠ BẢN ---
         bold_center = workbook.add_format({'font_name': font_name, 'bold': True, 'border': 1, 'align': 'center', 'valign': 'vcenter', 'bg_color': '#F2F2F2'})
-        
-        # ĐỊNH DẠNG CHO SỐ
+
         money_normal = workbook.add_format({'font_name': font_name, 'num_format': '#,##0;[Red](#,##0);"-"', 'border': 1})
         money_bold = workbook.add_format({'font_name': font_name, 'num_format': '#,##0;[Red](#,##0);"-"', 'border': 1, 'bold': True})
         money_italic = workbook.add_format({'font_name': font_name, 'num_format': '#,##0;[Red](#,##0);"-"', 'border': 1, 'italic': True})
         
-        # ĐỊNH DẠNG CHO CHỮ
         txt_normal = workbook.add_format({'font_name': font_name, 'border': 1})
         txt_bold = workbook.add_format({'font_name': font_name, 'border': 1, 'bold': True})
         txt_italic = workbook.add_format({'font_name': font_name, 'border': 1, 'italic': True})
@@ -39,42 +37,40 @@ class TrialBalanceVnXlsx(models.AbstractModel):
         sheet.set_column('B:B', 45)
         sheet.set_column('C:H', 17)
 
-        # --- HEADER ---
         sheet.write(0, 0, wizard.company_id.name.upper(), workbook.add_format({'font_name': font_name, 'bold': True}))
-        sheet.merge_range(0, 5, 0, 7, 'Mẫu số S06-DN', workbook.add_format({'font_name': font_name, 'bold': True, 'align': 'center'}))
-        sheet.merge_range(1, 5, 1, 7, '(Ban hành theo Thông tư số 200/2014/TT-BTC)', workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center', 'font_size': 10}))
-        sheet.merge_range(3, 0, 3, 7, 'BẢNG CÂN ĐỐI SỐ PHÁT SINH', workbook.add_format({'font_name': font_name, 'bold': True, 'font_size': 14, 'align': 'center'}))
-        sheet.merge_range(4, 0, 4, 7, f'Từ ngày {wizard.date_from.strftime("%d/%m/%Y")} đến ngày {wizard.date_to.strftime("%d/%m/%Y")}', 
-                          workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center'}))
+        sheet.merge_range(0, 5, 0, 7, _('Form S06-DN'), workbook.add_format({'font_name': font_name, 'bold': True, 'align': 'center'}))
+        sheet.merge_range(1, 5, 1, 7, _('(Issued with Circular No. 200/2014/TT-BTC)'), workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center', 'font_size': 10}))
+        sheet.merge_range(3, 0, 3, 7, _('TRIAL BALANCE OF TRANSACTIONS'), workbook.add_format({'font_name': font_name, 'bold': True, 'font_size': 14, 'align': 'center'}))
+        sheet.merge_range(4, 0, 4, 7, _('From %(date_from)s to %(date_to)s') % {
+            'date_from': wizard.date_from.strftime("%d/%m/%Y"),
+            'date_to': wizard.date_to.strftime("%d/%m/%Y"),
+        }, workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center'}))
 
         row = 7
-        sheet.merge_range(row, 0, row + 1, 0, 'Số hiệu TK', bold_center)
-        sheet.merge_range(row, 1, row + 1, 1, 'Tên tài khoản', bold_center)
-        sheet.merge_range(row, 2, row, 3, 'Số dư đầu kỳ', bold_center)
-        sheet.merge_range(row, 4, row, 5, 'Số phát sinh trong kỳ', bold_center)
-        sheet.merge_range(row, 6, row, 7, 'Số dư cuối kỳ', bold_center)
-        for i, h in enumerate(['Nợ', 'Có', 'Nợ', 'Có', 'Nợ', 'Có']):
+        sheet.merge_range(row, 0, row + 1, 0, _('Account code'), bold_center)
+        sheet.merge_range(row, 1, row + 1, 1, _('Account name'), bold_center)
+        sheet.merge_range(row, 2, row, 3, _('Opening balance'), bold_center)
+        sheet.merge_range(row, 4, row, 5, _('Movements in period'), bold_center)
+        sheet.merge_range(row, 6, row, 7, _('Closing balance'), bold_center)
+        for i, h in enumerate([_('Debit'), _('Credit'), _('Debit'), _('Credit'), _('Debit'), _('Credit')]):
             sheet.write(row + 1, i + 2, h, bold_center)
 
         row += 2
         totals = [0.0] * 6  # [init_debit, init_credit, debit, credit, end_debit, end_credit]
         
-        # --- ĐỔ DỮ LIỆU ĐÃ LỌC ---
         for line in filtered_lines:
-            # Thụt đầu dòng
             indent = '    ' * line['level']
             display_name = indent + line['name']
             
-            # XÁC ĐỊNH ĐỊNH DẠNG DỰA VÀO CẤP
             code_len = len(line['code'])
-            
-            if code_len == 3:  # Cấp 1: IN ĐẬM
+
+            if code_len == 3:
                 txt_format = txt_bold
                 money_format = money_bold
-            elif code_len <= 5:  # Cấp 2 (4-5 số): IN THƯỜNG
+            elif code_len <= 5:
                 txt_format = txt_normal
                 money_format = money_normal
-            else:  # Cấp 3+ (≥6 số): IN NGHIÊNG
+            else:
                 txt_format = txt_italic
                 money_format = money_italic
 
@@ -85,24 +81,19 @@ class TrialBalanceVnXlsx(models.AbstractModel):
             for i, val in enumerate(vals):
                 sheet.write(row, i + 2, val, money_format)
                 
-                # QUY TẮC TÍNH TỔNG:
                 if show_hierarchy:
-                    # Chế độ nhiều cấp: chỉ cộng tài khoản lá
                     if not line['is_parent']:
                         totals[i] += val
                 else:
-                    # Chế độ 1 cấp: cộng tất cả
                     totals[i] += val
             row += 1
 
-        # --- TỔNG CỘNG ---
-        sheet.merge_range(row, 0, row, 1, 'TỔNG CỘNG', bold_center)
+        sheet.merge_range(row, 0, row, 1, _('TOTAL'), bold_center)
         for i, t in enumerate(totals):
             sheet.write(row, i + 2, t, money_bold)
 
         row += 2
-        
-        # --- PHẦN CHỮ KÝ ---
+
         today = datetime.date.today()
         
         sign_title = workbook.add_format({
@@ -120,18 +111,21 @@ class TrialBalanceVnXlsx(models.AbstractModel):
             'font_size': 11
         })
         
-        sheet.merge_range(row, 4, row, 7, f"Ngày {today.day} tháng {today.month} năm {today.year}", 
-                         workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center'}))
+        sheet.merge_range(row, 4, row, 7, _('Date: %(day)s/%(month)s/%(year)s') % {
+            'day': today.day,
+            'month': today.month,
+            'year': today.year,
+        }, workbook.add_format({'font_name': font_name, 'italic': True, 'align': 'center'}))
         row += 2
-        
-        sheet.write(row, 0, 'Người lập biểu', sign_title)
-        sheet.write(row, 2, 'Kế toán trưởng', sign_title)
-        sheet.write(row, 5, 'Giám đốc', sign_title)
+
+        sheet.write(row, 0, _('Prepared by'), sign_title)
+        sheet.write(row, 2, _('Chief accountant'), sign_title)
+        sheet.write(row, 5, _('Director'), sign_title)
         row += 1
-        
-        sheet.write(row, 0, '(Ký, họ tên)', sign_text)
-        sheet.write(row, 2, '(Ký, họ tên)', sign_text)
-        sheet.write(row, 5, '(Ký, họ tên, đóng dấu)', sign_text)
+
+        sheet.write(row, 0, _('(Signature, full name)'), sign_text)
+        sheet.write(row, 2, _('(Signature, full name)'), sign_text)
+        sheet.write(row, 5, _('(Signature, full name, stamp)'), sign_text)
         
         return True
 

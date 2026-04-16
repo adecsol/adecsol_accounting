@@ -9,43 +9,42 @@ from odoo.tools import date_utils
 
 class L10nVnB03dnReportWizard(models.TransientModel):
     _name = "l10n.vn.b03dn.report.wizard"
-    _description = "B03-DN — Hộp thoại báo cáo lưu chuyển tiền tệ (trực tiếp)"
+    _description = "B03-DN — Statement of cash flows dialog (direct method)"
 
     company_id = fields.Many2one(
         "res.company",
-        string="Công ty",
+        string="Company",
         required=True,
         default=lambda self: self.env.company,
     )
     circular_type = fields.Selection(
         related="company_id.circular_type",
-        string="Loại thông tư",
+        string="Circular type",
     )
     template_id = fields.Many2one(
         "l10n.vn.b03dn.template",
-        string="Mẫu báo cáo",
+        string="Report template",
         domain=(
             "['&', '|', ('company_id', '=', False), "
             "('company_id', '=', company_id), "
             "('circular_type', '=', circular_type)]"
         ),
     )
-    date_from = fields.Date(string="Từ ngày", required=True)
-    date_to = fields.Date(string="Đến ngày", required=True)
-    date_from_cmp = fields.Date(string="Từ ngày (năm trước)")
-    date_to_cmp = fields.Date(string="Đến ngày (năm trước)")
+    date_from = fields.Date(string="Date from", required=True)
+    date_to = fields.Date(string="Date to", required=True)
+    date_from_cmp = fields.Date(string="Date from (prior year)")
+    date_to_cmp = fields.Date(string="Date to (prior year)")
     money_unit = fields.Selection(
         [
-            ("1", "Đồng"),
-            ("1000", "Ngàn đồng"),
-            ("1000000", "Triệu đồng"),
+            ("1", "VND"),
+            ("1000", "Thousands of VND"),
+            ("1000000", "Millions of VND"),
         ],
         default="1",
-        string="Đơn vị hiển thị số",
-        help="Quy đổi khi in / xuất Excel — khớp báo cáo QWeb.",
+        string="Amount display unit",
+        help="Scale for print / Excel export — matches QWeb report.",
     )
-    signature_date = fields.Date(string="Ngày ký", default=fields.Date.context_today)
-
+    signature_date = fields.Date(string="Signature date", default=fields.Date.context_today)
 
     @api.model
     def default_get(self, fields_list):
@@ -146,7 +145,7 @@ class L10nVnB03dnReportWizard(models.TransientModel):
         doc_ids=None,
         signature_date=None,
     ):
-        """Tính dữ liệu báo cáo — dùng từ wizard hoặc từ bộ lọc QWeb (không cần transient)."""
+        """Compute report data from wizard or QWeb filters (no transient required)."""
         company = self.env["res.company"].browse(company_id)
         template = self.env["l10n.vn.b03dn.template"].browse(template_id)
         if not company.exists() or not template.exists():
@@ -261,7 +260,7 @@ class L10nVnB03dnReportWizard(models.TransientModel):
 
     @api.model
     def build_payload_from_ui_filters(self, f, doc_ids=None):
-        """Ghép / làm mới payload từ snapshot b03dn_ui_filters (QWeb / Excel)."""
+        """Merge / rebuild payload from b03dn_ui_filters snapshot (QWeb / Excel)."""
         f = dict(f or {})
         try:
             cid = int(f.get("company_id") or 0)
@@ -303,7 +302,7 @@ class L10nVnB03dnReportWizard(models.TransientModel):
 
     @api.model
     def action_open_html_menu(self):
-        """Menu: mở thẳng báo cáo HTML (một lần — chỉnh trên QWeb)."""
+        """Menu: open HTML report directly (edit layout in QWeb)."""
         vals = self.default_get(list(self._fields))
         wiz = self.create(vals)
         data = wiz._report_payload()
@@ -314,13 +313,13 @@ class L10nVnB03dnReportWizard(models.TransientModel):
 
     @api.model
     def action_open_from_menu(self):
-        """Giữ wizard (tuỳ chọn) — có thể gọi từ nút khác."""
+        """Keep wizard (optional) — callable from other buttons."""
         Wizard = self.env["l10n.vn.b03dn.report.wizard"]
         vals = Wizard.default_get(list(Wizard._fields))
         wiz = Wizard.create(vals)
         return {
             "type": "ir.actions.act_window",
-            "name": self.env._("Báo cáo lưu chuyển tiền tệ (B03-DN trực tiếp)"),
+            "name": self.env._("Statement of cash flows (B03-DN direct)"),
             "res_model": "l10n.vn.b03dn.report.wizard",
             "view_mode": "form",
             "target": "new",

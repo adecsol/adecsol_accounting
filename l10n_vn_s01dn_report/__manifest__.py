@@ -1,14 +1,16 @@
 {
-    "name": "Nhật ký - Sổ Cái S01-DN (TT200)",
+    "name": "Journal – General Ledger S01-DN (TT200)",
     "version": "18.0.1.0.0",
     "category": "Accounting/Localizations",
-    "summary": "Nhật ký - Sổ Cái theo mẫu S01-DN, Thông tư 200/2014/TT-BTC",
+    "summary": "Vietnam TT200 Form S01-DN journal and general ledger report",
     "author": "Custom",
     "license": "AGPL-3",
     "depends": [
         "account_financial_report",
         "report_xlsx",
         "accounting_adecsol",
+        "account_usability",
+        "accounting_pdf_reports"
     ],
     "data": [
         "wizard/general_ledger_s01dn_inherit_view.xml",

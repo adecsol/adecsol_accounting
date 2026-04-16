@@ -623,8 +623,9 @@
                 </style>
 
                 <script type="application/json" id="b03dnReportReload" t-out="b03dn_report_reload_json"/>
+                <script type="application/json" id="b03dnReportI18n" t-out="b03dn_report_i18n_json"/>
 
-                <!-- Thanh công cụ QWeb: hiện trên màn hình (CSS #b03dnToolbar display:block); ẩn khi in (@media print). -->
+                <!-- QWeb toolbar: visible on screen; hidden when printing. -->
                 <div id="b03dnToolbar" class="b03dn-toolbar-screen-only">
                     <div class="b03dn-toolbar-toggle-row">
                         <button
@@ -633,10 +634,10 @@
                             class="b03dn-filter-toggle"
                             aria-controls="b03dnToolbarBody"
                             aria-expanded="true"
-                            title="Ẩn / hiện bộ lọc"
-                            aria-label="Ẩn hoặc hiện bộ lọc báo cáo"
+                            title="Show / hide filters"
+                            aria-label="Show or hide report filters"
                         >
-                            <span>Bộ lọc</span>
+                            <span>Filters</span>
                             <svg
                                 class="b03dn-filter-toggle-ico"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -657,7 +658,7 @@
                     <div id="b03dnToolbarBody" class="b03dn-toolbar-body">
                         <div class="b03dn-filter-bar b03dn-filter-bar--scope">
                             <div class="b03dn-f">
-                                <label for="b03dnFilterCompany">Công ty</label>
+                                <label for="b03dnFilterCompany">Company</label>
                                 <select id="b03dnFilterCompany" class="b03dn-sel-wide">
                                     <t t-foreach="b03dn_filter_companies" t-as="c">
                                         <option t-att-value="c.id" t-out="c.name"
@@ -666,7 +667,7 @@
                                 </select>
                             </div>
                             <div class="b03dn-f">
-                                <label for="b03dnFilterTemplate">Mẫu báo cáo</label>
+                                <label for="b03dnFilterTemplate">Report template</label>
                                 <select id="b03dnFilterTemplate" class="b03dn-sel-wide">
                                     <t t-foreach="b03dn_filter_templates" t-as="tpl">
                                         <option t-att-value="tpl.id" t-out="tpl.name"
@@ -677,25 +678,25 @@
                         </div>
                         <div class="b03dn-filter-bar b03dn-filter-bar--dates">
                             <div class="b03dn-date-cluster">
-                                <span class="b03dn-inline-sec">Năm nay</span>
+                                <span class="b03dn-inline-sec">Reporting period (filters)</span>
                                 <div class="b03dn-f">
-                                    <label for="b03dnDf">Từ</label>
+                                    <label for="b03dnDf">From</label>
                                     <input type="date" id="b03dnDf" t-att-value="b03dn_ui_filter_date_from"/>
                                 </div>
                                 <div class="b03dn-f">
-                                    <label for="b03dnDt">Đến</label>
+                                    <label for="b03dnDt">To</label>
                                     <input type="date" id="b03dnDt" t-att-value="b03dn_ui_filter_date_to"/>
                                 </div>
                             </div>
                             <span class="b03dn-bar-sep" aria-hidden="true"/>
                             <div class="b03dn-date-cluster">
-                                <span class="b03dn-inline-sec">Năm trước</span>
+                                <span class="b03dn-inline-sec">Prior period (filters)</span>
                                 <div class="b03dn-f">
-                                    <label for="b03dnDfc">Từ</label>
+                                    <label for="b03dnDfc">From</label>
                                     <input type="date" id="b03dnDfc" t-att-value="b03dn_ui_filter_date_from_cmp"/>
                                 </div>
                                 <div class="b03dn-f">
-                                    <label for="b03dnDtc">Đến</label>
+                                    <label for="b03dnDtc">To</label>
                                     <input type="date" id="b03dnDtc" t-att-value="b03dn_ui_filter_date_to_cmp"/>
                                 </div>
                             </div>
@@ -704,18 +705,18 @@
                         <input type="date" id="b03dnSigDate" style="display:none" t-att-value="b03dn_ui_filter_signature_date"/>
                         <div class="b03dn-filter-bar b03dn-filter-bar--money">
                             <div class="b03dn-f b03dn-f--money-unit">
-                                <label for="b03dnMoneyUnit">Đơn vị tính</label>
+                                <label for="b03dnMoneyUnit">Unit</label>
                                 <select
                                     id="b03dnMoneyUnit"
                                     name="b03dnMoneyUnit"
                                     class="b03dn-money-unit-inline"
-                                    title="Quy đổi hiển thị số (màn hình; khi in dùng dòng bên dưới)"
+                                    title="Scale displayed amounts (screen; printing uses the line below)"
                                     t-att-data-initial-money-unit="b03dn_money_unit_select_value"
-                                    aria-label="Đơn vị tiền tệ"
+                                    aria-label="Currency unit"
                                 >
-                                    <option value="1">Đồng</option>
-                                    <option value="1000">Ngàn đồng</option>
-                                    <option value="1000000">Triệu đồng</option>
+                                    <option value="1">VND</option>
+                                    <option value="1000">Thousands of VND</option>
+                                    <option value="1000000">Millions of VND</option>
                                 </select>
                             </div>
                         </div>
@@ -726,8 +727,8 @@
                 <table class="b03dn-header-table">
                     <tr>
                         <td colspan="3" class="b03dn-hdr-left">
-                            <div>Đơn vị báo cáo: <t t-out="company.name if company else ''"/></div>
-                            <div>Địa chỉ: <t t-out="b03dn_company_address"/></div>
+                            <div>Company: <t t-out="company.name if company else ''"/></div>
+                            <div>Address: <t t-out="b03dn_company_address"/></div>
                         </td>
                         <td colspan="2" class="b03dn-hdr-right">
                             <div class="mau" t-out="b03dn_form_title"/>
@@ -736,8 +737,8 @@
                     </tr>
                 </table>
 
-                <div class="b03dn-title">BÁO CÁO LƯU CHUYỂN TIỀN TỆ</div>
-                <div class="b03dn-subtitle">(Theo phương pháp trực tiếp) (*)</div>
+                <div class="b03dn-title">STATEMENT OF CASH FLOWS</div>
+                <div class="b03dn-subtitle">(Direct method) (*)</div>
                 <div class="b03dn-year-line" t-out="b03dn_year_line"/>
                 <div class="b03dn-dvt-line">
                     <div id="b03dnMoneyUnitCaption" class="b03dn-money-unit-caption">
@@ -749,11 +750,11 @@
                 <table class="b03dn-grid-table">
                     <thead>
                         <tr>
-                            <th class="b03dn-chi-tieu">Chỉ tiêu</th>
-                            <th class="b03dn-ma">Mã số</th>
-                            <th class="b03dn-tm">Thuyết minh</th>
-                            <th class="b03dn-money">Năm nay</th>
-                            <th class="b03dn-money">Năm trước</th>
+                            <th class="b03dn-chi-tieu">Line item</th>
+                            <th class="b03dn-ma">Code</th>
+                            <th class="b03dn-tm">Notes</th>
+                            <th class="b03dn-money">Current year</th>
+                            <th class="b03dn-money">Prior year</th>
                         </tr>
                         <tr class="b03dn-colnum">
                             <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
@@ -776,7 +777,7 @@
                                             t-att-data-b03dn-tm-att="b03dn_tm_attachment_id(line) or ''"
                                             t-att-data-b03dn-tm-code="b03dn_tm_expected_file_code(line)"
                                             t-att-data-b03dn-tm-did="b03dn_document_dossier_id"
-                                            t-attf-title="Mã tệp: {{ b03dn_tm_expected_file_code(line) }}"
+                                            t-attf-title="File code: {{ b03dn_tm_expected_file_code(line) }}"
                                             t-out="line.explanation_ref or ''"
                                         />
                                     </t>
@@ -816,32 +817,40 @@
 
                 <div class="b03dn-lap-wrapper">
                     <t t-out="b03dn_lap_place_text"/>
-                    <span id="b03dnLapDateDisplay" title="Nhấn để chọn ngày ký" t-out="b03dn_lap_date_text"/>
-                    <input type="date" id="b03dnSignatureDateInline" class="b03dn-sig-datepicker" title="Nhấn để chọn ngày" t-att-value="b03dn_today_iso"/>
+                    <span id="b03dnLapDateDisplay" t-att-title="b03dn_title_pick_signature_date" t-out="b03dn_lap_date_text"/>
+                    <input type="date" id="b03dnSignatureDateInline" class="b03dn-sig-datepicker" t-att-title="b03dn_title_pick_date" t-att-value="b03dn_today_iso"/>
                 </div>
 
                 <table class="b03dn-sig"><tr>
-                    <td style="width:33%">Người lập biểu</td>
-                    <td style="width:33%">Kế toán trưởng</td>
-                    <td style="width:33%">Giám đốc</td>
+                    <td style="width:33%">Prepared by</td>
+                    <td style="width:33%">Chief accountant</td>
+                    <td style="width:33%">Director</td>
                 </tr><tr class="sub">
-                    <td class="sub">(Ký, họ tên)</td>
-                    <td class="sub">(Ký, họ tên)</td>
-                    <td class="sub">(Ký, họ tên, đóng dấu)</td>
+                    <td class="sub">(Signature, full name)</td>
+                    <td class="sub">(Signature, full name)</td>
+                    <td class="sub">(Signature, full name, stamp)</td>
                 </tr><tr class="b03dn-sig-spacer">
                     <td class="b03dn-sig-gap-cell" colspan="3"><div class="b03dn-sig-gap" aria-hidden="true">&#8203;</div></td>
                 </tr></table>
 
                 <div class="b03dn-foot-note">
-                    - Số chứng chỉ hành nghề;<br/>
-                    - Đơn vị cung cấp dịch vụ kế toán<br/>
-                    Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ hành nghề,
-                    tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là cá nhân ghi rõ Số chứng chỉ hành nghề.
+                    - Professional license number;<br/>
+                    - Accounting service provider<br/>
+                    Where the preparer is an accounting firm, state the professional license number,
+                    name and address of the accounting service provider. Where the preparer is an individual,
+                    state the professional license number.
                 </div>
                 </div>
 
                 <script type="text/javascript"><![CDATA[
 (function () {
+    var b03dnI18n = {};
+    try {
+        var b03dnI18nEl = document.getElementById("b03dnReportI18n");
+        if (b03dnI18nEl && b03dnI18nEl.textContent) {
+            b03dnI18n = JSON.parse(b03dnI18nEl.textContent);
+        }
+    } catch (eI18n) { /* */ }
     function b03dnParseVnd(el) {
         var raw = el.getAttribute("data-vnd");
         if (raw === null || raw === "") { return 0; }
@@ -883,9 +892,9 @@
     }
     function b03dnMoneyUnitCaptionText(val) {
         var v = String(val || "1");
-        if (v === "1000") { return "Đơn vị tính: Ngàn đồng"; }
-        if (v === "1000000") { return "Đơn vị tính: Triệu đồng"; }
-        return "Đơn vị tính: Đồng";
+        if (v === "1000") { return b03dnI18n.unit1000 || "Unit: thousands of VND"; }
+        if (v === "1000000") { return b03dnI18n.unit1m || "Unit: millions of VND"; }
+        return b03dnI18n.unitVnd || "Unit: VND";
     }
     function b03dnApplyMoneyUnit() {
         var root = document.getElementById("b03dn_report_root");
@@ -983,6 +992,14 @@
             opts.b03dn_ui_filters = window.__b03dnGetFilterSnapshot();
             var path = window.location.pathname.split("?")[0];
             var url = path + "?options=" + encodeURIComponent(JSON.stringify(opts));
+            /* Keep ``context`` from the initial report URL (e.g. ``lang``); ``?options=`` alone drops it and QWeb reverts to en_US. */
+            try {
+                var qs = new URLSearchParams(window.location.search);
+                var ctx = qs.get("context");
+                if (ctx) {
+                    url += "&context=" + encodeURIComponent(ctx);
+                }
+            } catch (eCtx) { /* */ }
             var host = document.getElementById("b03dnReportDataHost");
             if (!host) {
                 window.location = url;
@@ -1075,7 +1092,8 @@
             var dd = String(d.getDate()).padStart(2, '0');
             var mm = String(d.getMonth() + 1).padStart(2, '0');
             var yy = d.getFullYear();
-            sigDisplay.textContent = "ngày " + dd + " tháng " + mm + " năm " + yy;
+            var datedFmt = (b03dnI18n.datedFormat || "dated %s").replace("%s", dd + "/" + mm + "/" + yy);
+            sigDisplay.textContent = datedFmt;
             if (sigHidden) { sigHidden.value = this.value; }
             b03dnScheduleReload();
         });
