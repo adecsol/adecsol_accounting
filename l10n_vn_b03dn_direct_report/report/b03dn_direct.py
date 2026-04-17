@@ -247,11 +247,19 @@ class ReportB03dnDirect(models.AbstractModel):
         place_lap = xlsx_rep._b03dn_xlsx_company_state_name(company) or "…"
         b03dn_lap_place_text = f"{place_lap}, "
         _ = self.env._
+        def _b03dn_dated_text(d):
+            """i18n template uses three %s (day, month, year) so VI can be 'ngày … tháng … năm …'."""
+            return _("dated %s/%s/%s") % (
+                d.strftime("%d"),
+                d.strftime("%m"),
+                str(d.year),
+            )
+
         if dt_lap and isinstance(dt_lap, date):
-            b03dn_lap_date_text = _("dated %s") % dt_lap.strftime("%d/%m/%Y")
+            b03dn_lap_date_text = _b03dn_dated_text(dt_lap)
         else:
             today_lap = fields.Date.context_today(self)
-            b03dn_lap_date_text = _("dated %s") % today_lap.strftime("%d/%m/%Y")
+            b03dn_lap_date_text = _b03dn_dated_text(today_lap)
 
         df_rep = data.get("date_from")
         dt_rep = data.get("date_to")
@@ -305,7 +313,7 @@ class ReportB03dnDirect(models.AbstractModel):
         b03dn_report_i18n_json = Markup(
             json.dumps(
                 {
-                    "datedFormat": _("dated %s"),
+                    "datedFormat": _("dated %s/%s/%s"),
                     "unitVnd": _("Unit: VND"),
                     "unit1000": _("Unit: thousands of VND"),
                     "unit1m": _("Unit: millions of VND"),

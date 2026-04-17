@@ -1092,7 +1092,8 @@
             var dd = String(d.getDate()).padStart(2, '0');
             var mm = String(d.getMonth() + 1).padStart(2, '0');
             var yy = d.getFullYear();
-            var datedFmt = (b03dnI18n.datedFormat || "dated %s").replace("%s", dd + "/" + mm + "/" + yy);
+            var datedTpl = b03dnI18n.datedFormat || "dated %s/%s/%s";
+            var datedFmt = datedTpl.replace("%s", dd).replace("%s", mm).replace("%s", String(yy));
             sigDisplay.textContent = datedFmt;
             if (sigHidden) { sigHidden.value = this.value; }
             b03dnScheduleReload();

@@ -315,61 +315,97 @@ class GeneralLedgerS01dnReport(models.AbstractModel):
                 ) > 0
             ]
 
-        # Dòng Nợ TK này — đối ứng là các dòng Có
+        # Dòng Nợ TK này — đối ứng là các dòng Có (và/hoặc nhiều mã TK Nợ ở dòng khác)
         if my_debit > 0 and float_is_zero(my_credit, precision_digits=prec):
-            opp = credit_pairs()
-            cp_debit_merged = self._s01dn_cp_side_codes(others, True)
-            if len(opp) <= 1:
-                cp_c = self._s01dn_cp_side_codes(others, False)
-                if len(opp) == 1:
-                    cp_c = opp[0][0]
-                return [{
-                    'cp_debit': cp_debit_merged,
-                    'cp_credit': cp_c,
-                    'amount': my_debit,
-                    'debit': my_debit,
-                    'credit': 0.0,
-                }]
-            weights = [a for _c, a in opp]
-            splits = self._s01dn_allocate_split_amounts(my_debit, weights, cur)
-            frag = []
-            for (code, _w), amt in zip(opp, splits):
-                frag.append({
-                    'cp_debit': cp_debit_merged,
-                    'cp_credit': code,
-                    'amount': amt,
-                    'debit': amt,
-                    'credit': 0.0,
-                })
-            return frag
+            opp_c = credit_pairs()
+            opp_d = debit_pairs()
 
-        # Dòng Có TK này — đối ứng là các dòng Nợ
+            # Nhiều TK Có đối ứng → tách dòng, mỗi dòng một mã Có; cột Nợ chỉ một mã (nếu có đúng 1)
+            if len(opp_c) > 1:
+                cp_d_single = opp_d[0][0] if len(opp_d) == 1 else ''
+                weights = [a for _c, a in opp_c]
+                splits = self._s01dn_allocate_split_amounts(my_debit, weights, cur)
+                frag = []
+                for (code, _w), amt in zip(opp_c, splits):
+                    frag.append({
+                        'cp_debit': cp_d_single,
+                        'cp_credit': code,
+                        'amount': amt,
+                        'debit': amt,
+                        'credit': 0.0,
+                    })
+                return frag
+
+            # Nhiều TK Nợ ở dòng khác, ít/một TK Có → tách dòng, mỗi dòng một mã Nợ đối ứng
+            if len(opp_d) > 1:
+                cp_c_single = opp_c[0][0] if len(opp_c) == 1 else ''
+                weights = [a for _c, a in opp_d]
+                splits = self._s01dn_allocate_split_amounts(my_debit, weights, cur)
+                frag = []
+                for (code, _w), amt in zip(opp_d, splits):
+                    frag.append({
+                        'cp_debit': code,
+                        'cp_credit': cp_c_single,
+                        'amount': amt,
+                        'debit': amt,
+                        'credit': 0.0,
+                    })
+                return frag
+
+            cp_c = opp_c[0][0] if len(opp_c) == 1 else ''
+            cp_d = opp_d[0][0] if len(opp_d) == 1 else ''
+            return [{
+                'cp_debit': cp_d,
+                'cp_credit': cp_c,
+                'amount': my_debit,
+                'debit': my_debit,
+                'credit': 0.0,
+            }]
+
+        # Dòng Có TK này — đối ứng là các dòng Nợ (và/hoặc nhiều mã TK Có ở dòng khác)
         if my_credit > 0 and float_is_zero(my_debit, precision_digits=prec):
-            opp = debit_pairs()
-            cp_credit_merged = self._s01dn_cp_side_codes(others, False)
-            if len(opp) <= 1:
-                cp_d = self._s01dn_cp_side_codes(others, True)
-                if len(opp) == 1:
-                    cp_d = opp[0][0]
-                return [{
-                    'cp_debit': cp_d,
-                    'cp_credit': cp_credit_merged,
-                    'amount': my_credit,
-                    'debit': 0.0,
-                    'credit': my_credit,
-                }]
-            weights = [a for _c, a in opp]
-            splits = self._s01dn_allocate_split_amounts(my_credit, weights, cur)
-            frag = []
-            for (code, _w), amt in zip(opp, splits):
-                frag.append({
-                    'cp_debit': code,
-                    'cp_credit': cp_credit_merged,
-                    'amount': amt,
-                    'debit': 0.0,
-                    'credit': amt,
-                })
-            return frag
+            opp_d = debit_pairs()
+            opp_c = credit_pairs()
+
+            if len(opp_d) > 1:
+                cp_c_single = opp_c[0][0] if len(opp_c) == 1 else ''
+                weights = [a for _c, a in opp_d]
+                splits = self._s01dn_allocate_split_amounts(my_credit, weights, cur)
+                frag = []
+                for (code, _w), amt in zip(opp_d, splits):
+                    frag.append({
+                        'cp_debit': code,
+                        'cp_credit': cp_c_single,
+                        'amount': amt,
+                        'debit': 0.0,
+                        'credit': amt,
+                    })
+                return frag
+
+            if len(opp_c) > 1:
+                cp_d_single = opp_d[0][0] if len(opp_d) == 1 else ''
+                weights = [a for _c, a in opp_c]
+                splits = self._s01dn_allocate_split_amounts(my_credit, weights, cur)
+                frag = []
+                for (code, _w), amt in zip(opp_c, splits):
+                    frag.append({
+                        'cp_debit': cp_d_single,
+                        'cp_credit': code,
+                        'amount': amt,
+                        'debit': 0.0,
+                        'credit': amt,
+                    })
+                return frag
+
+            cp_d = opp_d[0][0] if len(opp_d) == 1 else ''
+            cp_c = opp_c[0][0] if len(opp_c) == 1 else ''
+            return [{
+                'cp_debit': cp_d,
+                'cp_credit': cp_c,
+                'amount': my_credit,
+                'debit': 0.0,
+                'credit': my_credit,
+            }]
 
         # Dòng lưỡng kỳ hoặc 0 — giữ một dòng gộp mã TK như trước
         cp_debit = []
