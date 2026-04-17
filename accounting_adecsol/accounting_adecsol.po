@@ -26070,7 +26070,7 @@ msgstr "Xác minh giá và cập nhật nếu cần."
 
 #. module: accounting_adecsol
 #: model:ir.ui.menu,name:accounting_adecsol.menu_accounting_vn_root
-msgid "Vietnamese Accounting"
+msgid "Vietnam Accounting"
 msgstr "Kế toán Việt Nam"
 
 #. module: account

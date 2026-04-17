@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_accounting_vn_root" name="Vietnamese Accounting" parent="account.menu_finance" sequence="80"/>
+    <menuitem id="menu_accounting_vn_root" name="Vietnam Accounting" parent="account.menu_finance" sequence="80"/>
 
     <menuitem id="menu_vn_bctc_year" name="Annual financial statements" parent="menu_accounting_vn_root" sequence="10"/>
 
