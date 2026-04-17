@@ -1,26 +1,37 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * l10n_vn_b03dn_direct_report
+# 	* l10n_vn_b03dn_direct_report
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 18.0-20250820\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-16 06:00+0000\n"
-"PO-Revision-Date: 2026-04-16 06:00+0000\n"
+"POT-Creation-Date: 2026-04-16 09:47+0000\n"
+"PO-Revision-Date: 2026-04-16 09:47+0000\n"
 "Last-Translator: \n"
-"Language-Team: Vietnamese (Viet Nam)\n"
-"Language: vi_VN\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid "%s, %s"
 msgstr "%s, %s"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.actions.report,print_report_name:l10n_vn_b03dn_direct_report.b03dn_direct_html_action
+#: model:ir.actions.report,print_report_name:l10n_vn_b03dn_direct_report.b03dn_direct_xlsx_action
+msgid ""
+"'B03_DN_LCTT_%s_%s' % (object.date_from.strftime('%d%m%Y') if "
+"object.date_from else '', object.date_to.strftime('%d%m%Y') if "
+"object.date_to else '')"
+msgstr ""
+"'B03_DN_LCTT_%s_%s' % (object.date_from.strftime('%d%m%Y') if "
+"object.date_from else '', object.date_to.strftime('%d%m%Y') if "
+"object.date_to else '')"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:l10n.vn.b03dn.form.header,legal_reference:l10n_vn_b03dn_direct_report.b03dn_form_header_tt99
@@ -33,14 +44,14 @@ msgstr ""
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "(Direct method) (*)"
 msgstr "(Theo phương pháp trực tiếp) (*)"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_form_header.py:0
 #: model:l10n.vn.b03dn.form.header,legal_reference:l10n_vn_b03dn_direct_report.b03dn_form_header_tt200
 msgid ""
 "(Issued with Circular No. 200/2014/TT-BTC dated 22/12/2014 by the Ministry "
@@ -51,29 +62,17 @@ msgstr ""
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "(Signature, full name)"
 msgstr "(Ký, họ tên)"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "(Signature, full name, stamp)"
 msgstr "(Ký, họ tên, đóng dấu)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "- Accounting service provider"
-msgstr ""
-"<span style=\"font-style: normal;\">- Đơn vị cung cấp dịch vụ kế toán</span>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "- Professional license number;"
-msgstr ""
-"<span style=\"font-style: normal;\">- Số chứng chỉ hành nghề;</span>"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
@@ -102,7 +101,6 @@ msgstr ""
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_21
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_21
 msgid ""
 "1. Cash paid for purchase, construction of fixed assets and other long-term "
 "assets"
@@ -110,7 +108,6 @@ msgstr "1. Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạ
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_31
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_31
 msgid ""
 "1. Cash received from issuance of shares and capital contributions from "
 "owners"
@@ -125,7 +122,6 @@ msgstr "1. Tiền thu từ bán hàng, cung cấp dịch vụ và doanh thu khá
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_32
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_32
 msgid ""
 "2. Cash paid to owners for capital returns and repurchase of issued shares"
 msgstr ""
@@ -134,163 +130,165 @@ msgstr ""
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_02
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_02
 msgid "2. Cash paid to suppliers for goods and services"
 msgstr "2. Tiền chi trả cho người cung cấp hàng hóa và dịch vụ"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_22
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_22
 msgid ""
 "2. Cash received from disposal of fixed assets and other long-term assets"
 msgstr "2. Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_23
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_23
 msgid ""
 "3. Cash paid for loans and purchase of debt instruments of other entities"
 msgstr "3. Tiền chi cho vay, mua các công cụ nợ của đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_03
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_03
 msgid "3. Cash paid to employees"
 msgstr "3. Tiền chi trả cho người lao động"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_33
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_33
 msgid "3. Cash received from borrowings"
 msgstr "3. Tiền thu từ đi vay"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_24
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_24
 msgid "4. Cash received from collection of loans and sale of debt instruments"
 msgstr "4. Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_34
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_34
 msgid "4. Cash repayments of borrowings"
 msgstr "4. Tiền trả nợ gốc vay"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_04
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_04
 msgid "4. Interest paid"
 msgstr "4. Tiền lãi vay đã trả"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_25
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_25
 msgid "5. Cash paid for capital contributions to other entities"
 msgstr "5. Tiền chi đầu tư góp vốn vào đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_35
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_35
 msgid "5. Cash repayments of finance lease principal"
 msgstr "5. Tiền trả nợ gốc thuê tài chính"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_05
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_05
 msgid "5. Corporate income tax paid"
 msgstr "5. Thuế thu nhập doanh nghiệp đã nộp"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_26
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_26
 msgid "6. Cash received from return of capital contributions"
 msgstr "6. Tiền thu hồi đầu tư góp vốn vào đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_36
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_36
 msgid "6. Dividends and profit paid to owners"
 msgstr "6. Cổ tức, lợi nhuận đã trả cho chủ sở hữu"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_06
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_06
 msgid "6. Other cash receipts from operating activities"
 msgstr "6. Tiền thu khác từ hoạt động kinh doanh"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_07
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_07
 msgid "7. Other cash payments for operating activities"
 msgstr "7. Tiền chi khác cho hoạt động kinh doanh"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_27
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_27
 msgid "7. Receipts of interest, dividends and profit shares"
 msgstr "7. Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_60
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_60
-msgid "<strong>Cash and cash equivalents at beginning of period</strong>"
-msgstr "<strong>Tiền và tương đương tiền đầu kỳ</strong>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_70
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_70
-msgid "<strong>Cash and cash equivalents at end of period (70 = 50+60+61)</strong>"
-msgstr "<strong>Tiền và tương đương tiền cuối kỳ (70 = 50+60+61)</strong>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h1
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_h1
-msgid "<strong>I. Cash flows from operating activities</strong>"
-msgstr "<strong>I. Lưu chuyển tiền từ hoạt động kinh doanh</strong>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h2
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_h2
-msgid "<strong>II. Cash flows from investing activities</strong>"
-msgstr "<strong>II. Lưu chuyển tiền từ hoạt động đầu tư</strong>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h3
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_h3
-msgid "<strong>III. Cash flows from financing activities</strong>"
-msgstr "<strong>III. Lưu chuyển tiền từ hoạt động tài chính</strong>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_50
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_50
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid ""
-"<strong>Net increase (decrease) in cash during the period (50 = "
-"20+30+40)</strong>"
+"<option value=\"1\">VND</option>\n"
+"                                    <option value=\"1000\">Thousands of VND</option>\n"
+"                                    <option value=\"1000000\">Millions of VND</option>"
 msgstr ""
-"<strong>Lưu chuyển tiền thuần trong kỳ (50 = "
-"20+30+40)</strong>"
+"<option value=\"1\">VND</option>\n"
+"                                    <option value=\"1000\">Nghìn đồng</option>\n"
+"                                    <option value=\"1000000\">Triệu đồng</option>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+msgid "<span class=\"b03dn-inline-sec\">Prior period (filters)</span>"
+msgstr "<span class=\"b03dn-inline-sec\">Kỳ so sánh (bộ lọc)</span>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+msgid "<span class=\"b03dn-inline-sec\">Reporting period (filters)</span>"
+msgstr "<span class=\"b03dn-inline-sec\">Kỳ báo cáo (bộ lọc)</span>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+msgid "<span>Filters</span>"
+msgstr "<span>Bộ lọc</span>"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_40
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_40
 msgid "<strong><em>Net cash from financing activities</em></strong>"
-msgstr "<strong><em>Lưu chuyển tiền thuần từ hoạt động tài chính</em></strong>"
+msgstr ""
+"<strong><em>Lưu chuyển tiền thuần từ hoạt động tài chính</em></strong>"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_30
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_30
 msgid "<strong><em>Net cash from investing activities</em></strong>"
 msgstr "<strong><em>Lưu chuyển tiền thuần từ hoạt động đầu tư</em></strong>"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_20
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_20
 msgid "<strong><em>Net cash from operating activities</em></strong>"
-msgstr "<strong><em>Lưu chuyển tiền thuần từ hoạt động kinh doanh</em></strong>"
+msgstr ""
+"<strong><em>Lưu chuyển tiền thuần từ hoạt động kinh doanh</em></strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_60
+msgid "<strong>Cash and cash equivalents at beginning of period</strong>"
+msgstr "<strong>Tiền và tương đương tiền đầu kỳ</strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_70
+msgid ""
+"<strong>Cash and cash equivalents at end of period (70 = 50+60+61)</strong>"
+msgstr "<strong>Tiền và tương đương tiền cuối kỳ (70 = 50+60+61)</strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h1
+msgid "<strong>I. Cash flows from operating activities</strong>"
+msgstr "<strong>I. Lưu chuyển tiền từ hoạt động kinh doanh</strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h2
+msgid "<strong>II. Cash flows from investing activities</strong>"
+msgstr "<strong>II. Lưu chuyển tiền từ hoạt động đầu tư</strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_h3
+msgid "<strong>III. Cash flows from financing activities</strong>"
+msgstr "<strong>III. Lưu chuyển tiền từ hoạt động tài chính</strong>"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_50
+msgid ""
+"<strong>Net increase (decrease) in cash during the period (50 = "
+"20+30+40)</strong>"
+msgstr "<strong>Lưu chuyển tiền thuần trong kỳ (50 = 20+30+40)</strong>"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid ""
 "A computed line must have exactly one mode: sum expression, opening cash, FX"
 " account pattern, or cash filter (debit/credit patterns and/or tags). (line "
@@ -299,6 +297,11 @@ msgstr ""
 "Một chỉ tiêu tính toán phải có đúng một chế độ: biểu thức tổng, tiền đầu kỳ,"
 " mẫu tài khoản CLTG, hoặc lọc dòng tiền (mẫu Nợ/Có và/hoặc thẻ). (id chỉ "
 "tiêu: %s)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__active
+msgid "Active"
+msgstr "Kích hoạt"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_template_form
@@ -322,9 +325,24 @@ msgstr "Địa chỉ:"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid "Address: %s"
 msgstr "Địa chỉ: %s"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__amount_multiplier
+msgid "Amount Multiplier"
+msgstr "Hệ số nhân số tiền"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__money_unit
+msgid "Amount display unit"
+msgstr "Đơn vị hiển thị số tiền"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__tag_match_mode__any
+msgid "At least one tag"
+msgstr "Ít nhất một thẻ"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.res_config_settings_view_form_circular_type
@@ -332,12 +350,20 @@ msgid "B03-DN"
 msgstr "B03-DN"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model:ir.module.module,summary
-msgid ""
-"B03-DN TT200 direct cash flow: configurable template/lines, QWeb + XLSX, "
-"drill-down"
-msgstr ""
-"B03-DN TT200 LCTT trực tiếp: mẫu/dòng cấu hình, QWeb + XLSX, drill-down"
+#. odoo-javascript
+#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
+msgid "B03-DN (.xlsx)"
+msgstr "B03-DN (.xlsx)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_line
+msgid "B03-DN (direct) — Line item / rule"
+msgstr "B03-DN (trực tiếp) — Chỉ tiêu / quy tắc"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_template
+msgid "B03-DN (direct) — Report template"
+msgstr "Mẫu báo cáo B03-DN (phương pháp trực tiếp)"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_form_header_form
@@ -373,14 +399,24 @@ msgid "B03-DN — Cash flow tags"
 msgstr "B03-DN — Thẻ dòng tiền"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_account_move_line__b03dn_cash_flow_tag_ids
+msgid "B03-DN — Cash flow tags (line)"
+msgstr "B03-DN — Thẻ dòng tiền (dòng bút toán)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_res_company__b03dn_cash_equiv_account_ids
+msgid "B03-DN — Cash-equivalent accounts (short-term)"
+msgstr "B03-DN — Tài khoản tương đương tiền (ngắn hạn)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_engine
+msgid "B03-DN — Computation engine"
+msgstr "B03-DN — Động cơ tính toán"
+
+#. module: l10n_vn_b03dn_direct_report
 #: model:l10n.vn.b03dn.template,name:l10n_vn_b03dn_direct_report.b03dn_template_tt200_direct
 msgid "B03-DN — Direct method (TT200)"
 msgstr "B03-DN — Phương pháp trực tiếp (TT200)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:l10n.vn.b03dn.template,name:l10n_vn_b03dn_direct_report.b03dn_template_tt99_direct
-msgid "B03-DN — Direct method (TT99)"
-msgstr "B03-DN — Phương pháp trực tiếp (TT99)"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_form_header
@@ -388,107 +424,9 @@ msgid "B03-DN — Form header"
 msgstr "Tiêu đề mẫu biểu B03-DN"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_template
-msgid "B03-DN (direct) — Report template"
-msgstr "Mẫu báo cáo B03-DN (phương pháp trực tiếp)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__circular_type
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__circular_type
-msgid "Circular type"
-msgstr "Thông tư áp dụng"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__legal_reference
-msgid "Circular reference (line 2)"
-msgstr "Dòng căn cứ pháp lý (dòng 2)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__cash_account_ids
-msgid "Cash & cash-equivalent accounts (override)"
-msgstr "Tài khoản tiền và tương đương tiền (ghi đè)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__company_id
-msgid "Company"
-msgstr "Công ty"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__name
-msgid "Description"
-msgstr "Mô tả"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__document_dossier_id
-msgid "Notes dossier"
-msgstr "Hồ sơ tài liệu thuyết minh"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__active
-msgid "Active"
-msgstr "Kích hoạt"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__b03dn_tag_config_alert
-msgid "Tag configuration warning"
-msgstr "Cảnh báo cấu hình thẻ"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__form_title
-msgid "Form reference (line 1)"
-msgstr "Tham chiếu mẫu biểu (dòng 1)"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__line_ids
-msgid "Line items"
-msgstr "Chỉ tiêu"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__name
-msgid "Name"
-msgstr "Tên"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__circular_type
-msgid ""
-"Must match «Circular type» on the company for the template to appear on the "
-"report."
-msgstr ""
-"Phải trùng «Thông tư áp dụng» trên công ty thì mẫu mới hiển thị trên báo "
-"cáo."
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__company_id
-msgid "Leave empty: available for every company."
-msgstr "Để trống: dùng được cho mọi công ty."
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__document_dossier_id
-msgid ""
-"When set: on the HTML report, the «Notes» column opens files whose code "
-"matches (reference TM aligned with the line, e.g. 05 → …-05)."
-msgstr ""
-"Khi có giá trị: trên báo cáo HTML, cột «Thuyết minh» mở tệp có mã khớp "
-"(tham chiếu TM theo chỉ tiêu, ví dụ 05 → …-05)."
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__cash_account_ids
-msgid ""
-"If set, only these accounts are scanned. If empty: 111/112/113 per company + "
-"cash-equivalent accounts on res.company."
-msgstr ""
-"Nếu chọn: chỉ quét các tài khoản này. Nếu để trống: dùng 111/112/113 theo "
-"công ty + tài khoản tương đương tiền trên res.company."
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__form_title
-msgid "Example: «Form B 03 – DN»."
-msgstr "Ví dụ: «Mẫu số B 03 – DN»."
-
-#. module: l10n_vn_b03dn_direct_report
-#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__legal_reference
-msgid "Parenthetical line under the form reference, e.g. legal basis."
-msgstr "Dòng trong ngoặc dưới tham chiếu mẫu biểu, ví dụ căn cứ pháp lý."
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_report_l10n_vn_b03dn_direct_report_b03dn_direct
+msgid "B03-DN — QWeb report"
+msgstr "B03-DN — Báo cáo QWeb"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:ir.actions.act_window,name:l10n_vn_b03dn_direct_report.action_l10n_vn_b03dn_template
@@ -496,10 +434,19 @@ msgid "B03-DN — Report templates"
 msgstr "B03-DN — Mẫu báo cáo"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model:ir.module.module,shortdesc
-msgid "B03-DN — Statement of cash flows (direct method, configurable)"
-msgstr ""
-"B03-DN — Báo cáo lưu chuyển tiền tệ (phương pháp trực tiếp, cấu hình được)"
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_l10n_vn_b03dn_report_wizard
+msgid "B03-DN — Statement of cash flows dialog (direct method)"
+msgstr "B03-DN — Hộp thoại báo cáo lưu chuyển tiền tệ (phương pháp trực tiếp)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_report_l10n_vn_b03dn_direct_report_b03dn_direct_xlsx
+msgid "B03-DN — XLSX (form B 03 – DN TT200)"
+msgstr "B03-DN — XLSX (mẫu B 03 – DN TT200)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__cash_account_ids
+msgid "Cash & cash-equivalent accounts (override)"
+msgstr "Tài khoản tiền và tương đương tiền (ghi đè)"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.res_config_settings_view_form_circular_type
@@ -512,12 +459,22 @@ msgstr ""
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Chief accountant"
 msgstr "Kế toán trưởng"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__legal_reference
+msgid "Circular reference (line 2)"
+msgstr "Dòng căn cứ pháp lý (dòng 2)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__circular_type
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__circular_type
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__circular_type
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_res_company__circular_type
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_res_config_settings__circular_type
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.res_config_settings_view_form_circular_type
 msgid "Circular type"
 msgstr "Thông tư áp dụng"
@@ -541,20 +498,97 @@ msgstr "Đóng"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__code
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Code"
 msgstr "Mã số"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__debit_account_patterns
+msgid ""
+"Comma-separated account code patterns (e.g. 331%, 152%). Cash outflow "
+"(credit side of cash): match counterpart debit lines (TT200 debit column; "
+"excluding cash)."
+msgstr ""
+"Các mẫu mã tài khoản cách nhau bởi dấu phẩy (ví dụ 331%, 152%). Dòng tiền "
+"ra (bên Có của tài khoản tiền): khớp các dòng Nợ đối ứng (cột Nợ TT200; "
+"không gồm tài khoản tiền)."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__credit_account_patterns
+msgid ""
+"Comma-separated account code patterns. Cash inflow (debit side of cash): "
+"match counterpart credit lines (TT200 credit column)."
+msgstr ""
+"Các mẫu mã tài khoản cách nhau bởi dấu phẩy. Dòng tiền vào (bên Nợ của "
+"tài khoản tiền): khớp các dòng Có đối ứng (cột Có TT200)."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__exclude_account_patterns
+msgid ""
+"Comma-separated account codes, %% suffix supported like Debit/Credit "
+"patterns. If any counterpart code (or split string) matches an exclusion "
+"pattern, this leaf rule does not apply to that fragment (it may fall through"
+" to another line)."
+msgstr ""
+"Mã tài khoản cách nhau bởi dấu phẩy, hỗ trợ hậu tố %% như mẫu Nợ/Có. Nếu "
+"bất kỳ mã đối ứng (hoặc chuỗi tách) khớp một mẫu loại trừ, quy tắc lá này "
+"không áp dụng cho mảnh đó (có thể rơi xuống chỉ tiêu khác)."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_res_company
+msgid "Companies"
+msgstr "Các công ty"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__company_id
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__company_id
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Company"
 msgstr "Công ty"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+msgid "Company:"
+msgstr "Công ty:"
+
+#. module: l10n_vn_b03dn_direct_report
+#. odoo-python
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
+msgid "Company: %s"
+msgstr "Công ty: %s"
+
+#. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_report_wizard
 msgid "Comparison period (prior year)"
 msgstr "Kỳ so sánh (năm trước)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_res_config_settings
+msgid "Config Settings"
+msgstr "Cài đặt cấu hình"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__create_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__create_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__create_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__create_uid
+msgid "Created by"
+msgstr "Người tạo"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__create_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__create_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__create_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__create_date
+msgid "Created on"
+msgstr "Ngày tạo"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__credit_account_patterns
+msgid "Credit account patterns"
+msgstr "Mẫu tài khoản Có"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
@@ -563,14 +597,44 @@ msgstr "Đơn vị tiền tệ"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Current year"
 msgstr "Năm nay"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__date_from
+msgid "Date from"
+msgstr "Từ ngày"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__date_from_cmp
+msgid "Date from (prior year)"
+msgstr "Từ ngày (năm trước)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__date_to
+msgid "Date to"
+msgstr "Đến ngày"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__date_to_cmp
+msgid "Date to (prior year)"
+msgstr "Đến ngày (năm trước)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__debit_account_patterns
+msgid "Debit account patterns"
+msgstr "Mẫu tài khoản Nợ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__name
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Director"
 msgstr "Giám đốc"
@@ -581,9 +645,52 @@ msgid "Display"
 msgstr "Hiển thị"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__display_name
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__display_name
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__display_name
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__display_type
+msgid "Display Type"
+msgstr "Kiểu hiển thị"
+
+#. module: l10n_vn_b03dn_direct_report
 #: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_line_61
 msgid "Effect of foreign exchange rate changes"
 msgstr "Ảnh hưởng của chênh lệch tỷ giá hối đoái quy đổi ngoại tệ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__sum_expression
+msgid ""
+"Example: 01+02 or 20+30+40. When set: line = sum of codes (aggregate). Do "
+"not combine with opening / FX / cash filtering patterns."
+msgstr ""
+"Ví dụ: 01+02 hoặc 20+30+40. Khi có: chỉ tiêu = tổng các mã (tổng hợp). "
+"Không kết hợp với mẫu đầu kỳ / CLTG / lọc dòng tiền."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__form_title
+msgid "Example: «Form B 03 – DN»."
+msgstr "Ví dụ: «Mẫu số B 03 – DN»."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__exclude_account_patterns
+msgid "Exclude counterpart patterns"
+msgstr "Mẫu loại trừ tài khoản đối ứng"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__exclude_tag_ids
+msgid "Excluded tags"
+msgstr "Thẻ loại trừ"
+
+#. module: l10n_vn_b03dn_direct_report
+#. odoo-javascript
+#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
+msgid "Export B03-DN to Excel (TT200)"
+msgstr "Xuất B03-DN ra Excel (TT200)"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_report_wizard
@@ -591,18 +698,32 @@ msgid "Export Excel"
 msgstr "Xuất Excel"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "File code: "
-msgstr "Mã hồ sơ: "
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__extra_domain
+msgid "Extra filter (move line)"
+msgstr "Bộ lọc bổ sung (dòng bút toán)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__fx_account_patterns
+msgid "FX journal account patterns"
+msgstr "Mẫu tài khoản bút toán chênh lệch tỷ giá"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "<span>Filters</span>"
-msgstr "<span>Bộ lọc</span>"
+msgid "File code: {{ b03dn_tm_expected_file_code(line) }}"
+msgstr "Mã tệp: {{ b03dn_tm_expected_file_code(line) }}"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__display_type
+msgid ""
+"For list UI only (widget): section title / note; empty = computed line item "
+"(account patterns / sum / opening / FX)."
+msgstr ""
+"Chỉ cho giao diện danh sách (widget): tiêu đề phần / ghi chú; để trống = "
+"chỉ tiêu tính toán (mẫu tài khoản / tổng / đầu kỳ / CLTG)."
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_form_header.py:0
 #: model:l10n.vn.b03dn.form.header,form_title:l10n_vn_b03dn_direct_report.b03dn_form_header_tt200
 #: model:l10n.vn.b03dn.form.header,form_title:l10n_vn_b03dn_direct_report.b03dn_form_header_tt99
 msgid "Form B 03 – DN"
@@ -619,55 +740,162 @@ msgid "Form header — TT99"
 msgstr "Tiêu đề mẫu biểu — TT99"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__form_title
+msgid "Form reference (line 1)"
+msgstr "Tham chiếu mẫu biểu (dòng 1)"
+
+#. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "From"
 msgstr "Từ ngày"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__id
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__id
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__id
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__cash_account_ids
+msgid ""
+"If set, only these accounts are scanned. If empty: 111/112/113 per company +"
+" cash-equivalent accounts on res.company."
+msgstr ""
+"Nếu chọn: chỉ quét các tài khoản này. Nếu để trống: dùng 111/112/113 theo "
+"công ty + tài khoản tương đương tiền trên res.company."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__extra_domain
+msgid ""
+"JSON domain string on account.move.line, applied after detailed rules match."
+msgstr ""
+"Chuỗi domain JSON trên account.move.line, áp dụng sau khi các quy tắc chi "
+"tiết đã khớp."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_account_move_line
+msgid "Journal Item"
+msgstr "Mục nhật ký"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__write_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__write_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__write_uid
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__write_uid
+msgid "Last Updated by"
+msgstr "Sửa lần cuối bởi"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__write_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__write_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__write_date
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__write_date
+msgid "Last Updated on"
+msgstr "Sửa lần cuối vào"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__company_id
+msgid "Leave empty: available for every company."
+msgstr "Để trống: dùng được cho mọi công ty."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__code
+msgid "Line code (e.g. 01, 20, 70). Optional on Section / Note lines."
+msgstr "Mã chỉ tiêu (ví dụ 01, 20, 70). Tùy chọn với dòng Phần / Ghi chú."
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid "Line code is required for computed lines (line id: %s)."
 msgstr "Mã chỉ tiêu là bắt buộc với các dòng tính toán (id chỉ tiêu: %s)."
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid "Line code «%s» already exists on this template."
 msgstr "Mã chỉ tiêu «%s» đã tồn tại trên mẫu này."
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Line item"
 msgstr "Chỉ tiêu"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__line_ids
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_template_form
 msgid "Line items"
 msgstr "Chỉ tiêu"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid "Line name is required for computed lines (line id: %s)."
 msgstr "Tên chỉ tiêu là bắt buộc với các dòng tính toán (id chỉ tiêu: %s)."
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_report_wizard__money_unit__1000000
 msgid "Millions of VND"
 msgstr "Triệu đồng"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__amount_multiplier
+msgid "Multiplier after allocation (usually -1 for outflows)."
+msgstr "Hệ số nhân sau phân bổ (thường là -1 với dòng tiền ra)."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__tag_match_mode__all
+msgid "Must have all tags"
+msgstr "Phải có đủ mọi thẻ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__circular_type
+msgid ""
+"Must match «Circular type» on the company for the template to appear on the "
+"report."
+msgstr ""
+"Phải trùng «Thông tư áp dụng» trên công ty thì mẫu mới hiển thị trên báo "
+"cáo."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__name
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__display_type__line_note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Notes"
 msgstr "Thuyết minh"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__document_dossier_id
+msgid "Notes dossier"
+msgstr "Hồ sơ tài liệu thuyết minh"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__explanation_ref
+msgid "Notes reference"
+msgstr "Tham chiếu thuyết minh"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__explanation_ref
+msgid "Notes symbol on B03 (if any)."
+msgstr "Ký hiệu thuyết minh trên B03 (nếu có)."
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid ""
 "Only one computation mode is allowed: aggregate (sum), opening, FX, or leaf "
 "filter — do not mix. (line id: %s)"
@@ -676,22 +904,40 @@ msgstr ""
 "không trộn. (id chỉ tiêu: %s)"
 
 #. module: l10n_vn_b03dn_direct_report
-#. odoo-javascript
-#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
-msgid "Page"
-msgstr "Trang"
+#: model:ir.model.constraint,message:l10n_vn_b03dn_direct_report.constraint_l10n_vn_b03dn_form_header_l10n_vn_b03dn_form_header_circular_type_unique
+msgid "Only one form header record is allowed per circular type."
+msgstr "Chỉ được một bản ghi tiêu đề mẫu biểu cho mỗi loại thông tư."
 
 #. module: l10n_vn_b03dn_direct_report
-#. odoo-javascript
-#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
-msgid "B03-DN (.xlsx)"
-msgstr "B03-DN (.xlsx)"
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__use_opening_cash_balance
+msgid "Opening cash & equivalents"
+msgstr "Tiền và tương đương tiền đầu kỳ"
 
 #. module: l10n_vn_b03dn_direct_report
-#. odoo-javascript
-#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
-msgid "Export B03-DN to Excel (TT200)"
-msgstr "Xuất B03-DN ra Excel (TT200)"
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_account_move_line__b03dn_cash_flow_tag_ids
+msgid ""
+"Optional: tag cash lines directly; if empty, the report uses tags on the "
+"counterpart account per line configuration."
+msgstr ""
+"Tùy chọn: gắn thẻ trực tiếp cho dòng tiền; nếu để trống, báo cáo dùng thẻ "
+"trên tài khoản đối ứng theo cấu hình từng chỉ tiêu."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_form_header__legal_reference
+msgid "Parenthetical line under the form reference, e.g. legal basis."
+msgstr "Dòng trong ngoặc dưới tham chiếu mẫu biểu, ví dụ căn cứ pháp lý."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__tag_source__either
+msgid "Prefer cash line, then counterpart account"
+msgstr "Ưu tiên dòng tiền, sau đó tài khoản đối ứng"
+
+#. module: l10n_vn_b03dn_direct_report
+#. odoo-python
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
+#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+msgid "Prepared by"
+msgstr "Người lập biểu"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-javascript
@@ -700,33 +946,26 @@ msgid "Print"
 msgstr "In"
 
 #. module: l10n_vn_b03dn_direct_report
-#. odoo-javascript
-#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
-msgid ""
-"QWeb print: A4 portrait; @page margins; bottom-right page x/y. Print dialog: "
-"use Default or None margins — avoid Custom overlapping."
-msgstr ""
-"In QWeb/trình duyệt: A4 dọc; @page lề; góc dưới phải hiển thị trang x/y. Hộp "
-"thoại in: chọn Mặc định hoặc Không lề — tránh Lề tùy chỉnh bị chồng lấn."
-
-#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "Prepared by"
-msgstr "Người lập biểu"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "<span class=\"b03dn-inline-sec\">Prior period (filters)</span>"
-msgstr "<span class=\"b03dn-inline-sec\">Kỳ so sánh (bộ lọc)</span>"
-
-#. module: l10n_vn_b03dn_direct_report
-#. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Prior year"
 msgstr "Năm trước"
+
+#. module: l10n_vn_b03dn_direct_report
+#. odoo-javascript
+#: code:addons/l10n_vn_b03dn_direct_report/static/src/js/report_action.esm.js:0
+msgid ""
+"QWeb print: A4 portrait; @page margins; bottom-right page x/y. Print dialog:"
+" use Default or None margins — avoid Custom overlapping."
+msgstr ""
+"In QWeb/trình duyệt: A4 dọc; @page lề; góc dưới phải hiển thị trang x/y. Hộp"
+" thoại in: chọn Mặc định hoặc Không lề — tránh Lề tùy chỉnh bị chồng lấn."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model,name:l10n_vn_b03dn_direct_report.model_ir_actions_report
+msgid "Report Action"
+msgstr "Báo cáo hành động"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_form_header_form
@@ -739,40 +978,24 @@ msgid "Report period (current year)"
 msgstr "Kỳ báo cáo (năm hiện hành)"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__template_id
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Report template"
 msgstr "Mẫu báo cáo"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "Company:"
-msgstr "Công ty:"
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__b03dn_report_bold_amounts
+msgid "Report: bold amounts"
+msgstr "Báo cáo: in đậm số tiền"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__tag_ids
+msgid "Required tags"
+msgstr "Thẻ bắt buộc"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
-msgid "Company: %s"
-msgstr "Công ty: %s"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid "<span class=\"b03dn-inline-sec\">Reporting period (filters)</span>"
-msgstr "<span class=\"b03dn-inline-sec\">Kỳ báo cáo (bộ lọc)</span>"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
-msgid ""
-"<option value=\"1\">VND</option>\n"
-"                                    <option value=\"1000\">Thousands of VND</option>\n"
-"                                    <option value=\"1000000\">Millions of VND</option>"
-msgstr ""
-"<option value=\"1\">VND</option>\n"
-"                                    <option value=\"1000\">Nghìn đồng</option>\n"
-"                                    <option value=\"1000000\">Triệu đồng</option>"
-
-#. module: l10n_vn_b03dn_direct_report
-#. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "STATEMENT OF CASH FLOWS"
 msgstr "BÁO CÁO LƯU CHUYỂN TIỀN TỆ"
@@ -781,6 +1004,35 @@ msgstr "BÁO CÁO LƯU CHUYỂN TIỀN TỆ"
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
 msgid "Scale displayed amounts (screen; printing uses the line below)"
 msgstr "Quy mô số hiển thị (màn hình; in dùng dòng bên dưới)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__money_unit
+msgid "Scale for print / Excel export — matches QWeb report."
+msgstr "Tỷ lệ khi in / xuất Excel — khớp với báo cáo QWeb."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__display_type__line_section
+msgid "Section"
+msgstr "Phần"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__name
+msgid "Section / Note lines may be empty. Computed lines must have content."
+msgstr "Dòng Phần / Ghi chú có thể để trống. Dòng tính toán phải có nội dung."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__sequence
+msgid "Sequence"
+msgstr "Thứ tự"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_res_company__b03dn_cash_equiv_account_ids
+msgid ""
+"Short-term cash-equivalent accounts included in cash flows (e.g. sub-account"
+" 128 under 3 months). Leave empty if you only use 111/112/113."
+msgstr ""
+"Các tài khoản tương đương tiền ngắn hạn được tính trong lưu chuyển tiền "
+"(ví dụ TK con 128 dưới 3 tháng). Để trống nếu chỉ dùng 111/112/113."
 
 #. module: l10n_vn_b03dn_direct_report
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
@@ -793,27 +1045,88 @@ msgid "Show or hide report filters"
 msgstr "Hiện hoặc ẩn bộ lọc báo cáo"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__signature_date
+msgid "Signature date"
+msgstr "Ngày ký"
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/wizards/b03dn_wizard.py:0
 #: model:ir.actions.server,name:l10n_vn_b03dn_direct_report.action_open_b03dn_html_direct
 msgid "Statement of cash flows (B03-DN direct)"
 msgstr "Báo cáo lưu chuyển tiền tệ (B03-DN trực tiếp)"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model:ir.actions.act_window,name:l10n_vn_b03dn_direct_report.accounting_adecsol.action_vn_b03_dn
-msgid "Statement of cash flows (B03-DN direct) — Dialog"
-msgstr "Báo cáo lưu chuyển tiền tệ (B03-DN trực tiếp) — Hộp thoại"
-
-#. module: l10n_vn_b03dn_direct_report
 #: model:ir.actions.report,name:l10n_vn_b03dn_direct_report.b03dn_direct_html_action
-#: model:ir.ui.menu,name:l10n_vn_b03dn_direct_report.accounting_adecsol.menu_vn_b03_dn
 #: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.view_l10n_vn_b03dn_report_wizard
 msgid "Statement of cash flows (B03-DN) (direct)"
 msgstr "Báo cáo lưu chuyển tiền tệ (B03-DN) (trực tiếp)"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__sum_expression
+msgid "Sum expression"
+msgstr "Biểu thức tổng"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_form_header__circular_type__tt133
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_template__circular_type__tt133
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__res_company__circular_type__tt133
+msgid "TT133"
+msgstr "TT133"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_form_header__circular_type__tt200
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_template__circular_type__tt200
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__res_company__circular_type__tt200
+msgid "TT200"
+msgstr "TT200"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_form_header__circular_type__tt99
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_template__circular_type__tt99
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__res_company__circular_type__tt99
+msgid "TT99"
+msgstr "TT99"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__tag_match_mode
+msgid "Tag Match Mode"
+msgstr "Chế độ khớp thẻ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__tag_source
+msgid "Tag Source"
+msgstr "Nguồn thẻ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__exclude_tag_ids
+msgid ""
+"Tag accounts (or B03-DN cash-flow tags on move lines, depending on «Tag "
+"source») to exclude transactions that match account patterns but do not "
+"belong on this line. Use together with «Required tags» for evaluation."
+msgstr ""
+"Gắn thẻ tài khoản (hoặc thẻ dòng tiền B03-DN trên dòng bút toán, tùy "
+"«Nguồn thẻ») để loại các giao dịch khớp mẫu tài khoản nhưng không thuộc "
+"chỉ tiêu này. Dùng kết hợp với «Thẻ bắt buộc» khi đánh giá."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__b03dn_tag_config_alert
+msgid "Tag configuration warning"
+msgstr "Cảnh báo cấu hình thẻ"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__tag_source__cash_line
+msgid "Tags on cash line (B03-DN)"
+msgstr "Thẻ trên dòng tiền (B03-DN)"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_line__tag_source__counterpart_account
+msgid "Tags on counterpart account"
+msgstr "Thẻ trên tài khoản đối ứng"
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/models/b03dn_template.py:0
 msgid ""
 "Tags that appear only in «Required tags» and not in «Excluded tags» for any "
 "line on this template:"
@@ -822,7 +1135,12 @@ msgstr ""
 " bất kỳ chỉ tiêu nào của mẫu này:"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+#: model:ir.model.fields,field_description:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__template_id
+msgid "Template"
+msgstr "Mẫu"
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_report_wizard__money_unit__1000
 msgid "Thousands of VND"
 msgstr "Nghìn đồng"
 
@@ -855,7 +1173,14 @@ msgid "Unit: thousands of VND"
 msgstr "Đơn vị: Nghìn đồng"
 
 #. module: l10n_vn_b03dn_direct_report
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_report_wizard__circular_type
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_res_company__circular_type
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_res_config_settings__circular_type
+msgid "Used to filter report templates by the applicable accounting circular."
+msgstr "Dùng để lọc mẫu báo cáo theo thông tư kế toán áp dụng."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields.selection,name:l10n_vn_b03dn_direct_report.selection__l10n_vn_b03dn_report_wizard__money_unit__1
 msgid "VND"
 msgstr "VND"
 
@@ -865,85 +1190,115 @@ msgid "View report (HTML)"
 msgstr "Xem báo cáo (HTML)"
 
 #. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__use_opening_cash_balance
+msgid ""
+"When enabled: take cash account balances (per template config) on the day "
+"before the report period. Do not use together with sum expression, FX "
+"patterns or cash filtering."
+msgstr ""
+"Khi bật: lấy số dư tài khoản tiền (theo cấu hình mẫu) tại ngày liền trước "
+"kỳ báo cáo. Không dùng cùng lúc với biểu thức tổng, mẫu CLTG hoặc lọc "
+"dòng tiền."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_line__fx_account_patterns
+msgid ""
+"When set: line takes total movement of matching accounts in the period (e.g."
+" 413%%). Do not use together with sum expression, opening or cash filtering."
+msgstr ""
+"Khi có: chỉ tiêu lấy tổng phát sinh của các tài khoản khớp mẫu trong kỳ (ví "
+"dụ 413%%). Không dùng cùng lúc với biểu thức tổng, đầu kỳ hoặc lọc dòng "
+"tiền."
+
+#. module: l10n_vn_b03dn_direct_report
+#: model:ir.model.fields,help:l10n_vn_b03dn_direct_report.field_l10n_vn_b03dn_template__document_dossier_id
+msgid ""
+"When set: on the HTML report, the «Notes» column opens files whose code "
+"matches (reference TM aligned with the line, e.g. 05 → …-05)."
+msgstr ""
+"Khi có giá trị: trên báo cáo HTML, cột «Thuyết minh» mở tệp có mã khớp (tham"
+" chiếu TM theo chỉ tiêu, ví dụ 05 → …-05)."
+
+#. module: l10n_vn_b03dn_direct_report
 #. odoo-python
-#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
-#: model_terms:ir.ui.view,arch_db:l10n_vn_b03dn_direct_report.b03dn_direct
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid ""
 "Where the preparer is an accounting firm, state the professional license "
 "number, name and address of the accounting service provider. Where the "
 "preparer is an individual, state the professional license number."
 msgstr ""
-"Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng chỉ "
-"hành nghề, tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập biểu là "
-"cá nhân ghi rõ Số chứng chỉ hành nghề."
+"Đối với người lập biểu là các đơn vị dịch vụ kế toán phải ghi rõ Số chứng "
+"chỉ hành nghề, tên và địa chỉ Đơn vị cung cấp dịch vụ kế toán. Người lập "
+"biểu là cá nhân ghi rõ Số chứng chỉ hành nghề."
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
 #: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid "Year %s"
 msgstr "Năm %s"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
 #: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid "Year %s (from %s to %s)"
 msgstr "Năm %s (từ %s đến %s)"
 
 #. module: l10n_vn_b03dn_direct_report
 #. odoo-python
 #: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
+#: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct_xlsx.py:0
 msgid "Year …"
 msgstr "Năm …"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_02_supplier
-msgid "[B03-DN][02] Cash paid to suppliers for goods and services"
+msgid "[B03-DN][02] Tiền chi trả cho người cung cấp hàng hoá, dịch vụ"
 msgstr "[B03-DN][02] Tiền chi trả cho người cung cấp hàng hóa và dịch vụ"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_generic_out
-msgid "[B03-DN][07] Other cash payments for operating activities"
+msgid "[B03-DN][07] Tiền chi khác cho hoạt động kinh doanh"
 msgstr "[B03-DN][07] Tiền chi khác cho hoạt động kinh doanh"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_21_asset
 msgid ""
-"[B03-DN][21] Cash paid for purchase, construction of fixed assets and other "
-"long-term assets"
+"[B03-DN][21] Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác"
 msgstr ""
 "[B03-DN][21] Tiền chi mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_22
 msgid ""
-"[B03-DN][22] Cash received from disposal of fixed assets and other long-term"
-" assets"
+"[B03-DN][22] Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác"
 msgstr ""
 "[B03-DN][22] Tiền thu thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_25
-msgid "[B03-DN][25] Cash paid for capital contributions to other entities"
+msgid "[B03-DN][25] Tiền chi đầu tư góp vốn vào đơn vị khác"
 msgstr "[B03-DN][25] Tiền chi đầu tư góp vốn vào đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_26
-msgid "[B03-DN][26] Cash received from return of capital contributions"
+msgid "[B03-DN][26] Tiền thu hồi đầu tư vốn vào đơn vị khác"
 msgstr "[B03-DN][26] Tiền thu hồi đầu tư góp vốn vào đơn vị khác"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_27
-msgid "[B03-DN][27] Receipts of interest, dividends and profit shares"
+msgid "[B03-DN][27] Thu lãi tiền cho vay, cổ tức và lợi nhuận được chia"
 msgstr "[B03-DN][27] Tiền thu lãi cho vay, cổ tức và lợi nhuận được chia"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_34_loan_principal
-msgid "[B03-DN][34] Cash repayments of borrowings"
+msgid "[B03-DN][34] Tiền trả nợ gốc vay"
 msgstr "[B03-DN][34] Tiền trả nợ gốc vay"
 
 #. module: l10n_vn_b03dn_direct_report
 #: model:account.account.tag,name:l10n_vn_b03dn_direct_report.tag_b03_cf_36
-msgid "[B03-DN][36] Dividends and profit paid to owners"
+msgid "[B03-DN][36] Cổ tức, lợi nhuận đã trả cho chủ sở hữu"
 msgstr "[B03-DN][36] Cổ tức, lợi nhuận đã trả cho chủ sở hữu"
 
 #. module: l10n_vn_b03dn_direct_report
@@ -951,15 +1306,3 @@ msgstr "[B03-DN][36] Cổ tức, lợi nhuận đã trả cho chủ sở hữu"
 #: code:addons/l10n_vn_b03dn_direct_report/report/b03dn_direct.py:0
 msgid "dated %s"
 msgstr "ngày %s"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_01
-msgid ""
-"1. Cash received from sales of goods, services and other operating revenue"
-msgstr ""
-"1. Tiền thu từ bán hàng, cung cấp dịch vụ và các doanh thu hoạt động khác"
-
-#. module: l10n_vn_b03dn_direct_report
-#: model_terms:l10n.vn.b03dn.line,name:l10n_vn_b03dn_direct_report.b03dn_tt99_line_61
-msgid "Effect of foreign exchange rate changes (accounts 413)"
-msgstr "Ảnh hưởng của chênh lệch tỷ giá hối đoái quy đổi ngoại tệ (TK 413)"
