@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_ba_process" model="ir.module.category">
+        <field name="name">BA Process</field>
+        <field name="description">Business Analysis Process Management</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Base internal group -->
+    <record id="group_ba_user" model="res.groups">
+        <field name="name">BA Internal User</field>
+        <field name="category_id" ref="module_category_ba_process"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Portal group -->
+    <record id="group_ba_customer" model="res.groups">
+        <field name="name">BA Customer (Portal)</field>
+        <field name="category_id" ref="module_category_ba_process"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
+    <data noupdate="1">
+
+        <!-- ba.mom -->
+        <record id="rule_ba_mom_read" model="ir.rule">
+            <field name="name">ba.mom: Read for project members</field>
+            <field name="model_id" ref="model_ba_mom"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_mom_write" model="ir.rule">
+            <field name="name">ba.mom: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_mom"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_mom_unlink" model="ir.rule">
+            <field name="name">ba.mom: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_mom"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.customer.survey -->
+        <record id="rule_ba_customer_survey_read" model="ir.rule">
+            <field name="name">ba.customer.survey: Read for project members</field>
+            <field name="model_id" ref="model_ba_customer_survey"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_customer_survey_write" model="ir.rule">
+            <field name="name">ba.customer.survey: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_customer_survey"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_customer_survey_unlink" model="ir.rule">
+            <field name="name">ba.customer.survey: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_customer_survey"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.fitgap -->
+        <record id="rule_ba_fitgap_read" model="ir.rule">
+            <field name="name">ba.fitgap: Read for project members</field>
+            <field name="model_id" ref="model_ba_fitgap"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fitgap_write" model="ir.rule">
+            <field name="name">ba.fitgap: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_fitgap"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fitgap_unlink" model="ir.rule">
+            <field name="name">ba.fitgap: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_fitgap"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.fsd -->
+        <record id="rule_ba_fsd_read" model="ir.rule">
+            <field name="name">ba.fsd: Read for project members</field>
+            <field name="model_id" ref="model_ba_fsd"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fsd_write" model="ir.rule">
+            <field name="name">ba.fsd: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_fsd"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fsd_unlink" model="ir.rule">
+            <field name="name">ba.fsd: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_fsd"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.master.data -->
+        <record id="rule_ba_master_data_read" model="ir.rule">
+            <field name="name">ba.master.data: Read for project members</field>
+            <field name="model_id" ref="model_ba_master_data"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_master_data_write" model="ir.rule">
+            <field name="name">ba.master.data: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_master_data"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_master_data_unlink" model="ir.rule">
+            <field name="name">ba.master.data: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_master_data"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.handover -->
+        <record id="rule_ba_handover_read" model="ir.rule">
+            <field name="name">ba.handover: Read for project members</field>
+            <field name="model_id" ref="model_ba_handover"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_handover_write" model="ir.rule">
+            <field name="name">ba.handover: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_handover"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_handover_unlink" model="ir.rule">
+            <field name="name">ba.handover: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_handover"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.project.team -->
+        <record id="rule_ba_project_team_read" model="ir.rule">
+            <field name="name">ba.project.team: Read for project members</field>
+            <field name="model_id" ref="model_ba_project_team"/>
+            <field name="domain_force">['|', '|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id]), ('project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_project_team_write" model="ir.rule">
+            <field name="name">ba.project.team: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_project_team"/>
+            <field name="domain_force">['|', '|', ('project_id.ba_manager_id', '=', user.id), ('project_id.user_id', '=', user.id), ('project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_project_team_unlink" model="ir.rule">
+            <field name="name">ba.project.team: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_project_team"/>
+            <field name="domain_force">[('project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.fsd.feature -->
+        <record id="rule_ba_fsd_feature_read" model="ir.rule">
+            <field name="name">ba.fsd.feature: Read for project members</field>
+            <field name="model_id" ref="model_ba_fsd_feature"/>
+            <field name="domain_force">['|', '|', '|', ('fsd_id.project_id.ba_manager_id', '=', user.id), ('fsd_id.project_id.user_id', '=', user.id), ('fsd_id.project_id.ba_user_ids', 'in', [user.id]), ('fsd_id.project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fsd_feature_write" model="ir.rule">
+            <field name="name">ba.fsd.feature: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_fsd_feature"/>
+            <field name="domain_force">['|', '|', ('fsd_id.project_id.ba_manager_id', '=', user.id), ('fsd_id.project_id.user_id', '=', user.id), ('fsd_id.project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_fsd_feature_unlink" model="ir.rule">
+            <field name="name">ba.fsd.feature: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_fsd_feature"/>
+            <field name="domain_force">[('fsd_id.project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.master.data.line -->
+        <record id="rule_ba_master_data_line_read" model="ir.rule">
+            <field name="name">ba.master.data.line: Read for project members</field>
+            <field name="model_id" ref="model_ba_master_data_line"/>
+            <field name="domain_force">['|', '|', '|', ('master_data_id.project_id.ba_manager_id', '=', user.id), ('master_data_id.project_id.user_id', '=', user.id), ('master_data_id.project_id.ba_user_ids', 'in', [user.id]), ('master_data_id.project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_master_data_line_write" model="ir.rule">
+            <field name="name">ba.master.data.line: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_master_data_line"/>
+            <field name="domain_force">['|', '|', ('master_data_id.project_id.ba_manager_id', '=', user.id), ('master_data_id.project_id.user_id', '=', user.id), ('master_data_id.project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_master_data_line_unlink" model="ir.rule">
+            <field name="name">ba.master.data.line: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_master_data_line"/>
+            <field name="domain_force">[('master_data_id.project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.handover.line -->
+        <record id="rule_ba_handover_line_read" model="ir.rule">
+            <field name="name">ba.handover.line: Read for project members</field>
+            <field name="model_id" ref="model_ba_handover_line"/>
+            <field name="domain_force">['|', '|', '|', ('handover_id.project_id.ba_manager_id', '=', user.id), ('handover_id.project_id.user_id', '=', user.id), ('handover_id.project_id.ba_user_ids', 'in', [user.id]), ('handover_id.project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_handover_line_write" model="ir.rule">
+            <field name="name">ba.handover.line: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_handover_line"/>
+            <field name="domain_force">['|', '|', ('handover_id.project_id.ba_manager_id', '=', user.id), ('handover_id.project_id.user_id', '=', user.id), ('handover_id.project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_handover_line_unlink" model="ir.rule">
+            <field name="name">ba.handover.line: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_handover_line"/>
+            <field name="domain_force">[('handover_id.project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- ba.wbs.checklist -->
+        <record id="rule_ba_wbs_checklist_read" model="ir.rule">
+            <field name="name">ba.wbs.checklist: Read for project members</field>
+            <field name="model_id" ref="model_ba_wbs_checklist"/>
+            <field name="domain_force">['|', '|', '|', ('task_id.project_id.ba_manager_id', '=', user.id), ('task_id.project_id.user_id', '=', user.id), ('task_id.project_id.ba_user_ids', 'in', [user.id]), ('task_id.project_id.ba_developer_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_wbs_checklist_write" model="ir.rule">
+            <field name="name">ba.wbs.checklist: Write/Create for BA or PM</field>
+            <field name="model_id" ref="model_ba_wbs_checklist"/>
+            <field name="domain_force">['|', '|', ('task_id.project_id.ba_manager_id', '=', user.id), ('task_id.project_id.user_id', '=', user.id), ('task_id.project_id.ba_user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="rule_ba_wbs_checklist_unlink" model="ir.rule">
+            <field name="name">ba.wbs.checklist: Unlink for Manager</field>
+            <field name="model_id" ref="model_ba_wbs_checklist"/>
+            <field name="domain_force">[('task_id.project_id.ba_manager_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('group_ba_user'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Portal FSD Rule -->
+        <record id="rule_ba_fsd_portal" model="ir.rule">
+            <field name="name">BA FSD: Portal Customer</field>
+            <field name="model_id" ref="model_ba_fsd"/>
+            <field name="domain_force">[('state', 'in', ['pending_signoff', 'approved']), ('project_id.message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('group_ba_customer'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

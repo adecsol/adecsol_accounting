@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Demo — Nhóm nhân sự dự án
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Nhóm Core: Ban lãnh đạo + ADEC -->
+    <record id="team_sgf_core" model="ba.project.team">
+        <field name="name">Core Team</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="member_ids" eval="[(6, 0, [
+            ref('contact_sgf_director'),
+            ref('contact_sgf_it'),
+            ref('contact_adec_ba_lead'),
+            ref('contact_adec_dev_lead'),
+        ])]"/>
+    </record>
+
+    <!-- Nhóm Kế toán -->
+    <record id="team_sgf_accounting" model="ba.project.team">
+        <field name="name">Nhóm Kế toán</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="member_ids" eval="[(6, 0, [
+            ref('contact_sgf_accountant'),
+            ref('contact_adec_ba_lead'),
+        ])]"/>
+    </record>
+
+</odoo>

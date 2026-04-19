@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         project.task Views — WBS Task
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Inherit project.task form — add WBS checklist tab -->
+    <record id="project_task_form_inherit_ba" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.ba</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@name='description_page']" position="before">
+                <page string="📋 WBS Checklist" name="wbs_tab"
+                      invisible="not is_wbs">
+                    <!-- Checklist -->
+                    <field name="checklist_ids" nolabel="1">
+                        <list editable="bottom"
+                              decoration-success="state == 'done'"
+                              decoration-warning="state == 'in_progress'">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name" string="Name"/>
+                            <field name="assignee_id" string="Assignee"/>
+                            <field name="deadline" string="Deadline"/>
+                            <field name="state" string="Status" widget="badge"
+                                   decoration-muted="state == 'todo'"
+                                   decoration-warning="state == 'in_progress'"
+                                   decoration-success="state == 'done'"/>
+                            <field name="description" string="Description"/>
+                            <field name="priority" string="Priority"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+            <!-- Add BA boolean flags (hidden) -->
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="is_wbs" invisible="1"/>
+                <field name="ba_feature_priority" invisible="not is_wbs"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ── Task search: add BA filters ────────────────────── -->
+    <record id="project_task_search_inherit_ba" model="ir.ui.view">
+        <field name="name">project.task.search.inherit.ba</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="filter_wbs" string="WBS"
+                        domain="[('is_wbs','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         A2.CUS_SUR.01 — Customer Survey Views
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Form View -->
+    <record id="ba_customer_survey_view_form" model="ir.ui.view">
+        <field name="name">ba.customer.survey.form</field>
+        <field name="model">ba.customer.survey</field>
+        <field name="arch" type="xml">
+            <form string="Customer Survey (AS-IS)">
+                <header>
+                    <button name="action_send_survey" string="📧 Send Survey"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"
+                            confirm="Send survey email to customer?"/>
+                    <button name="action_confirm" string="✅ Confirm"
+                            type="object" class="btn-primary"
+                            invisible="state != 'responded'"/>
+                    <button name="action_create_tobe" string="📐 Create TO-BE"
+                            type="object" class="btn-success"
+                            invisible="state != 'confirmed' or tobe_page_id"/>
+                    <button name="action_mark_responded" string="Responded"
+                            type="object" class="btn-secondary"
+                            invisible="state != 'sent'"/>
+                    <button name="action_reset_draft" string="Reset to Draft"
+                            type="object" class="btn-secondary"
+                            invisible="state in ('draft', 'cancel')"/>
+                    <button name="action_cancel" string="Cancel"
+                            type="object" class="btn-secondary"
+                            invisible="state in ('cancel', 'responded', 'confirmed')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sent,responded,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="action_mark_responded" icon="fa-paperclip">
+                            <field name="attachment_count" widget="statinfo"
+                                   string="Files"/>
+                        </button>
+                        <button class="oe_stat_button" type="object"
+                                name="action_create_tobe" icon="fa-sitemap"
+                                invisible="state != 'confirmed'">
+                            <field name="tobe_count" widget="statinfo"
+                                   string="TO-BE"/>
+                        </button>
+
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Survey Title..."
+                                   readonly="state in ('confirmed', 'cancel')"/></h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="project_id" readonly="state in ('confirmed', 'cancel')"/>
+                            <field name="partner_id" string="Customer" readonly="state in ('confirmed', 'cancel')"/>
+                            <field name="send_date" readonly="state in ('confirmed', 'cancel')"/>
+                            <field name="result_date" readonly="state in ('confirmed', 'cancel')"/>
+                        </group>
+                        <group string="Links &amp; Templates">
+                            <label for="document_page_id" string="Knowledge"/>
+                            <div class="d-flex align-items-center gap-1">
+                                <field name="document_page_id" nolabel="1" readonly="1" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_document" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Document"
+                                        invisible="not document_page_id"/>
+                            </div>
+                            <label for="knowledge_template_id" string="Knowledge Template" invisible="document_page_id"/>
+                            <div class="d-flex align-items-center gap-1" invisible="document_page_id">
+                                <field name="knowledge_template_id" nolabel="1"
+                                       readonly="state in ('confirmed', 'cancel')" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_template" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Template"
+                                        invisible="not id"/>
+                            </div>
+                            <field name="tobe_page_id" string="TO-BE" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook readonly="state in ('confirmed', 'cancel')">
+                        <page string="📋 Survey Result" name="results" invisible="state in ('draft', 'sent')">
+                            <field name="survey_result" nolabel="1"
+                                   placeholder="Summary of analysis results from customer feedback..."
+                                   readonly="state in ('confirmed', 'cancel')"/>
+                        </page>
+                        <page string="📎 Attachments" name="attachments">
+                            <group>
+                                <field name="attachment_template_ids" widget="many2many_binary"
+                                       string="Template Files" readonly="state != 'draft'" />
+                                <field name="attachment_responded_ids" widget="many2many_binary"
+                                       string="Response Files" readonly="state in ('confirmed', 'cancel')"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="ba_customer_survey_view_kanban" model="ir.ui.view">
+        <field name="name">ba.customer.survey.kanban</field>
+        <field name="model">ba.customer.survey</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="project_id" class="o_kanban_small_column" quick_create="false">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+                <field name="attachment_count"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content">
+                            <strong><field name="name"/></strong>
+                            <div class="text-muted"><field name="project_id"/></div>
+                            <div><field name="partner_id"/></div>
+                            <div class="mt-1">
+                                <span class="badge rounded-pill text-bg-info">
+                                        <field name="attachment_count"/> files
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- list View -->
+    <record id="ba_customer_survey_view_list" model="ir.ui.view">
+        <field name="name">ba.customer.survey.list</field>
+        <field name="model">ba.customer.survey</field>
+        <field name="arch" type="xml">
+            <list string="Customer Survey"
+                  decoration-info="state == 'draft'"
+                  decoration-warning="state == 'sent'"
+                  decoration-success="state in ('responded', 'confirmed')"
+                  decoration-muted="state == 'cancel'">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="send_date"/>
+                <field name="result_date"/>
+                <field name="attachment_count"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'sent'"
+                       decoration-success="state == 'responded'"
+                       decoration-primary="state == 'confirmed'"
+                       decoration-danger="state == 'cancel'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="ba_customer_survey_view_search" model="ir.ui.view">
+        <field name="name">ba.customer.survey.search</field>
+        <field name="model">ba.customer.survey</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <separator/>
+                <filter name="filter_draft" string="Draft"
+                        domain="[('state','=','draft')]"/>
+                <filter name="filter_sent" string="Sent"
+                        domain="[('state','=','sent')]"/>
+                <filter name="filter_responded" string="Responded"
+                        domain="[('state','=','responded')]"/>
+                <filter name="filter_confirmed" string="Confirmed"
+                        domain="[('state','=','confirmed')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_project" string="Project"
+                            context="{'group_by':'project_id'}"/>
+                    <filter name="group_state" string="Status"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="ba_customer_survey_action" model="ir.actions.act_window">
+        <field name="name">Customer Survey</field>
+        <field name="res_model">ba.customer.survey</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="ba_customer_survey_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first customer survey
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Portal Templates — FSD Sign-off
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Portal "My FSD" Link in portal home -->
+    <template id="portal_my_home_fsd" name="Portal My Home — FSD"
+              inherit_id="portal.portal_my_home"
+              priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/adecsol_ba/static/description/icon.png'"/>
+                <t t-set="title">FSD Document</t>
+                <t t-set="url" t-value="'/my/fsd'"/>
+                <t t-set="text">View and sign-off FSD Document</t>
+                <t t-set="count" t-value="fsd_count"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- FSD list Page -->
+    <template id="portal_my_fsd_list" name="Portal FSD list">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">FSD Document</t>
+            </t>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <t t-if="not fsd_records">
+                            <div class="alert alert-info">
+                                No FSD documents require sign-off.
+                            </div>
+                        </t>
+                        <t t-if="fsd_records">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Document</th>
+                                        <th>Project</th>
+                                        <th>Features Count</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="fsd_records" t-as="fsd">
+                                        <tr>
+                                            <td><t t-esc="fsd.name"/></td>
+                                            <td><t t-esc="fsd.project_id.name"/></td>
+                                            <td><t t-esc="fsd.feature_count"/></td>
+                                            <td>
+                                                <span t-attf-class="badge rounded-pill #{
+                                                    'text-bg-info' if fsd.state == 'draft'
+                                                    else 'text-bg-warning' if fsd.state == 'pending_signoff'
+                                                    else 'text-bg-success' if fsd.state == 'approved'
+                                                    else 'text-bg-secondary'}">
+                                                    <t t-esc="fsd.state"/>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a t-attf-href="/my/fsd/#{fsd.id}"
+                                                   class="btn btn-sm btn-primary">
+                                                    View Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- FSD Detail / Sign-off Page -->
+    <template id="portal_fsd_detail" name="Portal FSD Detail">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-3">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2>
+                            <i class="fa fa-file-text-o me-2"/>
+                            <t t-esc="fsd.name"/>
+                        </h2>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td class="fw-bold" style="width:40%;">Project:</td>
+                                        <td><t t-esc="fsd.project_id.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Status:</td>
+                                        <td>
+                                            <span t-attf-class="badge rounded-pill #{
+                                                'text-bg-warning' if fsd.state == 'pending_signoff'
+                                                else 'text-bg-success' if fsd.state == 'approved'
+                                                else 'text-bg-secondary'}">
+                                                <t t-esc="fsd.state"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Total Estimated Hours:</td>
+                                        <td><t t-esc="fsd.total_planned_hours"/> hours</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Table -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4>Features Table</h4>
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width:5%;">#</th>
+                                    <th style="width:25%;">Feature Name</th>
+                                    <th style="width:35%;">Description</th>
+                                    <th style="width:8%;">Hours</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="fsd.feature_ids" t-as="feat">
+                                    <tr>
+                                        <td><t t-esc="feat.sequence"/></td>
+                                        <td><t t-esc="feat.name"/></td>
+                                        <td><t t-esc="feat.description"/></td>
+                                        <td><t t-esc="feat.planned_hours"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Content from Knowledge -->
+                <t t-if="fsd.fsd_page_content">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h4>FSD Content</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <t t-out="fsd.fsd_page_content"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+                <!-- Signature Section — only when pending_signoff and not yet signed -->
+                <t t-if="fsd.state == 'pending_signoff' and not fsd.customer_signature">
+                    <t t-if="request.env.user.partner_id in fsd.signer_ids">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card border-primary">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0">
+                                            <i class="fa fa-pencil me-2"/>Sign-off Document
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form t-attf-action="/my/fsd/#{fsd.id}/sign"
+                                              method="post" id="fsd_sign_form">
+                                            <input type="hidden" name="csrf_token"
+                                                   t-att-value="request.csrf_token()"/>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label fw-bold">Signer Name</label>
+                                                    <input type="text" name="signer_name"
+                                                           class="form-control" required="required"
+                                                           readonly="1"
+                                                           t-att-value="request.env.user.partner_id.name"/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label fw-bold">Title</label>
+                                                    <input type="text" name="signer_title" id="signer_title"
+                                                           class="form-control" required="required"
+                                                           placeholder="e.g., Director"/>
+                                                </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Signature (draw below)</label>
+                                            <div class="border rounded" style="background:#fff;">
+                                                <canvas id="signature_canvas"
+                                                        width="600" height="150"
+                                                        style="width:100%;touch-action:none;cursor:crosshair;"/>
+                                            </div>
+                                            <input type="hidden" name="signature" id="signature_data"/>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary mt-1"
+                                                    onclick="clearSignature()">Clear Signature</button>
+                                        </div>
+                                        <button type="submit" class="btn btn-success"
+                                                onclick="return prepareSignature()">
+                                            <i class="fa fa-check me-1"/>Confirm Sign-off
+                                        </button>
+                                    </form>
+                                    <script>
+                                        (function () {
+                                            var canvas = document.getElementById('signature_canvas');
+                                            var ctx = canvas.getContext('2d');
+                                            var drawing = false;
+                                            window.has_drawn = false;
+                                            function pos(e) {
+                                                var r = canvas.getBoundingClientRect();
+                                                var scaleX = canvas.width / r.width;
+                                                var scaleY = canvas.height / r.height;
+                                                var src = e.touches ? e.touches[0] : e;
+                                                return {x: (src.clientX - r.left) * scaleX, y: (src.clientY - r.top) * scaleY};
+                                            }
+                                            canvas.addEventListener('mousedown', function(e){ drawing=true; window.has_drawn=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+                                            canvas.addEventListener('mousemove', function(e){ if(!drawing) return; var p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+                                            canvas.addEventListener('mouseup', function(){ drawing=false; });
+                                            canvas.addEventListener('touchstart', function(e){ e.preventDefault(); drawing=true; window.has_drawn=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); });
+                                            canvas.addEventListener('touchmove', function(e){ e.preventDefault(); if(!drawing) return; var p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); });
+                                            canvas.addEventListener('touchend', function(){ drawing=false; });
+                                        })();
+                                        function clearSignature(){ var c=document.getElementById('signature_canvas'); c.getContext('2d').clearRect(0,0,c.width,c.height); window.has_drawn = false; }
+                                        function prepareSignature(){
+                                            if(!window.has_drawn) {
+                                                alert("Please provide your signature.");
+                                                return false;
+                                            }
+                                            if(!document.getElementById('signer_title').value.trim()){
+                                                alert("Title is required.");
+                                                return false;
+                                            }
+                                            var c=document.getElementById('signature_canvas');
+                                            document.getElementById('signature_data').value = c.toDataURL('image/png').split(',')[1];
+                                            return true;
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                    <t t-else="">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-lock me-2"/> 
+                                    <strong>Authorization Required:</strong> You are not listed as an Authorized Signer for this FSD Document. Please contact the project manager.
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- Already signed -->
+                <t t-if="fsd.customer_signature">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-success">
+                                <i class="fa fa-check-circle me-2"/>
+                                <strong>Signed off</strong> by
+                                <strong><t t-esc="fsd.customer_signer_name"/></strong>
+                                on <t t-esc="fsd.sign_date"/>.
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+</odoo>

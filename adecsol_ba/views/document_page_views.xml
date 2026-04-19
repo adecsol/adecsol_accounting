@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         B.1 — TO-BE Design: document.page extensions
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Inherit document.page form to add BA fields -->
+    <record id="document_page_form_inherit_ba" model="ir.ui.view">
+        <field name="name">document.page.form.inherit.ba</field>
+        <field name="model">document.page</field>
+        <field name="inherit_id" ref="document_page.view_wiki_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="action_create_fitgap" string="Create FIT-GAP"
+                            type="object" class="btn-warning"
+                            invisible="doc_type != 'tobe' or fitgap_count &gt; 0"/>
+                </header>
+            </xpath>
+            <!-- Button box: Count linked FIT-GAP -->
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object"
+                            name="action_open_fitgap_list"
+                            icon="fa-puzzle-piece"
+                            invisible="doc_type != 'tobe' or fitgap_count == 0">
+                        <field name="fitgap_count" widget="statinfo" string="FIT-GAP"/>
+                    </button>
+                </div>
+            </xpath>
+            <!-- Add doc_type and drawio_url after parent_id -->
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="doc_type"/>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="drawio_url" widget="url"
+                       placeholder="https://app.diagrams.net/?..."
+                       invisible="doc_type not in ('tobe', 'fsd')"/>
+            </xpath>
+            <!-- Add Draw.io iframe embed before content -->
+            <xpath expr="//field[@name='content']" position="before">
+                <div invisible="not drawio_url">
+                    <label for="drawio_embed" string="Embedded Diagram"/>
+                    <field name="drawio_embed" nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add doc_type to list view -->
+    <record id="document_page_list_inherit_ba" model="ir.ui.view">
+        <field name="name">document.page.list.inherit.ba</field>
+        <field name="model">document.page</field>
+        <field name="inherit_id" ref="document_page.view_wiki_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="doc_type" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

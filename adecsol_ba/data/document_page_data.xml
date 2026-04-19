@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Document Page Categories for BA Process
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Root Category: BA Documents -->
+    <record id="document_page_category_ba" model="document.page">
+        <field name="name">BA Document</field>
+        <field name="type">category</field>
+        <field name="doc_type">other</field>
+    </record>
+
+    <!-- Sub-category: MoM -->
+    <record id="document_page_category_mom" model="document.page">
+        <field name="name">Meeting Minutes (MoM)</field>
+        <field name="type">category</field>
+        <field name="parent_id" ref="document_page_category_ba"/>
+        <field name="doc_type">mom</field>
+        <field name="template"><![CDATA[
+<h2>Meeting Minutes — MoM</h2>
+<table class="table table-bordered">
+    <tr><td width="30%"><strong>Subject:</strong></td><td></td></tr>
+    <tr><td><strong>Project:</strong></td><td></td></tr>
+    <tr><td><strong>Meeting Date:</strong></td><td></td></tr>
+    <tr><td><strong>Attendees:</strong></td><td></td></tr>
+    <tr><td><strong>Note Taker:</strong></td><td></td></tr>
+</table>
+<h3>1. Discussion Content</h3>
+<ul><li></li></ul>
+<h3>2. Conclusion &amp; Next Actions</h3>
+<table class="table table-bordered">
+    <thead><tr><th>No.</th><th>Item</th><th>Assignee</th><th>Deadline</th></tr></thead>
+    <tbody><tr><td>1</td><td></td><td></td><td></td></tr></tbody>
+</table>
+        ]]></field>
+    </record>
+
+    <!-- Sub-category: FSD -->
+    <record id="document_page_category_fsd" model="document.page">
+        <field name="name">FSD Document</field>
+        <field name="type">category</field>
+        <field name="parent_id" ref="document_page_category_ba"/>
+        <field name="doc_type">fsd</field>
+        <field name="template"><![CDATA[
+<h2>Functional Specification Document (FSD)</h2>
+<h3>1. Overview</h3>
+<p>Brief description of the module/feature goal.</p>
+<h3>2. Scope</h3>
+<p>Related modules, models, views.</p>
+<h3>3. Functional Requirements</h3>
+<h4>3.1. Business Flow</h4>
+<p>[Flow description or Draw.io embedded diagram]</p>
+<h4>3.2. Data Fields</h4>
+<table class="table table-bordered">
+    <thead><tr><th>Field Name</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody><tr><td></td><td></td><td></td><td></td></tr></tbody>
+</table>
+<h3>4. Business Rules</h3>
+<ul><li></li></ul>
+<h3>5. UI (Mockup)</h3>
+<p>[Attach image or link]</p>
+        ]]></field>
+    </record>
+
+    <!-- Sub-category: Customer Survey -->
+    <record id="document_page_category_survey" model="document.page">
+        <field name="name">Customer Survey</field>
+        <field name="type">category</field>
+        <field name="parent_id" ref="document_page_category_ba"/>
+        <field name="doc_type">survey</field>
+    </record>
+
+    <!-- Sub-category: TO-BE Design -->
+    <record id="document_page_category_tobe" model="document.page">
+        <field name="name">TO-BE Design</field>
+        <field name="type">category</field>
+        <field name="parent_id" ref="document_page_category_ba"/>
+        <field name="doc_type">tobe</field>
+        <field name="approval_required" eval="True"/>
+    </record>
+
+</odoo>

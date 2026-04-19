@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Knowledge Sync Templates (mail.template used for rendering only)
+         These templates are NOT used for sending email — they provide
+         configurable QWeb body + subject used by action_sync_to_knowledge.
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- ── Customer Survey ──────────────────────────────────── -->
+    <record id="knowledge_tpl_survey" model="mail.template">
+        <field name="name">Knowledge: Customer Survey</field>
+        <field name="model_id" ref="model_ba_customer_survey"/>
+        <field name="subject">Customer Survey: {{ object.name }}</field>
+        <field name="body_html" type="html">
+<div>
+    <p><strong>📋 Customer Survey:</strong> <t t-out="object.name"/></p>
+    <p><strong>Project:</strong> <t t-out="object.project_id.name or 'N/A'"/></p>
+    <p><strong>Customer:</strong> <t t-out="object.partner_id.name or 'Customer'"/></p>
+    <p><strong>Send Date:</strong> <t t-out="str(object.send_date) if object.send_date else 'N/A'"/></p>
+    <p><strong>Response Date:</strong> <t t-out="str(object.result_date) if object.result_date else 'N/A'"/></p>
+    <hr/>
+    <t t-if="object.survey_result">
+        <t t-out="object.survey_result"/>
+    </t>
+    <t t-else="">
+        <p><em>(No survey result yet)</em></p>
+    </t>
+</div>
+        </field>
+    </record>
+
+    <!-- ── FIT-GAP Analysis ─────────────────────────────────── -->
+    <record id="knowledge_tpl_fitgap" model="mail.template">
+        <field name="name">Knowledge: FIT-GAP Analysis</field>
+        <field name="model_id" ref="model_ba_fitgap"/>
+        <field name="subject">FIT-GAP: {{ object.name }}</field>
+        <field name="body_html" type="html">
+<div>
+    <h2>📋 FIT-GAP Analysis: <t t-out="object.name"/></h2>
+    <p><strong>Project:</strong> <t t-out="object.project_id.name or 'N/A'"/></p>
+    <p><strong>Module:</strong> <t t-out="object.fitgap_module or 'N/A'"/></p>
+    <hr/>
+    <h3>✅ FIT — Covered Features</h3>
+    <t t-if="object.fit_content">
+        <t t-out="object.fit_content"/>
+    </t>
+    <t t-else="">
+        <p><em>(No FIT content yet)</em></p>
+    </t>
+    <hr/>
+    <h3>🔧 GAP — Custom / Development Required</h3>
+    <t t-if="object.gap_content">
+        <t t-out="object.gap_content"/>
+    </t>
+    <t t-else="">
+        <p><em>(No GAP content yet)</em></p>
+    </t>
+</div>
+        </field>
+    </record>
+
+    <!-- ── FSD Document ─────────────────────────────────────── -->
+    <record id="knowledge_tpl_fsd" model="mail.template">
+        <field name="name">Knowledge: FSD Document</field>
+        <field name="model_id" ref="model_ba_fsd"/>
+        <field name="subject">FSD: {{ object.name }}</field>
+        <field name="body_html" type="html">
+<div>
+    <h2>📄 FSD: <t t-out="object.name"/></h2>
+    <p><strong>Project:</strong> <t t-out="object.project_id.name or 'N/A'"/></p>
+    <p><strong>Customer:</strong> <t t-out="object.partner_id.name or 'N/A'"/></p>
+    <p><strong>Module:</strong> <t t-out="object.fitgap_module or 'N/A'"/></p>
+    <hr/>
+    <h3>📋 Feature List</h3>
+    <t t-if="object.feature_ids">
+        <table border="1" style="border-collapse:collapse;width:100%">
+            <thead>
+                <tr>
+                    <th style="padding:4px 8px">Feature</th>
+                    <th style="padding:4px 8px">Description</th>
+                    <th style="padding:4px 8px">Logic</th>
+                    <th style="padding:4px 8px">Est. Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="object.feature_ids" t-as="feat">
+                    <tr>
+                        <td style="padding:4px 8px"><t t-out="feat.name or ''"/></td>
+                        <td style="padding:4px 8px"><t t-out="feat.description or ''"/></td>
+                        <td style="padding:4px 8px"><t t-out="feat.logic_description or ''"/></td>
+                        <td style="padding:4px 8px"><t t-out="'%.1fh' % (feat.planned_hours or 0)"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </t>
+    <t t-else="">
+        <p><em>(No features yet)</em></p>
+    </t>
+</div>
+        </field>
+    </record>
+
+    <!-- ── MoM Minutes ──────────────────────────────────────── -->
+    <record id="knowledge_tpl_mom" model="mail.template">
+        <field name="name">Knowledge: Meeting Minutes</field>
+        <field name="model_id" ref="model_ba_mom"/>
+        <field name="subject">Meeting Minutes: {{ object.name }}</field>
+        <field name="body_html" type="html">
+<div>
+    <p><strong>📝 Meeting Minutes:</strong> <t t-out="object.name"/></p>
+    <p><strong>Time:</strong> <t t-out="object.start_date"/> - <t t-out="object.stop_date"/></p>
+    <p><strong>Attendees:</strong> <t t-out="', '.join(object.attendee_ids.mapped('name'))"/></p>
+    <p><strong>Meeting URL:</strong> <a t-att-href="object.meeting_url"><t t-out="object.meeting_url or '—'"/></a></p>
+    <hr/>
+    <t t-out="object.content or ''"/>
+</div>
+        </field>
+    </record>
+
+</odoo>

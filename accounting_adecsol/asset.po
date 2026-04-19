@@ -1,0 +1,1356 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20250820\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-17 08:33+0000\n"
+"PO-Revision-Date: 2026-04-17 08:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_count
+msgid "# of Depreciation Lines"
+msgstr "# Dòng khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" invisible=\"salvage_type != "
+"'percent'\">%</span>"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_move_form
+msgid "<span class=\"o_stat_text\"> Asset(s)</span>"
+msgstr "<span class=\"o_stat_text\"> Tài sản</span>"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_account
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__carry_forward_missed_depreciations
+msgid "Accumulate missed depreciations"
+msgstr "Tích lũy khấu hao bị bỏ lỡ"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction
+msgid "Action Needed"
+msgstr "Hành động cần thiết"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__active
+msgid "Active"
+msgstr "Đang hoạt động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_ids
+msgid "Activities"
+msgstr "Hoạt động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Kiểu hiển thị khi hoạt động ngoại lệ"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_state
+msgid "Activity State"
+msgstr "Trạng thái hoạt động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Biểu tượng Loại Hoạt động"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Add an internal note here..."
+msgstr "Thêm ghi chú nội bộ tại đây..."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
+msgid "All depreciation lines prior to this date will be automatically posted"
+msgstr "Tất cả các dòng khấu hao trước ngày này sẽ được hạch toán tự động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__allow_reversal
+msgid "Allow Reversal of journal entries"
+msgstr "Cho phép đảo bút toán kế toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
+msgid "Amount"
+msgstr "Số tiền"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciated_value
+msgid "Amount Already Depreciated"
+msgstr "Số tiền đã khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_value
+msgid "Amount of Depreciation Lines"
+msgstr "Số lượng dòng khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_distribution
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_distribution
+msgid "Analytic Distribution"
+msgstr "Phân phối theo phân tích"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+msgid "Analytic Information"
+msgstr "Thông tin phân tích"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__analytic_precision
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__analytic_precision
+msgid "Analytic Precision"
+msgstr "Độ chính xác trong phân tích"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Archived"
+msgstr "Đã lưu trữ"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Are you sure ?"
+msgstr "Bạn có chắc chắn không?"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__asset_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Asset"
+msgstr "Tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
+msgid "Asset Account"
+msgstr "Tài khoản tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_bank_statement_line__asset_count
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move__asset_count
+msgid "Asset Count"
+msgstr "Số lượng tài sản"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_group
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__asset_group_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
+msgid "Asset Group"
+msgstr "Nhóm tài sản"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
+#: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
+msgid "Asset Groups"
+msgstr "Nhóm tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__line_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Asset Line"
+msgstr "Dòng khấu hao tài sản"
+
+#. module: account_asset_management
+#: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
+msgid "Asset Management: Generate assets"
+msgstr "Quản lý tài sản: Tạo tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
+msgid "Asset Name"
+msgstr "Tên tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_account__asset_profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__profile_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Asset Profile"
+msgstr "Hồ sơ tài sản"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
+#: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
+msgid "Asset Profiles"
+msgstr "Hồ sơ tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
+msgid "Asset Removal"
+msgstr "Thanh lý tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_remove
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
+msgid "Asset Removal Date"
+msgstr "Ngày thanh lý tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
+msgid "Asset Sale Account"
+msgstr "Tài khoản bán tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
+msgid "Asset Start Date"
+msgstr "Ngày bắt đầu sử dụng"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_line
+msgid "Asset depreciation table line"
+msgstr "Dòng bảng khấu hao tài sản"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_profile
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__asset_profile_id
+msgid "Asset profile"
+msgstr "Hồ sơ tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Asset removal."
+msgstr "Thanh lý tài sản."
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
+msgid "Asset table recompute triggers"
+msgstr "Trình kích hoạt tính toán lại bảng tài sản"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_action
+#: model:ir.ui.menu,name:account_asset_management.account_asset_menu
+#: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
+#: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
+msgid "Assets"
+msgstr "Tài sản"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.action_account_asset_report
+#: model:ir.model,name:account_asset_management.model_account_asset_report
+#: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_graph
+#: model_terms:ir.ui.view,arch_db:account_asset_management.action_account_asset_report_pivot
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets Analysis"
+msgstr "Phân tích tài sản"
+
+#. module: account_asset_management
+#: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_report
+msgid "Assets analysis"
+msgstr "Phân tích tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets in draft state"
+msgstr "Tài sản ở trạng thái dự thảo"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Assets in running state"
+msgstr "Tài sản đang khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_attachment_count
+msgid "Attachment Count"
+msgstr "Số lượng tệp đính kèm"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
+msgid ""
+"By default during the validation of an invoice, an asset is created by "
+"invoice line as long as an accounting entry is created by invoice line. With"
+" this setting, an accounting entry will be created by product item. So, "
+"there will be an asset by product item."
+msgstr ""
+"Theo mặc định khi xác nhận hóa đơn, một tài sản được tạo theo từng dòng "
+"hóa đơn miễn là có bút toán kế toán theo từng dòng hóa đơn. Với cài đặt "
+"này, bút toán sẽ được tạo theo từng dòng sản phẩm, nên sẽ có một tài sản "
+"theo từng dòng sản phẩm."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__days_calc
+msgid "Calculate by days"
+msgstr "Tính theo ngày"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__open_asset
+msgid ""
+"Check this if you want to automatically confirm the assets of this profile "
+"when created by invoices."
+msgstr ""
+"Chọn tùy chọn này nếu bạn muốn tự động xác nhận các tài sản thuộc hồ sơ này "
+"khi được tạo từ hóa đơn."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__child_ids
+msgid "Child Asset Groups"
+msgstr "Nhóm tài sản con"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
+msgid ""
+"Choose the method to use to compute the dates and number of depreciation lines.\n"
+"  * Number of Years: Specify the number of years for the depreciation.\n"
+"  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
+msgstr ""
+"Chọn phương pháp để tính ngày và số dòng khấu hao.\n"
+"  * Số năm: Ghi rõ số năm khấu hao.\n"
+"  * Số lần khấu hao: Cố định số dòng khấu hao và khoảng cách giữa hai lần khấu hao."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
+msgid ""
+"Choose the method to use to compute the depreciation lines.\n"
+"  * Linear: Calculated on basis of: Depreciation Base / Number of Depreciations. Depreciation Base = Purchase Value - Salvage Value.\n"
+"  * Linear-Limit: Linear up to Salvage Value. Depreciation Base = Purchase Value.\n"
+"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor.\n"
+"  * Degressive-Linear (only for Time Method = Year): Degressive becomes linear when the annual linear depreciation exceeds the annual degressive depreciation.\n"
+"   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base is equal to the asset value."
+msgstr ""
+"Chọn phương pháp để tính các dòng khấu hao.\n"
+"  * Tuyến tính: Tính theo Cơ sở khấu hao / Số kỳ khấu hao. Cơ sở khấu hao = Giá trị mua − Giá trị thanh lý dự kiến.\n"
+"  * Tuyến tính có giới hạn: Khấu hao tuyến tính đến khi đạt giá trị thanh lý dự kiến. Cơ sở khấu hao = Giá trị mua.\n"
+"  * Giảm dần: Tính theo Giá trị còn lại (sổ sách) × Hệ số giảm dần.\n"
+"  * Giảm dần chuyển tuyến tính (chỉ khi Phương pháp thời gian = Năm): Chuyển sang tuyến tính khi mức khấu hao tuyến tính năm vượt mức khấu hao giảm dần năm.\n"
+"   * Giảm dần có giới hạn: Khấu hao giảm dần đến khi đạt giá trị thanh lý dự kiến. Cơ sở khấu hao bằng giá trị tài sản."
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Close"
+msgstr "Đóng"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
+msgid "Code"
+msgstr "Mã"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__company_id
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Company"
+msgstr "Công ty"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__currency_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__currency_id
+msgid "Company Currency"
+msgstr "Tiền tệ của công ty"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
+msgid "Completion Date"
+msgstr "Ngày hoàn thành"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Computation Method"
+msgstr "Phương pháp tính toán"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Compute"
+msgstr "Tính toán"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_compute_action
+#: model:ir.model,name:account_asset_management.model_account_asset_compute
+#: model:ir.ui.menu,name:account_asset_management.account_asset_compute_menu
+msgid "Compute Assets"
+msgstr "Tính toán tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Confirm"
+msgstr "Xác nhận"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Confirm Asset"
+msgstr "Xác nhận tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Create Move"
+msgstr "Tạo bút toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
+msgid "Create an asset by product item"
+msgstr "Tạo tài sản theo từng dòng sản phẩm"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_uid
+msgid "Created by"
+msgstr "Được tạo bởi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__create_date
+msgid "Created on"
+msgstr "Được tạo vào"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__date_end
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Date of asset purchase"
+msgstr "Ngày mua tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Date of depreciation"
+msgstr "Ngày khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
+msgid "Date of the event triggering the need to recompute the Asset Tables."
+msgstr "Ngày xảy ra sự kiện kích hoạt nhu cầu tính toán lại Bảng tài sản."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
+msgid "Days"
+msgstr "Ngày"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
+msgid "Default Asset Profile when creating invoice lines with this account."
+msgstr "Hồ sơ tài sản mặc định khi tạo dòng hóa đơn với tài khoản này."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_progress_factor
+msgid "Degressive Factor"
+msgstr "Hệ số giảm dần"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Delete/Reverse Move"
+msgstr "Xóa / đảo ngược bút toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
+msgid "Depr. Expense Account"
+msgstr "Tài khoản chi phí khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_depreciated
+msgid "Depreciated Value"
+msgstr "Giá trị đã khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__depreciate
+msgid "Depreciation"
+msgstr "Khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_depreciation_id
+msgid "Depreciation Account"
+msgstr "Tài khoản khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
+msgid "Depreciation Base"
+msgstr "Cơ sở khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Depreciation Board"
+msgstr "Bảng khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_date
+msgid "Depreciation Date"
+msgstr "Ngày khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Depreciation Dates"
+msgstr "Ngày khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_id
+msgid "Depreciation Entry"
+msgstr "Bút toán khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_line_ids
+msgid "Depreciation Lines"
+msgstr "Các dòng khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Depreciation Method"
+msgstr "Phương pháp khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Depreciation Month"
+msgstr "Tháng khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__name
+msgid "Depreciation Name"
+msgstr "Tên khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr "Tài khoản phân tích phân phối"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
+msgid "Done"
+msgstr "Xong"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__draft
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Draft"
+msgstr "Bản nháp"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_report_account_asset_management_asset_report_xls
+msgid "Dynamic XLS asset report generator"
+msgstr "Trình tạo báo cáo tài sản XLS động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_to
+msgid "End Date"
+msgstr "Ngày kết thúc"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_end
+msgid "Ending Date"
+msgstr "Ngày kết thúc"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_move_line_ids
+msgid "Entries"
+msgstr "Mục nhập"
+
+#. module: account_asset_management
+#: model:ir.ui.menu,name:account_asset_management.account_asset_report_menu
+msgid "Financial Assets"
+msgstr "Tài sản tài chính"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.wiz_account_asset_report_action
+#: model:ir.model,name:account_asset_management.model_wiz_account_asset_report
+#: model:ir.ui.menu,name:account_asset_management.wiz_account_asset_report_menu
+msgid "Financial Assets report"
+msgstr "Báo cáo Tài sản Tài chính"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__fixed
+msgid "Fixed"
+msgstr "Đã sửa"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_follower_ids
+msgid "Followers"
+msgstr "Người theo dõi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Người theo dõi (Đối tác)"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Biểu tượng Font Awesome, ví dụ: fa-tasks"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
+msgid "Force accounting date"
+msgstr "Ngày kế toán bắt buộc"
+
+#. module: account_asset_management
+#: model_terms:ir.actions.act_window,help:account_asset_management.action_account_asset_report
+msgid ""
+"From this report, you can have an overview on all depreciations. The\n"
+"            search bar can also be used to personalize your assets depreciation reporting."
+msgstr ""
+"Từ báo cáo này, bạn có thể theo dõi tổng quan mọi khoản khấu hao. Thanh tìm kiếm\n"
+"            cũng giúp tùy chỉnh cách lọc và hiển thị báo cáo khấu hao tài sản."
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "General"
+msgstr "Chung"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
+msgid "Generate Removal entries"
+msgstr "Tạo bút toán thanh lý"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_account_asset_report_view_form
+msgid "Generate Report"
+msgstr "Tạo báo cáo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__gross_value
+msgid "Gross Amount"
+msgstr "Giá trị gộp"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Group By"
+msgstr "Nhóm theo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__has_message
+msgid "Has Message"
+msgstr "Có tin nhắn"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__move_line_check
+msgid "Has accounting entries"
+msgstr "Đã có bút toán kế toán"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "History"
+msgstr "Lịch sử"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__id
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__id
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__id
+msgid "ID"
+msgstr ""
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Biểu tượng báo hiệu hoạt động (nhiệm vụ) có ngoại lệ."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Nếu được chọn, bạn cần chú ý đến các tin nhắn mới."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Nếu được chọn, một số tin nhắn có lỗi gửi."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__carry_forward_missed_depreciations
+msgid ""
+"If create an asset in a fiscal period that is now closed\n"
+"        the accumulated amount of depreciations that cannot be posted will be\n"
+"        carried forward to the first depreciation line of the current open\n"
+"        period."
+msgstr ""
+"Nếu tạo tài sản trong một kỳ kế toán đã đóng,\n"
+"        tổng khấu hao chưa hạch toán được sẽ\n"
+"        được chuyển sang dòng khấu hao đầu tiên của kỳ đang mở\n"
+"        tiếp theo."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr "Nếu để trống, hệ thống dùng sổ nhật ký của bút toán sẽ được đảo."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__use_leap_years
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__use_leap_years
+msgid ""
+"If not set, the system will distribute evenly the amount to amortize across the years, based on the number of years. So the amount per year will be the depreciation base / number of years.\n"
+" If set, the system will consider if the current year is a leap year. The amount to depreciate per year will be calculated as depreciation base / (depreciation end date - start date + 1) * days in the current year."
+msgstr ""
+"Nếu không thiết lập, hệ thống sẽ phân bổ đều số tiền khấu hao qua các năm, căn cứ vào số năm. Vì vậy số tiền mỗi năm sẽ là cơ sở khấu hao/số năm.\n"
+" Nếu được đặt, hệ thống sẽ xem xét liệu năm hiện tại có phải là năm nhuận hay không. Số tiền khấu hao mỗi năm sẽ được tính theo cơ sở khấu hao / (ngày kết thúc khấu hao - ngày bắt đầu khấu hao + 1) * số ngày trong năm hiện tại."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__allow_reversal
+msgid ""
+"If set, when pressing the Delete/Reverse Move button in a posted "
+"depreciation line will prompt the option to reverse the journal entry, "
+"instead of deleting them."
+msgstr ""
+"Nếu được đặt, khi nhấn nút Xóa / đảo ngược bút toán trên dòng khấu hao đã "
+"hạch toán sẽ hiện tùy chọn đảo bút toán thay vì xóa."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__draft
+msgid "Include draft assets"
+msgstr "Bao gồm các tài sản dự thảo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
+msgid ""
+"Indicates that the first depreciation entry for this asset has to be done "
+"from the depreciation start date instead of the first day of the fiscal "
+"year."
+msgstr ""
+"Cho biết bút toán khấu hao đầu tiên của tài sản này phải tính từ "
+"ngày bắt đầu khấu hao thay vì từ ngày đầu năm tài chính."
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Init"
+msgstr "Ban đầu"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
+msgid "Initial Balance Entry"
+msgstr "Bút toán số dư đầu kỳ"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_is_follower
+msgid "Is Follower"
+msgstr "Là người theo dõi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
+msgid "Journal"
+msgstr "Sổ nhật ký"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Journal Entries"
+msgstr "Bút toán"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_move
+msgid "Journal Entry"
+msgstr "Bút toán"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_move_line
+msgid "Journal Item"
+msgstr "Chi tiết bút toán"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.act_entries_open
+msgid "Journal Items"
+msgstr "Chi tiết bút toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error
+msgid "Message Delivery error"
+msgstr "Lỗi gửi tin nhắn"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_ids
+msgid "Messages"
+msgstr "Tin nhắn"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_min_value_id
+msgid "Min-Value Account"
+msgstr "Tài khoản lỗ thanh lý tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Hạn chót hoạt động của tôi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Sự kiện Lịch Hoạt động Tiếp theo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Hạn chót cho hoạt động tiếp theo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_summary
+msgid "Next Activity Summary"
+msgstr "Tóm tắt hoạt động tiếp theo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_type_id
+msgid "Next Activity Type"
+msgstr "Loại hoạt động tiếp theo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
+msgid "Next Period Depreciation"
+msgstr "Khấu hao trong kỳ tiếp theo"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Not archived"
+msgstr "Không được lưu trữ"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__note
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__note
+msgid "Note"
+msgstr "Ghi chú"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__note
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_remove_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Notes"
+msgstr "Ghi chú"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Số lượng hành động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
+msgid "Number of Years"
+msgstr "Số năm"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of errors"
+msgstr "Số lỗi"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Số lượng tin nhắn yêu cầu hành động"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Số lượng tin nhắn có lỗi gửi"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
+msgid "Open"
+msgstr "Mở"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Other Information"
+msgstr "Thông tin khác"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
+msgid "Parent Asset Group"
+msgstr "Nhóm tài sản gốc"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
+msgid "Parent Path"
+msgstr "Đường dẫn gốc"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__partner_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__partner_id
+msgid "Partner"
+msgstr "Đối tác"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_profile__salvage_type__percent
+msgid "Percentage of Price"
+msgstr "Phần trăm giá"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_period
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_period
+msgid "Period Length"
+msgstr "Độ dài khoảng thời gian"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method_period
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_period
+msgid "Period length for the depreciation accounting entries"
+msgstr "Độ dài kỳ để hạch toán khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_plus_value_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_plus_value_id
+msgid "Plus-Value Account"
+msgstr "Tài khoản lãi thanh lý tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__move_check
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__move_check
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Posted"
+msgstr "Đã hạch toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__posted_value
+msgid "Posted Amount"
+msgstr "Số tiền đã hạch toán"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Posted depreciation lines"
+msgstr "Các dòng khấu hao đã hạch toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__previous_id
+msgid "Previous Depreciation Line"
+msgstr "Dòng khấu hao trước đó"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Profile"
+msgstr "Hồ sơ"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
+msgid "Prorata Temporis"
+msgstr ""
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Purchase Month"
+msgstr "Tháng mua hàng"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
+msgid "Purchase Value"
+msgstr "Giá trị mua"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__rating_ids
+msgid "Ratings"
+msgstr "Xếp hạng"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__reason
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__reason
+msgid "Reason"
+msgstr "Lý do"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__code
+msgid "Reference"
+msgstr "Tham khảo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__posting_regime
+msgid "Removal Entry Policy"
+msgstr "Quy tắc hạch toán khi thanh lý"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__posting_regime
+msgid ""
+"Removal Entry Policy \n"
+"  * Residual Value: The non-depreciated value will be posted on the 'Residual Value Account' \n"
+"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value Account' or 'Min-Value Account' "
+msgstr ""
+"Quy tắc hạch toán khi thanh lý \n"
+"  * Giá trị còn lại: Phần giá trị chưa khấu hao sẽ vào 'Tài khoản giá trị còn lại' \n"
+"  * Lãi/Lỗ khi bán: Lãi hoặc lỗ sẽ vào 'Tài khoản lãi thanh lý tài sản' hoặc 'Tài khoản lỗ thanh lý tài sản'"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
+msgid ""
+"Removal date must be after the last posted entry in case of early removal"
+msgstr "Ngày thanh lý phải sau bút toán khấu hao cuối cùng đã hạch toán nếu thanh lý trước hạn"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Remove"
+msgstr "Xóa"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_remove
+msgid "Remove Asset"
+msgstr "Thanh lý tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__removed
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Removed"
+msgstr "Đã thanh lý"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_residual
+msgid "Residual Value"
+msgstr "Giá trị còn lại"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_residual_value_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_residual_value_id
+msgid "Residual Value Account"
+msgstr "Tài khoản giá trị còn lại"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__activity_user_id
+msgid "Responsible User"
+msgstr "Người dùng có trách nhiệm"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
+msgid "Results :"
+msgstr "Kết quả :"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__date_reversal
+msgid "Reversal date"
+msgstr "Ngày đảo ngược"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.wiz_asset_move_reverse_view_form
+msgid "Reverse Journal Entry"
+msgstr "Đảo bút toán"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_wiz_asset_move_reverse
+msgid "Reverse posted journal entry on depreciation line"
+msgstr "Đảo bút toán đã hạch toán trên dòng khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
+msgid "Running"
+msgstr "Đang khấu hao"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Lỗi gửi SMS"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__sale_value
+msgid "Sale Value"
+msgstr "Giá trị bán hàng"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_type
+msgid "Salvage Type"
+msgstr "Kiểu giá trị thanh lý"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__salvage_value
+msgid "Salvage Value"
+msgstr "Giá trị thu hồi"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
+msgid "Search Asset Group"
+msgstr "Tìm kiếm nhóm tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
+msgid ""
+"Set this flag for entries of previous fiscal years for which Odoo has not "
+"generated accounting entries."
+msgstr ""
+"Đánh dấu cho các bút toán của các năm tài chính trước mà Odoo chưa "
+"tự sinh bút toán kế toán."
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Set to Draft"
+msgstr "Đặt thành Bản nháp"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__open_asset
+msgid "Skip Draft State"
+msgstr "Bỏ qua trạng thái dự thảo"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_account_asset_report__date_from
+msgid "Start Date"
+msgstr "Ngày bắt đầu"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__state
+msgid "State"
+msgstr "Trạng thái"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__parent_state
+msgid "State of Asset"
+msgstr "Trạng thái tài sản"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__state
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__state
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Trạng thái theo hoạt động (nhiệm vụ)\n"
+"Quá hạn: Đã quá ngày hạn\n"
+"Hôm nay: Đến hạn trong hôm nay\n"
+"Dự kiến: Các hoạt động trong tương lai."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__salvage_value
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__salvage_value
+msgid ""
+"The estimated value that an asset will realize upon its sale at the end of its useful life.\n"
+"This value is used to determine the depreciation amounts."
+msgstr ""
+"Giá trị ước tính thu được khi thanh lý tài sản ở cuối thời gian sử dụng hữu ích.\n"
+"Giá trị này dùng để xác định mức khấu hao."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_number
+msgid "The number of years needed to depreciate your asset"
+msgstr "Số năm cần thiết để khấu hao tài sản của bạn"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
+msgid ""
+"This amount represent the depreciation base of the asset (Purchase Value - "
+"Salvage Value)."
+msgstr ""
+"Số tiền này thể hiện cơ sở khấu hao của tài sản (Giá trị mua - Giá trị thu "
+"hồi)."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
+msgid ""
+"This amount represent the initial value of the asset.\n"
+"The Depreciation Base is calculated as follows:\n"
+"Purchase Value - Salvage Value."
+msgstr ""
+"Số tiền này đại diện cho giá trị ban đầu của tài sản.\n"
+"Cơ sở khấu hao được tính như sau:\n"
+"Giá trị mua − Giá trị thu hồi (thanh lý dự kiến)."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_time
+msgid "Time Method"
+msgstr "Phương pháp thời gian"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "Total Days"
+msgstr "Tổng số ngày"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_trigger
+msgid "Trigger Date"
+msgstr "Ngày kích hoạt"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__type
+msgid "Type"
+msgstr "Loại"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Loại ngoại lệ của hoạt động trên bản ghi."
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__unposted_value
+msgid "Unposted Amount"
+msgstr "Số tiền chưa hạch toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
+msgid "Use Leap Years"
+msgstr "Sử dụng Năm nhuận"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_wiz_asset_move_reverse__journal_id
+msgid "Use Specific Journal"
+msgstr "Dùng sổ nhật ký cụ thể"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
+msgid "Use number of days to calculate depreciation amount"
+msgstr "Sử dụng số ngày để tính số tiền khấu hao"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
+msgid "View Asset Moves"
+msgstr "Xem bút toán tài sản"
+
+#. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
+msgid "View Move"
+msgstr "Xem bút toán"
+
+#. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__website_message_ids
+msgid "Website Messages"
+msgstr "Tin nhắn trên trang web"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__website_message_ids
+msgid "Website communication history"
+msgstr "Lịch sử giao tiếp trang web"
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__state
+#: model:ir.model.fields,help:account_asset_management.field_account_asset_line__parent_state
+msgid ""
+"When an asset is created, the status is 'Draft'.\n"
+"If the asset is confirmed, the status goes in 'Running' and the depreciation lines can be posted to the accounting.\n"
+"If the last depreciation line is posted, the asset goes into the 'Close' status.\n"
+"When the removal entries are generated, the asset goes into the 'Removed' status."
+msgstr ""
+"Khi tài sản được tạo, trạng thái là 'Bản nháp'.\n"
+"Khi xác nhận, trạng thái là 'Đang khấu hao' và các dòng khấu hao có thể được hạch toán.\n"
+"Khi dòng khấu hao cuối cùng đã hạch toán, tài sản chuyển sang trạng thái 'Đóng'.\n"
+"Khi đã tạo bút toán thanh lý, tài sản chuyển sang trạng thái 'Đã thanh lý'."
+
+#. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__date_start
+msgid ""
+"You should manually add depreciation lines with the depreciations of "
+"previous fiscal years if the Depreciation Start Date is different from the "
+"date for which accounting entries need to be generated."
+msgstr ""
+"Bạn nên tự thêm các dòng khấu hao cho phần khấu hao của các năm tài chính "
+"trước nếu ngày bắt đầu khấu hao khác với ngày cần sinh bút toán kế toán."

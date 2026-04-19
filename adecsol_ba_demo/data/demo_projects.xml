@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Demo Projects
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="project_sgf_erp" model="project.project">
+        <field name="name">[DEMO] SGF</field>
+        <field name="partner_id" ref="partner_saigon_foods"/>
+        <field name="description">
+Dự án triển khai hệ thống Odoo 18 ERP cho Công ty TNHH Sài Gòn Foods.
+Phạm vi: Kế toán, Bán hàng, Mua hàng, Kho vận, Sản xuất.
+Thời gian dự kiến: 6 tháng.
+Đội ngũ ADEC: 1 PM, 2 BA, 3 Dev, 1 QC.
+        </field>
+    </record>
+
+</odoo>

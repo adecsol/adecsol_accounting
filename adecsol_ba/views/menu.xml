@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         BA Process — Menu Structure
+         Integrated into Project app (no separate BA Process menu)
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- ── Duplicate Actions (from other modules) ─────────── -->
+
+    <!-- Document Pages (Knowledge / TO-BE Design) — only show TO-BE type -->
+    <record id="ba_document_page_action" model="ir.actions.act_window">
+        <field name="name">TO-BE Design</field>
+        <field name="res_model">document.page</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('doc_type', '=', 'tobe')]</field>
+        <field name="context">{'default_doc_type': 'tobe', 'default_draft_name': '1.0', 'default_draft_summary': 'TO-BE System Design'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create first TO-BE Design page
+            </p>
+            <p>Manage TO-BE process design document, business flow, technical solutions.</p>
+        </field>
+    </record>
+
+    <!-- All Project Tasks (overview) -->
+    <record id="ba_all_tasks_action" model="ir.actions.act_window">
+        <field name="name">All Tasks</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No tasks found
+            </p>
+        </field>
+    </record>
+
+    <!-- Projects -->
+    <record id="ba_project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════
+         Integrate BA menus into Project app
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- ── BA Analysis (under Project > BA Analysis) ──────── -->
+    <menuitem id="menu_ba_analysis"
+              name="BA Analysis"
+              parent="project.menu_main_pm"
+              sequence="3"
+              groups="adecsol_ba.group_ba_user"/>
+
+    <!-- BA Dashboard (filtered to BA projects only) -->
+    <menuitem id="menu_ba_dashboard"
+              name="Dashboard"
+              parent="menu_ba_analysis"
+              action="ba_dashboard_action"
+              sequence="1"/>
+
+    <!-- Quick access: Pending FSD -->
+    <menuitem id="menu_ba_fsd_pending"
+              name="Pending FSD Sign-off"
+              parent="menu_ba_analysis"
+              action="ba_fsd_pending_action"
+              sequence="5"/>
+
+    <!-- Quick access: FSD Awaiting Approval -->
+    <menuitem id="menu_ba_fsd_awaiting"
+              name="FSD Awaiting Approval"
+              parent="menu_ba_analysis"
+              action="ba_fsd_awaiting_approval_action"
+              sequence="6"/>
+
+    <!-- ── Survey ──────────────────────────────────────── -->
+    <menuitem id="menu_ba_survey"
+              name="Survey"
+              parent="menu_ba_analysis"
+              sequence="10"/>
+
+    <menuitem id="menu_ba_mom"
+              name="Meeting Minutes (MoM)"
+              parent="menu_ba_survey"
+              action="ba_mom_action"
+              sequence="10"/>
+
+    <menuitem id="menu_ba_customer_survey"
+              name="Customer Survey"
+              parent="menu_ba_survey"
+              action="ba_customer_survey_action"
+              sequence="20"/>
+
+    <!-- ── Design ──────────────────────────────────────── -->
+    <menuitem id="menu_ba_design"
+              name="Design"
+              parent="menu_ba_analysis"
+              sequence="20"/>
+
+    <menuitem id="menu_ba_document_page"
+              name="TO-BE Design"
+              parent="menu_ba_design"
+              action="ba_document_page_action"
+              sequence="5"/>
+
+    <menuitem id="menu_ba_fitgap"
+              name="FIT-GAP Analysis"
+              parent="menu_ba_design"
+              action="ba_fitgap_action"
+              sequence="10"/>
+
+    <!-- ── Documents ─────────────────────────────────────── -->
+    <menuitem id="menu_ba_docs"
+              name="Documents"
+              parent="menu_ba_analysis"
+              sequence="30"/>
+
+    <menuitem id="menu_ba_fsd"
+              name="FSD Document"
+              parent="menu_ba_docs"
+              action="ba_fsd_action"
+              sequence="10"/>
+
+    <menuitem id="menu_ba_master_data"
+              name="Master Data"
+              parent="menu_ba_docs"
+              action="ba_master_data_action"
+              sequence="20"/>
+
+    <!-- ── Approval ────────────────────────────────────── -->
+    <menuitem id="menu_ba_approval"
+              name="Approval"
+              parent="menu_ba_analysis"
+              sequence="40"/>
+
+    <menuitem id="menu_ba_handover"
+              name="Technical Handover"
+              parent="menu_ba_approval"
+              action="ba_handover_action"
+              sequence="10"/>
+
+    <!-- ── E. Plan ──────────────────────────────────────── -->
+    <menuitem id="menu_ba_plan"
+              name="Plan"
+              parent="menu_ba_analysis"
+              sequence="50"/>
+
+    <menuitem id="menu_ba_all_tasks"
+              name="All Tasks"
+              parent="menu_ba_plan"
+              action="ba_all_tasks_action"
+              sequence="10"/>
+
+    <menuitem id="menu_ba_project"
+              name="Project"
+              parent="menu_ba_plan"
+              action="ba_project_action"
+              sequence="20"/>
+
+    <!-- ── Configuration (under Project > Configuration) ── -->
+    <menuitem id="menu_ba_industry"
+              name="Industry"
+              parent="project.menu_project_config"
+              action="ba_industry_action"
+              sequence="50"/>
+
+</odoo>

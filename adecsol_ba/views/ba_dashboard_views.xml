@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         BA Dashboard — Manager Overview
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Dashboard Kanban View (Project cards with BA metrics) -->
+    <record id="ba_dashboard_kanban" model="ir.ui.view">
+        <field name="name">project.project.ba.dashboard.kanban</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard" default_group_by="ba_current_step"
+                    quick_create="false" records_draggable="false"
+                    sample="1">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="ba_manager_id"/>
+                <field name="ba_current_step"/>
+                <field name="ba_progress"/>
+                <field name="mom_count"/>
+                <field name="survey_count"/>
+                <field name="fsd_count"/>
+                <field name="fitgap_count"/>
+                <field name="handover_count"/>
+                <field name="pending_fsd_count"/>
+                <field name="pending_survey_count"/>
+                <field name="draft_handover_count"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content p-0">
+                            <!-- Header: Project name + badge -->
+                            <div class="d-flex justify-content-between align-items-start p-3 pb-2">
+                                <div class="flex-grow-1 pe-2">
+                                    <strong class="o_kanban_record_title d-block fs-5 mb-1">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div class="text-muted small" t-if="record.partner_id.value">
+                                        <i class="fa fa-building-o me-1"/>
+                                        <field name="partner_id"/>
+                                    </div>
+                                </div>
+                                <field name="ba_current_step" widget="badge"
+                                       decoration-info="ba_current_step == 'survey'"
+                                       decoration-primary="ba_current_step == 'design'"
+                                       decoration-warning="ba_current_step == 'fsd_data'"
+                                       decoration-danger="ba_current_step == 'approval_handover'"
+                                       decoration-success="ba_current_step == 'plan_update'"/>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="px-3 pb-2">
+                                <div class="progress" style="height: 8px; border-radius: 4px;">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                         t-attf-style="width: #{record.ba_progress.raw_value}%;"
+                                         t-att-aria-valuenow="record.ba_progress.raw_value"
+                                         aria-valuemin="0" aria-valuemax="100"/>
+                                </div>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <small class="text-muted">BA Progress</small>
+                                    <small class="fw-bold text-success">
+                                        <t t-out="record.ba_progress.raw_value"/>%
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Clickable Metrics Row -->
+                            <div class="d-flex flex-wrap gap-1 px-3 pb-2">
+                                <button name="action_view_mom" type="object"
+                                        class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="View Meeting Minutes">
+                                    <i class="fa fa-pencil-square-o me-1"/>
+                                    <t t-out="record.mom_count.raw_value"/> MoM
+                                </button>
+                                <button name="action_view_survey" type="object"
+                                        class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="View Surveys">
+                                    <i class="fa fa-clipboard me-1"/>
+                                    <t t-out="record.survey_count.raw_value"/> Survey
+                                </button>
+                                <button name="action_view_fitgap" type="object"
+                                        class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="View FIT-GAP">
+                                    <i class="fa fa-balance-scale me-1"/>
+                                    <t t-out="record.fitgap_count.raw_value"/> FIT-GAP
+                                </button>
+                                <button name="action_view_fsd" type="object"
+                                        class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="View FSD Documents">
+                                    <i class="fa fa-file-text-o me-1"/>
+                                    <t t-out="record.fsd_count.raw_value"/> FSD
+                                </button>
+                                <button name="action_open_handover_list" type="object"
+                                        class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        title="View Technical Handover">
+                                    <i class="fa fa-wrench me-1"/>
+                                    <t t-out="record.handover_count.raw_value"/> Handover
+                                </button>
+                            </div>
+
+                            <!-- Clickable Pending Actions (only show if non-zero) -->
+                            <div class="px-3 pb-2" t-if="record.pending_fsd_count.raw_value or record.pending_survey_count.raw_value or record.draft_handover_count.raw_value">
+                                <div class="small border-top pt-2">
+                                    <button name="action_dashboard_view_pending_fsd" type="object"
+                                            class="btn btn-sm btn-link text-warning fw-bold p-0 d-block text-start mb-1"
+                                            title="View Pending FSD Sign-off"
+                                            t-if="record.pending_fsd_count.raw_value">
+                                        <i class="fa fa-clock-o me-1"/>
+                                        <t t-out="record.pending_fsd_count.raw_value"/> FSD pending sign-off
+                                    </button>
+                                    <button name="action_dashboard_view_pending_survey" type="object"
+                                            class="btn btn-sm btn-link text-info p-0 d-block text-start mb-1"
+                                            title="View Pending Survey"
+                                            t-if="record.pending_survey_count.raw_value">
+                                        <i class="fa fa-send-o me-1"/>
+                                        <t t-out="record.pending_survey_count.raw_value"/> Survey awaiting response
+                                    </button>
+                                    <button name="action_dashboard_view_draft_handover" type="object"
+                                            class="btn btn-sm btn-link text-muted p-0 d-block text-start"
+                                            title="View Draft Handover"
+                                            t-if="record.draft_handover_count.raw_value">
+                                        <i class="fa fa-code-fork me-1"/>
+                                        <t t-out="record.draft_handover_count.raw_value"/> Handover draft
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Team -->
+                            <div class="d-flex align-items-center gap-2 px-3 pb-3 border-top pt-2">
+                                <div class="text-muted small flex-grow-1">
+                                    <i class="fa fa-user me-1" title="PM"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                </div>
+                                <div class="text-muted small" t-if="record.ba_manager_id.value">
+                                    <i class="fa fa-star me-1" title="BA Manager"/>
+                                    <field name="ba_manager_id" widget="many2one_avatar_user"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Dashboard List View (table overview) -->
+    <record id="ba_dashboard_list" model="ir.ui.view">
+        <field name="name">project.project.ba.dashboard.list</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <list string="BA Dashboard"
+                  decoration-warning="pending_fsd_count > 0"
+                  decoration-info="ba_current_step in ('survey', 'design')"
+                  decoration-success="ba_current_step == 'plan_update'">
+                <field name="name"/>
+                <field name="partner_id" string="Customer"/>
+                <field name="ba_current_step" string="Phase" widget="badge"
+                       decoration-info="ba_current_step == 'survey'"
+                       decoration-primary="ba_current_step == 'design'"
+                       decoration-warning="ba_current_step == 'fsd_data'"
+                       decoration-danger="ba_current_step == 'approval_handover'"
+                       decoration-success="ba_current_step == 'plan_update'"/>
+                <field name="ba_progress" string="Progress" widget="progressbar"/>
+                <field name="mom_count" string="MoM"/>
+                <field name="survey_count" string="Survey"/>
+                <field name="fitgap_count" string="FIT-GAP"/>
+                <field name="fsd_count" string="FSD"/>
+                <field name="handover_count" string="Handover"/>
+                <field name="pending_fsd_count" string="⏳ Pending FSD"/>
+                <field name="pending_survey_count" string="📩 Pending Survey"/>
+                <field name="draft_handover_count" string="🔧 Draft Handover"/>
+                <field name="user_id" string="PM" widget="many2one_avatar_user"/>
+                <field name="ba_manager_id" string="BA Manager" widget="many2one_avatar_user"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Dashboard Search -->
+    <record id="ba_dashboard_search" model="ir.ui.view">
+        <field name="name">project.project.ba.dashboard.search</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="ba_manager_id"/>
+                <separator/>
+                <filter name="filter_survey" string="Survey Phase"
+                        domain="[('ba_current_step','=','survey')]"/>
+                <filter name="filter_design" string="Design Phase"
+                        domain="[('ba_current_step','=','design')]"/>
+                <filter name="filter_fsd_data" string="FSD &amp; Data Phase"
+                        domain="[('ba_current_step','=','fsd_data')]"/>
+                <filter name="filter_approval" string="Approval &amp; Handover"
+                        domain="[('ba_current_step','=','approval_handover')]"/>
+                <filter name="filter_plan" string="Plan Update"
+                        domain="[('ba_current_step','=','plan_update')]"/>
+                <separator/>
+                <filter name="filter_has_pending_fsd" string="Has Pending FSD"
+                        domain="[('fsd_ids.state','=','pending_signoff')]"/>
+                <filter name="filter_my_projects" string="My Projects"
+                        domain="['|', ('user_id','=',uid), ('ba_manager_id','=',uid)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_phase" string="Phase"
+                            context="{'group_by':'ba_current_step'}"/>
+                    <filter name="group_customer" string="Customer"
+                            context="{'group_by':'partner_id'}"/>
+                    <filter name="group_pm" string="PM"
+                            context="{'group_by':'user_id'}"/>
+                    <filter name="group_ba_manager" string="BA Manager"
+                            context="{'group_by':'ba_manager_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════
+         BA Dashboard — Standalone action for BA Analysis menu
+         (filtered to BA projects only)
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Standalone action (for direct menu access) -->
+    <record id="ba_dashboard_action" model="ir.actions.act_window">
+        <field name="name">BA Dashboard</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">kanban,list</field>
+        <field name="search_view_id" ref="ba_dashboard_search"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('ba_dashboard_kanban')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('ba_dashboard_list')})]"/>
+        <field name="context">{'search_default_filter_my_projects': 1}</field>
+        <field name="domain">[('ba_current_step', '!=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No BA projects found
+            </p>
+            <p>Create a project and assign BA roles to start the BA process.</p>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════
+         Pending Actions Overview (cross-project FSD list for BA Manager)
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="ba_fsd_pending_action" model="ir.actions.act_window">
+        <field name="name">Pending FSD Sign-off</field>
+        <field name="res_model">ba.fsd</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'pending_signoff')]</field>
+        <field name="context">{'search_default_group_project': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No FSD documents pending customer sign-off
+            </p>
+        </field>
+    </record>
+
+    <record id="ba_fsd_awaiting_approval_action" model="ir.actions.act_window">
+        <field name="name">FSD Awaiting Internal Approval</field>
+        <field name="res_model">ba.fsd</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'draft'), ('pm_approved', '=', False)]</field>
+        <field name="context">{'search_default_group_project': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                All FSD documents have been internally approved
+            </p>
+        </field>
+    </record>
+
+</odoo>

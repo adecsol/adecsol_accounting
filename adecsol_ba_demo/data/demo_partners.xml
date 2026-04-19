@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Demo Partners — Khách hàng & Liên hệ
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- ADEC Solutions (company) -->
+    <record id="partner_adecsol" model="res.partner">
+        <field name="name">ADEC Solutions</field>
+        <field name="is_company">True</field>
+        <field name="street">26 Trần Quang Quá, Phường Phú Thạnh</field>
+        <field name="city">TP. Hồ Chí Minh</field>
+        <field name="country_id" ref="base.vn"/>
+        <field name="phone">0938 298 299</field>
+        <field name="email">erp@adecsol.vn</field>
+        <field name="website">https://adecsol.vn</field>
+        <field name="vat">0316789452</field>
+    </record>
+
+    <!-- Khách hàng: Công ty Thực phẩm Sài Gòn Foods -->
+    <record id="partner_saigon_foods" model="res.partner">
+        <field name="name">Công ty TNHH Sài Gòn Foods</field>
+        <field name="is_company">True</field>
+        <field name="street">125 Nguyễn Văn Trỗi, Phường 11</field>
+        <field name="city">TP. Hồ Chí Minh</field>
+        <field name="country_id" ref="base.vn"/>
+        <field name="phone">028 3844 5566</field>
+        <field name="email">contact@saigonfoods.vn</field>
+        <field name="vat">0301234567</field>
+    </record>
+
+    <!-- Liên hệ KH: Giám đốc -->
+    <record id="contact_sgf_director" model="res.partner">
+        <field name="name">Nguyễn Văn Minh</field>
+        <field name="parent_id" ref="partner_saigon_foods"/>
+        <field name="function">Giám đốc điều hành</field>
+        <field name="email">minh.nv@saigonfoods.vn</field>
+        <field name="phone">0903 456 789</field>
+    </record>
+
+    <!-- Liên hệ KH: Kế toán trưởng -->
+    <record id="contact_sgf_accountant" model="res.partner">
+        <field name="name">Trần Thị Hương</field>
+        <field name="parent_id" ref="partner_saigon_foods"/>
+        <field name="function">Kế toán trưởng</field>
+        <field name="email">huong.tt@saigonfoods.vn</field>
+        <field name="phone">0912 345 678</field>
+    </record>
+
+    <!-- Liên hệ KH: IT Manager -->
+    <record id="contact_sgf_it" model="res.partner">
+        <field name="name">Lê Quốc Bảo</field>
+        <field name="parent_id" ref="partner_saigon_foods"/>
+        <field name="function">Trưởng phòng IT</field>
+        <field name="email">bao.lq@saigonfoods.vn</field>
+        <field name="phone">0978 123 456</field>
+    </record>
+
+    <!-- Liên hệ ADEC: BA Lead -->
+    <record id="contact_adec_ba_lead" model="res.partner">
+        <field name="name">Phạm Thị Lan</field>
+        <field name="parent_id" ref="partner_adecsol"/>
+        <field name="function">BA Lead</field>
+        <field name="email">lan.pt@adecsol.vn</field>
+    </record>
+
+    <!-- Liên hệ ADEC: Dev Lead -->
+    <record id="contact_adec_dev_lead" model="res.partner">
+        <field name="name">Hoàng Đức Trung</field>
+        <field name="parent_id" ref="partner_adecsol"/>
+        <field name="function">Dev Lead</field>
+        <field name="email">trung.hd@adecsol.vn</field>
+    </record>
+
+</odoo>

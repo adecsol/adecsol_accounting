@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         A1.MoM — Biên bản họp mẫu
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- MoM 1: Kick-off Meeting -->
+    <record id="mom_kickoff" model="ba.mom">
+        <field name="name">Kick-off Meeting — Dự án SGF ERP</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="project_team_id" ref="team_sgf_core"/>
+        <field name="start_date">2026-04-07 02:00:00</field>
+        <field name="stop_date">2026-04-07 04:00:00</field>
+        <field name="meeting_format">online</field>
+        <field name="attendee_ids" eval="[(6, 0, [
+            ref('contact_sgf_director'),
+            ref('contact_sgf_accountant'),
+            ref('contact_sgf_it'),
+            ref('contact_adec_ba_lead'),
+            ref('contact_adec_dev_lead'),
+        ])]"/>
+        <field name="meeting_url">https://meet.google.com/abc-defg-hij</field>
+        <field name="content"><![CDATA[
+<h2>Biên bản Kick-off Meeting</h2>
+<h3>1. Giới thiệu dự án</h3>
+<ul>
+    <li>ADEC Solutions giới thiệu đội ngũ triển khai: PM Phạm Thị Lan (BA Lead), Hoàng Đức Trung (Dev Lead).</li>
+    <li>Phạm vi dự án: Kế toán, Bán hàng, Mua hàng, Kho vận, Sản xuất.</li>
+    <li>Timeline dự kiến: 6 tháng (04/2026 – 09/2026).</li>
+</ul>
+<h3>2. Yêu cầu nghiệp vụ sơ bộ từ SGF</h3>
+<ul>
+    <li><strong>Kế toán:</strong> Cần tích hợp hóa đơn điện tử (VNPT Invoice), quản lý công nợ chi tiết theo hợp đồng.</li>
+    <li><strong>Bán hàng:</strong> Quản lý đơn hàng theo kênh (Đại lý, Online, Siêu thị). Báo giá tự động từ bảng giá theo vùng.</li>
+    <li><strong>Kho vận:</strong> Quản lý lô/hạn sử dụng (Lot/Serial tracking). Tích hợp barcode scanner.</li>
+    <li><strong>Sản xuất:</strong> BOM đa tầng, lập kế hoạch sản xuất theo đơn hàng (MTO).</li>
+</ul>
+<h3>3. Kế hoạch tiếp theo</h3>
+<ul>
+    <li>Tuần 2: Phỏng vấn chi tiết từng phòng ban (Kế toán, Sales, Kho, Sản xuất).</li>
+    <li>Tuần 3: Gửi khảo sát khách hàng (A2.CUS_SUR.01).</li>
+    <li>Tuần 4: Hoàn tất FIT-GAP Analysis.</li>
+</ul>
+<h3>4. Action Items</h3>
+<table>
+    <tr><th>STT</th><th>Nội dung</th><th>Người thực hiện</th><th>Deadline</th></tr>
+    <tr><td>1</td><td>Cung cấp sơ đồ tổ chức</td><td>Lê Quốc Bảo (SGF IT)</td><td>11/04/2026</td></tr>
+    <tr><td>2</td><td>Lên lịch phỏng vấn phòng ban</td><td>Phạm Thị Lan (ADEC)</td><td>11/04/2026</td></tr>
+    <tr><td>3</td><td>Chuẩn bị mẫu khảo sát</td><td>Phạm Thị Lan (ADEC)</td><td>14/04/2026</td></tr>
+</table>
+        ]]></field>
+        <field name="state">approved</field>
+    </record>
+
+    <!-- MoM 2: Phỏng vấn Phòng Kế toán -->
+    <record id="mom_accounting" model="ba.mom">
+        <field name="name">Phỏng vấn Phòng Kế toán — SGF</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="project_team_id" ref="team_sgf_accounting"/>
+        <field name="start_date">2026-04-10 07:00:00</field>
+        <field name="stop_date">2026-04-10 09:30:00</field>
+        <field name="meeting_format">offline</field>
+        <field name="meeting_location">Phòng họp A3 — SGF HQ, Q7</field>
+        <field name="attendee_ids" eval="[(6, 0, [
+            ref('contact_sgf_accountant'),
+            ref('contact_adec_ba_lead'),
+        ])]"/>
+        <field name="content"><![CDATA[
+<h2>Biên bản phỏng vấn Phòng Kế toán</h2>
+<h3>1. Quy trình hiện tại (AS-IS)</h3>
+<ul>
+    <li>SGF đang sử dụng phần mềm MISA kết hợp Excel để quản lý kế toán.</li>
+    <li>Hóa đơn điện tử: Sử dụng VNPT Invoice, nhập tay vào MISA.</li>
+    <li>Công nợ: Theo dõi trên Excel, đối soát thủ công cuối tháng.</li>
+    <li>Báo cáo thuế: Xuất từ MISA, chỉnh sửa thủ công trước khi nộp.</li>
+</ul>
+<h3>2. Pain Points</h3>
+<ul>
+    <li>Mất 3-4 ngày/tháng để đối soát công nợ giữa Excel và MISA.</li>
+    <li>Không có cảnh báo tự động khi đến hạn thanh toán.</li>
+    <li>Hóa đơn điện tử nhập tay dễ sai sót, mất 2h/ngày.</li>
+</ul>
+<h3>3. Yêu cầu TO-BE</h3>
+<ul>
+    <li>Tích hợp trực tiếp VNPT Invoice ↔ Odoo (tự động tạo hóa đơn).</li>
+    <li>Quản lý công nợ theo hợp đồng, tự động nhắc thanh toán qua email/Zalo.</li>
+    <li>Dashboard kế toán real-time: doanh thu, chi phí, lãi gộp.</li>
+</ul>
+        ]]></field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <!-- MoM 3: Phỏng vấn Phòng Bán hàng -->
+    <record id="mom_sales" model="ba.mom">
+        <field name="name">Phỏng vấn Phòng Bán hàng — SGF</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="project_team_id" ref="team_sgf_core"/>
+        <field name="start_date">2026-04-11 02:00:00</field>
+        <field name="stop_date">2026-04-11 04:30:00</field>
+        <field name="meeting_format">online</field>
+        <field name="meeting_url">https://meet.google.com/abc-defg-hij</field>
+        <field name="attendee_ids" eval="[(6, 0, [
+            ref('contact_sgf_director'),
+            ref('contact_adec_ba_lead'),
+        ])]"/>
+        <field name="content"><![CDATA[
+<h2>Biên bản phỏng vấn Phòng Bán hàng</h2>
+<h3>1. Kênh bán hàng</h3>
+<ul>
+    <li><strong>Đại lý:</strong> 45 đại lý trên toàn quốc, chiết khấu theo vùng miền.</li>
+    <li><strong>Siêu thị:</strong> AEON, Co.opmart, Big C — yêu cầu barcode EAN-13, đóng gói riêng.</li>
+    <li><strong>Online:</strong> Shopee, Lazada, website riêng — cần đồng bộ tồn kho real-time.</li>
+</ul>
+<h3>2. Yêu cầu quan trọng</h3>
+<ul>
+    <li>Bảng giá phân theo vùng: Miền Bắc, Miền Trung, Miền Nam.</li>
+    <li>Chương trình khuyến mãi: Mua 10 tặng 1, chiết khấu theo doanh số tháng.</li>
+    <li>Báo cáo doanh số theo kênh, theo NVKD, theo sản phẩm.</li>
+</ul>
+        ]]></field>
+        <field name="state">draft</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         res.partner.industry — Add survey templates by industry
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Inherit form view to add survey_profile_item_ids -->
+    <record id="res_partner_industry_form_inherit_ba" model="ir.ui.view">
+        <field name="name">res.partner.industry.form.inherit.ba</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='full_name']" position="after">
+                <separator string="Default Survey Template"/>
+                <field name="survey_profile_item_ids" widget="many2many_tags"
+                       options="{'no_create': False}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit list view to add survey_profile_item_ids -->
+    <record id="res_partner_industry_list_inherit_ba" model="ir.ui.view">
+        <field name="name">res.partner.industry.list.inherit.ba</field>
+        <field name="model">res.partner.industry</field>
+        <field name="inherit_id" ref="base.res_partner_industry_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='full_name']" position="after">
+                <field name="survey_profile_item_ids" widget="many2many_tags"
+                       optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action — duplicate of base industry but scoped for BA module -->
+    <record id="ba_industry_action" model="ir.actions.act_window">
+        <field name="name">Industry</field>
+        <field name="res_model">res.partner.industry</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first industry
+            </p>
+            <p>Configure industries and corresponding survey templates.</p>
+        </field>
+    </record>
+
+</odoo>

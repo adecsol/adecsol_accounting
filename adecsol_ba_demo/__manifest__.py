@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "ADEC BA — Demo Data",
+    "version": "18.0.1.0.0",
+    "category": "Project",
+    "summary": "Dữ liệu mẫu cho module adecsol_ba",
+    "author": "ADEC Solutions",
+    "website": "https://adecsol.vn",
+    "license": "LGPL-3",
+    "depends": ["adecsol_ba"],
+    "data": [
+        "data/demo_partners.xml",
+        "data/demo_projects.xml",
+        "data/demo_stages.xml",
+        "data/demo_teams.xml",
+        "data/demo_mom.xml",
+        "data/demo_survey.xml",
+        "data/demo_fitgap.xml",
+        "data/demo_fsd.xml",
+        "data/demo_master_data.xml",
+        "data/demo_handover.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+    "application": False,
+}

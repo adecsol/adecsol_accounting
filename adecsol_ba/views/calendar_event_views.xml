@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Calendar Event — Smart Button MoM
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="calendar_event_form_inherit_ba" model="ir.ui.view">
+        <field name="name">calendar.event.form.inherit.ba</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <!-- Smart Button box -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object"
+                        name="action_view_moms" icon="fa-pencil-square-o">
+                    <field name="mom_count" widget="statinfo" string="MoM"/>
+                </button>
+            </xpath>
+
+            <!-- Add Project field -->
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="project_id" placeholder="Select related project..."/>
+            </xpath>
+
+            <!-- Add "Create MoM" button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object"
+                        name="action_create_mom" icon="fa-plus-circle"
+                        string="Create MoM"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

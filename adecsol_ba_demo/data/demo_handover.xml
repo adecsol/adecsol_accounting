@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         D2.TRAN_DEV — Technical Handover demo data
+         All linked to project SGF
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- ════════════════════════════════════════════════════════
+         Handover 1: Module e-Invoice (Accounting)
+         ════════════════════════════════════════════════════════ -->
+    <record id="ba_handover_einvoice" model="ba.handover">
+        <field name="name">[HANDOVER] Module tích hợp VNPT e-Invoice</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="planned_hours">56</field>
+        <field name="assignee_id" ref="base.user_admin"/>
+        <field name="date">2026-04-15</field>
+        <field name="note"><![CDATA[
+<p><strong>Lưu ý cho Dev:</strong></p>
+<ul>
+    <li>API sandbox VNPT: https://einvoice-sandbox.vnpt.vn (credentials trong Bitwarden).</li>
+    <li>Tham khảo module community hiện có: l10n_vn_edi_viettel (cùng pattern).</li>
+    <li>Cần xử lý edge case: timeout API, trùng hóa đơn, hủy sau khi ký.</li>
+    <li>Tuân thủ Nghị định 123/2020/NĐ-CP về hóa đơn điện tử.</li>
+</ul>
+        ]]></field>
+    </record>
+
+    <!-- Handover Lines: e-Invoice -->
+    <record id="ba_handover_line_create" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_einvoice"/>
+        <field name="sequence">1</field>
+        <field name="objective">Tạo hóa đơn điện tử từ Account Invoice — tự động khi xác nhận Invoice</field>
+        <field name="iso_9001">Log mọi API call với timestamp, user, request/response.</field>
+        <field name="iso_27001">Encrypt API credentials (token) bằng Odoo config parameter.</field>
+        <field name="odoo_std_module">account (Invoicing) — https://www.odoo.com/documentation/18.0/applications/finance/accounting.html</field>
+        <field name="oca_module">l10n_vn_edi_viettel (tham khảo pattern) — https://github.com/OCA/l10n-vietnam</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Tạo model <code>einvoice.config</code>: lưu API endpoint, token, series.</li>
+    <li>Override <code>account.move.action_post()</code>: gọi <code>_create_vnpt_einvoice()</code>.</li>
+    <li>Tạo wizard <code>einvoice.send.wizard</code>: cho phép chọn ký tự động hoặc thủ công.</li>
+    <li>Fields mới trên account.move: einvoice_number, einvoice_status, einvoice_pdf.</li>
+</ol>
+        ]]></field>
+        <field name="depend">account, base_setup</field>
+        <field name="inherit_model">account.move, account.move.line</field>
+        <field name="community_note">Xem PR #245 trên OCA/l10n-vietnam về xử lý concurrent API calls.</field>
+        <field name="adec_module">l10n_vn_einvoice_vnpt</field>
+        <field name="priority">critical</field>
+        <field name="note">Dev cần tạo unit test mock API VNPT.</field>
+    </record>
+
+    <record id="ba_handover_line_sign" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_einvoice"/>
+        <field name="sequence">2</field>
+        <field name="objective">Ký số hóa đơn — hỗ trợ HSM (tự động) và USB Token (thủ công)</field>
+        <field name="iso_9001">Ghi nhận signer info, timestamp ký vào log.</field>
+        <field name="iso_27001">HSM signing key do VNPT quản lý. Odoo chỉ gửi request ký.</field>
+        <field name="odoo_std_module">account</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Thêm field <code>sign_method</code> trên <code>einvoice.config</code>: selection HSM/TOKEN.</li>
+    <li>Nếu HSM: auto-call <code>/signInvoice</code> sau <code>/createInvoice</code> thành công.</li>
+    <li>Nếu TOKEN: hiện wizard chờ user cắm USB Token.</li>
+</ol>
+        ]]></field>
+        <field name="depend">l10n_vn_einvoice_vnpt</field>
+        <field name="inherit_model">account.move</field>
+        <field name="adec_module">l10n_vn_einvoice_vnpt</field>
+        <field name="priority">critical</field>
+    </record>
+
+    <record id="ba_handover_line_cancel" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_einvoice"/>
+        <field name="sequence">3</field>
+        <field name="objective">Hủy / Điều chỉnh HĐ điện tử — tuân thủ NĐ 123/2020</field>
+        <field name="iso_9001">Ghi lý do hủy, lưu biên bản hủy HĐ.</field>
+        <field name="iso_27001">HĐ đã hủy không được xóa khỏi DB, chỉ đánh dấu trạng thái.</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Button "Hủy HĐ" → Wizard nhập lý do → API /cancelInvoice.</li>
+    <li>Button "Điều chỉnh" → Tạo credit note + HĐ mới → API /adjustInvoice.</li>
+    <li>Liên kết HĐ gốc ↔ HĐ thay thế bằng field many2one.</li>
+</ol>
+        ]]></field>
+        <field name="depend">l10n_vn_einvoice_vnpt</field>
+        <field name="inherit_model">account.move</field>
+        <field name="adec_module">l10n_vn_einvoice_vnpt</field>
+        <field name="priority">critical</field>
+    </record>
+
+    <!-- ════════════════════════════════════════════════════════
+         Handover 2: Module Sales (Bán hàng)
+         ════════════════════════════════════════════════════════ -->
+    <record id="ba_handover_sales" model="ba.handover">
+        <field name="name">[HANDOVER] Customization Module Bán hàng</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="planned_hours">32</field>
+        <field name="assignee_id" ref="base.user_admin"/>
+        <field name="date">2026-04-16</field>
+        <field name="note"><![CDATA[
+<p><strong>Scope:</strong> Bảng giá theo vùng miền, KM mua 10 tặng 1, phân kênh bán hàng.</p>
+        ]]></field>
+    </record>
+
+    <record id="ba_handover_line_pricelist" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_sales"/>
+        <field name="sequence">1</field>
+        <field name="objective">Bảng giá tự động theo vùng miền (Bắc/Trung/Nam)</field>
+        <field name="odoo_std_module">sale_management, product</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Thêm field <code>region</code> (selection) trên res.partner.</li>
+    <li>Tạo 3 Pricelist: Miền Bắc, Miền Trung, Miền Nam.</li>
+    <li>Override <code>sale.order.onchange_partner_id()</code>: tự động gán pricelist theo region.</li>
+</ol>
+        ]]></field>
+        <field name="depend">sale, product</field>
+        <field name="inherit_model">res.partner, sale.order</field>
+        <field name="adec_module">adecsol_sale_region</field>
+        <field name="priority">major</field>
+    </record>
+
+    <record id="ba_handover_line_promo" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_sales"/>
+        <field name="sequence">2</field>
+        <field name="objective">Chương trình KM: Mua 10 tặng 1, chiết khấu theo doanh số tháng</field>
+        <field name="odoo_std_module">sale_loyalty</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Cấu hình loyalty program "Mua 10 tặng 1" cho sản phẩm nước mắm.</li>
+    <li>Tạo tiered discount rule: doanh số > 100tr → CK 5%, > 300tr → CK 8%.</li>
+</ol>
+        ]]></field>
+        <field name="depend">sale_loyalty</field>
+        <field name="priority">major</field>
+    </record>
+
+    <record id="ba_handover_line_channel" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_sales"/>
+        <field name="sequence">3</field>
+        <field name="objective">Phân kênh bán hàng: Đại lý / Siêu thị / Online</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Thêm field <code>sales_channel</code> trên sale.order.</li>
+    <li>Tạo pivot report phân tích doanh số theo kênh, NVKD, sản phẩm.</li>
+</ol>
+        ]]></field>
+        <field name="depend">sale</field>
+        <field name="inherit_model">sale.order</field>
+        <field name="adec_module">adecsol_sale_channel</field>
+        <field name="priority">minor</field>
+    </record>
+
+    <!-- ════════════════════════════════════════════════════════
+         Handover 3: Module Inventory (Kho vận)
+         ════════════════════════════════════════════════════════ -->
+    <record id="ba_handover_inventory" model="ba.handover">
+        <field name="name">[HANDOVER] Customization Module Kho vận</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="planned_hours">24</field>
+        <field name="assignee_id" ref="base.user_admin"/>
+        <field name="date">2026-04-17</field>
+        <field name="note"><![CDATA[
+<p><strong>Scope:</strong> Barcode scanner CE, FEFO cho sản phẩm thực phẩm, dashboard kho.</p>
+        ]]></field>
+    </record>
+
+    <record id="ba_handover_line_barcode" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_inventory"/>
+        <field name="sequence">1</field>
+        <field name="objective">Tích hợp Barcode Scanner cho CE (thay thế Enterprise module)</field>
+        <field name="odoo_std_module">stock</field>
+        <field name="oca_module">stock_barcodes — https://github.com/OCA/stock-logistics-barcode</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Cài đặt OCA <code>stock_barcodes</code> module.</li>
+    <li>Custom giao diện scan cho tablet Android (responsive CSS).</li>
+    <li>Test với scanner hardware: Zebra TC21, Honeywell CT40.</li>
+</ol>
+        ]]></field>
+        <field name="depend">stock, stock_barcodes</field>
+        <field name="adec_module">adecsol_stock_barcode</field>
+        <field name="priority">major</field>
+    </record>
+
+    <record id="ba_handover_line_fefo" model="ba.handover.line">
+        <field name="handover_id" ref="ba_handover_inventory"/>
+        <field name="sequence">2</field>
+        <field name="objective">Cấu hình FEFO (First Expired, First Out) cho sản phẩm thực phẩm</field>
+        <field name="odoo_std_module">stock (removal strategy)</field>
+        <field name="custom_work"><![CDATA[
+<ol>
+    <li>Cấu hình removal strategy = FEFO trên product category "Thực phẩm".</li>
+    <li>Tạo cron job cảnh báo sản phẩm sắp hết hạn (< 30 ngày).</li>
+    <li>Dashboard hiển thị tồn kho theo lot + ngày hết hạn.</li>
+</ol>
+        ]]></field>
+        <field name="depend">stock</field>
+        <field name="priority">major</field>
+    </record>
+
+</odoo>

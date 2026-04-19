@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Wizard: Import FSD → Handover Mapping
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="ba_handover_mapping_wizard_form" model="ir.ui.view">
+        <field name="name">ba.handover.mapping.wizard.form</field>
+        <field name="model">ba.handover.mapping.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import features from FSD">
+                <group>
+                    <field name="task_id" readonly="1"/>
+                    <field name="fsd_id"
+                           domain="[('project_id','=',task_id.project_id)]"
+                           options="{'no_create': True}"/>
+                    <field name="import_all"/>
+                </group>
+                <group string="Features to import"
+                       invisible="import_all">
+                    <field name="feature_ids" nolabel="1"
+                           domain="[('fsd_id','=',fsd_id)]"
+                           widget="many2many_checkboxes"/>
+                </group>
+                <footer>
+                    <button name="action_import" string="📥 Import"
+                            type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Access for the wizard -->
+    <record id="access_ba_handover_mapping_wizard" model="ir.model.access">
+        <field name="name">ba.handover.mapping.wizard.access</field>
+        <field name="model_id" ref="model_ba_handover_mapping_wizard"/>
+        <field name="group_id" ref="group_ba_user"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+</odoo>

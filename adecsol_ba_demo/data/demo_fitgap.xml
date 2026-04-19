@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         B2.FIT_GAP — FIT-GAP Analysis records for SGF project
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- FIT-GAP 1: Module Accounting (Kế toán) -->
+    <record id="fitgap_accounting" model="ba.fitgap">
+        <field name="name">FIT-GAP: Module Kế toán (Accounting)</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="fitgap_module">account, l10n_vn</field>
+        <field name="priority">critical</field>
+        <field name="gap_type">integration</field>
+        <field name="fit_content"><![CDATA[
+<ul>
+    <li><strong>Sổ kế toán:</strong> Odoo 18 hỗ trợ đầy đủ hệ thống tài khoản Việt Nam (l10n_vn).</li>
+    <li><strong>Quản lý công nợ:</strong> Theo dõi AR/AP theo từng đối tác, hạn thanh toán tự động.</li>
+    <li><strong>Báo cáo thuế:</strong> Hỗ trợ kê khai VAT đầu vào/đầu ra, bảng cân đối kế toán.</li>
+    <li><strong>Ngân hàng:</strong> Đối soát ngân hàng tự động từ file statement.</li>
+</ul>
+        ]]></field>
+        <field name="gap_content"><![CDATA[
+<ul>
+    <li><strong>🔴 Hóa đơn điện tử:</strong> Cần phát triển module <code>l10n_vn_einvoice_vnpt</code> để tích hợp API VNPT Invoice. Override action_post() trên account.move.</li>
+    <li><strong>🟠 Dashboard KPI:</strong> Cần custom OWL dashboard hiển thị doanh thu, chi phí, lãi gộp real-time.</li>
+    <li><strong>🟡 Nhắc thanh toán:</strong> Tạo cron job nhắc thanh toán tự động qua email khi đến hạn.</li>
+</ul>
+        ]]></field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <!-- FIT-GAP 2: Module Sales (Bán hàng) -->
+    <record id="fitgap_sales" model="ba.fitgap">
+        <field name="name">FIT-GAP: Module Bán hàng (Sales)</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="fitgap_module">sale, sale_management</field>
+        <field name="priority">high</field>
+        <field name="gap_type">customization</field>
+        <field name="fit_content"><![CDATA[
+<ul>
+    <li><strong>Quản lý đơn hàng:</strong> Odoo 18 hỗ trợ đầy đủ workflow Quotation → SO → Invoice.</li>
+    <li><strong>Bảng giá:</strong> Hỗ trợ Pricelist đa tầng, chiết khấu theo số lượng.</li>
+    <li><strong>Báo cáo Sales:</strong> Pivot, graph report theo sản phẩm, khách hàng, thời gian.</li>
+</ul>
+        ]]></field>
+        <field name="gap_content"><![CDATA[
+<ul>
+    <li><strong>🟠 Bảng giá theo vùng:</strong> Thêm field <code>region</code> trên res.partner (north/central/south). Tạo pricelist rule tự động gán theo vùng khi tạo SO.</li>
+    <li><strong>🟠 KM mua 10 tặng 1:</strong> Cấu hình promotion rule trên sale.coupon hoặc custom logic trên SO line.</li>
+    <li><strong>🟡 Phân kênh bán hàng:</strong> Tạo field sales_channel (Đại lý/Siêu thị/Online) trên SO để báo cáo theo kênh.</li>
+</ul>
+        ]]></field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <!-- FIT-GAP 3: Module Inventory (Kho vận) -->
+    <record id="fitgap_inventory" model="ba.fitgap">
+        <field name="name">FIT-GAP: Module Kho vận (Inventory)</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="fitgap_module">stock, stock_barcode</field>
+        <field name="priority">high</field>
+        <field name="gap_type">customization</field>
+        <field name="fit_content"><![CDATA[
+<ul>
+    <li><strong>Quản lý kho:</strong> Multi-warehouse, multi-location, routes tự động.</li>
+    <li><strong>Lô/Serial:</strong> Hỗ trợ Lot tracking + Expiration Date natively.</li>
+    <li><strong>Inventory Adjustment:</strong> Kiểm kê kho, điều chỉnh chênh lệch.</li>
+</ul>
+        ]]></field>
+        <field name="gap_content"><![CDATA[
+<ul>
+    <li><strong>🟠 Barcode Scanner CE:</strong> Sử dụng OCA <code>stock_barcodes</code> thay vì module Enterprise. Custom giao diện scan trên tablet Android.</li>
+    <li><strong>🟡 FIFO theo hạn sử dụng:</strong> Cấu hình removal strategy FEFO (First Expired, First Out) cho sản phẩm thực phẩm.</li>
+    <li><strong>🟡 Dashboard kho:</strong> Báo cáo tồn kho theo hạn sử dụng, cảnh báo sắp hết hạn.</li>
+</ul>
+        ]]></field>
+        <field name="state">draft</field>
+    </record>
+
+    <!-- Knowledge Pages cho GAP Solutions -->
+    <record id="docpage_gap_pricelist" model="document.page">
+        <field name="name">Giải pháp: Bảng giá theo vùng miền</field>
+        <field name="content"><![CDATA[
+<h3>Giải pháp kỹ thuật: Bảng giá tự động theo vùng</h3>
+<p>Thêm field <code>region</code> (selection: north/central/south) trên res.partner.
+Tạo Pricelist rule gán tự động theo region khi tạo Sale Order.</p>
+        ]]></field>
+    </record>
+
+    <record id="docpage_gap_einvoice" model="document.page">
+        <field name="name">Giải pháp: Tích hợp VNPT e-Invoice</field>
+        <field name="content"><![CDATA[
+<h3>Giải pháp kỹ thuật: Module l10n_vn_einvoice_vnpt</h3>
+<p>Phát triển custom module kết nối API VNPT Invoice.
+Override account.move.action_post() để tự động đẩy hóa đơn.</p>
+        ]]></field>
+    </record>
+
+    <record id="docpage_gap_barcode" model="document.page">
+        <field name="name">Giải pháp: Barcode Scanner CE</field>
+        <field name="content"><![CDATA[
+<h3>Giải pháp kỹ thuật: OCA stock_barcodes</h3>
+<p>Sử dụng OCA module stock_barcodes (CE alternative).
+Custom giao diện scan trên mobile browser cho tablet Android.</p>
+        ]]></field>
+    </record>
+
+    <record id="docpage_gap_dashboard" model="document.page">
+        <field name="name">Giải pháp: KPI Dashboard OWL</field>
+        <field name="content"><![CDATA[
+<h3>Giải pháp kỹ thuật: Custom Dashboard với OWL + Chart.js</h3>
+<p>Tạo OWL component dashboard, embed Chart.js cho biểu đồ.
+Alternative: Metabase/Grafana via iframe trên document.page.</p>
+        ]]></field>
+    </record>
+
+</odoo>

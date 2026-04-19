@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ba_template_preview_view_form" model="ir.ui.view">
+        <field name="name">ba.template.preview.form</field>
+        <field name="model">ba.template.preview</field>
+        <field name="arch" type="xml">
+            <form string="Template Preview">
+                <sheet>
+                    <group>
+                        <field name="preview_subject" string="Subject"/>
+                    </group>
+                    <separator string="Content Preview"/>
+                    <field name="preview_html" nolabel="1" widget="html" readonly="1"/>
+                </sheet>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

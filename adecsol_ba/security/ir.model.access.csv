@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ba_mom_user,ba.mom.user,model_ba_mom,group_ba_user,1,1,1,1
+access_ba_customer_survey_user,ba.customer.survey.user,model_ba_customer_survey,group_ba_user,1,1,1,1
+access_ba_fitgap_user,ba.fitgap.user,model_ba_fitgap,group_ba_user,1,1,1,1
+access_ba_fsd_user,ba.fsd.user,model_ba_fsd,group_ba_user,1,1,1,1
+access_ba_fsd_customer,ba.fsd.customer,model_ba_fsd,group_ba_customer,1,1,0,0
+access_ba_fsd_feature_user,ba.fsd.feature.user,model_ba_fsd_feature,group_ba_user,1,1,1,1
+access_ba_master_data_user,ba.master.data.user,model_ba_master_data,group_ba_user,1,1,1,1
+access_ba_master_data_line_user,ba.master.data.line.user,model_ba_master_data_line,group_ba_user,1,1,1,1
+access_ba_handover_user,ba.handover.user,model_ba_handover,group_ba_user,1,1,1,1
+access_ba_handover_line_user,ba.handover.line.user,model_ba_handover_line,group_ba_user,1,1,1,1
+access_ba_wbs_checklist_user,ba.wbs.checklist.user,model_ba_wbs_checklist,group_ba_user,1,1,1,1
+access_ba_project_team_user,ba.project.team.user,model_ba_project_team,group_ba_user,1,1,1,1
+access_ba_template_preview_user,ba.template.preview.user,model_ba_template_preview,group_ba_user,1,1,1,1

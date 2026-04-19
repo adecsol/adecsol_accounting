@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         D1.MasterData.01 — Master Data mẫu
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Master Data: Đối tác (res.partner) -->
+    <record id="masterdata_partner" model="ba.master.data">
+        <field name="name">Yêu cầu dữ liệu Đại lý / Khách hàng</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="object_type">partner</field>
+        <field name="import_status">validated</field>
+        <field name="note"><![CDATA[<p>SGF có 45 đại lý + 120 khách hàng lẻ cần import. Dữ liệu sẽ được export từ MISA sang Excel rồi import vào Odoo.</p>]]></field>
+    </record>
+
+    <record id="masterdata_partner_line1" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_partner"/>
+        <field name="sequence">1</field>
+        <field name="name">Mã đại lý (code)</field>
+        <field name="description">Mã nội bộ của đại lý, ví dụ: DL-HCM-001</field>
+        <field name="req_type">available</field>
+        <field name="solution">Map vào field ref trên res.partner</field>
+    </record>
+
+    <record id="masterdata_partner_line2" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_partner"/>
+        <field name="sequence">2</field>
+        <field name="name">Vùng miền</field>
+        <field name="description">Phân loại: Miền Bắc, Miền Trung, Miền Nam</field>
+        <field name="req_type">custom</field>
+        <field name="solution">Tạo field selection "region" trên res.partner: north/central/south. Dùng để tự động gán pricelist.</field>
+    </record>
+
+    <record id="masterdata_partner_line3" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_partner"/>
+        <field name="sequence">3</field>
+        <field name="name">Hạn mức công nợ</field>
+        <field name="description">Hạn mức công nợ tối đa cho từng đại lý (VNĐ)</field>
+        <field name="req_type">custom</field>
+        <field name="solution">Tạo field credit_limit trên res.partner. Thêm constraint khi tạo SO kiểm tra tổng công nợ hiện tại.</field>
+    </record>
+
+    <record id="masterdata_partner_line4" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_partner"/>
+        <field name="sequence">4</field>
+        <field name="name">Thông tin ngân hàng</field>
+        <field name="description">Số tài khoản, tên ngân hàng, chi nhánh</field>
+        <field name="req_type">available</field>
+        <field name="solution">Sử dụng res.partner.bank có sẵn trong Odoo</field>
+    </record>
+
+    <!-- Master Data: Sản phẩm (product.template) -->
+    <record id="masterdata_product" model="ba.master.data">
+        <field name="name">Yêu cầu dữ liệu Sản phẩm thực phẩm</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="object_type">product</field>
+        <field name="import_status">pending</field>
+        <field name="note"><![CDATA[<p>SGF có khoảng 350 SKU sản phẩm. Cần import từ file Excel hiện tại, bổ sung thông tin hạn sử dụng, barcode EAN-13.</p>]]></field>
+    </record>
+
+    <record id="masterdata_product_line1" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_product"/>
+        <field name="sequence">1</field>
+        <field name="name">Mã SKU sản phẩm</field>
+        <field name="description">Mã nội bộ, ví dụ: SGF-NM-001 (Nước mắm 500ml)</field>
+        <field name="req_type">available</field>
+        <field name="solution">Map vào default_code trên product.template</field>
+    </record>
+
+    <record id="masterdata_product_line2" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_product"/>
+        <field name="sequence">2</field>
+        <field name="name">Barcode EAN-13</field>
+        <field name="description">Mã vạch EAN-13 cho kênh siêu thị (AEON, Co.opmart)</field>
+        <field name="req_type">available</field>
+        <field name="solution">Map vào field barcode trên product.product. Validate format EAN-13 (13 chữ số).</field>
+    </record>
+
+    <record id="masterdata_product_line3" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_product"/>
+        <field name="sequence">3</field>
+        <field name="name">Hạn sử dụng mặc định (ngày)</field>
+        <field name="description">Số ngày hạn sử dụng từ ngày sản xuất, ví dụ: Nước mắm = 730 ngày</field>
+        <field name="req_type">available</field>
+        <field name="solution">Sử dụng field use_expiration_date + expiration_time trên product.template (module stock_lot)</field>
+    </record>
+
+    <record id="masterdata_product_line4" model="ba.master.data.line">
+        <field name="master_data_id" ref="masterdata_product"/>
+        <field name="sequence">4</field>
+        <field name="name">Nhóm sản phẩm theo kênh</field>
+        <field name="description">Phân loại: Đại lý, Siêu thị, Online — ảnh hưởng quy cách đóng gói</field>
+        <field name="req_type">custom</field>
+        <field name="solution">Tạo field selection hoặc Many2one "sales_channel" trên product.template. Dùng product.pricelist.item để phân giá theo channel.</field>
+        <field name="note">Thảo luận thêm với PM về cách tổ chức product category vs custom field.</field>
+    </record>
+
+</odoo>

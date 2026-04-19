@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         A2.CUS_SUR — Customer Survey demo data
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Survey 1: Kế toán — đã phản hồi -->
+    <record id="survey_sgf_accounting" model="ba.customer.survey">
+        <field name="name">Khảo sát nghiệp vụ Kế toán — SGF</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="partner_id" ref="partner_saigon_foods"/>
+        <field name="send_date">2026-04-14</field>
+        <field name="result_date">2026-04-18</field>
+        <field name="state">responded</field>
+        <field name="survey_result"><![CDATA[
+<h3>Tổng hợp kết quả khảo sát Kế toán</h3>
+<ul>
+    <li><strong>Ưu tiên cao nhất:</strong> Tích hợp hóa đơn điện tử VNPT — giảm 2h/ngày nhập thủ công.</li>
+    <li><strong>Ưu tiên cao:</strong> Quản lý công nợ tự động, cảnh báo khi đến hạn thanh toán.</li>
+    <li><strong>Ưu tiên trung bình:</strong> Dashboard báo cáo real-time (doanh thu, chi phí, lãi gộp).</li>
+    <li><strong>Kết luận:</strong> Cần custom module e-invoice connector + dashboard OWL.</li>
+</ul>
+        ]]></field>
+    </record>
+
+    <!-- Survey 2: Bán hàng — đã phản hồi -->
+    <record id="survey_sgf_sales" model="ba.customer.survey">
+        <field name="name">Khảo sát nghiệp vụ Bán hàng — SGF</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="partner_id" ref="partner_saigon_foods"/>
+        <field name="send_date">2026-04-14</field>
+        <field name="result_date">2026-04-19</field>
+        <field name="state">responded</field>
+        <field name="survey_result"><![CDATA[
+<h3>Tổng hợp kết quả khảo sát Bán hàng</h3>
+<ul>
+    <li><strong>Ưu tiên cao nhất:</strong> Bảng giá phân theo vùng (Bắc/Trung/Nam) — hiện đang quản lý bằng Excel.</li>
+    <li><strong>Ưu tiên cao:</strong> Chương trình KM mua 10 tặng 1, chiết khấu doanh số tháng.</li>
+    <li><strong>Ưu tiên trung bình:</strong> Báo cáo doanh số theo kênh (Đại lý/Siêu thị/Online).</li>
+    <li><strong>Kết luận:</strong> Odoo Sales + custom pricelist rule + loyalty program.</li>
+</ul>
+        ]]></field>
+    </record>
+
+    <!-- Survey 3: Kho vận — đang chờ -->
+    <record id="survey_sgf_warehouse" model="ba.customer.survey">
+        <field name="name">Khảo sát nghiệp vụ Kho vận — SGF</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="partner_id" ref="partner_saigon_foods"/>
+        <field name="send_date">2026-04-15</field>
+        <field name="state">sent</field>
+    </record>
+
+</odoo>

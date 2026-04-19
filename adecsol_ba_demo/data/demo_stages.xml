@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Demo Task Stages — linked to project SGF
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="stage_backlogs" model="project.task.type">
+        <field name="name">Backlogs</field>
+        <field name="sequence">10</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+    <record id="stage_assignees" model="project.task.type">
+        <field name="name">Assignees</field>
+        <field name="sequence">20</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+    <record id="stage_in_progress" model="project.task.type">
+        <field name="name">In Progress</field>
+        <field name="sequence">30</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+    <record id="stage_in_review" model="project.task.type">
+        <field name="name">In Review</field>
+        <field name="sequence">40</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+    <record id="stage_done" model="project.task.type">
+        <field name="name">Done</field>
+        <field name="sequence">50</field>
+        <field name="fold">True</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+    <record id="stage_delivery" model="project.task.type">
+        <field name="name">Delivery</field>
+        <field name="sequence">60</field>
+        <field name="fold">True</field>
+        <field name="project_ids" eval="[(4, ref('project_sgf_erp'))]"/>
+    </record>
+
+</odoo>

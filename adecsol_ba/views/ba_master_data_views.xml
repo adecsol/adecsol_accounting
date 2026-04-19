@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         D1.MasterData.01 — Master Data Views
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Form View -->
+    <record id="ba_master_data_view_form" model="ir.ui.view">
+        <field name="name">ba.master.data.form</field>
+        <field name="model">ba.master.data</field>
+        <field name="arch" type="xml">
+            <form string="Master Data (D1.MasterData.01)">
+                <header>
+                    <button name="action_validate" string="✅ Validate"
+                            type="object" class="btn-primary"
+                            invisible="import_status != 'pending'"/>
+                    <button name="action_mark_imported" string="📥 Imported"
+                            type="object" class="btn-success"
+                            invisible="import_status != 'validated'"/>
+                    <button name="action_mark_error" string="❌ Error"
+                            type="object" class="btn-danger"
+                            invisible="import_status in ('imported', 'error')"/>
+                    <button name="action_reset" string="Reset"
+                            type="object"
+                            invisible="import_status == 'pending'"/>
+                    <field name="import_status" widget="statusbar"
+                           statusbar_visible="pending,validated,imported"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Master Data Request Name..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="object_type" string="Object"/>
+                        </group>
+                        <group>
+                            <field name="attachment_ids" widget="many2many_binary"
+                                   string="Attachment"/>
+                            <field name="task_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Data Requirements" name="requirements">
+                            <field name="line_ids" nolabel="1">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" string="Requirements"/>
+                                    <field name="description" string="Description"/>
+                                    <field name="req_type" string="Type" widget="badge"
+                                           decoration-success="req_type == 'available'"
+                                           decoration-warning="req_type == 'custom'"
+                                           decoration-info="req_type == 'integration'"/>
+                                    <field name="solution" string="Solution"/>
+                                    <field name="note" string="Notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="note">
+                            <field name="note" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- list View -->
+    <record id="ba_master_data_view_list" model="ir.ui.view">
+        <field name="name">ba.master.data.list</field>
+        <field name="model">ba.master.data</field>
+        <field name="arch" type="xml">
+            <list string="Master Data"
+                  decoration-info="import_status == 'pending'"
+                  decoration-success="import_status == 'imported'"
+                  decoration-danger="import_status == 'error'">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="object_type"/>
+                <field name="import_status" widget="badge"
+                       decoration-info="import_status == 'pending'"
+                       decoration-warning="import_status == 'validated'"
+                       decoration-success="import_status == 'imported'"
+                       decoration-danger="import_status == 'error'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="ba_master_data_view_search" model="ir.ui.view">
+        <field name="name">ba.master.data.search</field>
+        <field name="model">ba.master.data</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <filter name="filter_pending" string="Pending"
+                        domain="[('import_status','=','pending')]"/>
+                <filter name="filter_error" string="Error"
+                        domain="[('import_status','=','error')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_project" string="Project"
+                            context="{'group_by':'project_id'}"/>
+                    <filter name="group_type" string="Object"
+                            context="{'group_by':'object_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="ba_master_data_view_kanban" model="ir.ui.view">
+        <field name="name">ba.master.data.kanban</field>
+        <field name="model">ba.master.data</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="project_id" class="o_kanban_small_column" quick_create="false">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="import_status"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content p-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <field name="import_status" widget="badge" decoration-info="import_status == 'pending'" decoration-success="import_status == 'imported'" decoration-danger="import_status == 'error'"/>
+                            </div>
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-folder-o me-1" title="Project"/><field name="project_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="ba_master_data_action" model="ir.actions.act_window">
+        <field name="name">Master Data</field>
+        <field name="res_model">ba.master.data</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="ba_master_data_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Master Data request
+            </p>
+        </field>
+    </record>
+
+</odoo>

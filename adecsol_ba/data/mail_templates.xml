@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Mail Templates for BA Process
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- A2: Customer Survey Email -->
+    <record id="mail_template_customer_survey" model="mail.template">
+        <field name="name">BA: Send Customer Survey</field>
+        <field name="model_id" ref="model_ba_customer_survey"/>
+        <field name="subject">Business Analysis Survey — {{ object.project_id.name }}</field>
+        <field name="email_from">{{ (object.project_id.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="body_html" type="html">
+<div style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="600" cellpadding="0" cellspacing="0" style="margin:20px auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+        <tr>
+            <td style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:32px 40px;border-radius:12px 12px 0 0;">
+                <h1 style="color:#fff;margin:0;font-size:22px;">📋 Business Analysis Survey</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:32px 40px;">
+                <p>Dear <strong t-out="object.partner_id.name"></strong>,</p>
+                <p>We are conducting business analysis for the project <strong t-out="object.project_id.name"></strong>.</p>
+                <p>Please coordinate to answer the attached survey and reply to this email by the agreed date.</p>
+
+                <p>If you have any questions, feel free to contact us.</p>
+
+                <p>Best regards,<br/><strong t-out="object.project_id.user_id.name or user.name"></strong></p>
+            </td>
+        </tr>
+    </table>
+</div>
+        </field>
+    </record>
+
+    <!-- D1: FSD Sign-off Notification -->
+    <record id="mail_template_fsd_signoff" model="mail.template">
+        <field name="name">BA: Send FSD to Customer for Approval</field>
+        <field name="model_id" ref="model_ba_fsd"/>
+        <field name="subject">FSD Signature Request — {{ object.name }} — {{ object.project_id.name }}</field>
+        <field name="email_from">{{ (object.project_id.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ ','.join(object.signer_ids.mapped('email')) if object.signer_ids else object.partner_id.email }}</field>
+        <field name="body_html" type="html">
+<div style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="600" cellpadding="0" cellspacing="0" style="margin:20px auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+        <tr>
+            <td style="background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%);padding:32px 40px;border-radius:12px 12px 0 0;">
+                <h1 style="color:#fff;margin:0;font-size:22px;">📄 Approve FSD Document</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:32px 40px;">
+                <p>Dear Customer,</p>
+                <p>We would like to send the document <strong>Functional Specification Document (FSD)</strong> for the project <strong t-out="object.project_id.name"></strong> for your review and signature.</p>
+
+                <div style="background:#f0fdf4;border-left:4px solid #22c55e;padding:16px;margin:16px 0;border-radius:4px;">
+                    <strong>Document:</strong> <t t-out="object.name"/><br/>
+                    <strong>Feature Count:</strong> <t t-out="object.feature_count"/><br/>
+                    <strong>Total Estimated Hours:</strong> <t t-out="object.total_planned_hours"/> hours
+                </div>
+
+                <p style="text-align:center; padding:20px 0;">
+                    <a t-attf-href="{{ object.get_base_url() }}/my/fsd/{{ object.id }}" style="background-color:#11998e;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;font-weight:bold;">Go to Approval Page</a>
+                </p>
+
+                <p>Please contact us if you have any questions.</p>
+                <p>Best regards,<br/><strong t-out="object.project_id.user_id.name or user.name"></strong></p>
+            </td>
+        </tr>
+    </table>
+</div>
+        </field>
+    </record>
+
+    <!-- D1: Dev notification after sign -->
+    <record id="mail_template_fsd_signed_notify_dev" model="mail.template">
+        <field name="name">BA: Dev Notify — FSD Signed</field>
+        <field name="model_id" ref="model_ba_fsd"/>
+        <field name="subject">✅ FSD Approved — {{ object.name }}</field>
+        <field name="email_from">{{ (object.project_id.user_id.email_formatted or user.email_formatted) }}</field>
+        <field name="body_html" type="html">
+<div style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+    <table width="600" cellpadding="0" cellspacing="0" style="margin:20px auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+        <tr>
+            <td style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);padding:32px 40px;border-radius:12px 12px 0 0;">
+                <h1 style="color:#fff;margin:0;font-size:22px;">🎉 FSD has been approved by the Customer!</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:32px 40px;">
+                <p>Hello Dev Team,</p>
+                <p>FSD Document <strong t-out="object.name"></strong> of project <strong t-out="object.project_id.name"></strong> has been signed and approved by the customer.</p>
+
+                <div style="background:#eef2ff;border-left:4px solid #6366f1;padding:16px;margin:16px 0;border-radius:4px;">
+                    <strong>Signed by:</strong> <t t-out="object.customer_signer_name or 'N/A'"/><br/>
+                    <strong>Signature Date:</strong> <t t-out="object.sign_date"/><br/>
+                    <strong>Features to dev (GAP):</strong> <t t-out="len(object.feature_ids)"/>
+                </div>
+
+                <p>Dev team can start implementation. Please check the created Tasks.</p>
+            </td>
+        </tr>
+    </table>
+</div>
+        </field>
+    </record>
+</odoo>

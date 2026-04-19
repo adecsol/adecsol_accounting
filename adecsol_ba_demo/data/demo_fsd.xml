@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         C1.FSD.01 — Tài liệu FSD mẫu
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="fsd_einvoice" model="ba.fsd">
+        <field name="name">FSD — Tích hợp Hóa đơn điện tử VNPT Invoice</field>
+        <field name="project_id" ref="project_sgf_erp"/>
+        <field name="state">pending_signoff</field>
+        <field name="content"><![CDATA[
+<h2>Functional Specification Document</h2>
+<h3>Tích hợp Hóa đơn điện tử VNPT Invoice</h3>
+<p><strong>Phiên bản:</strong> 1.0 | <strong>Ngày:</strong> 14/04/2026 | <strong>Tác giả:</strong> Phạm Thị Lan (ADEC BA Lead)</p>
+<hr/>
+<h3>1. Tổng quan</h3>
+<p>Module <code>l10n_vn_einvoice</code> kết nối Odoo 18 với API VNPT Invoice để tự động
+tạo, ký số và lưu trữ hóa đơn điện tử từ quy trình bán hàng.</p>
+<h3>2. Luồng nghiệp vụ</h3>
+<ol>
+    <li>Nhân viên KT xác nhận Customer Invoice trên Odoo.</li>
+    <li>Hệ thống gọi API VNPT để tạo hóa đơn điện tử.</li>
+    <li>VNPT trả về mã hóa đơn + PDF đã ký số.</li>
+    <li>Odoo lưu PDF làm attachment, cập nhật trạng thái "Đã phát hành".</li>
+    <li>Email tự động gửi PDF cho khách hàng.</li>
+</ol>
+<h3>3. Yêu cầu phi chức năng</h3>
+<ul>
+    <li>Thời gian phản hồi API &lt; 5 giây.</li>
+    <li>Retry tự động 3 lần khi API timeout.</li>
+    <li>Log toàn bộ request/response để audit.</li>
+</ul>
+        ]]></field>
+    </record>
+
+    <!-- FSD Features -->
+    <record id="fsd_feat_create_inv" model="ba.fsd.feature">
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="sequence">1</field>
+        <field name="name">Tạo hóa đơn điện tử từ Account Invoice</field>
+        <field name="description">Khi xác nhận Invoice, hệ thống gọi API VNPT /createInvoice với dữ liệu từ account.move.</field>
+        <field name="logic_description">Kế thừa action_post() của account.move → Gọi _create_einvoice() → Map fields → POST /api/v2/createInvoice → Lưu response.invoiceNo vào field einvoice_number.</field>
+        <field name="api_specification">POST /api/v2/createInvoice
+Headers: Authorization: Bearer {token}
+Body: {inv_series, inv_date, buyer_name, buyer_tax, items: [{name, qty, price, vat}]}
+Response: {invoiceNo, pdf_url, status}</field>
+        <field name="fit_gap">gap</field>
+        <field name="priority">critical</field>
+        <field name="planned_hours">24</field>
+        <field name="note">Cần VNPT cung cấp tài khoản sandbox để test.</field>
+    </record>
+
+    <record id="fsd_feat_sign" model="ba.fsd.feature">
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="sequence">2</field>
+        <field name="name">Ký số hóa đơn (Digital Signature)</field>
+        <field name="description">Sau khi tạo HĐ, hệ thống gọi API ký số. Hỗ trợ ký tự động (HSM) hoặc ký USB Token.</field>
+        <field name="logic_description">Nếu cấu hình auto_sign=True → Gọi /signInvoice ngay. Nếu False → Chờ user nhấn nút "Ký số" trên form Invoice.</field>
+        <field name="api_specification">POST /api/v2/signInvoice
+Body: {invoiceNo, signType: "HSM"|"TOKEN"}
+Response: {signed_pdf_url, sign_date, signer_name}</field>
+        <field name="fit_gap">gap</field>
+        <field name="priority">critical</field>
+        <field name="planned_hours">16</field>
+    </record>
+
+    <record id="fsd_feat_pdf" model="ba.fsd.feature">
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="sequence">3</field>
+        <field name="name">Tải và lưu trữ PDF hóa đơn</field>
+        <field name="description">Download PDF hóa đơn đã ký từ VNPT, lưu thành ir.attachment gắn với account.move.</field>
+        <field name="logic_description">GET /api/v2/getInvoicePDF?invoiceNo=xxx → Save binary to ir.attachment(res_model='account.move', res_id=move.id).</field>
+        <field name="api_specification">GET /api/v2/getInvoicePDF?invoiceNo={no}
+Response: application/pdf (binary)</field>
+        <field name="fit_gap">gap</field>
+        <field name="priority">major</field>
+        <field name="planned_hours">8</field>
+    </record>
+
+    <record id="fsd_feat_email" model="ba.fsd.feature">
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="sequence">4</field>
+        <field name="name">Gửi email HĐ điện tử cho khách hàng</field>
+        <field name="description">Tự động gửi email kèm PDF hóa đơn điện tử sau khi ký thành công.</field>
+        <field name="logic_description">Override _send_email() → Attach einvoice PDF → Use mail template "Hóa đơn điện tử" → Send via mail.mail.</field>
+        <field name="api_specification">N/A — dùng Odoo mail engine</field>
+        <field name="fit_gap">gap</field>
+        <field name="priority">major</field>
+        <field name="planned_hours">6</field>
+    </record>
+
+    <record id="fsd_feat_cancel" model="ba.fsd.feature">
+        <field name="fsd_id" ref="fsd_einvoice"/>
+        <field name="sequence">5</field>
+        <field name="name">Hủy / Điều chỉnh hóa đơn điện tử</field>
+        <field name="description">Cho phép hủy hoặc lập HĐ điều chỉnh theo quy định Nghị định 123/2020.</field>
+        <field name="logic_description">Button "Hủy HĐ" → Gọi /cancelInvoice → Tạo credit note trên Odoo. Button "Điều chỉnh" → Gọi /adjustInvoice → Tạo HĐ mới liên kết HĐ gốc.</field>
+        <field name="api_specification">POST /api/v2/cancelInvoice {invoiceNo, reason}
+POST /api/v2/adjustInvoice {originalNo, adjustType, items}</field>
+        <field name="fit_gap">gap</field>
+        <field name="priority">critical</field>
+        <field name="planned_hours">16</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         B2.FIT_GAP.01 — FIT-GAP Analysis Views
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Form View -->
+    <record id="ba_fitgap_view_form" model="ir.ui.view">
+        <field name="name">ba.fitgap.form</field>
+        <field name="model">ba.fitgap</field>
+        <field name="arch" type="xml">
+            <form string="FIT-GAP Analysis">
+                <header>
+                    <button name="action_confirm" string="✅ Confirm"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_reset_draft" string="Set to Draft"
+                            type="object" class="btn-secondary"
+                            invisible="state == 'draft'"/>
+                    <button name="action_create_fsd"
+                            string="➕ Create FSD"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="state != 'confirmed' or fsd_count &gt; 0"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="action_open_fsd_list"
+                                icon="fa-file-text-o"
+                                invisible="fsd_count == 0">
+                            <field name="fsd_count" widget="statinfo" string="FSD"/>
+                        </button>
+
+                    </div>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g., Inventory/Purchasing Analysis..." readonly="state != 'draft'"/></h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="project_id" readonly="state != 'draft'"/>
+                            <field name="partner_id" string="Customer"/>
+                            <field name="fitgap_module" string="Module" readonly="state != 'draft'"/>
+                            <field name="gap_type" string="GAP Type" readonly="state != 'draft'"/>
+                            <field name="priority" string="Priority" readonly="state != 'draft'"/>
+                        </group>
+                        <group string="Links &amp; Templates">
+                            <label for="document_page_id" string="Knowledge"/>
+                            <div class="d-flex align-items-center gap-1">
+                                <field name="document_page_id" nolabel="1" readonly="1" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_document" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Document"
+                                        invisible="not document_page_id"/>
+                            </div>
+                            <label for="knowledge_template_id" string="Knowledge Template" invisible="document_page_id"/>
+                            <div class="d-flex align-items-center gap-1" invisible="document_page_id">
+                                <field name="knowledge_template_id" nolabel="1"
+                                       readonly="state != 'draft'" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_template" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Template"
+                                        invisible="not id"/>
+                            </div>
+                            <field name="tobe_page_id" string="Linked TO-BE"
+                                   domain="[('doc_type','=','tobe')]"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="fit_and_gap" string="FIT and GAP">
+                            <div class="row mt-4">
+                                <div class="col-12 col-md-6 border-end pe-3">
+                                    <label for="fit_content" class="o_form_label fw-bold text-success mb-2">
+                                        ✅ FIT — Built-in Features
+                                    </label>
+                                    <field name="fit_content" nolabel="1"
+                                           placeholder="Description of matching built-in Odoo features..." readonly="state != 'draft'"/>
+                                </div>
+                                <div class="col-12 col-md-6 ps-3">
+                                    <label for="gap_content" class="o_form_label fw-bold text-danger mb-2">
+                                        🔧 GAP — To Develop
+                                    </label>
+                                    <field name="gap_content" nolabel="1"
+                                           placeholder="Requirements not met by Odoo, needing Customization..." readonly="state != 'draft'"/>
+                                </div>
+                            </div>
+
+                            <group class="mt-3">
+                                <field name="note" string="Notes" placeholder="Additional notes..." readonly="state != 'draft'"/>
+                            </group>
+                        </page>
+                        <page name="tobe_knowledge" string="📖 Linked TO-BE Content" invisible="not tobe_page_id">
+                            <field name="tobe_content" nolabel="1" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="ba_fitgap_view_list" model="ir.ui.view">
+        <field name="name">ba.fitgap.list</field>
+        <field name="model">ba.fitgap</field>
+        <field name="arch" type="xml">
+            <list string="FIT-GAP Analysis">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="fitgap_module" string="Module"/>
+                <field name="gap_type" string="GAP Type"/>
+                <field name="priority" widget="badge"
+                       decoration-danger="priority == 'critical'"
+                       decoration-warning="priority == 'high'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="ba_fitgap_view_search" model="ir.ui.view">
+        <field name="name">ba.fitgap.search</field>
+        <field name="model">ba.fitgap</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="fitgap_module"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_project" string="Project" context="{'group_by':'project_id'}"/>
+                    <filter name="group_partner" string="Customer" context="{'group_by':'partner_id'}"/>
+                    <filter name="group_gap" string="GAP Type" context="{'group_by':'gap_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="ba_fitgap_view_kanban" model="ir.ui.view">
+        <field name="name">ba.fitgap.kanban</field>
+        <field name="model">ba.fitgap</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="project_id" class="o_kanban_small_column" quick_create="false">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content p-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="text-muted small"><field name="partner_id"/></span>
+                                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'done'"/>
+                            </div>
+                            <strong class="o_kanban_record_title d-block mb-1"><field name="name"/></strong>
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-folder-o me-1" title="Project"/><field name="project_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="ba_fitgap_action" model="ir.actions.act_window">
+        <field name="name">FIT-GAP Analysis</field>
+        <field name="res_model">ba.fitgap</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="ba_fitgap_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first FIT-GAP analysis
+            </p>
+        </field>
+    </record>
+
+</odoo>

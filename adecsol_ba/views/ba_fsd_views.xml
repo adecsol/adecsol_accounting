@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         C1.FSD.01 — FSD Document Views
+         Workflow: Draft → Pending Customer Sign-off → Final Approved
+         Permissions via project-level role config (not security groups)
+         ══════════════════════════════════════════════════════ -->
+
+    <!-- Form View -->
+    <record id="ba_fsd_view_form" model="ir.ui.view">
+        <field name="name">ba.fsd.form</field>
+        <field name="model">ba.fsd</field>
+        <field name="arch" type="xml">
+            <form string="FSD Document">
+                <header>
+                    <!-- ── Draft: Internal Approve (PM / BA Manager) ── -->
+                    <button name="action_pm_approve" string="✅ Internal Approve"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft' or pm_approved or not current_can_approve"/>
+
+                    <!-- ── Draft: Revoke Approval (PM / BA Manager) ── -->
+                    <button name="action_revoke_approval" string="↩ Revoke Approval"
+                            type="object" class="btn-secondary"
+                            invisible="state != 'draft' or not pm_approved or not current_can_approve"/>
+
+                    <!-- ── Draft + Approved: Send to customer (BA Manager only) ── -->
+                    <button name="action_send_for_signoff" string="📧 Send to Customer for Sign-off"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft' or not pm_approved or not current_is_ba_manager"
+                            confirm="Send FSD document to customer for sign-off?"/>
+
+                    <!-- ── Pending Sign-off: Final Approve (BA Manager) ── -->
+                    <button name="action_final_approve" string="🔒 Final Approve &amp; Lock"
+                            type="object" class="btn-success"
+                            invisible="state != 'pending_signoff' or not current_is_ba_manager"/>
+
+                    <!-- ── Reset to Draft (BA Manager) ── -->
+                    <button name="action_reset_draft" string="↩ Reset to Draft"
+                            type="object" class="btn-secondary"
+                            invisible="state == 'draft' or not current_is_ba_manager"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,pending_signoff,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-wrench"
+                                name="action_open_handover_tasks" type="object"
+                                invisible="handover_count == 0">
+                            <field name="handover_count" widget="statinfo" string="WBS"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Final Approved" bg_color="text-bg-success"
+                            invisible="state != 'approved'"/>
+                    <widget name="web_ribbon" title="Internally Approved" bg_color="text-bg-primary"
+                            invisible="state != 'draft' or not pm_approved"/>
+
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="FSD document name..." readonly="is_locked"/></h1>
+                    </div>
+
+                    <group>
+                        <group string="General">
+                            <field name="fitgap_id" readonly="is_locked" options="{'no_create': True}"/>
+                            <field name="project_id" readonly="is_locked"/>
+                            <field name="partner_id" string="Customer" readonly="is_locked"/>
+                            <field name="signer_ids" widget="many2many_tags" options="{'no_create': True}" string="Authorized Signers" readonly="is_locked"/>
+                            <field name="fitgap_module" string="Module"/>
+                        </group>
+                        <group string="Links &amp; Templates">
+                            <label for="document_page_id" string="Knowledge"/>
+                            <div class="d-flex align-items-center gap-1">
+                                <field name="document_page_id" nolabel="1" readonly="is_locked" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_document" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Document"
+                                        invisible="not document_page_id"/>
+                            </div>
+                            <label for="knowledge_template_id" string="Knowledge Template" invisible="document_page_id"/>
+                            <div class="d-flex align-items-center gap-1" invisible="document_page_id">
+                                <field name="knowledge_template_id" nolabel="1" readonly="is_locked" class="flex-grow-1"/>
+                                <button name="action_preview_knowledge_template" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Knowledge Template"
+                                        invisible="not id"/>
+                            </div>
+                            <label for="customer_template_id" string="Customer Email Template"/>
+                            <div class="d-flex align-items-center gap-1">
+                                <field name="customer_template_id" nolabel="1" readonly="is_locked" class="flex-grow-1"/>
+                                <button name="action_preview_customer_template" type="object"
+                                        icon="fa-eye" class="btn-link p-0"
+                                        title="Preview Customer Email"
+                                        invisible="not id"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <!-- Approval info — shown conditionally -->
+                    <group invisible="not pm_approved and state != 'approved'">
+                        <group string="Internal Approval" invisible="not pm_approved">
+                            <field name="pm_approver_id" string="Approver" readonly="1"/>
+                            <field name="pm_approval_date" string="Date" readonly="1"/>
+                        </group>
+                        <group string="Final Approval" invisible="state != 'approved'">
+                            <field name="approver_id" string="Approver" readonly="1"/>
+                            <field name="approval_date" string="Date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Hidden computed fields for view logic -->
+                    <field name="is_locked" invisible="1"/>
+                    <field name="pm_approved" invisible="1"/>
+                    <field name="current_is_ba_manager" invisible="1"/>
+                    <field name="current_is_pm" invisible="1"/>
+                    <field name="current_is_ba_user" invisible="1"/>
+                    <field name="current_is_developer" invisible="1"/>
+                    <field name="current_can_approve" invisible="1"/>
+
+                    <!-- ── Tabs ─────────────────────────────────────── -->
+                    <notebook>
+                        <page string="📋 Feature Details" name="features">
+                            <field name="feature_ids" nolabel="1" readonly="is_locked">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" string="Feature"/>
+                                    <field name="description" string="Description"/>
+                                    <field name="logic_description" string="Logic"/>
+                                    <field name="api_specification" string="API"/>
+                                    <field name="note" string="Notes"/>
+                                    <field name="planned_hours" string="Estimated Hours" sum="Total Hours" optional="show"/>
+                                    <field name="task_id" string="Dev Task" optional="hide"/>
+                                </list>
+                            </field>
+                            <group>
+                                <field name="total_planned_hours" readonly="1" string="Total Estimated Hours"/>
+                                <field name="fitgap_task_ids" widget="many2many_tags" string="Linked Dev Tasks" readonly="is_locked" invisible="1"/>
+                            </group>
+                        </page>
+
+                        <page string="🔍 FIT-GAP Content" name="fitgap_content"
+                              invisible="not fitgap_id or not fitgap_page_content">
+                            <field name="fitgap_page_content" nolabel="1" readonly="1"
+                                   widget="html"
+                                   placeholder="(No FIT-GAP content synced yet)"/>
+                        </page>
+
+                        <page string="✍️ Customer Sign-off" name="signature" invisible="state == 'draft'">
+                            <group>
+                                <group string="Signers">
+                                    <field name="customer_signer_name" readonly="1"/>
+                                    <field name="customer_signer_title" readonly="1"/>
+                                    <field name="sign_date" readonly="1"/>
+                                </group>
+                                <group string="Signature">
+                                    <field name="customer_signature" widget="signature" readonly="1"/>
+                                    <field name="portal_share_token" readonly="1" groups="base.group_no_one"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="🔧 Work Handover" name="handover_content" invisible="handover_count == 0">
+                            <field name="handover_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="feature_id"/>
+                                    <field name="date"/>
+                                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirmed'"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="ba_fsd_view_list" model="ir.ui.view">
+        <field name="name">ba.fsd.list</field>
+        <field name="model">ba.fsd</field>
+        <field name="arch" type="xml">
+            <list string="FSD Document"
+                  decoration-info="state == 'draft'"
+                  decoration-warning="state == 'pending_signoff'"
+                  decoration-success="state == 'approved'">
+                <field name="name"/>
+                <field name="fitgap_id"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="feature_count"/>
+                <field name="total_planned_hours" sum="Total Hours"/>
+                <field name="pm_approved" string="Int. Approved" widget="boolean"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'pending_signoff'"
+                       decoration-success="state == 'approved'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="ba_fsd_view_search" model="ir.ui.view">
+        <field name="name">ba.fsd.search</field>
+        <field name="model">ba.fsd</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="fitgap_id"/>
+                <separator/>
+                <filter name="filter_draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="filter_pending" string="Pending Sign-off" domain="[('state','=','pending_signoff')]"/>
+                <filter name="filter_approved" string="Final Approved" domain="[('state','=','approved')]"/>
+                <separator/>
+                <filter name="filter_pm_approved" string="Internally Approved" domain="[('pm_approved','=',True)]"/>
+                <filter name="filter_not_pm_approved" string="Awaiting Internal Approval" domain="[('pm_approved','=',False),('state','=','draft')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_project" string="Project" context="{'group_by':'project_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="ba_fsd_view_kanban" model="ir.ui.view">
+        <field name="name">ba.fsd.kanban</field>
+        <field name="model">ba.fsd</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="project_id" class="o_kanban_small_column" quick_create="false">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content p-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="text-muted small"><field name="partner_id"/></span>
+                                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'pending_signoff'" decoration-success="state == 'approved'"/>
+                            </div>
+                            <strong class="o_kanban_record_title d-block mb-1"><field name="name"/></strong>
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-folder-o me-1" title="Project"/><field name="project_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="ba_fsd_action" model="ir.actions.act_window">
+        <field name="name">FSD Document</field>
+        <field name="res_model">ba.fsd</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="ba_fsd_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create first FSD document
+            </p>
+        </field>
+    </record>
+
+</odoo>

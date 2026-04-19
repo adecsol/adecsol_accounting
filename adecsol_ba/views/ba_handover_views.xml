@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════
+         Technical Handover (Handover Form)
+         ══════════════════════════════════════════════════════ -->
+
+    <record id="ba_handover_view_form" model="ir.ui.view">
+        <field name="name">ba.handover.form</field>
+        <field name="model">ba.handover</field>
+        <field name="arch" type="xml">
+            <form string="Technical Handover">
+                <header>
+                    <button name="action_confirm" string="✅ Confirm &amp; Generate Tasks" type="object"
+                            class="oe_highlight" invisible="state != 'draft' or not current_can_confirm"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="action_view_task" icon="fa-tasks"
+                                invisible="not task_id">
+                            <span class="o_stat_text">View Task</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Handover Name"/>
+                        <h1><field name="name" placeholder="e.g., Sales module handover..." readonly="state == 'confirmed'"/></h1>
+                    </div>
+                    <field name="current_can_confirm" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="planned_hours" widget="float_time" readonly="state == 'confirmed'"/>
+                            <field name="assignee_id" readonly="state == 'confirmed'"/>
+                            <field name="fsd_id" readonly="state == 'confirmed'"/>
+                            <field name="feature_id" readonly="state == 'confirmed'"/>
+                        </group>
+                        <group>
+                            <field name="project_id" readonly="state == 'confirmed'"/>
+                            <field name="date" readonly="state == 'confirmed'"/>
+                            <field name="task_id" readonly="1" invisible="not task_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="lines" string="Dev Handover Details">
+                            <field name="handover_line_ids" readonly="state == 'confirmed'">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="objective" string="Objective (Proposed Feature)"/>
+                                    <field name="iso_9001" string="Meets ISO 9001"/>
+                                    <field name="iso_27001" string="Meets ISO 27001"/>
+                                    <field name="task_id" string="Work Content (Detailed DEV Task)"/>
+                                    <field name="odoo_std_module" string="Standard Odoo V18 (Module &amp; Link)"/>
+                                    <field name="oca_module" string="OCA (Module &amp; Link)"/>
+                                    <field name="custom_work" string="Custom (Specific Dev work required)" />
+                                    <field name="depend" string="Depend"/>
+                                    <field name="inherit_model" string="Inherit (Model/Class)"/>
+                                    <field name="community_note" string="Customization Notes"/>
+                                    <field name="adec_module" string="ADEC Sol Module"/>
+                                    <field name="note" string="Notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="feature_info" string="📋 Feature Information" invisible="not feature_id">
+                            <field name="feature_content" nolabel="1" readonly="1"/>
+                        </page>
+                        <page name="note" string="General Notes">
+                            <field name="note" placeholder="Detailed content..." readonly="state == 'confirmed'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="ba_handover_view_list" model="ir.ui.view">
+        <field name="name">ba.handover.list</field>
+        <field name="model">ba.handover</field>
+        <field name="arch" type="xml">
+            <list string="Technical Handover">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="fsd_id" optional="show"/>
+                <field name="feature_id" optional="show"/>
+                <field name="planned_hours" widget="float_time" sum="Total"/>
+                <field name="assignee_id"/>
+                <field name="date"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirmed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="ba_handover_view_kanban" model="ir.ui.view">
+        <field name="name">ba.handover.kanban</field>
+        <field name="model">ba.handover</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="project_id" class="o_kanban_small_column" quick_create="false">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="assignee_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_content p-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'confirmed'"/>
+                            </div>
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-folder-o me-1" title="Project"/><field name="project_id"/>
+                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <field name="assignee_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="ba_handover_action" model="ir.actions.act_window">
+        <field name="name">Technical Handover</field>
+        <field name="res_model">ba.handover</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create technical handover
+            </p>
+        </field>
+    </record>
+</odoo>
